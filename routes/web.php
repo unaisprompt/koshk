@@ -19,9 +19,19 @@ use App\Http\Controllers\ApiWishlistController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('view-products', function () {
+    return view('pages.products');
+});
+
+Route::get('view-productdetail', function () {
+    return view('pages.productdetail');
+});
+Route::get('view-checkout', function () {
+    return view('pages.checkout');
+});
+Route::get('view-cart', function () {
+    return view('pages.cart');
+});
 
 Route::get('/',[ApiController::class, 'home']);
 

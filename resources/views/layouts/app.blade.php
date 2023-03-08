@@ -1,41 +1,42 @@
-<!doctype html>
-<html lang="zxx">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-        <!-- Link of CSS files -->
-        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/owl.theme.default.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/magnific-popup.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/animate.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/rangeSlider.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/odometer.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/boxicons.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/slick.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/countrySelect.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/meanmenu.min.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/responsive.css')}}">
-        <link rel="stylesheet" href="{{asset('assets/css/define.css')}}">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-        <title>Feather And Fins</title>
+<html lang="en">
 
-        <link rel="icon" type="image/png" href="{{asset('assets/img/favicon.png')}}">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
-        @yield('style')
+<head>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Favicons Icon -->
+  <link rel="icon" href="#" type="image/x-icon">
+  <link rel="shortcut icon" href="#" type="image/x-icon">
+  <title>Gift City</title>
+  <!-- Mobile Specific -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- CSS Style -->
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/font-awesome.min.css')}}" media="all">
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/simple-line-icons.css')}}" media="all">
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/owl.carousel.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/owl.theme.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.bxslider.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/jquery.mobile-menu.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}" media="all">
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/revslider.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('assets/css/developer.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/newstyle.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/define.css')}}">
+     <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-      
-    </head>
-    <body>
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
+    rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="cms-index-index cms-home-page home">
+    <div id="page">
         {{-- <div class="pre-loader">
             <svg class="gegga">
                 <defs>
@@ -67,35 +68,23 @@
             </svg>
         </div> --}}
 
-        <div class="pre-loader">
-            <div id="logo-loader"></div>
-    </div>
+    
 
 		@include('layouts.header')
 
         @yield('content')
 
         @include('layouts.footer')
-
+    </div>
          <!-- Link of JS files -->
-         <script src="{{asset('assets/js/jquery.min.js')}}"></script>
-         <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-         <script src="{{asset('assets/js/magnific-popup.min.js')}}"></script>
-         <script src="{{asset('assets/js/meanmenu.min.js')}}"></script>
-         <script src="{{asset('assets/js/appear.min.js')}}"></script>
-         <script src="{{asset('assets/js/countrySelect.min.js')}}"></script>
-         <script src="{{asset('assets/js/odometer.min.js')}}"></script>
-         <script src="{{asset('assets/js/loopcounter.js')}}"></script>
-         <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
-         <script src="{{asset('assets/js/rangeSlider.min.js')}}"></script>
-         <script src="{{asset('assets/js/slick.min.js')}}"></script>
-         <script src="{{asset('assets/js/form-validator.min.js')}}"></script>
-         <script src="{{asset('assets/js/contact-form-script.js')}}"></script>
-         <script src="{{asset('assets/js/ajaxchimp.min.js')}}"></script>
-         <script src="{{asset('assets/js/main.js')}}"></script>
-         <script src="{{asset('assets/js/define.js')}}"></script>
-
-         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+        <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('assets/js/revslider.js')}}"></script>
+        <script src="{{asset('assets/js/common.js')}}"></script>
+        <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('assets/js/jquery.mobile-menu.min.js')}}"></script>
+        <script src="{{asset('assets/js/countdown.js')}}"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
        <!--Start of Tawk.to Script-->
         <script type="text/javascript">
