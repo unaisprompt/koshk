@@ -1,7 +1,8 @@
- @extends('layouts.app')
-@section('content')   
 
- <section class="main-container col1-layout">
+
+@extends('layouts.app')
+@section('content')   
+    <section class="main-container col1-layout">
       <div class="container">
         <div class="row">
 
@@ -17,7 +18,8 @@
           <!-- Breadcrumbs End -->
 
           <div class="col-sm-12 col-xs-12">
-         <article class="col-main">
+
+            <article class="col-main">
               <div class="product-view">
                 <div class="product-essential">
                   <form action="#" method="post" id="product_addtocart_form">
@@ -26,7 +28,7 @@
                       <div class="new-label new-top-left"> New </div>
                       <div class="product-image">
                         <div class="product-full mag"> <img id="product-zoom" data-toggle="magnify"
-                            src="{{asset('assets\products-images\product1.jpg')}}" data-zoom-image="{{asset('assets/products-images/product1.jpg')}}"
+                            src="{{asset('assets\products-images\product1.jpg')}}" data-zoom-image="products-images/product1.jpg"
                             alt="product-image"> </div>
                         <div class="more-views">
                           <div class="slider-items-products">
@@ -37,19 +39,19 @@
 
                                 <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product1.jpg')}}"
                                     data-zoom-image="{{asset('assets/products-images/product1.jpg')}}"> <img id="product-zoom0"
-                                      src="{{asset('assets/products-images\product1.jpg')}}" alt="product-image"> </a></div>
+                                      src="{{asset('assets/products-images/product1.jpg')}}" alt="product-image"> </a></div>
                                 <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product3.jpg')}}"
                                     data-zoom-image="{{asset('assets/products-images/product3.jpg')}}"> <img id="product-zoom1"
-                                      src="{{asset('assets\products-images\product3.jpg')}}" alt="product-image"> </a></div>
+                                      src="{{asset('assets/products-images/product3.jpg')}}" alt="product-image"> </a></div>
                                 <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product4.jpg')}}"
                                     data-zoom-image="{{asset('assets/products-images/product4.jpg')}}"> <img id="product-zoom2"
-                                      src="{{asset('assets\products-images\product4.jpg')}}" alt="product-image"> </a></div>
+                                      src="{{asset('assets/products-images/product4.jpg')}}" alt="product-image"> </a></div>
                                 <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product5.jpg')}}"
                                     data-zoom-image="{{asset('assets/products-images/product5.jpg')}}"> <img id="product-zoom3"
-                                      src="{{asset('assets\products-images\product5.jpg')}}" alt="product-image"> </a> </div>
+                                      src="{{asset('assets/products-images/product5.jpg')}}" alt="product-image"> </a> </div>
                                 <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product6.jpg')}}"
                                     data-zoom-image="{{asset('assets/products-images/product6.jpg')}}"> <img id="product-zoom4"
-                                      src="{{asset('assets\products-images\product6.jpg')}}" alt="product-image"> </a></div>
+                                      src="{{asset('assets/products-images/product6.jpg')}}" alt="product-image"> </a></div>
                               </div>
                             </div>
                           </div>
@@ -864,10 +866,7 @@
           </div>
         </div>
       </div>
-    
-</section>
-
-
+    </section>
 <script>
         $(document).ready(function () {
           if (jQuery('.mega-menu-category').is(':visible')) {
@@ -875,4 +874,57 @@
         }
            });
     </script>
-  @endsection 
+  <!-- JavaScript -->
+@section('script')
+  <script type="text/javascript" src="{{asset('assets/js\jquery.flexslider.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js\cloud-zoom.js')}}"></script>
+@endsection
+
+
+  <script>
+    function hasScrolled() {
+      var st = $(this).scrollTop();
+
+      // Make sure they scroll more than delta
+      if (Math.abs(lastScrollTop - st) <= delta)
+        return;
+
+      // If they scrolled down and are past the navbar, add class .nav-up.
+      // This is necessary so you never see what is "behind" the navbar.
+      if (st > lastScrollTop && st > navbarHeight) {
+        // Scroll Down
+        $('header').removeClass('nav-down').addClass('nav-up');
+      } else {
+        // Scroll Up
+        if (st + $(window).height() < $(document).height()) {
+          $('header').removeClass('nav-up').addClass('nav-down');
+        }
+      }
+
+      lastScrollTop = st;
+    }
+
+
+
+
+    jQuery(document).ready(($) => {
+      $('.count-number,.quantity').on('click', '.plus', function (e) {
+        let $input = $(this).prev('input.qty');
+        let val = parseInt($input.val());
+        $input.val(val + 1).change();
+      });
+
+      $('.count-number,.quantity').on('click', '.minus',
+        function (e) {
+          let $input = $(this).next('input.qty');
+          var val = parseInt($input.val());
+          if (val > 0) {
+            $input.val(val - 1).change();
+          }
+        });
+    });
+
+
+  </script>
+
+@endsection
