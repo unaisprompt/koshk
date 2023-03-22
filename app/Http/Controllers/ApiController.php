@@ -19,11 +19,22 @@ class ApiController extends Controller
        $response = Http::post($url,  [
         'user_id'=>$user_id
         ]);
-        
-     //   return $response['deal_banner'];
-        
-      return view('home',compact('response'));
+        $response_data = $response->json();
+     $finalData = array(
+                "main_data" => $response_data,
+                "category_with_product" => $this->categoryWithProduct()
+            );
+      return view('home',compact('finalData'));
     
+    }
+    public function categoryWithProduct(){
+        $user_id= session()->get('user_id') ?? '';
+        $url = $this->url."/categoryWithProduct";
+       $response = Http::post($url,  [
+        'user_id'=>$user_id
+        ]);
+        $response_data = $response->json();
+        return $response_data;
     }
 
     public function about(){
