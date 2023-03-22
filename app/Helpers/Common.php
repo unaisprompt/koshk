@@ -29,3 +29,13 @@ function cartCount()
         }
 
 }
+function categoryList()
+{
+    $url = config('global.api')."/category";
+    $response = Http::get($url);
+    if($response->successful())
+    {
+    return $response->object()->data;
+    }
+    return [];
+}

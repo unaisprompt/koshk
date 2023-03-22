@@ -1,4 +1,8 @@
  <!-- Header -->
+ @php
+   $categoryList=categoryList();
+   
+ @endphp
     <header>
       <div class="top-nav">
         <div class="container">
@@ -113,13 +117,10 @@
                 <ul class="categories-filter animate-dropdown">
                   <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"
                       href="category.html">Categories <b class="caret"></b></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Computers</a></li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Appliances</a>
-                      </li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Televisions</a>
-                      </li>
-                      <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- Cameras</a></li>
+                    <ul class="dropdown-menu" role="menu">                   
+                      @foreach ($categoryList as $category)
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- {{$category->category_name}}</a></li>
+                      @endforeach
                     </ul>
                   </li>
                 </ul>
@@ -232,55 +233,7 @@
                 </div>
                 <div class="mega-menu-category">
                   <ul class="nav">
-                    <li class="dropdown has-sub wide"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                          class="fa fa-long-arrow-right" aria-hidden="true"></i> Computers</a>
-                      <div class="dropdown-menu wrap-popup">
-                        <div class="popup">
-                          <div class="row">
-                            <div class="col-md-4 col-sm-6">
-                              <h3>Laptops</h3>
-                              <ul class="nav">
-                                <li> <a href="grid.html"><span>Microsoft</span></a> </li>
-                                <li> <a href="grid.html"><span>Lenova</span></a> </li>
-                                <li> <a href="grid.html"><span>Apple</span></a> </li>
-                                <li> <a href="grid.html"><span>Touchscreen</span></a> </li>
-                              </ul>
-                              <br>
-                              <h3>Components</h3>
-                              <ul class="nav">
-                                <li> <a href="grid.html">Hard Drives</a> </li>
-                                <li> <a href="grid.html">Motherboards</a> </li>
-                                <li> <a href="grid.html">Graphic Cards </a> </li>
-                                <li> <a href="grid.html">Processors</a> </li>
-                              </ul>
-                            </div>
-                            <div class="col-md-4 col-sm-6 has-sep">
-                              <h3>Printers</h3>
-                              <ul class="nav">
-                                <li> <a href="grid.html">Scanners</a> </li>
-                                <li> <a href="grid.html">3D Printers</a> </li>
-                                <li> <a href="grid.html">Fax Machines</a> </li>
-                                <li> <a href="grid.html">Connectors</a> </li>
-                              </ul>
-                              <br>
-                              <h3>Accessories</h3>
-                              <ul class="nav">
-                                <li> <a href="grid.html">Keyboards </a> </li>
-                                <li> <a href="grid.html">WebCams</a> </li>
-                                <li> <a href="grid.html">Batteries</a> </li>
-                                <li> <a href="grid.html">Speakers</a> </li>
-                              </ul>
-                            </div>
-                            <div class="col-md-4 has-sep hidden-sm">
-                              <div class="custom-menu-right">
-                                <div class="box-banner media">
-                                  <div class="add-right"><img src="{{asset('assets\images\menu-img1.jpg')}}" alt=""></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <!-- 
                     </li>
                     <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                           class="fa fa-long-arrow-right" aria-hidden="true"></i> Appliances </a>
@@ -334,14 +287,49 @@
                           </div>
                         </div>
                       </div>
+                    </li> -->
+                    @foreach ($categoryList as $category)
+                    @if(empty($category->subcategory))
+                    <li class="nosub"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{$category->category_name}}
+                      </a>
                     </li>
-                    <li class="nosub"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Televisions
-                      </a></li>
-                    <li class="nosub"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Cameras</a>
+                    @else
+                    <li class="dropdown has-sub wide"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                          class="fa fa-long-arrow-right" aria-hidden="true"></i>{{$category->category_name}}</a>
+                      <div class="dropdown-menu wrap-popup">
+                        <div class="popup">
+                          <div class="row">
+                              @foreach($category->subcategory as $subcategory)
+                            <div class="col-md-4 col-sm-6">
+                              <h3>{{$subcategory->subcategory_name}}</h3>
+                              <ul class="nav">
+                                @foreach($subcategory->inner_category as $inner_category)
+                                <li> <a href="grid.html"><span>{{$inner_category->innersubcategory_name}}</span></a> </li>
+                                @endforeach
+                              </ul>
+                            </div>
+                            @if($loop->iteration%3==0)
+                           </div>
+                          <div class="row">
+                            @endif
+                              @endforeach
+                            <!-- <div class="col-md-4 has-sep hidden-sm">
+                              <div class="custom-menu-right">
+                                <div class="box-banner media">
+                                  <div class="add-right"><img src="{{asset('assets\images\menu-img1.jpg')}}" alt=""></div>
+                                </div>
+                              </div>
+                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                    @endif
+                    @endforeach
+                    <!-- <li class="nosub"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Cameras</a>
                     </li>
                     <li class="nosub"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Mobiles,
                         Tablets</a></li>
-                    <li class="nosub custom-offer"><a href="#"><i class="fa fa-star"></i> Deal of the day</a></li>
+                    <li class="nosub custom-offer"><a href="#"><i class="fa fa-star"></i> Deal of the day</a></li> -->
                   </ul>
                 </div>
               </div>
@@ -350,9 +338,11 @@
           <!-- features box -->
           <div class="our-features-box hidden-xs">
             <div class="features-block">
-              <div class="col-lg-9 col-md-9 col-xs-12 col-sm-9 offer-block"> <a href="#">Mobile</a> <a href="#">Best
-                  Sellers</a> <a href="#">Electronics</a> <a href="#">Customer Service</a> <a
-                  href="#">Fashion</a><span>offer ends today</span> </div>
+              <div class="col-lg-9 col-md-9 col-xs-12 col-sm-9 offer-block">
+                @foreach($categoryList as $category)
+                 <a href="#">{{$category->category_name}}</a>
+                 @if($loop->iteration>=5) @break @endif
+                @endforeach
             </div>
           </div>
         </div>

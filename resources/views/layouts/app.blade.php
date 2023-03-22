@@ -25,8 +25,8 @@
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/developer.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/newstyle.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/define.css')}}">     
-     <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+     <!-- <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
   <!-- Google Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
@@ -129,6 +129,13 @@ function newsLetter() {
             });
             };
 </script>
+<script>
+        $(document).ready(function () {
+          if (jQuery('.mega-menu-category').is(':visible')) {
+            jQuery('.mega-menu-category').slideUp();
+        }
+           });
+    </script>
          @yield('script')
      </body>
  </html>
