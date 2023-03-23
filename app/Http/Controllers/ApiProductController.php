@@ -76,7 +76,7 @@ class ApiProductController extends Controller
           $bestsellers=$response->object()->bestsellers;
           $brands=$response->object()->brands;
           $search=$request->search;
-          return view('pages.product.productlist',compact('datas','bestsellers','brands','search'));
+          return view('pages.product.searchlist',compact('datas','bestsellers','brands','search'));
        }
     }
 
