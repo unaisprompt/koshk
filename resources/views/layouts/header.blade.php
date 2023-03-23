@@ -112,7 +112,7 @@
           </div>
           <div class="col-lg-7 col-md-6 col-sm-6 col-xs-3 hidden-xs category-search-form">
             <div class="search-box">
-              <form id="search_mini_form" action="#" method="get">
+              <form id="search_mini_form" action="{{url('search')}}" method="get">
                 <!-- Autocomplete End code -->
                 <ul class="categories-filter animate-dropdown">
                   <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"
@@ -124,8 +124,8 @@
                     </ul>
                   </li>
                 </ul>
-                <input id="search" type="text" name="q" value="Search entire store here..." class="searchbox"
-                  maxlength="128">
+                <input id="search" type="text" name="search" placeholder="Search entire store here..." class="searchbox"
+                  maxlength="128" value={{request()->search}}>
                 <button type="submit" title="Search" class="search-btn-bg" id="submit-button"></button>
               </form>
             </div>

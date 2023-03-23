@@ -70,13 +70,14 @@ class ApiProductController extends Controller
       'user_id'=>$user_id,
       'search'=>$request->search  
       ]);
-     // return $response;
-        $datas=$response['data'];
-        $bestsellers=$response['bestsellers'];
-        $brands=$response['brands'];
-       
-       return view('pages.product.productlist',compact('datas','bestsellers','brands'));
-
+       if($response->successful())
+       {
+          $datas=$response->object()->data;
+          $bestsellers=$response->object()->bestsellers;
+          $brands=$response->object()->brands;
+          $search=$request->search;
+          return view('pages.product.productlist',compact('datas','bestsellers','brands','search'));
+       }
     }
 
     public function BrandProduct(Request $request){
