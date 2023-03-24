@@ -206,7 +206,7 @@
                     <!--actions-->
                     <div class="actions">
                       <button class="btn-checkout" title="Checkout" type="button"><span>Checkout</span> </button>
-                      <a href="shopping_cart.html" class="view-cart"><span>View Cart</span></a>
+                      <a href="{{url('cart')}}" class="view-cart"><span>View Cart</span></a>
                     </div>
                   </div>
                 </div>

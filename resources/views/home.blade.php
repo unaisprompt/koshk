@@ -123,7 +123,7 @@
               <div class="item item-carousel">
                 <div class="item-inner">
                   <div class="item-img">
-                    <div class="item-img-info"> <a class="product-image" href="product_detail.html"> <img alt=""
+                    <div class="item-img-info"> <a class="product-image" href="{{url('product/detail')}}?product={{$product['id']}}"> <img alt=""
                           src="{{$product['productimage']['image_url']}}"> </a>
                       <div class="box-hover">
                         <ul class="add-to-links">
@@ -1189,6 +1189,54 @@
       $("#bkgOverlay").fadeOut(400);
       $("#delayedPopup").fadeOut(300);
     }
+
+
+    $('.cart_button_home').click(function(e){
+ 
+ e.preventDefault();
+var setting={
+    url:'{{url("/add-to-cart")}}',
+     dataType:'json',
+     type:'post',
+     headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       },
+     data: { 
+         product_id: $(this).data('cpid'),
+         product_name: $(this).data('pname'),
+         qty: 1,
+         price: $(this).data('pprice'),
+         shipping_cost: $(this).data('pship'),
+         tax: $(this).data('tax'),
+         image: $(this).data('img')
+     },
+   
+     success:function(response){
+      // console.log(response);
+
+      if(response.status==1){
+       // alert(response.cart_count);
+         $('.badgecart').text(response.cart_count);
+         Toastify({
+     text: "Cart Item Added",
+     className: "info",
+     close: true,
+     style: {
+         background: "#1cad6a",
+     }
+     }).showToast();
+
+      }
+     
+     },
+      error: function(xhr) {
+      
+  console.log(xhr.responseText); // this line will save you tons of hours while debugging
+ // do something here because of error
+}
+ };
+$.ajax(setting);
+});
   </script>
 
 @endsection
