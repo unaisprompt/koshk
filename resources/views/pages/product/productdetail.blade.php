@@ -925,7 +925,7 @@
     
     function cartadd(id){
  
-  alert('jhghjsgv');
+     //alert('jhghjsgv');
 
      var setting={
     url:'{{url("/add-to-cart")}}',
