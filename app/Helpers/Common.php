@@ -39,3 +39,13 @@ function categoryList()
     }
     return [];
 }
+function topRatedProducts()
+{
+    $url = config('global.api')."/top-rated-products";
+    $response = Http::post($url,['category_id'=>request()->category_id]);
+    if($response->successful())
+    {
+    return $response->object()->top_rated_products;
+    }
+    return [];
+}

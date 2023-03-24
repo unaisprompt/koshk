@@ -14,11 +14,10 @@ class ApiProductController extends Controller
 
     
     public function productList(Request $request){
-
         $user_id= session()->get('user_id') ?? '';
-        $category_id=$request->category ?? '';
-        $subcategory_id=$request->subcategory ?? '';
-        // $innersubcategory_id=$request->innersubcategory ?? '';
+        $category_id=$request->category_id ?? '';
+        $subcategory_id=$request->subcategory_id ?? '';
+        $innersubcategory_id=$request->innersubcategory_id ?? '';
         if($category_id!=''){
           session()->put('category_id',$category_id);
         }
@@ -31,15 +30,14 @@ class ApiProductController extends Controller
         $response = Http::post($url,  [
         'user_id'=>$user_id,
         'category_id' =>$category_id,
-        'subcategory_id' =>$subcategory_id
+        'subcategory_id' =>$subcategory_id,
+        'innersubcategory_id'=>$innersubcategory_id
         ]);
         
-       // return $response['brands'];
-        $datas=$response['data'];
-        $bestsellers=$response['bestsellers'];
-        $brands=$response['brands'];
-       // return $datas;
-       return view('pages.product.productlist',compact('datas','bestsellers','brands'));
+         if($response->successful())
+       {
+          return view('pages.product.productlist',["data"=>$response->object()]);
+       }
     }
 
     public function productDetail(Request $request){

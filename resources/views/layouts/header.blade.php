@@ -119,7 +119,7 @@
                       href="category.html">Categories <b class="caret"></b></a>
                     <ul class="dropdown-menu" role="menu">                   
                       @foreach ($categoryList as $category)
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="category.html">- {{$category->category_name}}</a></li>
+                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{{url('products?category_id='.$category->id)}}">- {{$category->category_name}}</a></li>
                       @endforeach
                     </ul>
                   </li>

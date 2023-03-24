@@ -4,80 +4,138 @@
   <section class="main-container col2-left-layout">
     <div class="container">
      <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
+   <div class="breadcrumbs">
             <ul>
-              <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
-              <li> <strong>{{$search}}</strong> </li>
+              <li class="home"> <a href="{{url('')}}" title="Go to Home Page">Home</a> <span>/</span> </li>
+              @if($data->category)
+              <li> <a href="grid.html" title="">{{$data->category->category_name}}</a><input type="hidden" id="category_id" value="{{$data->category->id}}"> @if($data->subcategory)<span>/ </span>@endif </li>
+                @if($data->subcategory)
+                  <li> <a href="grid.html" title="">{{$data->subcategory->subcategory_name}}</a><input type="hidden" id="subcategory_id" value="{{$data->subcategory->id}}"> @if($data->inner_subcategory)<span>/</span>@endif </li>
+                  @if($data->inner_subcategory)
+                   <li> <strong>{{$data->inner_subcategory->innersubcategory_name}}</strong><input type="hidden" id="inner_subcategory_id" value="{{$data->inner_subcategory->id}}"> </li>
+                  @endif
+                @endif
+              @endif
             </ul>
           </div>
            <!-- Breadcrumbs End -->
       <div class="row">
         <div class="col-sm-9 col-sm-push-3"> 
-         
-          
+         <div class="category-description std">
+                        <div class="slider-items-products">
+                          <div id="category-desc-slider"
+                            class="product-flexslider hidden-buttons">
+                            <div class="slider-items slider-width-col1
+                              owl-carousel owl-theme">
+
+                              <!-- Item -->
+                              <div class="item"> <a href="#"><img alt=""
+                                    src="images\category-img1.jpg"></a>
+                                <div class="cat-img-title cat-bg cat-box">
+                                  <div class="small-tag">Season 2021</div>
+                                  <h2 class="cat-heading">Televisions</h2>
+                                  <p>GET 40% OFF &sdot; Free Delivery </p>
+                                </div>
+                              </div>
+                              <!-- End Item -->
+
+                              <!-- Item -->
+                              <div class="item"> <a href="#"><img alt=""
+                                    src="images\category-img2.jpg"></a>
+                                <div class="cat-img-title cat-bg cat-box">
+                                  <div class="small-tag">Xperia Brands</div>
+                                  <h2 class="cat-heading">Smartwatches</h2>
+                                  <p>Save 70% on all items</p>
+                                </div>
+                                <!-- End Item -->
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
           <div class="page-title">
-            <h2> Search result for '{{$search}}' </h2>
-            <!-- <p class="font-size-14 text-gray-90 mb-0">Showing 1–35 of 62 results</p> -->
-          </div>
+                        <h2> @if($data->inner_subcategory)
+                            {{$data->inner_subcategory->innersubcategory_name}}
+                            @elseif($data->subcategory)
+                            {{$data->subcategory->subcategory_name}}
+                            @elseif($data->category)
+                            {{$data->category->category_name}}
+                            @endif </h2>
+                        <p class="font-size-14 text-gray-90 mb-0" id="result_count">Showing {{count($data->products)}}
+                          of {{$data->total_count}} results</p>
+                      </div>
           <article class="col-main">
           <div class="pro-listing">
             <div class="toolbar">
-              <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-3">
-                        <div class="product-list-grid">
-                            <ul class="nav">
-                                <!-- <li class="nav-item">
-                                        <a href="grid.html" class="button-grid nav-link">
-                                            <i class="fa fa-th-large"></i>
-                                        </a>
-                                    </li> -->
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-3">
+                                <div class="product-list-grid">
+                                  <ul class="nav">
                                     <li class="nav-item">
-                                        <a href="list.html" class="button-list nav-link  active">
-                                            <i class="fa fa-bars"></i>
-                                        </a>
+                                      <a href="grid.html" class="button-grid
+                                        nav-link">
+                                        <i class="fa fa-th-large"></i>
+                                      </a>
                                     </li>
-                                                                                                    
-                            </ul>
-                        </div>
-                    </div>
+                                    <li class="nav-item">
+                                      <a href="list.html" class="button-list
+                                        nav-link active">
+                                        <i class="fa fa-bars"></i>
+                                      </a>
+                                    </li>
 
-                    <!-- <div class="col-xl-6 col-lg-6 col-md-6 col-9">
-                        <div class="pro-sorting">
-                            <form class="woocommerce-showing">
-                                <select name="showby" aria-label="show" class="show-filter">
-                                                            <option value="Show 20" selected="selected">Show 20
-                                                            <option value="Show 30">Show 30
-                                                            <option value="Show 40">Show 40
-                                                            <option value="Show 50">Show 50
+                                  </ul>
+                                </div>
+                              </div>
 
-                                                    </select>
-                                            </form>
-                        </div>
-                        <div class="pro-sorting">
-                            <form class="woocommerce-ordering">
-                                <select name="orderby" aria-label="Shop order">
-                                                            <option value="popularity">Sort by popularity
-                                                            <option value="rating">Sort by average rating
-                                                            <option value="date">Sort by latest
-                                                            <option value="price">Sort by price: low to high
-                                                            <option value="price-desc" selected="selected">Sort by price: high to low
-                                                    </select>
-                                            </form>
-                        </div>
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-9">
+                                <!-- <div class="pro-sorting">
+                                  <form class="woocommerce-showing" style="margin-bottom: 0px;">
+                                    <select name="showby" aria-label="show"
+                                      class="show-filter">
+                                      <option value="Show 20"
+                                        selected="selected">Show 20
+                                        <option value="Show 30">Show 30
+                                          <option value="Show 40">Show 40
+                                            <option value="Show 50">Show 50
+                                            </select>
+                                          </form>
+                                        </div> -->
+                                        <div class="pro-sorting">
+                                          <form class="woocommerce-ordering"  style="margin-bottom: 0px;">
+                                            <select name="orderby" aria-label="Shop order" id="sort-type" onchange="filter()">
+                                                <option value="sort-by-popularity">
+                                                    Sort by popularity
+                                                </option>
+                                                <option value="sort-by-date" selected>
+                                                    Sort by date
+                                                </option>
+                                                <option value="price-low-to-high" >
+                                                    Sort by price: low to high
+                                                </option>
+                                                <option value="price-high-to-low">
+                                                    Sort by price: high to low
+                                                </option>
+                                            </select>
+                                        </form>
+                                        </div>
 
-                        
-                    </div> -->
-             </div>
-            </div>
+
+                                                </div>
+                                                <div class="col-md-12">
+                                                </div>
+                                              </div>
+                                            </div>
             <div class="category-products">
               <ol class="products-list" id="products-list">
-                @foreach ($datas as $data)
-                 <li class="item @if($loop->iteration==1) first @elseif ($loop->iteration%2==0) even @elseif ($loop->iteration%1==0) odd @endif">
-                  <div class="product-image"> <a href="product_detail.html" title="{{$data->product_name}}"> <img class="small-image" src="{{$data->productimage->image_url}}" alt="{{$data->product_name}}"> </a>
+                @foreach ($data->products as $product)
+                 <li class="item  @if($loop->iteration==1) first @elseif ($loop->iteration%2==0) even @elseif ($loop->iteration%1==0) odd @endif listing">
+                  <div class="product-image"> <a href="product_detail.html" title="{{$product->product_name}}"> <img class="small-image" src="{{$product->productimage->image_url}}" alt="{{$product->product_name}}"> </a>
                   
                   </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a href="product_detail.html" title="{{$data->product_name}}">{{$data->product_name}}</a></h2>
+                    <h2 class="product-name"><a href="product_detail.html" title="{{$product->product_name}}">{{$product->product_name}}</a></h2>
                     <div class="ratings">
                       <div class="rating-box">
                         <div style="width:50%" class="rating"></div>
@@ -85,11 +143,11 @@
                       <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                     </div>
                     <div class="desc std">
-                      <p>{{$data->description}} <a class="link-learn" title="" href="product_detail.html">Learn More</a> </p>
+                      <p>{{$product->description}} <a class="link-learn" title="" href="product_detail.html">Learn More</a> </p>
                     </div>
                     <div class="price-box">
-                      <p class="old-price"> <span class="price-label"></span> <span class="price"> AED {{$data->product_price}} </span> </p>
-                      <p class="special-price"> <span class="price-label"></span> <span class="price"> AED {{$data->discounted_price}} </span> </p>
+                      <p class="old-price"> <span class="price-label"></span> <span class="price"> AED {{$product->product_price}} </span> </p>
+                      <p class="special-price"> <span class="price-label"></span> <span class="price"> AED {{$product->discounted_price}} </span> </p>
                     </div>
                     <div class="actions">
                       <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
@@ -101,6 +159,9 @@
                 @endforeach
                 
               </ol>
+              @if($data->total_count>6)
+              <a href="#" id="load_more" onclick="event.preventDefault();loadMore()">Load more...</a>
+              @endif
             </div>
             <!-- <div class="pages">
                        <ul class="pagination">
@@ -144,17 +205,17 @@
           </div>
           
           <div class="widget widget-filter">
-                    <!-- <div class="block-title">Filter</div> -->
+                    <div class="block-title">Filter</div> 
                     
-            <!-- <div class="widget-brand">
+             <div class="widget-brand">
             <h5 class="widget-title">Brand</h5>
-            @foreach ($brands as $brand)
+            @foreach ($data->brands as $brand)
             <div class="custom-control custom-checkbox mb-2">
-              <input type="checkbox" class="custom-control-input" id="brandCheck{{$loop->iteration}}">
+              <input type="checkbox" value="{{$brand->id}}" class="custom-control-input brands" id="brandCheck{{$loop->iteration}}" onChange="brandChecked($(this))">
               <label class="custom-control-label" for="brandCheck{{$loop->iteration}}"> {{$brand->brand_name}}</label>
             </div>
             @endforeach
-          </div>   -->
+          </div>  
           
           <!-- <div class="widget-color">
             <h5 class="widget-title">Colors</h5>
@@ -260,32 +321,7 @@
               </div>
             </div>
    
-          <!-- <div class="widget-latest">
-            <div class="block-title"> Top Rated Products</div>
-            <div class="block-content">
-              <ul class="product-list">
-                @foreach ($bestsellers as $item)
-                <li class="item">
-                      <figure class="featured-thumb"> <a href="#"> <img src="{{$item->productimage->image_url}}" alt="{{$item->product_name}}"> </a> </figure>
-                  <div class="content-info">
-                   <a href="grid.html" title="Lorem ipsum dolor sit amet">Anti Glare Side Narrow Border Display Laptop</a>
-                   <div class="star-rating">
-                               <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                               </div>
-                   <div class="item-content">
-                      <div class="item-price">
-                        <div class="price-box"> <span class="regular-price"> <span class="price">AED 179.00</span> </span> </div>
-                      </div>
-                      
-                    </div>
-                  </div>
-              
-               </li>
-                @endforeach
-              </ul>
-           
-            </div>
-          </div> -->
+        @include('pages.product.topratedproducts')
         </aside>
       </div>
     </div>
@@ -299,7 +335,7 @@
             </div>
             <div id="bestsell-slider" class="product-flexslider hidden-buttons">
               <div class="slider-items slider-width-col4 products-grid block-content">
-                @foreach ($bestsellers as $item)
+                @foreach ($data->bestsellers as $item)
                 <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
@@ -343,5 +379,99 @@
   </div>
   </section>
   <!-- Main Container End -->
+  <script>
+    var loadCount=0;
+    function loadData()
+    {
+        var formData=new FormData();
+        if($('#category_id').length>0)
+        {
+        formData.append('category_id',$('#category_id').val());
+        }
+        if($('#subcategory_id').length>0)
+        {
+         formData.append('subcategory_id',$('#subcategory_id').val());
+        }
+         if($('#inner_subcategory_id').length>0)
+        {
+          formData.append('inner_subcategory_id',$('#inner_subcategory_id').val());
+        }
+        if($('#sort-type').length>0)
+        {
+          formData.append('type',$('#sort-type').val());
+        }
+           formData.append('page',loadCount);
+        $('.brands').each(function(){
+            if($(this).prop('checked'))
+            {
+            formData.append('brand_ids[]',$(this).val());
+            }
+        });
+
+        $.ajax({
+            url:'{{config('global.api')}}/product-list',
+            type:'post',
+            processData: false,
+            contentType: false,
+            data:formData,
+            dataType:'json',
+            success:function(response){
+                response.products.forEach(function(product,index){
+                    var item=` <li class="item ${index%2==0?`even`:`odd`} listing">
+                                <div class="product-image"> <a href="product_detail.html" title="${product.product_name}"> <img class="small-image" src="${product.productimage.image_url}" alt="${product.product_name}"> </a>
+                                
+                                </div>
+                                <div class="product-shop">
+                                    <h2 class="product-name"><a href="product_detail.html" title="${product.product_name}">${product.product_name}</a></h2>
+                                    <div class="ratings">
+                                    <div class="rating-box">
+                                        <div style="width:50%" class="rating"></div>
+                                    </div>
+                                    <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
+                                    </div>
+                                    <div class="desc std">
+                                    <p>${product.description} <a class="link-learn" title="" href="product_detail.html">Learn More</a> </p>
+                                    </div>
+                                    <div class="price-box">
+                                    <p class="old-price"> <span class="price-label"></span> <span class="price"> AED ${product.product_price} </span> </p>
+                                    <p class="special-price"> <span class="price-label"></span> <span class="price"> AED ${product.discounted_price} </span> </p>
+                                    </div>
+                                    <div class="actions">
+                                    <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
+                                    <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist" href="wishlist.html"></a> 
+                                    <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
+                                    </span> </div>
+                                </div>
+                                </li>`;
+                    $('#products-list').append(item);
+                });
+
+             if(parseInt(response.total_count)===parseInt($('.listing').length))
+              {
+                 $('#load_more').hide();
+              }else{
+                $('#load_more').show();
+              }
+              $('#result_count').html(`Showing ${$('.listing').length} of ${response.total_count} results`);
+            }
+        })
+    }
+    function filter()
+    {
+        loadCount=0;
+         $('#products-list').empty();
+        loadData();
+    }
+    function loadMore()
+    {
+        loadCount++;
+        var formData=new FormData();
+       loadData();
+    }
+    function brandChecked(ref)
+    {
+            filter();
+    }
+  </script>
 @endsection
        
