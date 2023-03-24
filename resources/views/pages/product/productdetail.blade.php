@@ -10,9 +10,8 @@
           <div class="breadcrumbs">
             <ul>
               <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
-              <li> <a href="grid.html" title="">Computers</a> <span>/ </span> </li>
-              <li> <a href="grid.html" title="">Components</a> <span>/</span> </li>
-              <li> <strong>Motherboard</strong> </li>
+              
+              <li> <strong>{{$data['product_name']}}</strong> </li>
             </ul>
           </div>
           <!-- Breadcrumbs End -->
@@ -28,7 +27,7 @@
                       <div class="new-label new-top-left"> New </div>
                       <div class="product-image">
                         <div class="product-full mag"> <img id="product-zoom" data-toggle="magnify"
-                            src="{{asset('assets\products-images\product1.jpg')}}" data-zoom-image="products-images/product1.jpg"
+                            src="{{$data['productimage']['image_url']}}" data-zoom-image="products-images/product1.jpg"
                             alt="product-image"> </div>
                         <div class="more-views">
                           <div class="slider-items-products">
@@ -61,10 +60,8 @@
 
                       <div class="add-to-box">
                         <div class="add-to-cart">
-                          <button onclick="productAddToCartForm.submit(this)" class="button btn-cart"
-                            title="Add to Cart" type="button">Add to Cart</button>
-                          <button onclick="productAddToCartForm.submit(this)" class="button btn-buy" title="Add to Cart"
-                            type="button">Sold Out</button>
+                          <button onclick="cartadd({{$data['id']}})"  id="cart_button" style="cursor:pointer;" value="{{$data['id']}}" class="button btn-cart"title="Add to Cart">Add to Cart</button>
+                          <button  class="button btn-buy" title="Add to Cart" type="button">Sold Out</button>
 
                         </div>
 
@@ -77,9 +74,11 @@
                     <div class="product-shop col-lg- col-sm-7 col-xs-12">
                       <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a
                           class="product-prev" href="#"><span></span></a> </div>
-                      <div class="brand">XPERIA</div>
+                      <div class="brand">{{$data['brand']['brand_name']}}</div>
                       <div class="product-name">
-                        <h1>Anti Glare Core i5 9th Genration Side Narrow Border Display Laptop</h1>
+                        <h1>{{$data['product_name']}}</h1>
+                        <input type="hidden" value="{{$data['product_name']}}" name="pro_name" id="pro_name">
+                       <input type="hidden" value="{{$data['productimage']['image_url']}}" name="pro_img" id="pro_img">
                       </div>
                       <div class="rating">
                         <div class="star-rating">
@@ -90,20 +89,19 @@
                       </div>
                       <div class="price-block">
                         <div class="count-number">
-                          <form id='myform' method='POST' class='quantity' action='#'>
                             <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                            <input type='text' name='quantity' value='0' class='qty' />
+                            <input type='text'id="pro_qty" name='quantity' value='1' class='qty' />
                             <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                          </form>
                         </div>
                         <div class="price-box">
 
                           <p class="availability in-stock"><span>Sold out</span></p>
                           <p class="special-price"> <span class="price-label">Special Price</span> <span
-                              id="product-price-48" class="price"> AED 309.99 </span> </p>
+                              id="product-price-48" class="price"> AED {{$data['discounted_price']}} </span> </p>
+                              <input type="hidden" value="{{$data['discounted_price']}}" name="price" id="pro_price">
 
                           <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> AED
-                              315.99 </span> </p>
+                            {{$data['product_price']}} </span> </p>
                           <p>Free Shipping & Free Delivery</p>
 
                         </div>
@@ -157,7 +155,7 @@
 
 
                     </div>
-                  </form>
+                 
                 </div>
                 <div class="product-collateral">
                   <div class="add_info">
@@ -433,7 +431,6 @@
                                   <div class="form-submit">
                                     <input name="submit" type="submit" id="submit" class="submit" value="Submit">
                                   </div>
-                                </form>
                               </div><!-- #respond -->
                             </div>
                           </div>
@@ -923,6 +920,56 @@
           }
         });
     });
+
+
+    
+    function cartadd(id){
+ 
+     //alert('jhghjsgv');
+
+     var setting={
+    url:'{{url("/add-to-cart")}}',
+     dataType:'json',
+     type:'post',
+     headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       },
+     data: { 
+         product_id: id,
+         product_name: $("#pro_name").val(),
+         qty: $("#pro_qty").val(),
+         price: $("#pro_price").val(),
+         shipping_cost: 0,
+         tax: 0,
+         image: $("#pro_img").val()
+     },
+   
+     success:function(response){
+      // console.log(response);
+
+      if(response.status==1){
+         Toastify({
+     text: "Cart Item Added",
+     className: "info",
+     close: true,
+     style: {
+         background: "#1cad6a",
+     }
+     }).showToast();
+      }
+     
+     },
+      error: function(xhr) {
+      
+  console.log(xhr.responseText); // this line will save you tons of hours while debugging
+ // do something here because of error
+}
+ };
+
+ 
+
+     $.ajax(setting);
+}
 
 
   </script>

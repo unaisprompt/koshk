@@ -107,7 +107,7 @@
         <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 logo-block">
             <!-- Header Logo -->
-            <div class="logo"> <a title="Citroen" href="index.html"><img alt="Citroen" src="{{asset('assets/images/logo.png')}}"> </a>
+            <div class="logo"> <a title="Citroen" href="{{url('/')}}"><img alt="Citroen" src="{{asset('assets/images/logo.png')}}"> </a>
             </div>
             <!-- End Header Logo -->
           </div>
@@ -371,7 +371,7 @@
               <!-- Top Cart -->
               <div class="mini-cart">
                 <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a
-                    href="shopping_cart.html"> <span class="cart_count">2</span>
+                    href="{{url('cart')}}"> <span class="cart_count">2</span>
                   </a> </div>
                 <div>
                   <div class="top-cart-content">
@@ -421,7 +421,7 @@
                     <!--actions-->
                     <div class="actions">
                       <button class="btn-checkout" title="Checkout" type="button"><span>Checkout</span> </button>
-                      <a href="shopping_cart.html" class="view-cart"><span>View Cart</span></a>
+                      <a href="{{url('cart')}}" class="view-cart"><span>View Cart</span></a>
                     </div>
                   </div>
                 </div>

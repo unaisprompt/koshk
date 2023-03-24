@@ -7,6 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+
   <!-- Favicons Icon -->
   <link rel="icon" href="#" type="image/x-icon">
   <link rel="shortcut icon" href="#" type="image/x-icon">
@@ -35,6 +36,9 @@
     rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
 </head>
 
 <body class="cms-index-index cms-home-page home">
@@ -87,6 +91,7 @@
         <script src="{{asset('assets/js/jquery.mobile-menu.min.js')}}"></script>
         <script src="{{asset('assets/js/countdown.js')}}"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
          @yield('script')                
             <script> 
 function newsLetter() {
