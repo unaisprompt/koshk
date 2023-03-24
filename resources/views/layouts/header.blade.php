@@ -54,6 +54,7 @@
       </div>
 
       <div class="container">
+
         <div class="positionsa">
           <div id="bkgOverlay" class="backgroundOverlay"></div>
 
@@ -76,13 +77,14 @@
                   <h1>Sign In</h1>
                 </div>
 
-                <form>
+                <form id="first_popup">
+                  @csrf
                   <label>Your email</label>
-                  <input type="email" name="" placeholder="email">
+                  <input type="email" name="email" id="email" placeholder="email">
                   <label>Password</label>
-                  <input type="password" name="" placeholder="password">
-                  <button class="signin" type="button">SIGN IN</button>
-                  <button class="signUp" type="button">SIGN UP</button>
+                  <input type="password" name="password" id="password" placeholder="password">
+                  <button type="button" class="signin" type="button" onclick="loginUserPopup()">SIGN IN</button>
+                  {{-- <button class="signUp" type="button">SIGN UP</button> --}}
                 </form>
 
 
@@ -99,7 +101,6 @@
 
           <!-- End MailChimp Signup Form -->
         </div>
-
 
 
 
@@ -134,13 +135,227 @@
             <div class="mm-toggle-wrap" open-val="0">
               <div class="mm-toggle"><i class="fa fa-bars"></i><span class="mm-label">Menu</span> </div>
             </div>
-            <div class="yujhs">
+              @if(!empty(session()->all()['token']))
+                 @if(session()->all()['token'])
+             <a href="{{url('logout')}}" class="dropdown-item"><i class="ft-power mr-2"></i><span>logout</span></a>
+           @endif
+           @endif
+             <div class="yujhs">
               <div class="dropdown block-language-wrapper"> <a href="#"> <img src="{{asset('assets/images/arabia.png')}}" alt="language">
                   UAE </a>
               </div>
               <div class="fl-links">
                 <div class="no-js">
-                  <a href="#" title="Company" class="clicker" data-toggle="modal" data-target="#myModalsignin"></a>
+                 
+                  @if(!empty(session()->all()['token']))
+                 @if(session()->all()['token'])
+                  {{-- <button type="button" title="Company" class="clicker"></button>{{session()->all()['name']}} --}}
+                  <div class="top-cart-contain">
+              <!-- Top Cart -->
+              <div class="mini-cart">
+                <div data-toggle="dropdown" data-hover="dropdown" class="clicker dropdown-toggle"></div>
+                <div>
+                  <div class="top-cart-content">
+                    <!--block-subtitle-->
+                    <ul class="mini-products-list" id="cart-sidebar">
+                      <li class="item first">
+                        {{session()->all()['name']}}
+                      </li>
+                       <a href="{{url('logout')}}" class="dropdown-item"><i class="ft-power mr-2"></i><span>logout</span></a>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- Top Cart -->
+              <div id="ajaxconfig_info" style="display:none"> <a href="#/"></a>
+                <input value="" type="hidden">
+                <input id="enable_module" value="1" type="hidden">
+                <input class="effect_to_cart" value="1" type="hidden">
+                <input class="title_shopping_cart" value="Go to shopping cart" type="hidden">
+              </div>
+            </div>
+            @endif
+                  @else
+                  <button type="button" title="Company" class="clicker" onclick="$('#myModalsignin').modal('show');"></button>
+                  @endif
+                  
+    <div class="modal fade" id="myModalsignin" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header v5c">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="yhd0d">
+            <h1>Welcome back!</h1>
+            <h2>Sign in to your account</h2>
+            <h3>Don't have an account? <a href="#" data-toggle="modal" onclick="$('#myModalsignup').modal('show');$('#myModalsignin').modal('hide');">Sign Up</a></h3>
+          </div>
+          <form id="login_form">
+            @csrf
+          <div class="mmc5c">
+            <label>Email</label>
+            <input type="text" name="email" id="email_signup" value="">
+          </div>
+          <div class="mmc5c">
+            <label>Password</label>
+            <input type="password" name="password" id="password" value="">
+            <span><i class="fa fa-eye-slash"></i></span>
+          </div>
+          <span class="ipEvhD"  onclick="$('#myModalsignup').modal('hide');$('#myModalforgot').modal('show'); " style="cursor:pointer;">Forgot your password?</span>
+          <button type="button" class="jcdgCW" id="login_btn" onclick="loginUser()">Sign In</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModalsignup" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header v5c">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form  method="post" id="register_form">
+          @csrf
+        <div class="modal-body">
+          <div class="yhd0d">
+            <h2>Create an account</h2>
+            <h3>Already have an account? <a href="#">Sign In</a></h3>
+          </div>
+          <div class="mmc5c">
+            <label>Email</label>
+            <input type="text" id="email_reg" name="email_reg" value="">
+          </div>
+          <div class="mmc5c">
+            <label>Password</label>
+            <input type="password" id="password" name="password_reg" value="">
+            <span><i class="fa fa-eye-slash"></i></span>
+          </div>
+        
+          <div class="mmc5c">
+            <label> Name</label>
+            <input type="text" id="name" name="name" value="">
+          </div>
+           
+            
+          <div class="mmc5c">
+            <label> Last Name</label>
+            <input type="text" id="last_name" name="last_name" value="">
+          </div>
+          
+          <div class="mmc5c">
+            <label>mobile</label>
+            <input type="text" id="phone" name="phone" value="">
+          </div>
+          <button type="button" class="jcdgCW" id="register_btn" onclick="register()">Create an account</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+   <div class="modal fade" id="myModalsigninotp" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header v5c">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form id="otp_form">
+          @csrf
+        <div class="modal-body">
+          <div class="yhd0d">
+            <h1>Verify Your Account</h1>
+            {{-- <h2>Sign in to your account</h2> --}}
+            <h3>Don't have an account? <a href="#" data-toggle="modal" onclick="$('#myModalsignup').modal('show');">Sign Up</a></h3>
+          </div>
+          <div class="mmc5c">
+            <label>otp</label>
+            <input type="number" name="otp_verify_otp" value="" id="otp_verify_otp">
+          </div>
+          <a class="ipEvhD" href="#">Forgot your password?</a>
+          <button type="button" class="jcdgCW" onclick="verifyOtp()">Verify Otp</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="myModalforgot" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header v5c">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form id="forget_password">
+          @csrf
+        <div class="modal-body">
+          <div class="yhd0d">
+            <h1>Forget password</h1>
+            {{-- <h2>Sign in to your account</h2> --}}
+           
+          </div>
+          <div class="mmc5c">
+            <label>Enter Your Registered Email</label>
+            <input type="text" name="email" value="" id="email_forget">
+          </div>
+          <button type="button" class="jcdgCW" onclick="ForgetPassword()">Send Email</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+     <div class="modal fade" id="myModalforgetotp" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header v5c">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form id="forget_otp">
+          @csrf
+        <div class="modal-body">
+          <div class="yhd0d">
+            <h1>Otp Enter</h1>
+            {{-- <h2>Sign in to your account</h2> --}}
+            {{-- <h3>Don't have an account? <a href="#" data-toggle="modal" onclick="$('#myModalsignup').modal('show');">Sign Up</a></h3> --}}
+          </div>
+          <div class="mmc5c">
+            <label>otp</label>
+            <input type="number" name="otp" value="" id="otp_for">
+            <span><i class="fa fa-eye-slash"></i></span>
+          </div>
+          <button type="button" class="jcdgCW" onclick="ForgetOtp()">Verify Otp</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+   <div class="modal fade" id="myModalchangepass" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header v5c">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form id="change_password">
+          @csrf
+        <div class="modal-body">
+          <div class="yhd0d">
+            <h1>Password Reset</h1>
+            {{-- <h2>Sign in to your account</h2> --}}
+            {{-- <h3>Don't have an account? <a href="#" data-toggle="modal" onclick="$('#myModalsignup').modal('show');">Sign Up</a></h3> --}}
+          </div>
+          <div class="mmc5c">
+            <label>Enter New Password</label>
+            <input type="text" name="new_password" value="" id="new_password">
+          </div>
+          <button type="button" class="jcdgCW" onclick="newPassword()">change Password</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
                   <!-- <div class="fl-nav-links">
                     <ul class="links">
                       <li><a href="dashboard.php" title="My Account">My Account</a></li>

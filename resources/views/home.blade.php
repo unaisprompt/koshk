@@ -1167,9 +1167,10 @@
     }(window.jQuery);
   </script>
 
+ 
+                 {{-- @if(!empty(session()->all()['token'])) --}}
 
-
-  <script type="text/javascript">
+  {{-- <script type="text/javascript">
     $(document).ready(function () {
       //Fade in delay for the background overlay (control timing here)
       $("#bkgOverlay").delay(2800).fadeIn(400);
@@ -1187,7 +1188,8 @@
       $("#bkgOverlay").fadeOut(400);
       $("#delayedPopup").fadeOut(300);
     }
-  </script>
+  </script> --}}
 
+{{-- @endif --}}
 @endsection
        

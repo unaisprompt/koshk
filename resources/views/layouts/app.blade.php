@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Favicons Icon -->
   <link rel="icon" href="#" type="image/x-icon">
   <link rel="shortcut icon" href="#" type="image/x-icon">
@@ -25,8 +26,9 @@
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/developer.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/newstyle.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/define.css')}}">     
-     <!-- <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+     <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <!-- Google Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
@@ -77,7 +79,7 @@
         @include('layouts.footer')
     </div>
          <!-- Link of JS files -->
-        <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+        {{-- <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script> --}}
         <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('assets/js/revslider.js')}}"></script>
         <script src="{{asset('assets/js/common.js')}}"></script>
@@ -136,6 +138,280 @@ function newsLetter() {
         }
            });
     </script>
+    <script>
+ function register()
+   {
+    let name=$('#name').val();
+    let email=$('#email_reg').val();
+    let password=$('#password_reg').val();
+    let c_password=$('#c_password').val();
+    let mobile = $('#mobile').val();
+    $.ajax({
+        url:"{{url('register-post')}}",
+        type:'post',
+        data:$('#register_form').serialize(),
+        dataType:'json',
+        success: function (response) {
+                    $(".preloader").hide();
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                            $('#myModalsigninotp').modal('show');
+                           $('#myModalsignup').modal('hide');
+                           $('#myModalsignin').modal('hide');
+                     
+                        });
+                        document.getElementById("form").reset();
+                        $('#refresh').click();
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    $(".preloader").hide();
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+    });
+   }
+    </script>
+    <script>
+        function verifyOtp()
+   {
+    let otp=$('#otp_verify_otp').val();
+    let email =$('#email_reg').val();
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    $.ajax({
+        url:"{{route('email-verify')}}",
+        type:'post',
+         data: {
+                    otp: otp,
+                    email: email
+            },
+        dataType:'json',
+        success: function (response) {
+                    $(".preloader").hide();
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                             $('#myModalsignin').modal('show');
+                            $('#myModalsigninotp').modal('hide');
+                           $('#myModalsignup').modal('hide');
+                          
+                     location.reload();
+                        });
+                        document.getElementById("form").reset();
+                        $('#refresh').click();
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    $(".preloader").hide();
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+    });
+   }
+        </script>
+
+        <script>
+        function loginUser()
+   {
+    let email=$('#email_signup').val();
+    let password =$('#password').val();
+    $.ajax({
+        url:"{{url('login-post')}}",
+        type:'post',
+        data:$('#login_form').serialize(),
+        dataType:'json',
+        success: function (response) {
+                    $(".preloader").hide();
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                        location.reload();
+                          
+                     location.reload();
+                        });
+                        document.getElementById("form").reset();
+                        $('#refresh').click();
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            location.reload();
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    $(".preloader").hide();
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+    });
+   }
+        </script>
+            <script>
+        function loginUserPopup()
+   {
+    let email=$('#email').val();
+    let password =$('#password').val();
+    $.ajax({
+        url:"{{url('login-post')}}",
+        type:'post',
+        data:$('#first_popup').serialize(),
+        dataType:'json',
+        success: function (response) {
+                    $(".preloader").hide();
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                        location.reload();
+                          
+                    //  location.reload();
+                        });
+                        document.getElementById("form").reset();
+                        $('#refresh').click();
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            location.reload();
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    $(".preloader").hide();
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+    });
+   }
+        </script>
+         <script>
+function ForgetPassword()
+   {
+    let email=$('#otp_verify_otp').val();
+    $.ajax({
+        url:"{{url('forget-post')}}",
+        type:'post',
+        data:$('#forget_password').serialize(),
+        dataType:'json',
+        success: function (response) {
+                    $(".preloader").hide();
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                        $('#myModalforgot').modal('hide');
+                         $('#myModalsignin').modal('hide');
+                         $('#myModalforgetotp').modal('show');
+                        });
+                        document.getElementById("form").reset();
+                        $('#refresh').click();
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            location.reload();
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    $(".preloader").hide();
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+    });
+   }
+        </script>
+                 <script>
+function ForgetOtp()
+   {
+     let otp=$('#otp_for').val();
+    let email =$('#email').val();
+    $.ajax({
+        url:"{{url('verify-otp')}}",
+        type:'post',
+        data:$('#forget_otp').serialize(),
+        dataType:'json',
+        success: function (response) {
+                    $(".preloader").hide();
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                        $('#myModalforgot').modal('hide');
+                        $('#myModalchangepass').modal('show');
+                        });
+                        document.getElementById("form").reset();
+                        $('#refresh').click();
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    $(".preloader").hide();
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+    });
+   }
+        </script>
+                  <script>
+function newPassword()
+   {
+     let new_pass=$('#new_password').val();
+    $.ajax({
+        url:"{{url('password-reset')}}",
+        type:'post',
+        data:$('#change_password').serialize(),
+        dataType:'json',
+        success: function (response) {
+                    $(".preloader").hide();
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                        $('#myModalchangepass').modal('hide');
+                        $('myModalforgetotp').modal('hide');
+                         location.reload();
+                        });
+                        document.getElementById("form").reset();
+                        $('#refresh').click();
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    $(".preloader").hide();
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+    });
+   }
+        </script>
          @yield('script')
      </body>
  </html>
