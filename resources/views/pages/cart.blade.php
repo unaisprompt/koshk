@@ -21,54 +21,45 @@
               </div>
               <div class="row">
               <div class="col-sm-8 col-lg-8">
+                @php $total=0; $shipping=0; @endphp
+
+                @if($data)
+                @foreach($data as $item)
                 <div class="uthssk">
                   <div class="pous">
-                    <img src="{{asset('assets/images/mobile-img.jpg')}}" alt="">
+                    <img src="{{$item['image_url']}}" alt="">
                   </div>
                   <div class="pous1">
-                    <h3>TOMMY JEANS</h3>
-                    <h4>Linear Logo Hoodie Green XL International</h4>  
+                    {{-- <h3>Brand</h3> --}}
+                    <h4>{{$item['product_name']}}</h4>  
                     <small>Order in 7 hrs 13 mins</small>  
                     <small><b>Free delivery by Tomorrow, Dec 28</b></small>  
-                    <h5>Sold by <b>noon Fashion</b></h5>  
-                    <span><i class="fa fa-trash"></i> Remove</span>       
+                    <h5>Sold by <b>Gift City</b></h5>  
+                    @if(Session::has('user_id'))
+                    <a href="{{url('delete-cart')}}/{{$item['id']}}">
+                    <span><i class="fa fa-trash"></i> Remove</span>  </a>
+                    @else
+                    <a href="{{url('delete-cart')}}/{{$item['product_id']}}">
+                    <span><i class="fa fa-trash"></i> Remove</span>  </a>
+                    @endif     
                   </div>
                   <div class="pous2">
-                    <p>$1080</p>
+                    <p>AED {{$item['price'] * $item['qty']}}</p>
+                   @php $total+=$item['price'] * $item['qty']; @endphp
                     <div class="count-number">
-                      <form id='myform' method='POST' class='quantity' action='#'>
+                    
                         <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                        <input type='text' name='quantity' value='0' class='qty' />
+                        <input type='text' name='quantity' value='{{$item['qty']}}' class='qty' />
                         <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                      </form>
+                     
                     </div>
                   </div>
                 </div>
-                <div class="uthssk">
-                  <div class="pous">
-                    <img src="{{asset('assets/images/mobile-img.jpg')}}" alt="">
-                  </div>
-                  <div class="pous1">
-                    <h3>TOMMY JEANS</h3>
-                    <h4>Linear Logo Hoodie Green XL International</h4>  
-                    <small>Order in 7 hrs 13 mins</small>  
-                    <small><b>Free delivery by Tomorrow, Dec 28</b></small>  
-                    <h5>Sold by <b>noon Fashion</b></h5>  
-                    <span><i class="fa fa-trash"></i> Remove</span>       
-                  </div>
-                  <div class="pous2">
-                    <p>$1080</p>
-                    <div class="count-number">
-                      <form id='myform' method='POST' class='quantity' action='#'>
-                        <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                        <input type='text' name='quantity' value='0' class='qty' />
-                        <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                      </form>
-                    </div>
-                  </div>
-                </div>
+                @endforeach
+                @endif
+              
                 <div class="gcvYcJ">
-                  <button type="button">Continue Shopping</button>
+                  <a href="{{url('/')}}"><button type="button">Continue Shopping</button></a>
                 </div>
               </div>
               <div class="col-sm-4 col-lg-4">
@@ -85,8 +76,8 @@
                         <h5>delivery charges</h5>
                       </div>
                       <div class="cilop1">
-                        <h5>$790</h5>
-                        <h5>+$0</h5>
+                        <h5>AED {{$total}}</h5>
+                        <h5>+AED 0</h5>
                       </div>
                   </div><hr>
                   <div class="d-flex justify-content-between">
@@ -94,7 +85,7 @@
                         <h5>your total savings</h5>
                       </div>
                       <div class="cilop1">
-                        <h5>$790</h5>
+                        <h5>AED {{$total}}</h5>
                       </div>
                   </div>
                   <div class="ctllRv">

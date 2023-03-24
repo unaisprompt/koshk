@@ -38,15 +38,15 @@ Route::get('/',[ApiController::class, 'home']);
 ############# User ############################
 
 Route::get('login',[ApiUserController::class, 'login']);
-Route::post('login-post',[ApiUserController::class,'loginPost']);
+Route::post('login-post',[ApiUserController::class,'loginPost'])->name('login-post');
 Route::post('loginPop',[ApiUserController::class,'loginPop']);
 Route::get('logout',[ApiUserController::class, 'logout']);
 Route::get('register',[ApiUserController::class, 'register']);
-Route::post('register-post',[ApiUserController::class,'registerPost']);
-Route::post('email-verify',[ApiUserController::class,'emailVerify']);
+Route::post('register-post',[ApiUserController::class,'registerPost'])->name('register-post');
+Route::post('email-verify',[ApiUserController::class,'emailVerify'])->name('email-verify');;
 Route::get('my-account',[ApiUserController::class,'myaccount']);
 Route::get('user-forget',[ApiUserController::class,'forgetPassword']);
-Route::post('forget-post',[ApiUserController::class,'forgetPasswordPost']);
+Route::post('forget-post',[ApiUserController::class,'forgetPasswordPost'])->name('forget-post');
 Route::post('verify-otp',[ApiUserController::class,'otpVerify']);
 Route::post('password-reset',[ApiUserController::class,'passwordReset']);
 Route::get('user-password-change',[ApiUserController::class,'passwordChangeUser']);

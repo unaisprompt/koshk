@@ -9,10 +9,12 @@
             <div id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container'>
               <div id='rev_slider_4' class='rev_slider fullwidthabanner'>
                 <ul>
+                  @if(!empty($finalData['main_data']['slider']))
                   @foreach($finalData['main_data']['slider'] as $banner)
+
                   <li data-transition='random' data-slotamount='7' data-masterspeed='1000'
-                    data-thumb='{{$banner['image']}}'>
-                    <img src='{{$banner['image']}}' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
+                    data-thumb='{{!empty($banner['image'])}}'>
+                    <img src='{{!empty($banner['image'])}}' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
                     <div class="container">
                       <div class="content_slideshow">
                         <div class="row">
@@ -22,12 +24,12 @@
                               <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-endspeed='500'
                                 data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none'
                                 data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
-                                style='z-index:2; white-space:nowrap;'><span>{{$banner['title1']}}</span> </div>
+                                style='z-index:2; white-space:nowrap;'><span>{{!empty($banner['title1'])}}</span> </div>
                               <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-endspeed='500' data-speed='500'
                                 data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none'
                                 data-elementdelay='0.1' data-endelementdelay='0.1'
                                 style='z-index:3; white-space:nowrap;'><span
-                                  style="font-weight:normal; display:block">{{$banner['title2']}}</div>
+                                  style="font-weight:normal; display:block">{{!empty($banner['title2'])}}</div>
                               <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500'
                                 data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none'
                                 data-elementdelay='0.1' data-endelementdelay='0.1'
@@ -39,7 +41,7 @@
                     </div>
                   </li>
                   @endforeach
-
+                  @endif
                 </ul>
                 <div class="tp-bannertimer"></div>
               </div>
@@ -121,7 +123,7 @@
               <div class="item item-carousel">
                 <div class="item-inner">
                   <div class="item-img">
-                    <div class="item-img-info"> <a class="product-image" href="product_detail.html"> <img alt=""
+                    <div class="item-img-info"> <a class="product-image" href="{{url('product/detail')}}?product={{$product['id']}}"> <img alt=""
                           src="{{$product['productimage']['image_url']}}"> </a>
                       <div class="box-hover">
                         <ul class="add-to-links">
@@ -276,7 +278,7 @@
                       <div class="item-info">
                         <div class="info-inner">
                           <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html">{{$featured_products['product_name']}}</a> </div>
-                          <div class="brand">{{$featured_products['brand']['brand_name']}}</div>
+                          <div class="brand">{{!empty($featured_products['brand']['brand_name'])}}</div>
                           <div class="star-rating">
                             {{-- <span style="width:60%">Rated <strong class="rating">{{$featured_products['rattings']}}</strong> out of 5</span> --}}
                           </div>
@@ -1167,9 +1169,10 @@
     }(window.jQuery);
   </script>
 
+ 
+                 {{-- @if(!empty(session()->all()['token'])) --}}
 
-
-  <script type="text/javascript">
+  {{-- <script type="text/javascript">
     $(document).ready(function () {
       //Fade in delay for the background overlay (control timing here)
       $("#bkgOverlay").delay(2800).fadeIn(400);
@@ -1187,7 +1190,60 @@
       $("#bkgOverlay").fadeOut(400);
       $("#delayedPopup").fadeOut(300);
     }
+<<<<<<< HEAD
+  </script> --}}
+
+<script>
+
+    $('.cart_button_home').click(function(e){
+ 
+ e.preventDefault();
+var setting={
+    url:'{{url("/add-to-cart")}}',
+     dataType:'json',
+     type:'post',
+     headers: {
+           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+       },
+     data: { 
+         product_id: $(this).data('cpid'),
+         product_name: $(this).data('pname'),
+         qty: 1,
+         price: $(this).data('pprice'),
+         shipping_cost: $(this).data('pship'),
+         tax: $(this).data('tax'),
+         image: $(this).data('img')
+     },
+   
+     success:function(response){
+      // console.log(response);
+
+      if(response.status==1){
+       // alert(response.cart_count);
+         $('.badgecart').text(response.cart_count);
+         Toastify({
+     text: "Cart Item Added",
+     className: "info",
+     close: true,
+     style: {
+         background: "#1cad6a",
+     }
+     }).showToast();
+
+      }
+     
+     },
+      error: function(xhr) {
+      
+  console.log(xhr.responseText); // this line will save you tons of hours while debugging
+ // do something here because of error
+}
+ };
+$.ajax(setting);
+});
   </script>
 
+
+{{-- @endif --}}
 @endsection
        

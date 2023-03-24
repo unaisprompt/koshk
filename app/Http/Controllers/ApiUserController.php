@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Session;
 
 class ApiUserController extends Controller
 {
@@ -57,7 +58,7 @@ class ApiUserController extends Controller
         'email'=>$request->email,
         'password'=>$request->password
         ]);
-        
+        // dd($request);
         if($response['status']==1){
            // return back()->with('error', $response['message']);
           // return $response;
@@ -100,12 +101,13 @@ class ApiUserController extends Controller
                 // session()->forget('cart');
                 // session()->put('cart', $cart);
             }
-
-            return redirect('/');
+         return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
 
            }
            else{
-               return back()->with('error', $response['message']);
+                 return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
            }
     }
 public function loginPop(Request $request){
@@ -158,11 +160,13 @@ public function loginPop(Request $request){
                 // session()->put('cart', $cart);
             }
 
-            return $response->json();
+             return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
 
            }
            else{
-               return back()->with('error', $response['message']);
+                 return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
            }
     }
     public function logout(){
@@ -178,42 +182,52 @@ public function loginPop(Request $request){
     }
     
     public function registerPost(Request $request){
-       // return $request;
         $url = $this->url."/register";
         $response = Http::post($url,  [
         'name'=>$request->name,
         'last_name'=>$request->last_name,
-        'email'=>$request->email,
-        'password'=>$request->password,
+        'email'=>$request->email_reg,
+        'password'=>$request->password_reg,
         'mobile'=>$request->phone,
-        'country_code'=>$request->code,
+        'country_code'=>+971,
         'token'=>$request->_token,
-        'type'=>'email',
+        'type'=>2,
         'register_type'=>'email',
         'login_type'=>'email'
         ]);
        if($response['status']==1){
-        $data=$response['data'];
-        return view('pages.emailverify',compact('data'));
+        Session::put('email', $request->email);
+         return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
        }
        else{
-        return redirect()->back()->withInput()->with('error',$response['message']);
+           return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
        }
     }
 
     public function emailVerify(Request $request){
+        //  dd($request->email);
+        $data = $request->session()->all();
         $url = $this->url."/emailverify";
         $response = Http::post($url,  [
         'email'=>$request->email,
         'token'=>$request->otp
         ]);
-        
-        if($response['status']==1){
-            return redirect('/login');
-           }
-           else{
-               return back()->with('error', $response['message']);
-           }
+        //   dd($response->json());
+        $response =$response->json();
+          if($response['status']==1){
+            session()->forget('email');
+            session()->put('user_id', $response['data']['id']);
+            session()->put('token', $response['data']['access_token']);
+            session()->put('name', $response['data']['name']);
+         return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
+       }
+       else{
+           return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
+       }
     }
 
     public function profile(){
@@ -382,29 +396,35 @@ public function loginPop(Request $request){
         $response = Http::post($url,  [
        'email'=>$request->email,
         ]);
-        
-        $data=$request->email;
-       if($response['status']==1){
-        return view('pages.otpverify',compact('data'));
+        if($response['status']==1){
+        Session::put('email', $request->email);
+         return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
        }
        else{
-           return back()->with('error', $response['message']);
+           return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
        }
     }
     public function otpVerify(Request $request)
     {
+        $data = $request->session()->all();
      $url = $this->url."/verifyOtp";
         $response = Http::post($url,  [
-       'email'=>$request->email,
+       'email'=>$data['email'],
        'otp'=>$request->otp,
         ]);
          $data = $response->json();
-        //  dd($data);
+        // dd($data);
        if($response['status']==1){
-        return view('pages.passwordreset',compact('data'));
-       }else{
-         $data = $request->email;
-         return view('pages.otpverify',compact('data'))->with('error', $response['message']);
+         Session::put('user_id', $data['data']['id']);
+        session()->forget('email');
+        return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
+       }
+       else{
+           return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
        }
     }
 
@@ -427,17 +447,20 @@ public function loginPop(Request $request){
   }
     public function passwordReset(Request $request)
     {
-
+     $data = $request->session()->all();
      $url = $this->url."/passwordChange";
         $response = Http::post($url,  [
-       'new_pass'=>$request->new_pass,
-       'user_id'=>$request->user_id,
+       'new_pass'=>$request->new_password,
+       'user_id'=>$data['user_id'],
         ]);
        if($response['status']==1){
-        return redirect('login');
+       session()->forget('user_id');
+        return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
        }
        else{
-           return back()->with('error', $response['message']);
+           return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
        }
     }
     public function passwordChangeUser()

@@ -43,7 +43,7 @@ class ApiCartController extends Controller
         }
 
     
-        return view('pages.cart.cart',compact('data'));
+        return view('pages.cart',compact('data'));
     }
 
     public function addToCart(Request $request){
