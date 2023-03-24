@@ -138,7 +138,7 @@
                     <h2 class="product-name"><a href="product_detail.html" title="{{$product->product_name}}">{{$product->product_name}}</a></h2>
                     <div class="ratings">
                       <div class="rating-box">
-                        <div style="width:50%" class="rating"></div>
+                        <div style="width:{{$product->rattings?$product->rattings[0]->avg_ratting*2*10:'0'}}%" class="rating"></div>
                       </div>
                       <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                     </div>
@@ -181,26 +181,38 @@
         <div class="widget widget-categories">
             <div class="block-title">Browse Categories</div>
             <div id="accordion" class="accordion">
-                @foreach (categoryList() as $categroy)
-                    <div class="card border-0 mb-2">
+              @if($data->category)
+                @foreach ($data->category->subcategory as $subcategory)
+                   <div class="card border-0 mb-2">
                         <div class="card-header">
                         <h6 class="mb-0">
+                          @if($subcategory->inner_category)
                             <a class="link-title" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$loop->iteration}}">
-                               {{$categroy->category_name}}
+                               {{$subcategory->subcategory_name}}
                             </a>
+                          @else
+                           <a class="link-title" href="{{url('products?category_id='.$data->category->id.'&subcategory_id='.$subcategory->id)}}">
+                               {{$subcategory->subcategory_name}}
+                            </a>
+                          @endif
                         </h6>
                         </div>
+                        @if($subcategory->inner_category)
                         <div id="collapse{{$loop->iteration}}" class="collapse" data-parent="#accordion">
-                        <div class="card-body text-muted">
-                            <ul class="list-unstyled">
-                                @foreach ($categroy->subcategory as $subcategory)
-                                    <li> <a href="#">{{$subcategory->subcategory_name}}</a></li>
-                                @endforeach
-                            </ul>
+                          <div class="card-body text-muted">
+                              <ul class="list-unstyled">
+                                  @foreach ($subcategory->inner_category as $innercategory)
+                                      <li> <a href="{{url('products?category_id='.$data->category->id.'&subcategory_id='.$subcategory->id.'&innersubcategory_id='.$innercategory->id)}}">{{$innercategory->innersubcategory_name}}</a></li>
+                                  @endforeach
+                              </ul>
+                          </div>
                         </div>
-                        </div>
+                        @endif
                     </div>
                 @endforeach
+              @else
+                @include('pages.product.sidecategory')
+              @endif
             </div>
           </div>
           
@@ -275,14 +287,14 @@
            
           </div>     -->
                     
-          <!-- <div class="widget-price">
+          <div class="widget-price">
           <h5>Price Range</h5>
           <div class="wrapper">
   <fieldset class="filter-price">
 
     <div class="price-field">
-      <input type="range" min="100" max="500" value="135" id="lower">
-      <input type="range" min="100" max="500" value="500" id="upper">
+      <input type="range" min="0" max="{{$data->max_price}}" value="0" id="lower" onchange="filter()">
+      <input type="range" min="0" max="{{$data->max_price}}" value="{{$data->max_price}}" id="upper" onchange="filter()">
     </div>
     <div class="price-wrap">
       <div class="price-container">
@@ -301,7 +313,7 @@
     </div>
   </fieldset>
 </div>
-          </div> -->
+          </div>
           </div>
           
           
@@ -400,6 +412,8 @@
         {
           formData.append('type',$('#sort-type').val());
         }
+        formData.append('lower',$('#lower').val());
+        formData.append('upper',$('#upper').val());
            formData.append('page',loadCount);
         $('.brands').each(function(){
             if($(this).prop('checked'))

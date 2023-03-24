@@ -233,64 +233,9 @@
                 </div>
                 <div class="mega-menu-category">
                   <ul class="nav">
-                    <!-- 
-                    </li>
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                          class="fa fa-long-arrow-right" aria-hidden="true"></i> Appliances </a>
-                      <div class="dropdown-menu wrap-popup">
-                        <div class="popup">
-                          <div class="row">
-                            <div class="col-md-4 col-sm-6">
-                              <h3>Kitchen</h3>
-                              <ul class="nav">
-                                <li> <a href="grid.html">Refrigerators</a> </li>
-                                <li> <a href="grid.html">Dishwashers</a> </li>
-                                <li> <a href="grid.html">Microwaves</a> </li>
-                                <li> <a href="grid.html">Tosters</a> </li>
-                              </ul>
-                              <br>
-                              <h3>Desktops</h3>
-                              <ul class="nav">
-                                <li> <a href="grid.html"><span>Routers & Modems</span></a> </li>
-                                <li> <a href="grid.html"><span>CPUs, Processors</span></a> </li>
-                                <li> <a href="grid.html"><span>PC Gaming Store</span></a> </li>
-                                <li> <a href="grid.html"><span>Components</span></a> </li>
-                              </ul>
-                            </div>
-                            <div class="col-md-4 col-sm-6 has-sep">
-                              <h3>Cameras</h3>
-                              <ul class="nav">
-                                <li> <a href="grid.html"><span>Accessories</span></a> </li>
-                                <li> <a href="grid.html"><span>Binoculars</span></a> </li>
-                                <li> <a href="grid.html"><span>Telescopes</span></a> </li>
-                                <li> <a href="grid.html"><span>Camcorders</span></a> </li>
-                              </ul>
-                              <br>
-                              <h3>Mobile Phones</h3>
-                              <ul class="nav">
-                                <li> <a href="grid.html"><span>Apple</span></a> </li>
-                                <li> <a href="grid.html"><span>Samsung</span></a> </li>
-                                <li> <a href="grid.html"><span>Motorola</span></a> </li>
-                                <li> <a href="grid.html"><span>Lenovo</span></a> </li>
-                              </ul>
-                            </div>
-                            <div class="col-md-4 has-sep hidden-sm">
-                              <div class="custom-menu-right">
-                                <div class="box-banner media">
-                                  <div class="add-right"><img src="{{asset('assets\images\menu-img2.jpg')}}" alt=""></div>
-                                </div>
-                                <div class="box-banner media">
-                                  <div class="add-right"><img src="{{asset('assets\images\menu-img3.jpg')}}" alt=""></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li> -->
                     @foreach ($categoryList as $category)
                     @if(empty($category->subcategory))
-                    <li class="nosub"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{$category->category_name}}
+                    <li class="nosub"><a href="{{url('products?category_id='.$category->id)}}"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> {{$category->category_name}}
                       </a>
                     </li>
                     @else
@@ -304,7 +249,7 @@
                               <h3>{{$subcategory->subcategory_name}}</h3>
                               <ul class="nav">
                                 @foreach($subcategory->inner_category as $inner_category)
-                                <li> <a href="grid.html"><span>{{$inner_category->innersubcategory_name}}</span></a> </li>
+                                <li> <a href="{{url('products?category_id='.$category->id.'&subcategory_id='.$subcategory->id.'&innersubcategory_id='.$inner_category->id)}}"><span>{{$inner_category->innersubcategory_name}}</span></a> </li>
                                 @endforeach
                               </ul>
                             </div>
@@ -313,23 +258,11 @@
                           <div class="row">
                             @endif
                               @endforeach
-                            <!-- <div class="col-md-4 has-sep hidden-sm">
-                              <div class="custom-menu-right">
-                                <div class="box-banner media">
-                                  <div class="add-right"><img src="{{asset('assets\images\menu-img1.jpg')}}" alt=""></div>
-                                </div>
-                              </div>
-                            </div> -->
                           </div>
                         </div>
                       </div>
                     @endif
                     @endforeach
-                    <!-- <li class="nosub"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Cameras</a>
-                    </li>
-                    <li class="nosub"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> Mobiles,
-                        Tablets</a></li>
-                    <li class="nosub custom-offer"><a href="#"><i class="fa fa-star"></i> Deal of the day</a></li> -->
                   </ul>
                 </div>
               </div>
@@ -340,7 +273,7 @@
             <div class="features-block">
               <div class="col-lg-9 col-md-9 col-xs-12 col-sm-9 offer-block">
                 @foreach($categoryList as $category)
-                 <a href="#">{{$category->category_name}}</a>
+                 <a href="{{url('products?category_id='.$category->id)}}">{{$category->category_name}}</a>
                  @if($loop->iteration>=5) @break @endif
                 @endforeach
             </div>

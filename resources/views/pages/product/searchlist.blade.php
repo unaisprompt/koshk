@@ -120,26 +120,7 @@
         <div class="widget widget-categories">
             <div class="block-title">Browse Categories</div>
             <div id="accordion" class="accordion">
-                @foreach (categoryList() as $categroy)
-                    <div class="card border-0 mb-2">
-                        <div class="card-header">
-                        <h6 class="mb-0">
-                            <a class="link-title" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$loop->iteration}}">
-                               {{$categroy->category_name}}
-                            </a>
-                        </h6>
-                        </div>
-                        <div id="collapse{{$loop->iteration}}" class="collapse" data-parent="#accordion">
-                        <div class="card-body text-muted">
-                            <ul class="list-unstyled">
-                                @foreach ($categroy->subcategory as $subcategory)
-                                    <li> <a href="#">{{$subcategory->subcategory_name}}</a></li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        </div>
-                    </div>
-                @endforeach
+               @include('pages.product.sidecategory')
             </div>
           </div>
           
