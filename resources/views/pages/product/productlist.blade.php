@@ -38,11 +38,11 @@
                               <!-- Item -->
                               <div class="item"> <a href="#"><img alt=""
                                     src="{{$banner->image_url}}"></a>
-                                <div class="cat-img-title cat-bg cat-box">
+                                <!-- <div class="cat-img-title cat-bg cat-box">
                                   <div class="small-tag">Season 2021</div>
                                   <h2 class="cat-heading">Televisions</h2>
                                   <p>GET 40% OFF &sdot; Free Delivery </p>
-                                </div>
+                                </div> -->
                               </div>
                               <!-- End Item -->
                              @endforeach
