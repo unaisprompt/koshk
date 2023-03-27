@@ -42,17 +42,14 @@ class ApiProductController extends Controller
     }
 
     public function productDetail(Request $request){
-       // return $request;
         $url = $this->url."/productdetails";
         $response = Http::post($url,  [
-        'product_id'=>$request->product
+        'product_id'=>$request->id
         ]);
-
-       $data = $response['data'];
-
-      //  return $data;
-
-      return view('pages.product.productdetail',compact('data'));
+       if($response->successful())
+       {
+      return view('pages.product.productdetail',["data" =>$response->object()->data]);
+      }
     }
 
     public function searchProduct(Request $request){

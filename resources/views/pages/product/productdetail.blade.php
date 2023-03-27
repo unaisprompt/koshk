@@ -1,7 +1,17 @@
 
 
 @extends('layouts.app')
-@section('content')   
+@section('content') 
+<style>
+  .product-view .product-essential .add-to-links .link-wishlist.active 
+  {
+    background:blue;
+    color:white;
+  }
+  .comment-respond .stars a.active {
+    color:#ffc808
+  }
+</style>  
     <section class="main-container col1-layout">
       <div class="container">
         <div class="row">
@@ -11,7 +21,7 @@
             <ul>
               <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
               
-              <li> <strong>{{$data['product_name']}}</strong> </li>
+              <li> <strong>{{$data->product_name}}</strong> </li>
             </ul>
           </div>
           <!-- Breadcrumbs End -->
@@ -24,33 +34,24 @@
                   <form action="#" method="post" id="product_addtocart_form">
                     <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
                     <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
+                      @if ($data->new_item)
                       <div class="new-label new-top-left"> New </div>
+                      @endif
                       <div class="product-image">
                         <div class="product-full mag"> <img id="product-zoom" data-toggle="magnify"
-                            src="{{$data['productimage']['image_url']}}" data-zoom-image="products-images/product1.jpg"
+                            src="{{$data->productimage->image_url}}" data-zoom-image="{{$data->productimage->image_url}}"
                             alt="product-image"> </div>
                         <div class="more-views">
                           <div class="slider-items-products">
                             <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
                               <div class="slider-items slider-width-col4 block-content">
-
-
-
-                                <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product1.jpg')}}"
-                                    data-zoom-image="{{asset('assets/products-images/product1.jpg')}}"> <img id="product-zoom0"
-                                      src="{{asset('assets/products-images/product1.jpg')}}" alt="product-image"> </a></div>
-                                <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product3.jpg')}}"
-                                    data-zoom-image="{{asset('assets/products-images/product3.jpg')}}"> <img id="product-zoom1"
-                                      src="{{asset('assets/products-images/product3.jpg')}}" alt="product-image"> </a></div>
-                                <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product4.jpg')}}"
-                                    data-zoom-image="{{asset('assets/products-images/product4.jpg')}}"> <img id="product-zoom2"
-                                      src="{{asset('assets/products-images/product4.jpg')}}" alt="product-image"> </a></div>
-                                <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product5.jpg')}}"
-                                    data-zoom-image="{{asset('assets/products-images/product5.jpg')}}"> <img id="product-zoom3"
-                                      src="{{asset('assets/products-images/product5.jpg')}}" alt="product-image"> </a> </div>
-                                <div class="more-views-items"> <a href="#" data-image="{{asset('assets/products-images/product6.jpg')}}"
-                                    data-zoom-image="{{asset('assets/products-images/product6.jpg')}}"> <img id="product-zoom4"
-                                      src="{{asset('assets/products-images/product6.jpg')}}" alt="product-image"> </a></div>
+                               @foreach ($data->productimages as $image)
+                                <div class="more-views-items"> 
+                                  <a href="#" data-image="{{$image->image_url}}"
+                                    data-zoom-image="{{$image->image_url}}"> <img id="product-zoom{{$loop->iteration}}"
+                                      src="{{$image->image_url}}" alt="product-image"> </a>
+                                </div>
+                               @endforeach
                               </div>
                             </div>
                           </div>
@@ -60,63 +61,65 @@
 
                       <div class="add-to-box">
                         <div class="add-to-cart">
-                          <button onclick="cartadd({{$data['id']}})"  id="cart_button" style="cursor:pointer;" value="{{$data['id']}}" class="button btn-cart"title="Add to Cart">Add to Cart</button>
+                          <button onclick="cartadd({{$data->id}})"  id="cart_button" style="cursor:pointer;" value="{{$data->id}}" class="button btn-cart"title="Add to Cart">Add to Cart</button>
+                          @if(collect($data->stocks)->sum('quantity')<=0)
                           <button  class="button btn-buy" title="Add to Cart" type="button">Sold Out</button>
-
+                          @endif
                         </div>
 
                       </div>
                       <ul class="add-to-links">
-                        <li> <a class="link-wishlist" href="wishlist.html"><span>Add to Wishlist</span></a></li>
-                        <li><a class="link-compare" href="compare.html"><span>Continue Shopping</span></a></li>
+                        <li> <a class="link-wishlist active" href="#"><span>Add to Wishlist</span></a></li>
+                        <li><a class="link-compare" href="{{url('products')}}"><span>Continue Shopping</span></a></li>
                       </ul>
                     </div>
                     <div class="product-shop col-lg- col-sm-7 col-xs-12">
                       <div class="product-next-prev"> <a class="product-next" href="#"><span></span></a> <a
                           class="product-prev" href="#"><span></span></a> </div>
-                      <div class="brand">{{$data['brand']['brand_name']}}</div>
+                      <div class="brand">{{$data->brand->brand_name}}</div>
                       <div class="product-name">
-                        <h1>{{$data['product_name']}}</h1>
-                        <input type="hidden" value="{{$data['product_name']}}" name="pro_name" id="pro_name">
-                       <input type="hidden" value="{{$data['productimage']['image_url']}}" name="pro_img" id="pro_img">
+                        <h1>{{$data->product_name}}</h1>
+                        <input type="hidden" value="{{$data->product_name}}" name="pro_name" id="pro_name">
+                       <input type="hidden" value="{{$data->productimage->image_url}}" name="pro_img" id="pro_img">
                       </div>
                       <div class="rating">
                         <div class="star-rating">
-                          <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
+                          <span style="width:{{(count($data->rattings)>0)?$data->rattings[0]->avg_ratting*2*10:'0'}}%">Rated <strong class="rating">{{(count($data->rattings)>0)?$data->rattings[0]->avg_ratting:'0'}}</strong> out of 5</span>
                         </div>
-                        <p class="rating-links"> <a href="#">453 ratings &amp; 61 reviews</a> <span
+                        <p class="rating-links"> <a href="#">{{(count($data->rattings)>0)?$data->rattings[0]->ratting_count:'0'}} ratings &amp; {{count($data->reviews)}} reviews</a> <span
                             class="separator">|</span> <a href="#">Add Review</a> </p>
                       </div>
                       <div class="price-block">
-                        <div class="count-number">
+                        <!-- <div class="count-number">
                             <input type='button' value='-' class='qtyminus minus' field='quantity' />
                             <input type='text'id="pro_qty" name='quantity' value='1' class='qty' />
                             <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                        </div>
+                        </div> -->
                         <div class="price-box">
-
+                            @if(collect($data->stocks)->sum('quantity')<=0)
                           <p class="availability in-stock"><span>Sold out</span></p>
+                          @endif
                           <p class="special-price"> <span class="price-label">Special Price</span> <span
-                              id="product-price-48" class="price"> AED {{$data['discounted_price']}} </span> </p>
-                              <input type="hidden" value="{{$data['discounted_price']}}" name="price" id="pro_price">
+                              id="product-price-48" class="price"> AED {{$data->discounted_price}} </span> </p>
+                              <input type="hidden" value="{{$data->discounted_price}}" name="price" id="pro_price">
 
                           <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> AED
-                            {{$data['product_price']}} </span> </p>
-                          <p>Free Shipping & Free Delivery</p>
+                            {{$data->product_price}} </span> </p>
+                          <p{{$data->delivery_message}}</p>
 
                         </div>
                       </div>
 
-                      <div class="list">
+                      <!-- <div class="list">
                         <div class="heading">Colors</div>
                         <div class="points">
                           <span style="background-color:rgb(72, 118, 255)"></span>
                           <span style="background-color:rgb(192, 192, 192)"></span>
                           <span style="background-color:rgb(255, 195, 0)"></span>
                         </div>
-                      </div>
+                      </div> -->
 
-                      <div class="list">
+                      <!-- <div class="list">
                         <div class="heading">Highlights</div>
                         <div class="points">
                           <ul>
@@ -126,24 +129,22 @@
                             <li>19.5 inch Display</li>
                           </ul>
                         </div>
-                      </div>
+                      </div> -->
 
                       <div class="list">
                         <div class="heading">Description</div>
                         <div class="points">
-                          Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc.
-                          Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-                        </div>
+                        {{$data->description}}</div>
                       </div>
 
                       <div class="list">
-                        <div class="heading">Seller</div>
+                        <div class="heading">Other</div>
                         <div class="points">
-                          <h4>ThemesGround Retail</h4>
+                          <h4>Shipping & Return</h4>
                           <ul>
-                            <li>Free Wordwide Shipping</li>
-                            <li>30 Days Return Policy</li>
-                            <li>Member Discount</li>
+                            <li>{{($data->free_shipping||$data->shipping_cost==0)?'Free Shipping':"Shipping Cost $data->shipping_cost"}}</li>
+                            <li>{{($data->est_shipping_days>0)?'Estimated shipping days '.$data->est_shipping_days:"Shipping days may vary"}}</li>
+                            <li>{{$data->is_return?"$data->return_days Days Return Policy":"No return Available"}}</li>
                           </ul>
                         </div>
                       </div>
@@ -162,88 +163,18 @@
                     <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
                       <li class="active"> <a href="#product_tabs_description" data-toggle="tab"> Product Description
                         </a> </li>
-                      <li><a href="#product_tabs_tags" data-toggle="tab">Specifications</a></li>
+                      <!-- <li><a href="#product_tabs_tags" data-toggle="tab">Specifications</a></li> -->
                       <li> <a href="#reviews_tabs" data-toggle="tab">Reviews</a> </li>
-                      <li> <a href="#product_tabs_custom" data-toggle="tab">Custom Tab</a> </li>
-                      <li> <a href="#product_tabs_custom1" data-toggle="tab">Questions & Answers</a> </li>
+                      <!-- <li> <a href="#product_tabs_custom" data-toggle="tab">Custom Tab</a> </li> -->
+                      <!-- <li> <a href="#product_tabs_custom1" data-toggle="tab">Questions & Answers</a> </li> -->
                     </ul>
                     <div id="productTabContent" class="tab-content">
                       <div class="tab-pane fade in active" id="product_tabs_description">
                         <div class="std">
-                          <h2>Product Description</h2>
-                          <p>Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac
-                            felis. Donec non erat sed elit bibendum sodales. Donec eu cursus velit. Proin nunc lacus,
-                            gravida mollis dictum ut, vulputate eu turpis. Sed felis sapien, commodo in iaculis in,
-                            feugiat sed enim. Sed nunc ipsum, fermentum varius dignissim vitae, blandit et ante.Maecenas
-                            sagittis, lorem sed congue egestas, lectus purus congue nisl, ac molestie enim ligula nec
-                            eros. </p>
-                          <p>The keyboard offers a comfortable typing experience, thereby minimizing the load on your
-                            hands while working. Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor
-                            euismod laoreet eget ac felis. Donec non erat sed elit bibendum sodales. Donec eu cursus
-                            velit. Proin nunc lacus, gravida mollis dictum ut, vulputate eu turpis. Sed felis sapien,
-                            commodo in iaculis in, feugiat sed enim. </p>
-                          <br>
-                          <div class="desc-row">
-                            <div class="desc-img">
-                              <img src="{{asset('assets\images\desc-img1.jpg')}}">
-                            </div>
-                            <div class="heading">Stylish and Elegant Design</div>
-                            <div>
-                              <p>Featuring a stylish and stunning design, this laptop from Vaio is a must-buy device
-                                that perfectly complements a modern corporate leader’s lifestyle. Aliquam laoreet
-                                consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis. Donec
-                                non erat sed elit bibendum sodales. Donec eu cursus velit. Proin nunc lacus, gravida
-                                mollis dictum ut, vulputate eu turpis. Sed felis sapien, commodo in iaculis in, feugiat
-                                sed enim. Sed nunc ipsum, fermentum varius dignissim vitae, blandit et ante.</p>
-                            </div>
-                          </div>
-                          <div class="desc-row">
-                            <div class="desc-img align-right">
-                              <img src="{{asset('assets\images\desc-img2.jpg')}}">
-                            </div>
-                            <div class="heading">Lightweight</div>
-                            <div>
-                              <p>Thanks to its lightweight build, this laptop makes it easy to lift, hold, and open. You
-                                can even take it along with you wherever you go, making it your ideal travel companion.
-                                Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget
-                                ac felis. Donec non erat sed elit bibendum sodales. Donec eu cursus velit. Proin nunc
-                                lacus, gravida mollis dictum ut, vulputate eu turpis. Sed felis sapien, commodo in
-                                iaculis in, feugiat sed enim. Sed nunc ipsum, fermentum varius dignissim vitae, blandit
-                                et ante.</p>
-                            </div>
-                          </div>
-                          <div class="desc-row">
-                            <div class="desc-img">
-                              <img src="{{asset('assets\images\desc-img4.jpg')}}">
-                            </div>
-                            <div class="heading">Easy Connectivity</div>
-                            <div>
-                              <p>This laptop comes with a wide range of I/O ports that let you connect various
-                                compatible devices to it. Moreover, the ports are placed on either side of the laptop,
-                                making it easy for you to connect your compatible mobile/tablet, storage drives,
-                                external displays, and more. Aliquam laoreet consequat malesuada. Integer vitae diam sed
-                                dolor euismod laoreet eget ac felis. Donec non erat sed elit bibendum sodales. Donec eu
-                                cursus velit. Proin nunc lacus, gravida mollis dictum ut, vulputate eu turpis.</p>
-                            </div>
-                          </div>
-                          <div class="desc-row">
-                            <div class="desc-img align-right">
-                              <img src="{{asset('assets\images\desc-img5.jpg')}}">
-                            </div>
-                            <div class="heading">Ergonomic Keyboard and Hinge</div>
-                            <div>
-                              <p>Thanks to the ergonomically designed hinge, this laptop's screen tilts down at a
-                                slanting angle, enabling you to open it with ease. The keyboard offers a comfortable
-                                typing experience, thereby minimizing the load on your hands while working. Aliquam
-                                laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis.
-                                Donec non erat sed elit bibendum sodales. Donec eu cursus velit. Proin nunc lacus,
-                                gravida mollis dictum ut, vulputate eu turpis. Sed felis sapien, commodo in iaculis in,
-                                feugiat sed enim. Sed nunc ipsum, fermentum varius dignissim vitae, blandit et ante.</p>
-                            </div>
-                          </div>
+                         {!!$data->detail_description!!}
                         </div>
                       </div>
-                      <div class="tab-pane fade" id="product_tabs_tags">
+                      <!-- <div class="tab-pane fade" id="product_tabs_tags">
                         <div class="box-collateral box-spec">
                           <h3>General</h3>
 
@@ -347,59 +278,36 @@
 
 
                         </div>
-                      </div>
+                      </div> -->
                       <div class="tab-pane fade" id="reviews_tabs">
                         <div class="woocommerce-Reviews">
                           <div>
-                            <h2 class="woocommerce-Reviews-title">2 reviews for <span>Anti Glare Core i5 9th Genration
-                                Side Narrow Border Display Laptop</span></h2>
+                            <h2 class="woocommerce-Reviews-title">{{count($data->reviews)}} reviews for <span>{{$data->product_name}}</span></h2>
                             <ol class="commentlist">
+                              @foreach ($data->reviews as $review)
                               <li class="comment">
                                 <div>
-                                  <img alt="" src="{{asset('assets\images\member1.png')}}" class="avatar avatar-60 photo">
+                                  <img alt="" src="{{$review->users->image_url}}" class="avatar avatar-60 photo">
                                   <div class="comment-text">
                                     <div class="star-rating">
-                                      <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
+                                      <span style="width:{{$review->ratting*2*10}}%">Rated <strong class="rating">{{$review->ratting}}</strong> out of 5</span>
                                     </div>
                                     <p class="meta">
-                                      <strong>John Doe</strong>
-                                      <span>–</span> April 19, 2021
+                                      <strong>{{$review->users->name}}</strong>
+                                      <span>–</span>{{date('F j, Y',strtotime($review->created_at))}}
                                     </p>
                                     <div class="description">
-                                      <p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla
-                                        quis lorem ut libero malesuada feugiat. Proin eget tortor risus. Donec rutrum
-                                        congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit.</p>
-                                      <p>Donec sollicitudin molestie malesuada. Vivamus suscipit tortor eget felis
-                                        porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Nulla quis lorem ut libero malesuada feugiat. Vivamus magna justo, lacinia eget
-                                        consectetur sed, convallis at tellus.</p>
+                                      <p>{{$review->comment}}</p>
                                     </div>
                                   </div>
                                 </div>
                               </li><!-- #comment-## -->
-                              <li class="comment">
-                                <div>
-                                  <img alt="" src="{{asset('assets\images\member2.png')}}" class="avatar avatar-60 photo">
-                                  <div class="comment-text">
-                                    <div class="star-rating">
-                                      <span style="width:80%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                                    </div>
-                                    <p class="meta">
-                                      <strong>Stephen Smith</strong> <span>–</span> June 02, 2020
-                                    </p>
-                                    <div class="description">
-                                      <p>Donec rutrum congue leo eget malesuada. Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit.</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li><!-- #comment-## -->
+                              @endforeach
                             </ol>
                           </div>
                           <div>
                             <div>
-                              <div class="comment-respond">
+                              <div class="comment-respond" style="padding:26px">
                                 <span class="comment-reply-title">Add a review </span>
                                 <form action="#" method="post" class="comment-form" novalidate="">
                                   <p class="comment-notes"><span id="email-notes">Your email address will not be
@@ -408,36 +316,39 @@
                                     <label id="rating">Your rating</label>
                                     <p class="stars">
                                       <span>
-                                        <a class="star-1" href="#">1</a>
-                                        <a class="star-2" href="#">2</a>
-                                        <a class="star-3" href="#">3</a>
-                                        <a class="star-4" href="#">4</a>
-                                        <a class="star-5" href="#">5</a>
+                                        <a class="star-1 star active" href="#" onclick="event.preventDefault();addRating(1,$(this))">1</a>
+                                        <a class="star-2 star" href="#" onclick="event.preventDefault();addRating(2,$(this))">2</a>
+                                        <a class="star-3 star" href="#" onclick="event.preventDefault();addRating(3,$(this))">3</a>
+                                        <a class="star-4 star" href="#" onclick="event.preventDefault();addRating(4,$(this))">4</a>
+                                        <a class="star-5 star" href="#" onclick="event.preventDefault();addRating(5,$(this))">5</a>
                                       </span>
                                     </p>
                                   </div>
                                   <p class="comment-form-comment">
                                     <label>Your review <span class="required">*</span></label>
+                                    <input type="hidden" name="ratting" value="0"/>
+                                    <input type="hidden" name="user_id" value="{{session()->get('user_id')}}"/>
                                     <textarea id="comment" name="comment" cols="45" rows="8" required=""></textarea>
                                   </p>
                                   <p class="comment-form-author">
-                                    <label for="author">Name <span class="required">*</span></label>
-                                    <input id="author" name="author" type="text" value="" size="30" required="">
+                                    <label for="author">Name </label>
+                                    <input id="author" name="author" readonly type="text" value="{{session()->get('name')}}" size="30" required="">
                                   </p>
                                   <p class="comment-form-email">
-                                    <label for="email">Email <span class="required">*</span></label>
-                                    <input id="email" name="email" type="email" value="" size="30" required="">
+                                    <label for="email">Email </label>
+                                    <input id="email" name="email" readonly type="email" value="{{session()->get('email')}}" size="30" required="">
                                   </p>
                                   <div class="form-submit">
                                     <input name="submit" type="submit" id="submit" class="submit" value="Submit">
                                   </div>
+                                </form>
                               </div><!-- #respond -->
                             </div>
                           </div>
                           <div class="clear"></div>
                         </div>
                       </div>
-                      <div class="tab-pane fade" id="product_tabs_custom">
+                      <!-- <div class="tab-pane fade" id="product_tabs_custom">
                         <div class="product-tabs-content-inner clearfix">
                           <p><strong>Lorem Ipsum</strong><span>&nbsp;is
                               simply dummy text of the printing and typesetting industry. Lorem Ipsum
@@ -450,8 +361,8 @@
                               publishing software like Aldus PageMaker including versions of Lorem
                               Ipsum.</span></p>
                         </div>
-                      </div>
-                      <div class="tab-pane fade" id="product_tabs_custom1">
+                      </div> -->
+                      <!-- <div class="tab-pane fade" id="product_tabs_custom1">
                         <div class="product-tabs-content-inner clearfix">
                           <div class="faq">
                             <ul>
@@ -491,7 +402,7 @@
                             </ul>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
@@ -973,5 +884,14 @@
 
 
   </script>
-
+<script>
+  function addRating(rating,ref)
+  {
+    @if(session()->get('token')) 
+    $('#ratting').val(1);
+     @else 
+     $('#myModalsignin').modal('show');
+      @endif
+  }
+</script>
 @endsection

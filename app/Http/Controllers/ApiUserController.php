@@ -65,6 +65,7 @@ class ApiUserController extends Controller
             session()->put('user_id', $response['data']['id']);
             session()->put('token', $response['data']['access_token']);
             session()->put('name', $response['data']['name']);
+            session()->put('email', $response['data']['email']);
             $carts = session()->get('cart');
            // return $carts;
             $url = $this->url."/addtocart";

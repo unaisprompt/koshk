@@ -130,11 +130,11 @@
               <ol class="products-list" id="products-list">
                 @foreach ($data->products as $product)
                  <li class="item  @if($loop->iteration==1) first @elseif ($loop->iteration%2==0) even @elseif ($loop->iteration%1==0) odd @endif listing">
-                  <div class="product-image"> <a href="product_detail.html" title="{{$product->product_name}}"> <img class="small-image" src="{{$product->productimage->image_url}}" alt="{{$product->product_name}}"> </a>
+                  <div class="product-image"> <a href="{{url('product-detail?id='.$product->id)}}" title="{{$product->product_name}}"> <img class="small-image" src="{{$product->productimage->image_url}}" alt="{{$product->product_name}}"> </a>
 
                   </div>
                   <div class="product-shop">
-                    <h2 class="product-name"><a href="product_detail.html" title="{{$product->product_name}}">{{$product->product_name}}</a></h2>
+                    <h2 class="product-name"><a href="{{url('product-detail?id='.$product->id)}}" title="{{$product->product_name}}">{{$product->product_name}}</a></h2>
                     <div class="ratings">
                       <div class="rating-box">
                         <div style="width:{{$product->rattings?$product->rattings[0]->avg_ratting*2*10:'0'}}%" class="rating"></div>
@@ -142,7 +142,7 @@
                       <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                     </div>
                     <div class="desc std">
-                      <p>{{$product->description}} <a class="link-learn" title="" href="product_detail.html">Learn More</a> </p>
+                      <p>{{$product->description}} <a class="link-learn" title="" href="{{url('product-detail?id='.$product->id)}}">Learn More</a> </p>
                     </div>
                     <div class="price-box">
                       <p class="old-price"> <span class="price-label"></span> <span class="price"> AED {{$product->product_price}} </span> </p>
@@ -350,7 +350,7 @@
                 <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="{{$item->product_name}}" href="product_detail.html"> <img alt="{{$item->product_name}}" src="{{$item->productimage->image_url}}"> </a>
+                      <div class="item-img-info"> <a class="product-image" title="{{$item->product_name}}" href="{{url('product-detail?id='.$item->id)}}"> <img alt="{{$item->product_name}}" src="{{$item->productimage->image_url}}"> </a>
                         @if($item->new_item==1)<div class="new-label new-top-left">new</div>@endif
                         <div class="box-hover">
                           <ul class="add-to-links">
@@ -363,7 +363,7 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a title="{{$item->product_name}}" href="product_detail.html">{{$item->product_name}}</a> </div>
+                        <div class="item-title"> <a title="{{$item->product_name}}" href="{{url('product-detail?id='.$item->id)}}">{{$item->product_name}}</a> </div>
                         <div class="brand">{{$item->brand->brand_name}}</div>
                         <div class="star-rating">
                                <span style="width:{{(count($item->rattings)>0)?$item->rattings[0]->avg_ratting*2*10:'0'}}%">Rated <strong class="rating">{{(count($item->rattings)>0)?$item->rattings[0]->avg_ratting:'0'}}</strong> out of 5</span>
@@ -431,11 +431,11 @@
             success:function(response){
                 response.products.forEach(function(product,index){
                     var item=` <li class="item ${index%2==0?`even`:`odd`} listing">
-                                <div class="product-image"> <a href="product_detail.html" title="${product.product_name}"> <img class="small-image" src="${product.productimage.image_url}" alt="${product.product_name}"> </a>
+                                <div class="product-image"> <a href="{{url('product-detail')}}?id=${product.id}" title="${product.product_name}"> <img class="small-image" src="${product.productimage.image_url}" alt="${product.product_name}"> </a>
 
                                 </div>
                                 <div class="product-shop">
-                                    <h2 class="product-name"><a href="product_detail.html" title="${product.product_name}">${product.product_name}</a></h2>
+                                    <h2 class="product-name"><a href="{{url('product-detail')}}?id=${product.id}" title="${product.product_name}">${product.product_name}</a></h2>
                                     <div class="ratings">
                                     <div class="rating-box">
                                         <div style="width:50%" class="rating"></div>
@@ -443,7 +443,7 @@
                                     <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                                     </div>
                                     <div class="desc std">
-                                    <p>${product.description} <a class="link-learn" title="" href="product_detail.html">Learn More</a> </p>
+                                    <p>${product.description} <a class="link-learn" title="" href="{{url('product-detail')}}?id=${product.id}">Learn More</a> </p>
                                     </div>
                                     <div class="price-box">
                                     <p class="old-price"> <span class="price-label"></span> <span class="price"> AED ${product.product_price} </span> </p>
@@ -451,7 +451,7 @@
                                     </div>
                                     <div class="actions">
                                     <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
-                                    <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist" href="wishlist.html"></a>
+                                    <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist ${product.is_wishlist?'active':''}" href="#" onclick="event.preventDefault();addWishlist(${product.id},$(this))"></a>
                                     <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
                                     </span> </div>
                                 </div>
