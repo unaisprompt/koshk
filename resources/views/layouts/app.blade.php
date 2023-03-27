@@ -101,7 +101,7 @@
          @yield('script')
             <script>
 function newsLetter() {
-            var email = $("#email").val();
+            var email = $("#email_news").val();
             $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
