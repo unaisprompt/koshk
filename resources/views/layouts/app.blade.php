@@ -46,7 +46,7 @@
     <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/revslider.js')}}"></script>
-    <script src="{{asset('assets/js/common.js')}}"></script>
+    <!-- <script src="{{asset('assets/js/common.js')}}"></script> -->
     <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.mobile-menu.min.js')}}"></script>
     <script src="{{asset('assets/js/countdown.js')}}"></script>
@@ -97,6 +97,7 @@
     </div>
          <!-- Link of JS files -->
 
+    <script src="{{asset('assets/js/common.js')}}"></script>
 
          @yield('script')
             <script>
