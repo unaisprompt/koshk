@@ -1,5 +1,11 @@
 @extends('layouts.app')
-@section('content')   
+@section('content')
+<style>
+   .products-list .actions .add-to-links a.link-wishlist.active{
+        background-color: blue;
+        color: white;
+    }
+</style>
   <!-- Main Container -->
   <section class="main-container col2-left-layout">
     <div class="container">
@@ -8,9 +14,9 @@
             <ul>
               <li class="home"> <a href="{{url('')}}" title="Go to Home Page">Home</a> <span>/</span> </li>
               @if($data->category)
-              <li> <a href="grid.html" title="">{{$data->category->category_name}}</a><input type="hidden" id="category_id" value="{{$data->category->id}}"> @if($data->subcategory)<span>/ </span>@endif </li>
+              <li> <a href="{{url('products?category_id='.$data->category->id)}}" title="">{{$data->category->category_name}}</a><input type="hidden" id="category_id" value="{{$data->category->id}}"> @if($data->subcategory)<span>/ </span>@endif </li>
                 @if($data->subcategory)
-                  <li> <a href="grid.html" title="">{{$data->subcategory->subcategory_name}}</a><input type="hidden" id="subcategory_id" value="{{$data->subcategory->id}}"> @if($data->inner_subcategory)<span>/</span>@endif </li>
+                  <li> <a href="{{url('products?category_id='.$data->category->id.'&subcategory_id='.$data->subcategory->id)}}" title="">{{$data->subcategory->subcategory_name}}</a><input type="hidden" id="subcategory_id" value="{{$data->subcategory->id}}"> @if($data->inner_subcategory)<span>/</span>@endif </li>
                   @if($data->inner_subcategory)
                    <li> <strong>{{$data->inner_subcategory->innersubcategory_name}}</strong><input type="hidden" id="inner_subcategory_id" value="{{$data->inner_subcategory->id}}"> </li>
                   @endif
@@ -20,17 +26,18 @@
           </div>
            <!-- Breadcrumbs End -->
       <div class="row">
-        <div class="col-sm-9 col-sm-push-3"> 
+        <div class="col-sm-9 col-sm-push-3">
          <div class="category-description std">
                         <div class="slider-items-products">
+                            @if($data->category)
                           <div id="category-desc-slider"
                             class="product-flexslider hidden-buttons">
                             <div class="slider-items slider-width-col1
                               owl-carousel owl-theme">
-
+                              @foreach ($data->category->multi_banner as $banner)
                               <!-- Item -->
                               <div class="item"> <a href="#"><img alt=""
-                                    src="images\category-img1.jpg"></a>
+                                    src="{{$banner->image_url}}"></a>
                                 <div class="cat-img-title cat-bg cat-box">
                                   <div class="small-tag">Season 2021</div>
                                   <h2 class="cat-heading">Televisions</h2>
@@ -38,20 +45,10 @@
                                 </div>
                               </div>
                               <!-- End Item -->
-
-                              <!-- Item -->
-                              <div class="item"> <a href="#"><img alt=""
-                                    src="images\category-img2.jpg"></a>
-                                <div class="cat-img-title cat-bg cat-box">
-                                  <div class="small-tag">Xperia Brands</div>
-                                  <h2 class="cat-heading">Smartwatches</h2>
-                                  <p>Save 70% on all items</p>
-                                </div>
-                                <!-- End Item -->
-
-                              </div>
+                             @endforeach
                             </div>
                           </div>
+                          @endif
                         </div>
                       </div>
           <div class="page-title">
@@ -61,9 +58,11 @@
                             {{$data->subcategory->subcategory_name}}
                             @elseif($data->category)
                             {{$data->category->category_name}}
+                            @else
+                            All Category
                             @endif </h2>
                         <p class="font-size-14 text-gray-90 mb-0" id="result_count">Showing {{count($data->products)}}
-                          of {{$data->total_count}} results</p>
+                          of {{$data->total_count}} results {{request()->search?"for '".request()->search."'":''}}</p>
                       </div>
           <article class="col-main">
           <div class="pro-listing">
@@ -73,7 +72,7 @@
                                 <div class="product-list-grid">
                                   <ul class="nav">
                                     <li class="nav-item">
-                                      <a href="grid.html" class="button-grid
+                                      <a href="#" class="button-grid
                                         nav-link">
                                         <i class="fa fa-th-large"></i>
                                       </a>
@@ -132,7 +131,7 @@
                 @foreach ($data->products as $product)
                  <li class="item  @if($loop->iteration==1) first @elseif ($loop->iteration%2==0) even @elseif ($loop->iteration%1==0) odd @endif listing">
                   <div class="product-image"> <a href="product_detail.html" title="{{$product->product_name}}"> <img class="small-image" src="{{$product->productimage->image_url}}" alt="{{$product->product_name}}"> </a>
-                  
+
                   </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="product_detail.html" title="{{$product->product_name}}">{{$product->product_name}}</a></h2>
@@ -151,13 +150,13 @@
                     </div>
                     <div class="actions">
                       <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
-                      <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist" href="wishlist.html"></a> 
+                      <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist @if($product->is_wishlist) active @endif" href="#" onclick="event.preventDefault();addWishlist({{$product->id}},$(this))"></a>
                       <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
                      </span> </div>
                   </div>
                 </li>
                 @endforeach
-                
+
               </ol>
               @if($data->total_count>6)
               <a href="#" id="load_more" onclick="event.preventDefault();loadMore()">Load more...</a>
@@ -175,7 +174,7 @@
                 <br>
                 </div>
           </article>
-          <!--	///*///======    End article  ========= //*/// --> 
+          <!--	///*///======    End article  ========= //*/// -->
         </div>
         <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
         <div class="widget widget-categories">
@@ -215,10 +214,10 @@
               @endif
             </div>
           </div>
-          
+
           <div class="widget widget-filter">
-                    <div class="block-title">Filter</div> 
-                    
+                    <div class="block-title">Filter</div>
+
              <div class="widget-brand">
             <h5 class="widget-title">Brand</h5>
             @foreach ($data->brands as $brand)
@@ -227,8 +226,8 @@
               <label class="custom-control-label" for="brandCheck{{$loop->iteration}}"> {{$brand->brand_name}}</label>
             </div>
             @endforeach
-          </div>  
-          
+          </div>
+
           <!-- <div class="widget-color">
             <h5 class="widget-title">Colors</h5>
             <div class="custom-control custom-checkbox mb-2">
@@ -263,9 +262,9 @@
               <input type="checkbox" class="custom-control-input" id="colorCheck8">
               <label class="custom-control-label" for="colorCheck8"><span style="background-color:rgb(128, 0, 0)"></span> Maroon</label>
             </div>
-            
+
           </div>   -->
-          
+
           <!-- <div class="widget-ratings">
             <h5 class="widget-title">Customer Ratings</h5>
             <div class="custom-control custom-checkbox mb-2">
@@ -284,9 +283,9 @@
               <input type="checkbox" class="custom-control-input" id="rateCheck4">
               <label class="custom-control-label" for="rateCheck4"> 1 <i class="fa fa-star" aria-hidden="true"></i> and above</label>
             </div>
-           
+
           </div>     -->
-                    
+
           <div class="widget-price">
           <h5>Price Range</h5>
           <div class="wrapper">
@@ -315,14 +314,14 @@
 </div>
           </div>
           </div>
-          
-          
-          
-          
-          
-          
-          
-     
+
+
+
+
+
+
+
+
             <div class="featured-add-box">
               <div class="featured-add-inner"> <a href="#"> <img src="{{url('assets/images/hot-trends-banner.jpg')}}" alt="f-img"></a>
                 <div class="banner-content">
@@ -332,7 +331,7 @@
                  </div>
               </div>
             </div>
-   
+
         @include('pages.product.topratedproducts')
         </aside>
       </div>
@@ -367,7 +366,7 @@
                         <div class="item-title"> <a title="{{$item->product_name}}" href="product_detail.html">{{$item->product_name}}</a> </div>
                         <div class="brand">{{$item->brand->brand_name}}</div>
                         <div class="star-rating">
-                               <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
+                               <span style="width:{{(count($item->rattings)>0)?$item->rattings[0]->avg_ratting*2*10:'0'}}%">Rated <strong class="rating">{{(count($item->rattings)>0)?$item->rattings[0]->avg_ratting:'0'}}</strong> out of 5</span>
                                </div>
                         <div class="item-content">
                           <div class="item-price">
@@ -433,7 +432,7 @@
                 response.products.forEach(function(product,index){
                     var item=` <li class="item ${index%2==0?`even`:`odd`} listing">
                                 <div class="product-image"> <a href="product_detail.html" title="${product.product_name}"> <img class="small-image" src="${product.productimage.image_url}" alt="${product.product_name}"> </a>
-                                
+
                                 </div>
                                 <div class="product-shop">
                                     <h2 class="product-name"><a href="product_detail.html" title="${product.product_name}">${product.product_name}</a></h2>
@@ -452,7 +451,7 @@
                                     </div>
                                     <div class="actions">
                                     <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
-                                    <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist" href="wishlist.html"></a> 
+                                    <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist" href="wishlist.html"></a>
                                     <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
                                     </span> </div>
                                 </div>
@@ -486,6 +485,36 @@
     {
             filter();
     }
+    function addWishlist(id,ref)
+    {
+       @if(session()->get('token'))
+        var token="{{session()->get('token')}}";
+        $.ajax({
+        url: '{{config('global.api')}}/addtowishlist',
+        type: 'POST',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer '+token);
+        },
+        data: {product_id:id},
+        success: function (response) {
+            if(response.status==1)
+            {
+                Toastify({
+                text: response.message,
+                className: "info",
+                close: true,
+                style: {
+                    background: "#1cad6a",
+                }
+                }).showToast();
+                ref.addClass('active');
+            }
+        },
+        error: function () { },
+        });
+       @else
+       $('#myModalsignin').modal('show');
+       @endif
+    }
   </script>
 @endsection
-       

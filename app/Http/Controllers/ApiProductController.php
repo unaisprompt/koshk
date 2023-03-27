@@ -12,12 +12,13 @@ class ApiProductController extends Controller
         $this->url = config('global.api');
     }
 
-    
+
     public function productList(Request $request){
         $user_id= session()->get('user_id') ?? '';
         $category_id=$request->category_id ?? '';
         $subcategory_id=$request->subcategory_id ?? '';
         $innersubcategory_id=$request->innersubcategory_id ?? '';
+        $search=$request->search ?? '';
         if($category_id!=''){
           session()->put('category_id',$category_id);
         }
@@ -25,15 +26,15 @@ class ApiProductController extends Controller
           session()->put('subcategory_id',$subcategory_id);
         }
         session()->forget('brand_id');
-
         $url = $this->url."/products";
         $response = Http::post($url,  [
         'user_id'=>$user_id,
         'category_id' =>$category_id,
         'subcategory_id' =>$subcategory_id,
-        'innersubcategory_id'=>$innersubcategory_id
+        'innersubcategory_id'=>$innersubcategory_id,
+        'search'=>$search
         ]);
-        
+
          if($response->successful())
        {
           return view('pages.product.productlist',["data"=>$response->object()]);
@@ -44,9 +45,9 @@ class ApiProductController extends Controller
        // return $request;
         $url = $this->url."/productdetails";
         $response = Http::post($url,  [
-        'product_id'=>$request->product    
+        'product_id'=>$request->product
         ]);
-        
+
        $data = $response['data'];
 
       //  return $data;
@@ -66,7 +67,7 @@ class ApiProductController extends Controller
 
       $response = Http::post($url,  [
       'user_id'=>$user_id,
-      'search'=>$request->search  
+      'search'=>$request->search
       ]);
        if($response->successful())
        {
@@ -88,15 +89,15 @@ class ApiProductController extends Controller
 
        $response = Http::post($url,  [
        'user_id'=>$user_id,
-       'brand_id'=>$request->brand_id  
+       'brand_id'=>$request->brand_id
        ]);
       // return $response;
          $datas=$response['data'];
          $bestsellers=$response['bestsellers'];
          $brands=$response['brands'];
-        
+
         return view('pages.product.productlist',compact('datas','bestsellers','brands'));
- 
+
      }
 
      public function reviewAdd(Request $request){
@@ -118,7 +119,7 @@ class ApiProductController extends Controller
           'comment' => $request->review
       ]);
       return $response;
-           
+
       }
       else{
         return redirect('/login');
@@ -129,10 +130,10 @@ class ApiProductController extends Controller
 
      public function variation_price(Request $request){
       //  dd($request->all());
-  
+
         $url = $this->url."/variation-price-change";
         $response = Http::post($url,  [
-        'product_id'=>$request->product_id, 
+        'product_id'=>$request->product_id,
         'variation'=>$request->variation
         ]);
       //  dd($response);
@@ -142,7 +143,7 @@ class ApiProductController extends Controller
          }else{
           return response()->json(['status' => 0,'price'=>0],200);
          }
-  
+
        }
 
      public function filter(Request $request){
