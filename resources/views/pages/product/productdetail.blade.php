@@ -884,14 +884,4 @@
 
 
   </script>
-<script>
-  function addRating(rating,ref)
-  {
-    @if(session()->get('token')) 
-    $('#ratting').val(1);
-     @else 
-     $('#myModalsignin').modal('show');
-      @endif
-  }
-</script>
 @endsection
