@@ -1,7 +1,9 @@
  <!-- Header -->
  @php
    $categoryList=categoryList();
-   
+   $category=collect($categoryList)->first(function ($value,$key) {
+                                return $value->id == request()->category_id;
+                            });
  @endphp
     <header>
       <div class="top-nav">
@@ -67,9 +69,9 @@
             <div class="new-con">
 
               <div class="left">
-              
+
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus reiciendis. </p>
-              
+
               </div>
               <div class="right">
 
@@ -113,18 +115,19 @@
           </div>
           <div class="col-lg-7 col-md-6 col-sm-6 col-xs-3 hidden-xs category-search-form">
             <div class="search-box">
-              <form id="search_mini_form" action="{{url('search')}}" method="get">
+              <form id="search_mini_form" action="{{url('products')}}" method="get">
                 <!-- Autocomplete End code -->
                 <ul class="categories-filter animate-dropdown">
                   <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"
-                      href="category.html">Categories <b class="caret"></b></a>
-                    <ul class="dropdown-menu" role="menu">                   
+                      href="#">{{$category?$category->category_name:'Categories'}} <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu">
                       @foreach ($categoryList as $category)
-                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{{url('products?category_id='.$category->id)}}">- {{$category->category_name}}</a></li>
+                        <li role="presentation"><a role="menuitem @if($category->id==request()->category_id) active @endif" tabindex="-1" href="{{url('products?category_id='.$category->id)}}">- {{$category->category_name}}</a></li>
                       @endforeach
                     </ul>
                   </li>
                 </ul>
+                <input type="hidden" name="category_id" value="{{request()->category_id}}"/>
                 <input id="search" type="text" name="search" placeholder="Search entire store here..." class="searchbox"
                   maxlength="128" value={{request()->search}}>
                 <button type="submit" title="Search" class="search-btn-bg" id="submit-button"></button>
@@ -146,7 +149,7 @@
               </div>
               <div class="fl-links">
                 <div class="no-js">
-                 
+
                   @if(!empty(session()->all()['token']))
                  @if(session()->all()['token'])
                   {{-- <button type="button" title="Company" class="clicker"></button>{{session()->all()['name']}} --}}
@@ -178,7 +181,7 @@
                   @else
                   <button type="button" title="Company" class="clicker" onclick="$('#myModalsignin').modal('show');"></button>
                   @endif
-                  
+
     <div class="modal fade" id="myModalsignin" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -231,18 +234,18 @@
             <input type="password" id="password" name="password_reg" value="">
             <span><i class="fa fa-eye-slash"></i></span>
           </div>
-        
+
           <div class="mmc5c">
             <label> Name</label>
             <input type="text" id="name" name="name" value="">
           </div>
-           
-            
+
+
           <div class="mmc5c">
             <label> Last Name</label>
             <input type="text" id="last_name" name="last_name" value="">
           </div>
-          
+
           <div class="mmc5c">
             <label>mobile</label>
             <input type="text" id="phone" name="phone" value="">
@@ -293,7 +296,7 @@
           <div class="yhd0d">
             <h1>Forget password</h1>
             {{-- <h2>Sign in to your account</h2> --}}
-           
+
           </div>
           <div class="mmc5c">
             <label>Enter Your Registered Email</label>
