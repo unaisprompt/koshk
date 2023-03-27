@@ -49,3 +49,13 @@ function topRatedProducts()
     }
     return [];
 }
+function CommonData()
+{
+    $url = config('global.api')."/getcommon-fileds";
+      $response = Http::get($url);
+    if($response->successful())
+    {
+    return $response->object()->data;
+    }
+    return [];
+}

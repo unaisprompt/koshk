@@ -9,12 +9,13 @@
             <div id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container'>
               <div id='rev_slider_4' class='rev_slider fullwidthabanner'>
                 <ul>
+                  {{-- {{dd($finalData['main_data']['slider'])}} --}}
                   @if(!empty($finalData['main_data']['slider']))
                   @foreach($finalData['main_data']['slider'] as $banner)
 
                   <li data-transition='random' data-slotamount='7' data-masterspeed='1000'
-                    data-thumb='{{!empty($banner['image'])}}'>
-                    <img src='{{!empty($banner['image'])}}' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
+                    data-thumb='{{$banner['image']}}'>
+                    <img src='{{$banner['image']}}' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
                     <div class="container">
                       <div class="content_slideshow">
                         <div class="row">
@@ -24,12 +25,12 @@
                               <div class='tp-caption ExtraLargeTitle sft  tp-resizeme ' data-endspeed='500'
                                 data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none'
                                 data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1'
-                                style='z-index:2; white-space:nowrap;'><span>{{!empty($banner['title1'])}}</span> </div>
+                                style='z-index:2; white-space:nowrap;'><span>{{$banner['title1']}}</span> </div>
                               <div class='tp-caption LargeTitle sfl  tp-resizeme ' data-endspeed='500' data-speed='500'
                                 data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none'
                                 data-elementdelay='0.1' data-endelementdelay='0.1'
                                 style='z-index:3; white-space:nowrap;'><span
-                                  style="font-weight:normal; display:block">{{!empty($banner['title2'])}}</div>
+                                  style="font-weight:normal; display:block">{{$banner['title2']}}</div>
                               <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500'
                                 data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none'
                                 data-elementdelay='0.1' data-endelementdelay='0.1'
@@ -97,7 +98,6 @@
           </div>
         </div> -->
     <!-- /.info-boxes-inner -->
-
 
 
 
@@ -198,57 +198,25 @@
         </div>
       </div>
     </div>
-    {{-- <div class="container-fluid qwre">
+    <div class="container-fluid qwre">
       <div class="container">
         <div class="row">
+          @if(!empty($finalData['main_data']['offer_banner']))
+         @foreach($finalData['main_data']['offer_banner'] as $offer_banner)
           <div class="bb5g">
             <div class="yuhd">
-              <img src="{{asset('assets/images/shoes.png')}}" alt="" />
+              <img src="{{$offer_banner['image']}}" alt="" />
             </div>
             <div class="uyd">
-              <h1>30% off or more</h1>
-              <h2>Sports Shoes</h2>
+              <h1>{{$offer_banner['title']}}</h1>
+              <h2>{{$offer_banner['category']['category_name']}}</h2>
             </div>
           </div>
-          <div class="bb5g">
-            <div class="yuhd">
-              <img src="{{asset('assets/images/Shoes1.png')}}" alt="" />
-            </div>
-            <div class="uyd">
-              <h1>30% off or more</h1>
-              <h2>Sports Shoes</h2>
-            </div>
-          </div>
-          <div class="bb5g">
-            <div class="yuhd">
-              <img src="{{asset('assets/images/Shoes2.png')}}" alt="" />
-            </div>
-            <div class="uyd">
-              <h1>30% off or more</h1>
-              <h2>Sports Shoes</h2>
-            </div>
-          </div>
-          <div class="bb5g">
-            <div class="yuhd">
-              <img src="{{asset('assets/images/Shoes3.png')}}" alt="" />
-            </div>
-            <div class="uyd">
-              <h1>30% off or more</h1>
-              <h2>Sports Shoes</h2>
-            </div>
-          </div>
-          <div class="bb5g">
-            <div class="yuhd">
-              <img src="{{asset('assets/images/Shoes4.png')}}" alt="" />
-            </div>
-            <div class="uyd">
-              <h1>30% off or more</h1>
-              <h2>Sports Shoes</h2>
-            </div>
-          </div>
+          @endforeach
+         @endif
         </div>
       </div>
-    </div> --}}
+    </div>
 
     <div class="container">
       <div class="bestsell-pro">
@@ -340,31 +308,35 @@
     <section class="explor">
       <div class="container">
         <div class="row">
-          <div class="col-md-6 col-sm-3 col-lg-3">
+      
+         <div class="col-md-6 col-sm-3 col-lg-3">
             <div class="utgd">
-              <h4>Explore everyday <br />essentials</h4>
+              <h4>Hot Deal <br />Product</h4>
+              @if(!empty($finalData['main_data']['hot_products_limited']))
+               @foreach($finalData['main_data']['hot_products_limited'] as $product_img)
               <a href="#">
-                <img src="{{asset('assets/images/ponds-cream.jpg')}}" alt="" />
+                <img src="{{$product_img['productimage']['image_url']}}" alt="" />
               </a>
-              <a href="#">
-                <img src="{{asset('assets/images/vasline.png')}}" alt="" />
-              </a>
-              <a href="#">
-                <img src="{{asset('assets/images/lakme.jpg')}}" alt="" />
-              </a>
-              <a href="#">
-                <img src="{{asset('assets/images/ponds-cream.jpg')}}" alt="" />
-              </a>
+             @endforeach
+             @endif
             </div>
           </div>
           <div class="col-md-6 col-sm-3 col-lg-3">
             <div class="utgd1">
-              <h4>Food, fitness and WFH <br />essentials</h4>
+              <h4>New <br> Arrivals</h4>
+              @if($finalData['main_data']['new_products']&& count($finalData['main_data']['new_products'])>4)
+            @php
+            $arr = $finalData['main_data']['new_products'];
+            $limitedArray = array_slice($arr, 0, 4);
+            @endphp
+            @foreach($limitedArray as $new_arrival)
               <a href="#">
-                <img src="{{asset('assets/images/breakfist.jpg')}}" alt="" />
-                <h6>breakfast essentials</h6>
+                <img src="{{$new_arrival['productimage']['image_url']}}" alt="" />
+                <h6>{{$new_arrival['product_name']}}</h6>
               </a>
-              <a href="#">
+              @endforeach
+              @endif
+              {{-- <a href="#">
                 <img src="{{asset('assets/images/WFH.jpg')}}" alt="" />
                 <h6>WFH essentials</h6>
               </a>
@@ -375,20 +347,36 @@
               <a href="#">
                 <img src="{{asset('assets/images/fitness.jpg')}}" alt="" />
                 <h6>fitness essentials</h6>
-              </a>
+              </a> --}}
               <div class="iu5d">
                 <a href="#">See all offers</a>
               </div>
             </div>
           </div>
+          {{-- {{dd($finalData['main_data'])}} --}}
           <div class="col-md-6 col-sm-3 col-lg-3">
             <div class="utgd1">
-              <h4>Up to 30% off | Snacks & <br />beverages</h4>
+              <h4>Bestseller Product</h4>
+               @if($finalData['main_data']['bestsellers']&& count($finalData['main_data']['bestsellers'])>4)
+            @php
+            $arr_best = $finalData['main_data']['bestsellers'];
+            $limitedArrayBest = array_slice($arr_best, 0, 4);
+            @endphp
+            @foreach($limitedArrayBest as $bestsellers)
               <a href="#">
-                <img src="{{asset('assets/images/biskut.jpg')}}" alt="" />
-                <h6>biskut & Snacks</h6>
+                <img src="{{$bestsellers['productimage']['image_url']}}" alt="" />
+                 <h6>
+                  @php if(strlen($bestsellers['product_name']) > 30){
+                      $string = substr($bestsellers['product_name'], 0, 20) . "...";
+                      echo $string; 
+                  }else{
+                   echo $bestsellers['product_name'];
+                  }
+                  @endphp </h6>
               </a>
-              <a href="#">
+              @endforeach
+              @endif
+              {{-- <a href="#">
                 <img src="{{asset('assets/images/beverages.jpg')}}" alt="" />
                 <h6>beverages</h6>
               </a>
@@ -399,7 +387,7 @@
               <a href="#">
                 <img src="{{asset('assets/images/fitness.jpg')}}" alt="" />
                 <h6>fitness essentials</h6>
-              </a>
+              </a> --}}
               <div class="iu5d">
                 <a href="#">See all offers</a>
               </div>
@@ -407,12 +395,27 @@
           </div>
           <div class="col-md-6 col-sm-3 col-lg-3">
             <div class="utgd1">
-              <h4>Electronics to make your <br />christmas special</h4>
+              <h4>Featured  Product</h4>
+            @if($finalData['main_data']['featured_products']&& count($finalData['main_data']['featured_products'])>4)
+            @php
+            $arr_featured = $finalData['main_data']['featured_products'];
+            $limitedArrayFeatured = array_slice($arr_featured, 0, 4);
+            @endphp
+            @foreach($limitedArrayFeatured as $featured_products)
               <a href="#">
-                <img src="{{asset('assets/products-images/product4.jpg')}}" alt="" />
-                <h6>breakfast essentials</h6>
+                 <img src="{{$featured_products['productimage']['image_url']}}" alt="" />
+                <h6>
+                  @php if(strlen($featured_products['product_name']) > 30){
+                      $string = substr($featured_products['product_name'], 0, 20) . "...";
+                      echo $string; 
+                  }else{
+                   echo $featured_products['product_name'];
+                  }
+                  @endphp </h6>
               </a>
-              <a href="#">
+                @endforeach
+              @endif
+              {{-- <a href="#">
                 <img src="{{asset('assets/products-images/product1.jpg')}}" alt="" />
                 <h6>WFH essentials</h6>
               </a>
@@ -423,7 +426,7 @@
               <a href="#">
                 <img src="{{asset('assets/products-images/product3.jpg')}}" alt="" />
                 <h6>fitness essentials</h6>
-              </a>
+              </a> --}}
               <div class="iu5d">
                 <a href="#">See all offers</a>
               </div>
@@ -497,7 +500,7 @@
         </div>
       </div>
     </div>
-
+{{-- {{dd($finalData)}} --}}
     <section class="bb5b">
       <div class="container">
         <div class="row">
@@ -505,32 +508,35 @@
             <div class="bv5v">
               <h3>Sales</h3>
               <div class="products-grid yh32d">
+                @if(!empty($finalData['main_data']['sale']))
+                @foreach($finalData['main_data']['sale'] as $sale_data)
                 <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
                       <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
-                        src="{{asset('assets/products-images/product5.jpg')}}" alt="Retis lapen casen"> </a>
+                        src="{{$sale_data['productimage']['image_url']}}" alt="Retis lapen casen"> </a>
                       </div>
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> Anti Glare
-                            Side Narrow Border Display Laptop </a> </div>
-                        <div class="brand">Sonet</div>
+                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> {{$sale_data['product_name']}} </a> </div>
+                        <div class="brand">{{!empty($sale_data['brand']['brand_name'])}}</div>
                         <div class="item-content">
                           <div class="star-rating">
-                            <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
+                            {{-- <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span> --}}
                           </div>
                           <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">AED 125.00</span>
-                              </span> <span class="old-price"><span class="price">AED 199.00</span></span></div>
+                            <div class="price-box"> <span class="regular-price"> <span class="price">AED {{$sale_data['product_price']}}</span>
+                              </span> <span class="old-price"><span class="price">AED {{$sale_data['discounted_price']}}</span></span></div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="item">
+                @endforeach
+                @endif
+                {{-- <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
                       <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
@@ -604,7 +610,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> --}}
               </div>
             </div>
           </div>
@@ -617,18 +623,19 @@
                   <li data-target="#myCarousel" data-slide-to="1"></li>
                   <li data-target="#myCarousel" data-slide-to="2"></li>
                 </ol>
-
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner">
-                  <div class="item active">
-                    <img src="{{asset('assets/images/BLOG_2_square_1000x.jpg')}}" alt="" />
+                  @foreach($finalData['main_data']['slipping_banner'] as $sliding)
+                  <div class="item  @if($loop->iteration == 1) active @endif">
+                    <img src="{{$sliding['image']}}" alt="" />
                   </div>
-                  <div class="item">
+                  @endforeach
+                  {{-- <div class="item">
                     <img src="{{asset('assets/images/blog-img1.jpg')}}" alt="" />
                   </div>
                   <div class="item">
                     <img src="{{asset('assets/images/blog-img3.jpg')}}" alt="" />
-                  </div>
+                  </div> --}}
                 </div>
               </div>
             </div>
@@ -637,32 +644,35 @@
             <div class="bv5v">
               <h3>top rated</h3>
               <div class="products-grid yh32d">
+                @if(!empty($finalData['main_data']['top_rated']))
+                @foreach($finalData['main_data']['top_rated'] as $top_rated)
                 <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
                       <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
-                            src="{{asset('assets/products-images/product7.jpg')}}" alt="Retis lapen casen"> </a>
+                            src="{{$top_rated['productimage']['image_url']}}" alt="Retis lapen casen"> </a>
                       </div>
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> Anti Glare
-                            Side Narrow Border Display Laptop </a> </div>
-                        <div class="brand">Sonet</div>
+                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> {{$top_rated['product_name']}} </a> </div>
+                        <div class="brand">{{!empty($top_rated['brand']['brand_name'])}}</div>
                         <div class="item-content">
                           <div class="star-rating">
                             <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
                           </div>
                           <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">AED 125.00</span>
-                              </span> <span class="old-price"><span class="price">AED 199.00</span></span></div>
+                            <div class="price-box"> <span class="regular-price"> <span class="price">AED {{$top_rated['product_price']}}</span>
+                              </span> <span class="old-price"><span class="price">AED {{$top_rated['discounted_price']}}</span></span></div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="item">
+                @endforeach
+                @endif
+                {{-- <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
                       <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
@@ -736,7 +746,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> --}}
               </div>
             </div>
           </div>
@@ -745,24 +755,24 @@
     </section>
 
     <!-- Latest Blog -->
-
     <section class="home-articles spacer-medium">
       <div class="container">
         <div class="css-grid--columns-2">
+       @if(!empty($finalData['main_data']['bottom_banner']))
+          @foreach($finalData['main_data']['bottom_banner'] as $bottom_banner)
           <div class="article-home">
-            <div class="article-home__i
-          
-          
-          e parallax-parent"> <img src="{{asset('assets\images\Sophie_editorail-16_500x.jpg')}}" class="parallax-child--second"
+            <div class="article-home__ie parallax-parent"> <img src="{{$bottom_banner['image']}}" class="parallax-child--second"
                 alt="article image"> </div>
             <div class="article-home__content">
               <div class="inside">
-                <h4 class="title">Discount for<br /> laptops</h4>
+                <h4 class="title">{{$bottom_banner['title']}}</h4>
                 <a href="#" class="link">Shop Now <i class="fa fa-chevron-circle-right"></i></a>
               </div>
             </div>
           </div>
-          <div class="article-home">
+          @endforeach
+         @endif
+          {{-- <div class="article-home">
             <div class="article-home__image parallax-parent"> <img src="{{asset('assets\images\BLOG_2_square_1000x.jpg')}}"
                 class="parallax-child--second" alt="article image"> </div>
             <div class="article-home__content">
@@ -781,7 +791,7 @@
                 <a href="#" class="link">Shop Now <i class="fa fa-chevron-circle-right"></i></a>
               </div>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </section>
@@ -804,22 +814,24 @@
         </div>
       </div>
     </section> -->
-
     <!-- End Latest Blog -->
-
     <div class="container-fluid qwre">
       <div class="container">
         <div class="row">
+           @if(!empty($finalData['main_data']['offer_banner']))
+          @foreach($finalData['main_data']['offer_banner'] as $offer_banner)
           <div class="bb5g">
             <div class="yuhd">
-              <img src="{{asset('assets/images/shoes.png')}}" alt="" />
+              <img src="{{$offer_banner['image']}}" alt="" />
             </div>
             <div class="uyd">
-              <h1>30% off or more</h1>
-              <h2>Sports Shoes</h2>
+              <h1>{{$offer_banner['title']}}</h1>
+              <h2>{{$offer_banner['category']['category_name']}}</h2>
             </div>
           </div>
-          <div class="bb5g">
+          @endforeach
+          @endif
+          {{-- <div class="bb5g">
             <div class="yuhd">
               <img src="{{asset('assets/images/Shoes1.png')}}" alt="" />
             </div>
@@ -854,7 +866,7 @@
               <h1>30% off or more</h1>
               <h2>Sports Shoes</h2>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
@@ -1172,7 +1184,7 @@
  
                  {{-- @if(!empty(session()->all()['token'])) --}}
 
-  {{-- <script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready(function () {
       //Fade in delay for the background overlay (control timing here)
       $("#bkgOverlay").delay(2800).fadeIn(400);
@@ -1190,8 +1202,7 @@
       $("#bkgOverlay").fadeOut(400);
       $("#delayedPopup").fadeOut(300);
     }
-<<<<<<< HEAD
-  </script> --}}
+  </script>
 
 <script>
 
