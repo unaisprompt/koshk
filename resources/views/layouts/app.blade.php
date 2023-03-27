@@ -26,10 +26,13 @@
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/revslider.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/developer.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/newstyle.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/css/define.css')}}">     
-     <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="{{asset('assets/css/define.css')}}">
+  {{-- please dont add/modify script link . if you facing any problem please contact --}}
+     {{-- <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script> --}}
+  {{-- please dont add/modify script link . if you facing any problem please contact --}}
+
+  {{-- please dont add/modify script link . if you facing any problem please contact --}}
+  {{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
 
   <!-- Google Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
@@ -37,8 +40,18 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+   {{-- please dont add/modify script link . if you facing any problem please contact --}}
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> --}}
 
+    <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/revslider.js')}}"></script>
+    <script src="{{asset('assets/js/common.js')}}"></script>
+    <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.mobile-menu.min.js')}}"></script>
+    <script src="{{asset('assets/js/countdown.js')}}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="cms-index-index cms-home-page home">
@@ -74,7 +87,7 @@
             </svg>
         </div> --}}
 
-    
+
 
 		@include('layouts.header')
 
@@ -83,17 +96,10 @@
         @include('layouts.footer')
     </div>
          <!-- Link of JS files -->
-        {{-- <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script> --}}
-        <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('assets/js/revslider.js')}}"></script>
-        <script src="{{asset('assets/js/common.js')}}"></script>
-        <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
-        <script src="{{asset('assets/js/jquery.mobile-menu.min.js')}}"></script>
-        <script src="{{asset('assets/js/countdown.js')}}"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-         @yield('script')                
-            <script> 
+
+         @yield('script')
+            <script>
 function newsLetter() {
             var email = $("#email").val();
             $.ajaxSetup({
@@ -106,7 +112,7 @@ function newsLetter() {
             url: '{{ url("addNewsLetter")}}',
             data: {
                     email: email,
-                  
+
             },
             cache: false,
             success: function (response) {
@@ -114,7 +120,7 @@ function newsLetter() {
                     $(".preloader").hide();
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
-                     
+
 
                         });
                         document.getElementById("form").reset();
@@ -163,7 +169,7 @@ function newsLetter() {
                             $('#myModalsigninotp').modal('show');
                            $('#myModalsignup').modal('hide');
                            $('#myModalsignin').modal('hide');
-                     
+
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
@@ -209,7 +215,7 @@ function newsLetter() {
                              $('#myModalsignin').modal('show');
                             $('#myModalsigninotp').modal('hide');
                            $('#myModalsignup').modal('hide');
-                          
+
                      location.reload();
                         });
                         document.getElementById("form").reset();
@@ -247,7 +253,7 @@ function newsLetter() {
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
                         location.reload();
-                          
+
                      location.reload();
                         });
                         document.getElementById("form").reset();
@@ -285,7 +291,7 @@ function newsLetter() {
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
                         location.reload();
-                          
+
                     //  location.reload();
                         });
                         document.getElementById("form").reset();
