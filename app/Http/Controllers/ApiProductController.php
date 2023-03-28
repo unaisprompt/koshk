@@ -44,7 +44,8 @@ class ApiProductController extends Controller
     public function productDetail(Request $request){
         $url = $this->url."/productdetails";
         $response = Http::post($url,  [
-        'product_id'=>$request->id
+        'product_id'=>$request->id,
+        'user_id'=>session()->get('user_id')
         ]);
        if($response->successful())
        {

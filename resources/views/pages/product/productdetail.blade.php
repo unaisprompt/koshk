@@ -110,26 +110,6 @@
                         </div>
                       </div>
 
-                      <!-- <div class="list">
-                        <div class="heading">Colors</div>
-                        <div class="points">
-                          <span style="background-color:rgb(72, 118, 255)"></span>
-                          <span style="background-color:rgb(192, 192, 192)"></span>
-                          <span style="background-color:rgb(255, 195, 0)"></span>
-                        </div>
-                      </div> -->
-
-                      <!-- <div class="list">
-                        <div class="heading">Highlights</div>
-                        <div class="points">
-                          <ul>
-                            <li>Intel Celeron Dual Core</li>
-                            <li>HDD Capacity 1 TB</li>
-                            <li>RAM 4 GB DDR4</li>
-                            <li>19.5 inch Display</li>
-                          </ul>
-                        </div>
-                      </div> -->
 
                       <div class="list">
                         <div class="heading">Description</div>
@@ -156,7 +136,7 @@
 
 
                     </div>
-                 
+                  </form>
                 </div>
                 <div class="product-collateral">
                   <div class="add_info">
@@ -174,115 +154,10 @@
                          {!!$data->detail_description!!}
                         </div>
                       </div>
-                      <!-- <div class="tab-pane fade" id="product_tabs_tags">
-                        <div class="box-collateral box-spec">
-                          <h3>General</h3>
-
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="spec-tbl">
-                            <colgroup>
-                              <col width="20%">
-                              <col>
-                            </colgroup>
-                            <tr>
-                              <th>Sales Package</th>
-                              <td>Laptop, Power Adaptor, Laptop Bag, User Guide, Warranty Documents</td>
-                            </tr>
-                            <tr>
-                              <th>Model Number</th>
-                              <td>NE15V2IN007P</td>
-                            </tr>
-                            <tr>
-                              <th>Part Number</th>
-                              <td>NE15V2IN007P</td>
-                            </tr>
-                            <tr>
-                              <th>Model Name</th>
-                              <td>E15 AMD</td>
-                            </tr>
-                            <tr>
-                              <th>Series</th>
-                              <td>E Series</td>
-                            </tr>
-                            <tr>
-                              <th>Color
-                              <td>Silver</td>
-                              </th>
-                            </tr>
-                            <tr>
-                              <th>Type</th>
-                              <td>Thin and Light Laptop</td>
-                            </tr>
-                            <tr>
-                              <th>Suitable For</th>
-                              <td>Processing & Multitasking</td>
-                            </tr>
-                            <tr>
-                              <th>Battery Backup</th>
-                              <td>Upto 8 hours</td>
-                            </tr>
-                            <tr>
-                              <th>MS Office Provided</th>
-                              <td>Yes</td>
-                            </tr>
-                          </table>
-
-
-                        </div>
-                        <div class="box-collateral box-spec">
-                          <h3>Processor And Memory Features</h3>
-
-                          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="spec-tbl">
-                            <colgroup>
-                              <col width="20%">
-                              <col>
-                            </colgroup>
-                            <tr>
-                              <th>Processor Brand</th>
-                              <td>AMD</td>
-                            </tr>
-                            <tr>
-                              <th>Processor Name</th>
-                              <td>Ryzen 5 Quad Core</td>
-                            </tr>
-                            <tr>
-                              <th>SSD</th>
-                              <td>Yes</td>
-                            </tr>
-                            <tr>
-                              <th>SSD Capacity</th>
-                              <td>512 GB</td>
-                            </tr>
-                            <tr>
-                              <th>RAM</th>
-                              <td>8 GB</td>
-                            </tr>
-                            <tr>
-                              <th>RAM Type
-                              <td>DDR4</td>
-                              </th>
-                            </tr>
-                            <tr>
-                              <th>Processor Variant</th>
-                              <td>3500U</td>
-                            </tr>
-                            <tr>
-                              <th>Clock Speed</th>
-                              <td>2.1 GHz with Turbo Boost Upto 3.7 GHz</td>
-                            </tr>
-                            <tr>
-                              <th>Graphic Processor</th>
-                              <td>AMD Radeon Vega 8</td>
-                            </tr>
-
-                          </table>
-
-
-                        </div>
-                      </div> -->
                       <div class="tab-pane fade" id="reviews_tabs">
                         <div class="woocommerce-Reviews">
                           <div>
-                            <h2 class="woocommerce-Reviews-title">{{count($data->reviews)}} reviews for <span>{{$data->product_name}}</span></h2>
+                            <h2 class="woocommerce-Reviews-title"><v id="review_count">{{count($data->reviews)}}</v> reviews for <span>{{$data->product_name}}</span></h2>
                             <ol class="commentlist">
                               @foreach ($data->reviews as $review)
                               <li class="comment">
@@ -309,14 +184,14 @@
                             <div>
                               <div class="comment-respond" style="padding:26px">
                                 <span class="comment-reply-title">Add a review </span>
-                                <form action="#" method="post" class="comment-form" novalidate="">
+                                <form onsubmit="event.preventDefault();submitReview()" action="#" id="addreviewform" method="post" class="comment-form" novalidate="">
                                   <p class="comment-notes"><span id="email-notes">Your email address will not be
                                       published.</span> Required fields are marked <span class="required">*</span></p>
                                   <div class="comment-form-rating">
                                     <label id="rating">Your rating</label>
                                     <p class="stars">
                                       <span>
-                                        <a class="star-1 star active" href="#" onclick="event.preventDefault();addRating(1,$(this))">1</a>
+                                        <a class="star-1 star" href="#" onclick="event.preventDefault();addRating(1,$(this))">1</a>
                                         <a class="star-2 star" href="#" onclick="event.preventDefault();addRating(2,$(this))">2</a>
                                         <a class="star-3 star" href="#" onclick="event.preventDefault();addRating(3,$(this))">3</a>
                                         <a class="star-4 star" href="#" onclick="event.preventDefault();addRating(4,$(this))">4</a>
@@ -326,9 +201,12 @@
                                   </div>
                                   <p class="comment-form-comment">
                                     <label>Your review <span class="required">*</span></label>
-                                    <input type="hidden" name="ratting" value="0"/>
+                                    <input type="hidden" name="ratting" id="ratting" value="0"/>
+                                    <input type="hidden" name="vendor_id" value="{{$data->vendor_id}}"/>
                                     <input type="hidden" name="user_id" value="{{session()->get('user_id')}}"/>
-                                    <textarea id="comment" name="comment" cols="45" rows="8" required=""></textarea>
+                                    <input type="hidden" name="product_id" value="{{$data->id}}"/>
+                                    <input type="reset" id="reset" style="display:none">
+                                    <textarea id="comment" name="comment" cols="45" rows="8" required="" @if(!session()->get('token')) onclick="$('#myModalsignin').modal('show');" @endif></textarea>
                                   </p>
                                   <p class="comment-form-author">
                                     <label for="author">Name </label>
@@ -339,7 +217,7 @@
                                     <input id="email" name="email" readonly type="email" value="{{session()->get('email')}}" size="30" required="">
                                   </p>
                                   <div class="form-submit">
-                                    <input name="submit" type="submit" id="submit" class="submit" value="Submit">
+                                    <input name="submit"  class="submit"  type="submit" id="submit"  @if(!session()->get('token')) disabled  @endif value="Submit">
                                   </div>
                                 </form>
                               </div><!-- #respond -->
@@ -348,61 +226,6 @@
                           <div class="clear"></div>
                         </div>
                       </div>
-                      <!-- <div class="tab-pane fade" id="product_tabs_custom">
-                        <div class="product-tabs-content-inner clearfix">
-                          <p><strong>Lorem Ipsum</strong><span>&nbsp;is
-                              simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                              has been the industry's standard dummy text ever since the 1500s, when
-                              an unknown printer took a galley of type and scrambled it to make a type
-                              specimen book. It has survived not only five centuries, but also the
-                              leap into electronic typesetting, remaining essentially unchanged. It
-                              was popularised in the 1960s with the release of Letraset sheets
-                              containing Lorem Ipsum passages, and more recently with desktop
-                              publishing software like Aldus PageMaker including versions of Lorem
-                              Ipsum.</span></p>
-                        </div>
-                      </div> -->
-                      <!-- <div class="tab-pane fade" id="product_tabs_custom1">
-                        <div class="product-tabs-content-inner clearfix">
-                          <div class="faq">
-                            <ul>
-                              <li>
-                                <strong>Is there any issue in display with color shifting? And is the body
-                                  metallic?</strong>
-                                <p>Featuring a stylish and stunning design, this laptop from Vaio is a must-buy device
-                                  that perfectly complements a modern corporate leader’s lifestyle. Aliquam laoreet
-                                  consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis. </p>
-                                <span>Jhon Doe</span>
-                              </li>
-                              <li>
-                                <strong>Is there any heating issue which is not so normal?</strong>
-                                <p>Donec eu cursus velit. Proin nunc lacus, gravida mollis dictum ut, vulputate eu
-                                  turpis. Sed felis sapien, commodo in iaculis in, feugiat sed enim. Sed nunc ipsum,
-                                  fermentum varius dignissim vitae, blandit et ante.</p>
-                                <span>Saraha Smith</span>
-                              </li>
-                              <li>
-                                <strong>Can i install external graphics card?</strong>
-                                <p> Integer vitae diam sed dolor euismod laoreet eget ac felis. Donec non erat sed elit
-                                  bibendum sodales. Donec eu cursus velit.</p>
-                                <span>Stephen Doe</span>
-                              </li>
-                              <li>
-                                <strong>It is useful for coding or not?</strong>
-                                <p>Sed felis sapien, commodo in iaculis in, feugiat sed enim. Sed nunc ipsum, fermentum
-                                  varius dignissim vitae, blandit et ante.</p>
-                                <span>Mark Doe</span>
-                              </li>
-                              <li>
-                                <strong>What is the average battery life?</strong>
-                                <p>Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet
-                                  eget ac felis. Donec non erat sed elit bibendum sodales.</p>
-                                <span>Jhon Doe</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div> -->
                     </div>
                   </div>
 
@@ -884,14 +707,79 @@
 
 
   </script>
-<script>
-  function addRating(rating,ref)
-  {
-    @if(session()->get('token')) 
-    $('#ratting').val(1);
-     @else 
-     $('#myModalsignin').modal('show');
+  <script>
+    function addRating(count,ref)
+    {
+      @if(session()->get('token'))
+       $('.star').removeClass('.active');
+       ref.addClass('active');
+       $('#ratting').val(count);
+      @else
+       $('#myModalsignin').modal('show');
       @endif
-  }
-</script>
+    }
+  </script>
+  <script>
+    function submitReview()
+    {
+       var token="{{session()->get('token')}}";
+         $.ajax({
+            url:'{{config('global.api')}}/addratting',
+            type:'post',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer '+token);
+            },
+            data:$('#addreviewform').serialize(),
+            dataType:'json',
+            success:function(response){
+                if(response.status)
+                {
+                        Toastify({
+                      text: response.message,
+                      className: "info",
+                      close: true,
+                      style: {
+                          background: "#1cad6a",
+                      }
+                      }).showToast();
+                      
+                let rating=$('#ratting').val();
+                let comment=$('#comment').val();
+                let discription= `<li class="comment">
+                                  <div>
+                                    <img alt="" src="{{session()->get('profile_pic')}}" class="avatar avatar-60 photo">
+                                    <div class="comment-text">
+                                      <div class="star-rating">
+                                        <span style="width:${rating*2*10}%">Rated <strong class="rating">${ratting}</strong> out of 5</span>
+                                      </div>
+                                      <p class="meta">
+                                        <strong>{{session()->get('name')}}</strong>
+                                        <span>–</span>few minutes ago
+                                      </p>
+                                      <div class="description">
+                                        <p>${comment}</p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </li>`;
+                  $('.commentlist').append(discription); 
+                  $('#reset').click();
+                  let review_count=parseInt($('#review_count').html());
+                  
+                  $('#review_count').html(review_count+1);
+                }else{
+                   Toastify({
+                      text: response.message,
+                      className: "error",
+                      close: true,
+                      style: {
+                          background: "red",
+                      }
+                      }).showToast();
+                }           
+            }
+          });
+    }
+    
+  </script>
 @endsection
