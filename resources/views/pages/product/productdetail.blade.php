@@ -42,6 +42,13 @@
                       @endif
                       <div class="product-image">
                          @if($data->is_variation)
+                           @if($variation->video)
+                             <video width="420" height="340" controls id="product-video" style="display: none;">
+                            <source src="{{$variation->video}}" type="video/mp4">
+
+                            Your browser does not support the video tag.
+                          </video>
+                         @endif
                          @php
                            $image=collect($variation->product_images)->first();
                          @endphp
@@ -69,6 +76,13 @@
                             <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
                               <div class="slider-items slider-width-col4 block-content">
                                 @if($data->is_variation)
+                                  @if($variation->video)
+                                    <div class="more-views-items" img-div="2"> <a href="#"
+                                    data-image="{{url('assets/products-images/video-image.jpg')}}"
+                                    data-zoom-image="{{url('assets/products-images/video-image.jpg')}}"> <img id="product-zoom0"
+                                      src="{{url('assets/products-images/video-image.jpg')}}" class="indiviual-image" image-video="2"
+                                      alt="product-image"> </a></div>
+                                    @endif
                                  @foreach ($variation->product_images as $image)
                                 <div class="more-views-items"> 
                                   <a href="#" data-image="{{$image->image}}"
