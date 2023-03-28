@@ -146,13 +146,13 @@
                         </div>
                         {{-- <span style="font-size: 12px
                         ;">Free Shipping & Free Delivery</span> --}}
-                        <div class="count-number">
+                        {{-- <div class="count-number">
                           <form id='myform' method='POST' class='quantity' action='#'>
                             <input type='button' value='-' class='qtyminus minus' field='quantity' />
                             <input type='text' name='quantity' value='0' class='qty' />
                             <input type='button' value='+' class='qtyplus plus' field='quantity' />
                           </form>
-                        </div>
+                        </div> --}}
                         <div class="action">
                           <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><i
                               class="fa fa-shopping-basket"></i></button>
@@ -254,13 +254,13 @@
                                 </span> </div>
                             </div>
 
-                            <div class="count-number">
+                            {{-- <div class="count-number">
                               <form id='myform' method='POST' class='quantity' action='#'>
                                 <input type='button' value='-' class='qtyminus minus' field='quantity' />
                                 <input type='text' name='quantity' value='0' class='qty' />
                                 <input type='button' value='+' class='qtyplus plus' field='quantity' />
                               </form>
-                            </div>
+                            </div> --}}
                             <div class="action">
                               <button class="button btn-cart" type="button" title=""
                                 data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
