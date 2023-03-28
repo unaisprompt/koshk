@@ -1469,20 +1469,65 @@ if (jQuery('#product-zoom').length > 0) {
 		gallery: 'gallery_01'
 	});
 }
-jQuery("#gallery_01 .slider-items").owlCarousel({
-	video: true,
-	autoplay: false,
-	items: 4, //10 items above 1000px browser width
-	itemsDesktop: [1024, 3], //5 items between 1024px and 901px
-	itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
-	itemsTablet: [600, 3], //2 items between 600 and 0;
-	itemsMobile: [320, 2],
-	navigation: true,
-	navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-	slideSpeed: 500,
-	pagination: false
-});
 
+
+// $(document).ready(function () {
+// 	var owl = $("#gallery_01 .slider-items");
+// 	owl.owlCarousel({
+// 		video: true,
+// 		autoplay: false,
+// 		items: 4, //10 items above 1000px browser width
+// 		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
+// 		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
+// 		itemsTablet: [600, 3], //2 items between 600 and 0;
+// 		itemsMobile: [320, 2],
+// 		navigation: true,
+// 		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+// 		slideSpeed: 500,
+// 		pagination: false
+// 	});
+
+	
+// })
+
+// $('.owl-wrapper').on('click', '.owl-item', function () {
+// 	alert('click');
+// })
+// $('.more-views-items').click(function(e){
+
+
+
+$(document).ready(function() {
+	var owl = $("#gallery_01 .slider-items");
+	owl.owlCarousel({
+		video: true,
+				autoplay: false,
+				items: 4, //10 items above 1000px browser width
+				itemsDesktop: [1024, 3], //5 items between 1024px and 901px
+				itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
+				itemsTablet: [600, 3], //2 items between 600 and 0;
+				itemsMobile: [320, 2],
+				navigation: true,
+				navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+				slideSpeed: 500,
+				pagination: false
+	})
+	
+	
+  })
+
+$(".indiviual-image").click(function(e){
+	if($(this).attr("image-video")=="1"){
+		
+		$("#product-zoom").show();
+		$("#product-video").hide();
+	}else{
+		
+		$("#product-zoom").hide();
+		$("#product-video").show();
+	}
+	
+});
 
 
 $('.owl-carousel').owlCarousel({
