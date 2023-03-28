@@ -9,10 +9,8 @@
             <div id='rev_slider_4_wrapper' class='rev_slider_wrapper fullwidthbanner-container'>
               <div id='rev_slider_4' class='rev_slider fullwidthabanner'>
                 <ul>
-                  {{-- {{dd($finalData['main_data']['slider'])}} --}}
                   @if(!empty($finalData['main_data']['slider']))
                   @foreach($finalData['main_data']['slider'] as $banner)
-
                   <li data-transition='random' data-slotamount='7' data-masterspeed='1000'
                     data-thumb='{{$banner['image']}}'>
                     <img src='{{$banner['image']}}' data-bgfit='cover' data-bgrepeat='no-repeat' alt="banner" />
@@ -348,9 +346,9 @@
                 <img src="{{asset('assets/images/fitness.jpg')}}" alt="" />
                 <h6>fitness essentials</h6>
               </a> --}}
-              <div class="iu5d">
+              {{-- <div class="iu5d">
                 <a href="#">See all offers</a>
-              </div>
+              </div> --}}
             </div>
           </div>
           {{-- {{dd($finalData['main_data'])}} --}}
@@ -388,9 +386,9 @@
                 <img src="{{asset('assets/images/fitness.jpg')}}" alt="" />
                 <h6>fitness essentials</h6>
               </a> --}}
-              <div class="iu5d">
+              {{-- <div class="iu5d">
                 <a href="#">See all offers</a>
-              </div>
+              </div> --}}
             </div>
           </div>
           <div class="col-md-6 col-sm-3 col-lg-3">
@@ -427,9 +425,9 @@
                 <img src="{{asset('assets/products-images/product3.jpg')}}" alt="" />
                 <h6>fitness essentials</h6>
               </a> --}}
-              <div class="iu5d">
+              {{-- <div class="iu5d">
                 <a href="#">See all offers</a>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>
