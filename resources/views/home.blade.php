@@ -123,7 +123,7 @@
               <div class="item item-carousel">
                 <div class="item-inner">
                   <div class="item-img">
-                    <div class="item-img-info"> <a class="product-image" href="{{url('product/detail')}}?product={{$product['id']}}"> <img alt=""
+                    <div class="item-img-info"> <a class="product-image" href="{{url('product-detail')}}?id={{$product['id']}}"> <img alt=""
                           src="{{$product['productimage']['image_url']}}"> </a>
                       <div class="box-hover">
                         <ul class="add-to-links">
@@ -136,7 +136,7 @@
                   </div>
                   <div class="item-info">
                     <div class="info-inner">
-                      <div class="item-title"> <a href="product_detail.html">{{$product['product_name']}}</a> </div>
+                      <div class="item-title"> <a href="{{url('product-detail')}}?id={{$product['id']}}">{{$product['product_name']}}</a> </div>
                       {{-- <div class="brand">Datsun</div> --}}
                       <div class="star-rating">
                         <span style="width:60%">Rated <strong class="rating">{{$product['avg_ratting']}}</strong> out of 5</span>
@@ -205,11 +205,11 @@
          @foreach($finalData['main_data']['offer_banner'] as $offer_banner)
           <div class="bb5g">
             <div class="yuhd">
-              <img src="{{$offer_banner['image']}}" alt="" />
+              <a href="{{url('products')}}?category_id={{$offer_banner['cat_id']}}" style="text-decoration:none;"><img src="{{$offer_banner['image']}}" alt="" />
             </div>
             <div class="uyd">
               <h1>{{$offer_banner['title']}}</h1>
-              <h2>{{$offer_banner['category']['category_name']}}</h2>
+              <h2>{{$offer_banner['category']['category_name']}}</h2></a>
             </div>
           </div>
           @endforeach
@@ -233,7 +233,7 @@
                     <div class="item-inner">
                       <div class="item-img">
                         <div class="item-img-info"> <a class="product-image" title="Retis lapen casen"
-                            href="product_detail.html"> <img alt="" src="{{$featured_products['productimage']['image_url']}}"> </a>
+                            href="{{url('product-detail')}}?id={{$featured_products['id']}}"> <img alt="" src="{{$featured_products['productimage']['image_url']}}"> </a>
                            <div class="box-hover">
                             <ul class="add-to-links">
                               <li><a class="link-quickview" href="quick_view.html"></a> </li>
@@ -314,7 +314,7 @@
               <h4>Hot Deal <br />Product</h4>
               @if(!empty($finalData['main_data']['hot_products_limited']))
                @foreach($finalData['main_data']['hot_products_limited'] as $product_img)
-              <a href="#">
+              <a href="{{url('product-detail')}}?id={{$product_img['id']}}">
                 <img src="{{$product_img['productimage']['image_url']}}" alt="" />
               </a>
              @endforeach
@@ -330,7 +330,7 @@
             $limitedArray = array_slice($arr, 0, 4);
             @endphp
             @foreach($limitedArray as $new_arrival)
-              <a href="#">
+              <a href="{{url('product-detail')}}?id={{$new_arrival['id']}}">
                 <img src="{{$new_arrival['productimage']['image_url']}}" alt="" />
                 <h6>{{$new_arrival['product_name']}}</h6>
               </a>
@@ -363,7 +363,7 @@
             $limitedArrayBest = array_slice($arr_best, 0, 4);
             @endphp
             @foreach($limitedArrayBest as $bestsellers)
-              <a href="#">
+              <a href="{{url('product-detail')}}?id={{$bestsellers['id']}}">
                 <img src="{{$bestsellers['productimage']['image_url']}}" alt="" />
                  <h6>
                   @php if(strlen($bestsellers['product_name']) > 30){
@@ -402,7 +402,7 @@
             $limitedArrayFeatured = array_slice($arr_featured, 0, 4);
             @endphp
             @foreach($limitedArrayFeatured as $featured_products)
-              <a href="#">
+              <a href="{{url('product-detail')}}?id={{$featured_products['id']}}">
                  <img src="{{$featured_products['productimage']['image_url']}}" alt="" />
                 <h6>
                   @php if(strlen($featured_products['product_name']) > 30){
@@ -513,7 +513,7 @@
                 <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
+                      <div class="item-img-info"> <a href="{{url('product-detail')}}?id={{$sale_data['id']}}" title="Retis lapen casen" class="product-image"> <img
                         src="{{$sale_data['productimage']['image_url']}}" alt="Retis lapen casen"> </a>
                       </div>
                     </div>
@@ -649,7 +649,7 @@
                 <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
+                      <div class="item-img-info"> <a href="{{url('product-detail')}}?id={{$top_rated['id']}}" title="Retis lapen casen" class="product-image"> <img
                             src="{{$top_rated['productimage']['image_url']}}" alt="Retis lapen casen"> </a>
                       </div>
                     </div>
@@ -820,13 +820,14 @@
         <div class="row">
            @if(!empty($finalData['main_data']['offer_banner']))
           @foreach($finalData['main_data']['offer_banner'] as $offer_banner)
+          {{-- {{dd($offer_banner)}} --}}
           <div class="bb5g">
             <div class="yuhd">
-              <img src="{{$offer_banner['image']}}" alt="" />
+              <a href="{{url('products')}}?category_id={{$offer_banner['cat_id']}}" style="text-decoration:none;"><img src="{{$offer_banner['image']}}" alt="" />
             </div>
             <div class="uyd">
               <h1>{{$offer_banner['title']}}</h1>
-              <h2>{{$offer_banner['category']['category_name']}}</h2>
+              <h2>{{$offer_banner['category']['category_name']}}</h2></a>
             </div>
           </div>
           @endforeach

@@ -68,33 +68,33 @@
               <h4>Contact Us</h4>
               <div class="contacts-info">
                 <address>
-                  <i class="add-icon"></i>ThemesGround, 789 Main rd,<br>
-                  Anytown, CA 12345 USA<br>
+                  <i class="add-icon"></i>{{CmsPage()['settings']['address']}}
                 </address>
-                <div class="phone-footer"><i class="phone-icon"></i>+ 888 456-7890</div>
-                <div class="email-footer"><i class="email-icon"></i><a href="mailto:abc@example.com">citroen@abc.com</a>
+                <div class="phone-footer"><i class="phone-icon"></i>+971 {{CmsPage()['settings']['contact']}}</div>
+                <div class="email-footer"><i class="email-icon"></i><a href="mailto:{{CmsPage()['settings']['email']}}">{{CmsPage()['settings']['email']}}</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      {{-- {{dd(CmsPage())}} --}}
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-12">
             <div class="social">
               <ul>
-                <li class="fb"><a href="#"></a></li>
-                <li class="tw"><a href="#"></a></li>
+                <li class="fb"><a href="{{CmsPage()['settings']['facebook']}}"></a></li>
+                <li class="tw"><a href="{{CmsPage()['settings']['twitter']}}"></a></li>
 
 
 
-                <li class="linkedin"><a href="#"></a></li>
-                <li class="youtube"><a href="#"></a></li>
+                <li class="linkedin"><a href="{{CmsPage()['settings']['instagram']}}"></a></li>
+                <li class="youtube"><a href="{{CmsPage()['settings']['linkedin']}}"></a></li>
               </ul>
             </div>
           </div>
-          <div class="col-sm-12 col-xs-12 coppyright"> &copy; 2023 Gift city. all rights reserved. </div>
+          <div class="col-sm-12 col-xs-12 coppyright"> &copy; {{CmsPage()['settings']['copyright']}}. </div>
         </div>
       </div>
     </footer>
@@ -215,6 +215,3 @@
       <li><a href="#" tabindex="5"><i class="fa fa-shopping-cart"></i> <br />Cart</a></li>
     </ul>
   </header>
-
-   
-  

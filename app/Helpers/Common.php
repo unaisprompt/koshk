@@ -59,3 +59,13 @@ function CommonData()
     }
     return [];
 }
+function CmsPage()
+{
+    $url = config('global.api')."/cmspages";
+      $response = Http::get($url);
+    if($response->successful())
+    {
+    return $response->json();
+    }
+    return [];
+}
