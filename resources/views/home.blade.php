@@ -244,7 +244,7 @@
                       <div class="item-info">
                         <div class="info-inner">
                           <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html">{{$featured_products['product_name']}}</a> </div>
-                          <div class="brand">{{!empty($featured_products['brand']['brand_name'])}}</div>
+                          {{-- <div class="brand">{{!empty($featured_products['brand']['brand_name'])}}</div> --}}
                           <div class="star-rating">
                             {{-- <span style="width:60%">Rated <strong class="rating">{{$featured_products['rattings']}}</strong> out of 5</span> --}}
                           </div>
@@ -654,7 +654,7 @@
                     <div class="item-info">
                       <div class="info-inner">
                         <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> {{$top_rated['product_name']}} </a> </div>
-                        {{-- <div class="brand">{{!empty($top_rated['brand']['brand_name'])}}</div> --}}
+                        <div class="brand">{{!empty($top_rated['brand']['brand_name'])}}</div>
                         <div class="item-content">
                           <div class="star-rating">
                             <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
