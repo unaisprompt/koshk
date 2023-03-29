@@ -154,11 +154,11 @@
                           <p class="availability in-stock"><span>Sold out</span></p>
                           @endif
                           <p class="special-price"> <span class="price-label">Special Price</span> <span
-                              id="product-price-48" class="price"> AED {{$data->discounted_price}} </span> </p>
+                              id="product-price-48" class="price"> AED {{$data->is_variation?$variation->discounted_variation_price:$data->discounted_price}} </span> </p>
                               <input type="hidden" value="{{$data->discounted_price}}" name="price" id="pro_price">
 
                           <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> AED
-                            {{$data->product_price}} </span> </p>
+                            {{$data->is_variation?$variation->price:$data->product_price}} </span> </p>
                           <p{{$data->delivery_message}}</p>
 
                         </div>
