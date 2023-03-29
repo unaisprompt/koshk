@@ -25,6 +25,41 @@ class ApiUserController extends Controller
             return view('pages.login');
         }
     }
+    public function getalreadyUserPassReset()
+    {
+        return view('pages.reset-already');
+    }
+    public function alreadyUserPassReset(Request $request){
+         $user_id= session()->get('user_id');
+        $token= session()->get('token');
+        if(!$user_id && !$token)
+        return ;
+   if($request->password  != $request->conf_password)
+   {
+     return response()->json(["status"=>0,
+                            "message"=>'conform password dos not match',]);
+   }else{
+    $url = $this->url."/reset-alredy-user"; 
+    $token= 'Bearer '.session()->get('token');
+    // $user_id= session()->get('user_id');
+    $response = Http::withHeaders([
+            'Authorization' => $token
+    ])->post($url,  [
+    'password'=>$request->password,
+        ]);
+        }
+        //  return $response;
+        $data = $response->json();
+    if($response['status']==1){
+      return response()->json(["status"=>1,
+                            "message"=>$response['message'] ]);
+    }
+    else{
+        return response()->json(["status"=>0,
+                            "message"=>$response['message'],]);
+    }
+        // return view('pages.profile');
+    }
 
     public function myaccount(){
          $user_id= session()->get('user_id');
@@ -103,8 +138,10 @@ class ApiUserController extends Controller
                 // session()->forget('cart');
                 // session()->put('cart', $cart);
             }
+            //   dd($response->json());
          return response()->json(["status"=>1,
-                            "message"=>$response['message']]);
+                            "message"=>$response['message'],
+                            "data" =>$response['data']['is_already'] ]);
 
            }
            else{
