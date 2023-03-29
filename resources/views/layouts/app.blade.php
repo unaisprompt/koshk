@@ -295,9 +295,12 @@ function newsLetter() {
                     $(".preloader").hide();
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
-                        location.reload();
-
-                    //  location.reload();
+                        if(response.data == 1){
+                                $('#myModalsignin').modal('hide');
+                         window.location.href = "{{url('user-password-new')}}";
+                            }else{
+                                location.reload();
+                            }
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
