@@ -9,7 +9,29 @@
       <div class="top-nav">
         <div class="container">
           <div class="header-strip-wrap">
+ <div class="delivery-section ">
 
+              <span class="icons" href="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02c-.37-1.11-.56-2.3-.56-3.53c0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99C3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+              </Span>
+
+              <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
+              <span class="delivery-content">Phone number - <span>00971 43555577</span> </span>
+
+            </div>
+           <div class="delivery-section delivery-time">
+
+              <span class="icons" href="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8zm.5-13H11v6l5.25 3.15l.75-1.23l-4.5-2.67z"/></svg>
+              </Span>
+
+              <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
+              
+              <span class="delivery-content" data-container="body" data-toggle="popover" 
+              data-trigger="hover" data-placement="bottom" data-content="Vivamus
+              sagittis lacus vel augue laoreet rutrum faucibus.">
+              Delivery Slot - <span>9:00 to 6:00</span> </span>
+            </div>
 
             <div class="delivery-section">
 
@@ -295,7 +317,7 @@
         <div class="modal-body">
           <div class="yhd0d">
             <h1>Forget password</h1>
-            {{-- <h2>Sign in to your account</h2> --}}
+            <button type="button" onclick="$('#myModalsignup').modal('show');$('#myModalforgot').modal('hide');">Create your account ?</button>
 
           </div>
           <div class="mmc5c">
@@ -303,6 +325,7 @@
             <input type="text" name="email" value="" id="email_forget">
           </div>
           <button type="button" class="jcdgCW" onclick="ForgetPassword()">Send Email</button>
+           <button type="button" onclick="$('#myModalforgot').modal('hide');">sign in your account?</button>
         </div>
         </form>
       </div>
