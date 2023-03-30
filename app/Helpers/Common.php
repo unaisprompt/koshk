@@ -69,3 +69,27 @@ function CmsPage()
     }
     return [];
 }
+function minicart(){
+
+        $url = config('global.api')."/getcart";
+        $user_id= session()->get('user_id');
+        $token= 'Bearer '.session()->get('token');
+        $data=[];
+        if($user_id){
+            $response = Http::withHeaders([
+                'Authorization' => $token
+            ])->post($url, [
+                'user_id' => $user_id
+            ]);
+            $data=$response['data'];
+        }
+
+        else{
+            $carts = session()->get('cart',[]);
+            if($carts&&is_array($carts))
+            $data = $carts;
+        }
+
+    
+        return view('layouts.minicart',compact('data'));
+    }

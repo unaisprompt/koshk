@@ -394,65 +394,7 @@
               </div>
             </div>
             <div class="top-cart-contain">
-              <!-- Top Cart -->
-              <div class="mini-cart">
-                <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a
-                    href="{{url('cart')}}"> <span class="cart_count">2</span>
-                  </a> </div>
-                <div>
-                  <div class="top-cart-content">
-                    <!--block-subtitle-->
-                    <ul class="mini-products-list" id="cart-sidebar">
-                      <li class="item first">
-                        <div class="item-inner"> <a class="product-image" title="Retis lapen casen" href="#l"><img
-                              alt="Retis lapen casen" src="{{asset('assets/products-images/product6.jpg')}}"> </a>
-                          <div class="product-details">
-                            <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a>
-                            </div>
-                            <p class="product-name"><a href="#">Health & Fitness Smartwatch with Heart Rate Monitor</a>
-                            </p>
-                            <div class="count-number">
-                              <form id='myform' method='POST' class='quantity' action='#'>
-                                <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                                <input type='text' name='quantity' value='0' class='qty' />
-                                <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                              </form>
-                            </div>
-                            1 x <span class="price">$179.99</span>
-
-                          </div>
-                        </div>
-                      </li>
-                      <li class="item last">
-                        <div class="item-inner"> <a class="product-image" title="Retis lapen casen"
-                            href="product_detail.html"><img alt="Retis lapen casen" src="{{asset('assets/products-images/product3.jpg')}}">
-                          </a>
-                          <div class="product-details">
-                            <div class="access"><a class="btn-remove1" title="Remove This Item" href="#">Remove</a>
-                            </div>
-                            <p class="product-name"><a href="#">Siomons Galaxy N31 Ocean Blue, 8GB RAM, 128GB Storag</a>
-                            </p>
-                            <div class="count-number">
-                              <form id='myform' method='POST' class='quantity' action='#'>
-                                <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                                <input type='text' name='quantity' value='0' class='qty' />
-                                <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                              </form>
-                            </div>
-                            1 x <span class="price">$80.00</span>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                    <!--actions-->
-                    <div class="actions">
-                      <button class="btn-checkout" title="Checkout" type="button"><span>Checkout</span> </button>
-                      <a href="{{url('cart')}}" class="view-cart"><span>View Cart</span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- Top Cart -->
+                  {{minicart()}}
               <div id="ajaxconfig_info" style="display:none"> <a href="#/"></a>
                 <input value="" type="hidden">
                 <input id="enable_module" value="1" type="hidden">
