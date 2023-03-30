@@ -49,57 +49,8 @@
         </div>
       </div>
     </div>
-{{-- {{dd($finalData)}} --}}
+
     <!-- ============================================== INFO BOXES ============================================== -->
-    <!--<div class="info-boxes wow fadeInUp">
-          <div class="container info-boxes-inner">
-            <div class="row">
-              <div class="col-md-6 col-sm-4 col-lg-4">
-                <div class="info-box">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <img src="images/moneyback.png" alt="" />
-                      <h4 class="info-box-heading green">money back</h4>
-                    </div>
-                  </div>
-                  <h6 class="text">30 Days Money Back Guarantee</h6>
-                </div>
-              </div>
-              
-              
-              <div class="hidden-md col-sm-4 col-lg-4">
-                <div class="info-box">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <img src="images/free-shipping.jpg" alt="" />
-                      <h4 class="info-box-heading green">free shipping</h4>
-                    </div>
-                  </div>
-                  <h6 class="text">Shipping on orders over $99</h6>
-                </div>
-              </div>
-           
-              <div class="col-md-6 col-sm-4 col-lg-4">
-                <div class="info-box">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <img src="images/SpecialSale.png" alt="" />
-                      <h4 class="info-box-heading green">Special Sale</h4>
-                    </div>
-                  </div>
-                  <h6 class="text">Extra $5 off on all items </h6>
-                </div>
-              </div>
-             
-            </div>
-           
-          </div>
-        </div> -->
-    <!-- /.info-boxes-inner -->
-
-
-
-
     <!-- ============================================== SCROLL TABS ============================================== -->
     <div id="product-tabs-slider" class="scroll-tabs">
       <div class="more-info-tab clearfix">
@@ -126,7 +77,7 @@
                       <div class="box-hover">
                         <ul class="add-to-links">
                           <li><a class="link-quickview openModal"></a></li>
-                          <li><a class="link-wishlist" href="wishlist.html"></a> </li>
+                          <li><a class="link-wishlist add-to-wishlist" data-cpidw="{{$product['id']}}"></li>
                          </ul>
                       </div>
 
@@ -235,7 +186,7 @@
                            <div class="box-hover">
                             <ul class="add-to-links">
                               <li><a class="link-quickview" href="quick_view.html"></a> </li>
-                              <li><a class="link-wishlist" href="wishlist.html"></a> </li>
+                              <li><a class="link-wishlist add-to-wishlist" data-cpidw="{{$featured_products['id']}}"></a> </li>
                               <li><a class="link-compare" href="compare.html"></a> </li>
                             </ul>
                           </div>

@@ -55,7 +55,7 @@ Route::get('user-password-new',[ApiUserController::class,'getalreadyUserPassRese
 Route::post('change-password',[ApiUserController::class,'passwordChange']);
 Route::get('address-list',[ApiUserController::class,'addressList']);
 Route::get('address',[ApiUserController::class,'getAddress']);
-Route::get('edit-address/{id}',[ApiUserController::class,'getAddressEdit']);
+Route::post('edit-address',[ApiUserController::class,'getAddressEdit'])->name('edit-address');
 Route::post('address-post',[ApiUserController::class,'addAddress']);
 Route::post('address-update',[ApiUserController::class,'updateAddress']);
 Route::post('address-delete',[ApiUserController::class,'deleteAddress']);

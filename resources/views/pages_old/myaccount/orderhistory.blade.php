@@ -57,17 +57,17 @@
                      
                         @foreach($data['data'] as $item)
                                         <div class="row">
-  <div class="col-sm-12 mb-2">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">order Number : {{$item['order_number']}}</h5>
-        <p class="card-text">date :{{$item['date']}}</p>
-       <p class="card-text">Amount: AED {{$item['grand_total']}}</p>
-        <a href="{{url('order-detail/'.encrypt($item['order_number']))}}" class="btn btn-primary">order details</a>
-      
-      </div>
-    </div>
-  </div>
+                <div class="col-sm-12 mb-2">
+                    <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">order Number : {{$item['order_number']}}</h5>
+                        <p class="card-text">date :{{$item['date']}}</p>
+                    <p class="card-text">Amount: AED {{$item['grand_total']}}</p>
+                        <a href="{{url('order-detail/'.encrypt($item['order_number']))}}" class="btn btn-primary">order details</a>
+                    
+                    </div>
+                    </div>
+                </div>
  
 </div> 
                        
