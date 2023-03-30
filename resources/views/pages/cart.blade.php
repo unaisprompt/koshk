@@ -47,11 +47,11 @@
                     <p>AED {{$item['price'] * $item['qty']}}</p>
                    @php $total+=$item['price'] * $item['qty']; @endphp
                     <div class="count-number">
-                    
+                      <form id="myform" method="POST" class="quantity" action="#">
                         <input type='button' value='-' class='qtyminus minus' field='quantity' />
                         <input type='text' name='quantity' value='{{$item['qty']}}' class='qty' />
                         <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                     
+                      </form>
                     </div>
                   </div>
                 </div>
