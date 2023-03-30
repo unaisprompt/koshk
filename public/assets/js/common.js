@@ -301,11 +301,20 @@ jQuery(document).ready(function () {
     });
     /* Top Cart js */
     function slideEffectAjax() {
+            var timer;
         jQuery('.top-cart-contain').mouseenter(function () {
-            jQuery(this).find(".top-cart-content").stop(true, true).slideDown();
+             clearTimeout(timer);
+             var ref=jQuery(this);
+             timer = setTimeout(function() {
+                ref.find(".top-cart-content").stop(true, true).slideDown();
+             }, 500);
         });
         jQuery('.top-cart-contain').mouseleave(function () {
-            jQuery(this).find(".top-cart-content").stop(true, true).slideUp();
+              clearTimeout(timer);
+             var ref=jQuery(this);
+             timer = setTimeout(function() {
+                 ref.find(".top-cart-content").stop(true, true).slideUp();
+             }, 500);
         });
     }
     jQuery(document).ready(function () {
