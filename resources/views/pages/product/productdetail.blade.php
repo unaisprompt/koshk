@@ -2,6 +2,9 @@
 
 @extends('layouts.app')
 @section('content') 
+@php
+  $price=$data->is_variation?$variation->discounted_variation_price:$data->discounted_price;
+@endphp
 <style>
   .product-view .product-essential .add-to-links .link-wishlist.active 
   {
@@ -115,7 +118,7 @@
 
                       <div class="add-to-box">
                         <div class="add-to-cart">
-                          <button onclick="cartadd({{$data->id}})"  type="button"  id="cart_button" style="cursor:pointer;" value="{{$data->id}}" class="button btn-cart"title="Add to Cart">Add to Cart</button>
+                          <button onclick="cartadd({{$data->id}},{{$variation?$variation->id:0}})"  type="button"  id="cart_button" style="cursor:pointer;" value="{{$data->id}}" class="button btn-cart"title="Add to Cart">Add to Cart</button>
                           @if(collect($data->stocks)->sum('quantity')<=0)
                           <button  class="button btn-buy" title="Add to Cart" type="button">Sold Out</button>
                           @endif
@@ -154,8 +157,8 @@
                           <p class="availability in-stock"><span>Sold out</span></p>
                           @endif
                           <p class="special-price"> <span class="price-label">Special Price</span> <span
-                              id="product-price-48" class="price"> AED {{$data->is_variation?$variation->discounted_variation_price:$data->discounted_price}} </span> </p>
-                              <input type="hidden" value="{{$data->discounted_price}}" name="price" id="pro_price">
+                              id="product-price-48" class="price"> AED {{$price}} </span> </p>
+                              <input type="hidden" value="{{$price}}" name="price" id="pro_price">
 
                           <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> AED
                             {{$data->is_variation?$variation->price:$data->product_price}} </span> </p>
@@ -174,7 +177,7 @@
                           @endphp
                         <div class="points">
                           @foreach ($attribute_item->items as $item)
-                          <button type="button" onclick="addVariation({{$attribute_item->attribute_id}},'{{$item->variation_value}}',$(this))" class="btn btn-info {{$selected_item->variation_value==$item->variation_value?'active':''}}">{{$item->variation_value}}</button>
+                          <button type="button" data-attribute="{{$attribute_item->attribute_name}}" onclick="addVariation({{$attribute_item->attribute_id}},'{{$item->variation_value}}',$(this))" class="btn btn-info attribute-button {{$selected_item->variation_value==$item->variation_value?'active':''}}">{{$item->variation_value}}</button>
                           @endforeach
                         </div>
                       </div>
@@ -465,10 +468,26 @@
 
 
     
-    function cartadd(id){
+    function cartadd(id,variation_id){
  
-     //alert('jhghjsgv');
-
+     @php
+     
+       $tax=$data->tax;
+       if($data->tax_type=='percentage')
+       {
+        $tax=round($price*$tax/100,2);
+       }
+     @endphp
+     var variation=[];
+     var attribute=[];
+    $('.attribute-button').each(function(){
+      if($(this).hasClass('active'))
+      {
+         variation.push($(this).html());
+         attribute.push($(this).data('attribute'));
+      }
+      
+    })
      var setting={
     url:'{{url("/add-to-cart")}}',
      dataType:'json',
@@ -479,11 +498,14 @@
      data: { 
          product_id: id,
          product_name: $("#pro_name").val(),
-         qty: $("#pro_qty").val(),
+         qty: 1,
          price: $("#pro_price").val(),
-         shipping_cost: 0,
-         tax: 0,
-         image: $("#pro_img").val()
+         shipping_cost: '{{$data->shipping_cost}}',
+         tax: {{$tax}},
+         image: $("#pro_img").val(),
+         attribute: attribute,
+         variation: variation,
+         variationId: {{$variation?$variation->id:''}}
      },
    
      success:function(response){
