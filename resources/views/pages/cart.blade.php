@@ -21,7 +21,11 @@
               </div>
               <div class="row">
               <div class="col-sm-8 col-lg-8">
-                @php $total=0; $shipping=0; @endphp
+                @php 
+                $total=0; 
+                $shipping=0;
+                $total_discount=0;
+                 @endphp
 
                 @if($data)
                 @foreach($data as $item)
@@ -31,25 +35,33 @@
                   </div>
                   <div class="pous1">
                     {{-- <h3>Brand</h3> --}}
-                    <h4>{{$item['product_name']}}</h4>  
-                    <small>Order in 7 hrs 13 mins</small>  
-                    <small><b>Free delivery by Tomorrow, Dec 28</b></small>  
+                    <h4>{{$item['product_name']}}</h4> 
+
+                    <small>Ordered {{\Carbon\Carbon::parse($item['created_at'])->diffForHumans(\Carbon\Carbon::now())}}</small>  
+                    <small><b>@if(!($item['shipping_cost']>0)) Free @endif delivery by {{\Carbon\Carbon::now()->addDays($item['est_shipping_days'])->format('l, F jS, Y')}}</b></small>  
                     <h5>Sold by <b>Gift City</b></h5>  
                     @if(Session::has('user_id'))
                     <a href="{{url('delete-cart')}}/{{$item['id']}}">
                     <span><i class="fa fa-trash"></i> Remove</span>  </a>
+                        @if($item['coupon_name'])
+                        <br/>     
+                        COUPON : {{$item['coupon_name']}} <button class="btn btn-danger btn-sm btn-rounded" onclick="removeCoupon({{$item['id']}})"><i class="fa fa-trash"></i></button>
+                        @endif
                     @else
                     <a href="{{url('delete-cart')}}/{{$item['product_id']}}">
                     <span><i class="fa fa-trash"></i> Remove</span>  </a>
-                    @endif     
+                    @endif
                   </div>
                   <div class="pous2">
                     <p>AED {{$item['price'] * $item['qty']}}</p>
-                   @php $total+=$item['price'] * $item['qty']; @endphp
+                   @php $total+=$item['price'] * $item['qty'];
+                        $total_discount+=$item['discount_amount'];
+                        $shipping+=$item['shipping_cost'];
+                    @endphp
                     <div class="count-number">
                       <form id="myform" method="POST" class="quantity" action="#">
                         <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                        <input type='text' name='quantity' value='{{$item['qty']}}' class='qty' />
+                        <input type='text' name='quantity' data-cart_id="{{Session::has('user_id')?$item['id']:$item['product_id']}}" value='{{$item['qty']}}' class='qty' />
                         <input type='button' value='+' class='qtyplus plus' field='quantity' />
                       </form>
                     </div>
@@ -65,31 +77,35 @@
               <div class="col-sm-4 col-lg-4">
                 <div class="hcbyIU">
                   <h1>Order Summary</h1>
+                  @if(Session::has('user_id'))
                   <div class="coupon thm-coupon-cart">                
                   <input type="text" name="coupon_code" class="form-control unicase-form-control input-text" id="coupon_code" value="" placeholder="Coupon code"> 
-                  <button type="submit" class="btn btn-upper btn-primary" name="apply_coupon" value="Apply coupon">Apply</button>
+                  <button type="submit" class="btn btn-upper btn-primary" name="apply_coupon" value="Apply coupon" onclick="applyCoupon()">Apply</button>
                   </div>
+                  @endif
                   <div class="po1s">
                     <div class="d-flex justify-content-between">
                       <div class="cilop">
-                        <h5>sub total</h5>
-                        <h5>delivery charges</h5>
+                        <h5>Total</h5>
+                        <h5>Discount</h5>
+                        <h5>Delivery charges</h5>
                       </div>
                       <div class="cilop1">
                         <h5>AED {{$total}}</h5>
-                        <h5>+AED 0</h5>
+                        <h5>-AED {{$total_discount}}</h5>
+                        <h5>+AED {{$shipping}}</h5>
                       </div>
                   </div><hr>
                   <div class="d-flex justify-content-between">
                       <div class="cilop">
-                        <h5>your total savings</h5>
+                        <h5>Net Amount</h5>
                       </div>
                       <div class="cilop1">
-                        <h5>AED {{$total}}</h5>
+                        <h5>AED {{$total-$total_discount+$shipping}}</h5>
                       </div>
                   </div>
                   <div class="ctllRv">
-                    <button>Checkout</button>
+                    <button onclick="window.location='{{url("checkout")}}'">Checkout</button>
                   </div>
                   </div>
                 </div>
@@ -98,7 +114,7 @@
               <div class="bestsell-pro mt-0 mb-60">
       <div>
 
-        <section class="banner-row irf">
+       {{-- <section class="banner-row irf">
           <div class="container">
             <div class="row">
               <div class="col-12 col-lg-12 col-md-12">
@@ -113,8 +129,8 @@
               
             </div>
           </div>
-      </section>
-        <div class="slider-items-products">
+      </section>--}}
+    {{--<div class="slider-items-products">
           <div class="bestsell-block">
             <div class="block-title">
               <h2>You May also intrested</h2>
@@ -358,7 +374,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div>--}}
       </div>
     </div>
             </div>
@@ -377,5 +393,131 @@
             jQuery('.mega-menu-category').slideUp();
         }
            });
+           function updateCart(qty,cartid)
+           {
+                   var setting={
+                        url:'{{url("/update-cart")}}',
+                          dataType:'json',
+                          type:'post',
+                          headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                          data: {
+                              qty: qty,
+                              cart_id: cartid
+                          },
+                          success:function(response){
+                          if(response.status==1){
+                              Toastify({
+                                        text: "Cart Item Updated",
+                                        className: "info",
+                                        close: true,
+                                        style: {
+                                            background: "#1CAD6A",
+                                        }
+                                        }).showToast();
+                                        location.reload();
+                          }
+                          },
+                          error: function(xhr) {
+                      console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                      // do something here because of error
+                    }
+            };
+                 $.ajax(setting);
+           }
+           function applyCoupon()
+           {
+            $.ajax({
+              url:'{{config('global.api')}}/checkout',
+              type:'post',
+              beforeSend: function (xhr) {
+                  xhr.setRequestHeader('Authorization', 'Bearer {{session()->get('token')}}');
+              },
+              data:{user_id:{{session()->get('user_id')}},coupon_name:$('#coupon_code').val()},
+              dataType:'json',
+              success:function(response){
+                 if(response.status==1)
+                 {
+                    Toastify({
+                              text: response.message,
+                              className: "info",
+                              close: true,
+                              style: {
+                                  background: "#1CAD6A",
+                              }
+                              }).showToast();
+                        location.reload();
+                 }else{
+                   Toastify({
+                              text: response.message,
+                              className: "info",
+                              close: true,
+                              style: {
+                                  background: "red",
+                              }
+                              }).showToast();
+                 }
+              }
+            })
+           }
+    </script>
+    
+    <script>
+        jQuery(document).ready(($) => {
+                $('.quantity').on('click', '.plus', function(e) {
+                    let $input = $(this).prev('input.qty');
+                    let val = parseInt($input.val());
+                    $input.val( val+1 ).change();
+                    updateCart(val+1,$input.data('cart_id'));
+                });
+        
+                $('.quantity').on('click', '.minus', 
+                    function(e) {
+                    let $input = $(this).next('input.qty');
+                    var val = parseInt($input.val());
+                    if (val > 1) {
+                        $input.val( val-1 ).change();
+                          updateCart(val-1,$input.data('cart_id'));
+                    } 
+                });
+            });
+    </script>
+    <script>
+      function removeCoupon(cart_id)
+      {
+        $.ajax({
+              url:'{{config('global.api')}}/remove_coupon',
+              type:'post',
+              beforeSend: function (xhr) {
+                  xhr.setRequestHeader('Authorization', 'Bearer {{session()->get('token')}}');
+              },
+              data:{cart_id},
+              dataType:'json',
+              success:function(response){
+                 if(response.status==1)
+                 {
+                    Toastify({
+                              text: response.message,
+                              className: "info",
+                              close: true,
+                              style: {
+                                  background: "#1CAD6A",
+                              }
+                              }).showToast();
+                        location.reload();
+                 }else{
+                   Toastify({
+                              text: response.message,
+                              className: "info",
+                              close: true,
+                              style: {
+                                  background: "red",
+                              }
+                              }).showToast();
+                 }
+              }
+            })
+      }
     </script>
  @endsection
