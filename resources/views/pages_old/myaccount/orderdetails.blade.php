@@ -88,7 +88,7 @@
                                 @endif
                               <button type="button" class="btn btn-success" style="padding: 10px;"><a href="{{url('order-tracking/'.encrypt($value['id']))}}">Track Your Order</a></button> <br>  
                            </div>
-                            </div>
+                    </div>
                     </div>
                 </div>
                 </div> 

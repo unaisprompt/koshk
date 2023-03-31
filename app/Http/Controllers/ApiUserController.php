@@ -162,6 +162,7 @@ public function loginPop(Request $request){
             session()->put('user_id', $response['data']['id']);
             session()->put('token', $response['data']['access_token']);
             session()->put('name', $response['data']['name']);
+            session()->put('profile', $response['data']['profile_pic']);
             $carts = session()->get('cart');
            // return $carts;
             $url = $this->url."/addtocart";
@@ -212,6 +213,7 @@ public function loginPop(Request $request){
        session()->forget('user_id');
        session()->forget('token');
         session()->forget('name');
+        session()->forget('profile_pic');
         return redirect('/');
     }
     
@@ -260,6 +262,7 @@ public function loginPop(Request $request){
             session()->put('user_id', $response['data']['id']);
             session()->put('token', $response['data']['access_token']);
             session()->put('name', $response['data']['name']);
+            session()->put('profile', $response['data']['profile_pic']);
          return response()->json(["status"=>1,
                             "message"=>$response['message']]);
        }
@@ -272,7 +275,7 @@ public function loginPop(Request $request){
     public function profile(){
 
     }
-    public function getAddressEdit(Request $request,$id)
+    public function getAddressEdit(Request $request)
     {
         $user_id= session()->get('user_id');
         $token= session()->get('token');
@@ -285,16 +288,20 @@ public function loginPop(Request $request){
             'Authorization' => $token
     ])->post($url,  [
     'user_id'=>$user_id,
-    'address_id'=>decrypt($id)
+    'address_id'=>$request->id
         ]);
         $data = $response->json();
-    if($response['status']==1){
+  if($response['status']==1){
+        return response()->json(['status' => 1,
+                "message"=>$response['message'],
+              "data"=>$response['data']]);
 
-       return view('pages.myaccount.addressedit',compact('data'));
-    }
-    else{
-        return back()->with('error', $response['message']);
-    }
+     }
+     else{
+        return response()->json(['status' => 0,
+                "message"=>$response['message']]);
+
+     }
         
     }
     public function updateAddress(Request $request)
@@ -314,19 +321,22 @@ public function loginPop(Request $request){
         'first_name'=>$request->first_name,
         'last_name'=>$request->last_name,
         'street_address'=>$request->street_address,
-        'pincode'=>0,
+        'pincode'=>1,
         'city'=>$request->city,
         'mobile'=>$request->mobile,
         'email'=>$request->email,
         'landmark'=>$request->landmark,
         ]);
         $data = $response->json();
-    if($response['status']==1){
-         return back();
-    }
-    else{
-        return back()->with('error', $response['message']);
-    } 
+      if($response['status']==1){
+        return response()->json(['status' => 1,
+                "message"=>$response['message']]);
+     }
+     else{
+        return response()->json(['status' => 0,
+                "message"=>$response['message']]);
+
+     }
     }
     public function getAddress()
     {
@@ -360,12 +370,16 @@ public function loginPop(Request $request){
             'landmark'=>$request->landmark,
         ]);
         $data = $response->json();
-    if($response['status']==1){
-         return redirect('address-list');
-    }
-    else{
-        return back()->with('error', $response['message']);
-    }
+   if($response['status']==1){
+        return response()->json(['status' => 1,
+                "message"=>$response['message']]);
+
+     }
+     else{
+        return response()->json(['status' => 0,
+                "message"=>$response['message']]);
+
+     }
     }
   public function addressList(){
         $user_id= session()->get('user_id');
@@ -527,12 +541,16 @@ public function loginPop(Request $request){
         'new_password'=>$request->new_password,
         'conform_password'=>$request->conform_password,
         ]);
-     if($response['status']==1){
-        return redirect('my-aacount');
-       }
-       else{
-           return back()->with('error', $response['message']);
-       }
+      if($response['status']==1){
+        return response()->json(['status' => 1,
+                "message"=>$response['message']]);
+
+     }
+     else{
+        return response()->json(['status' => 0,
+                "message"=>$response['message']]);
+
+     }
     }
 public function editProfile(){
         $user_id= session()->get('user_id');
@@ -649,7 +667,7 @@ public function getOrderDetails(Request $request,$orderId)
        'order_number'=>$orderDetailId ,
  
         ]);
-        // return $response;
+        //  return $response;
     $data = $response->json();
 
        if($response['status']==1){
