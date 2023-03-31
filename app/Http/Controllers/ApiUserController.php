@@ -372,7 +372,8 @@ public function loginPop(Request $request){
         $data = $response->json();
    if($response['status']==1){
         return response()->json(['status' => 1,
-                "message"=>$response['message']]);
+                "message"=>$response['message'],
+                    "data"=>$data]);
 
      }
      else{

@@ -100,11 +100,12 @@ class ApiOrderController extends Controller
     $response = Http::withHeaders([
             'Authorization' => $token
     ])->post($url,  [
-    'email'=>$request->email_shipping,
     'user_id'=>$user_id,
     'mobile'=>$request->mobile_shipping,
     'full_name'=>$request->first_name_shipping.' '.$request->last_name_shipping ,
     'street_address'=>$request->shipping_address,
+    'billing_address_id'=>$request->billing_address,
+    'shipping_address_id'=>$request->shipping_address,
     'payment_type'=>$request->payment_type,
         ]);
         $data = $response->json();
