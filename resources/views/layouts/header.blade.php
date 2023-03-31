@@ -5,6 +5,16 @@
                                 return $value->id == request()->category_id;
                             });
  @endphp
+ <style>
+  .cust{
+        text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+}
+.clsicon{
+  float: right;
+}
+  </style>
     <header>
       <div class="top-nav">
         <div class="container">
@@ -160,11 +170,11 @@
             <div class="mm-toggle-wrap" open-val="0">
               <div class="mm-toggle"><i class="fa fa-bars"></i><span class="mm-label">Menu</span> </div>
             </div>
-              @if(!empty(session()->all()['token']))
+              {{-- @if(!empty(session()->all()['token']))
                  @if(session()->all()['token'])
              <a href="{{url('logout')}}" class="dropdown-item"><i class="ft-power mr-2"></i><span>logout</span></a>
            @endif
-           @endif
+           @endif --}}
              <div class="yujhs">
               <div class="dropdown block-language-wrapper"> <a href="#"> <img src="{{asset('assets/images/arabia.png')}}" alt="language">
                   UAE </a>
@@ -183,10 +193,11 @@
                   <div class="top-cart-content">
                     <!--block-subtitle-->
                     <ul class="mini-products-list" id="cart-sidebar">
-                      <li class="item first">
-                        {{session()->all()['name']}}
+                      <li class="item first cust">
+                        {{session()->all()['name']}}<i class="fa fa-user clsicon"></i>
                       </li>
-                       <a href="{{url('logout')}}" class="dropdown-item"><i class="ft-power mr-2"></i><span>logout</span></a>
+                      <li class="item first cust"><a href="{{url('my-account')}}" class="dropdown-item"><i class="ft-power mr-2"></i><span>My Account</span></a><i class="fa fa-home clsicon"></i></li>
+                      <li class="item first cust"> <a href="{{url('logout')}}" class="dropdown-item"><i class="ft-power mr-2"></i><span>Logout</span></a><i class="fa fa-sign-out clsicon"></i></li>
                     </ul>
                   </div>
                 </div>
