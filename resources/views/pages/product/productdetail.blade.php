@@ -505,7 +505,7 @@
          image: $("#pro_img").val(),
          attribute: attribute,
          variation: variation,
-         variationId: {{$variation?$variation->id:''}}
+         variationId: '{{$variation?$variation->id:''}}'
      },
    
      success:function(response){

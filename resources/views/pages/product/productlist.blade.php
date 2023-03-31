@@ -149,7 +149,7 @@
                       <p class="special-price"> <span class="price-label"></span> <span class="price"> AED {{$product->discounted_price}} </span> </p>
                     </div>
                     <div class="actions">
-                      <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
+                      <button class="button btn-cart ajx-cart" title="Add to Cart" type="button" data-details="{{json_encode($product)}}" onClick="addCart($(this).data('details'))"><span>Add to Cart</span></button>
                       <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist @if($product->is_wishlist) active @endif" href="#" onclick="event.preventDefault();addWishlist({{$product->id}},$(this))"></a>
                       <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
                      </span> </div>
@@ -373,7 +373,7 @@
                             <div class="price-box"> <span class="regular-price"> <span class="price">AED {{$item->discounted_price}}</span> </span> </div>
                           </div>
                           <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
+                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart" data-details="{{json_encode($item)}}" onclick="addCart($(this).data('details'))"><i class="fa fa-shopping-basket"></i></button>
                           </div>
                         </div>
                       </div>
@@ -515,6 +515,62 @@
        @else
        $('#myModalsignin').modal('show');
        @endif
+    }
+  </script>
+  <script>
+    function addCart(product)
+    {
+      if(product.is_variation==1)
+      {
+        window.location='{{url("product-detail")}}?id='+product.id;
+        return;
+      }
+      var tax=0;
+      if(product.tax_type=="amount")
+      {
+        tax=product.tax;
+      }else{
+        tax=product.discounted_price*product.tax/100;
+      }
+           var setting={
+                        url:'{{url("/add-to-cart")}}',
+                        dataType:'json',
+                        type:'post',
+                        headers: {
+                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                          },
+                        data: { 
+                            product_id: product.id,
+                            product_name: product.product_name,
+                            qty: 1,
+                            price: product.discounted_price,
+                            shipping_cost: product.shipping_cost,
+                            tax: tax,
+                            image: product.productimage.image_url
+                        },
+                      
+                        success:function(response){
+                          // console.log(response);
+
+                          if(response.status==1){
+                            Toastify({
+                        text: "Cart Item Added",
+                        className: "info",
+                        close: true,
+                        style: {
+                            background: "#1cad6a",
+                        }
+                        }).showToast();
+                          }
+                        
+                        },
+                          error: function(xhr) {
+                          
+                      console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                    }
+                    };
+            $.ajax(setting);
     }
   </script>
 @endsection
