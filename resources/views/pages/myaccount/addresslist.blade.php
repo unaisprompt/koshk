@@ -407,5 +407,5 @@ location.reload();
      });
      };
      </script>
-        </script>
+       
 @endsection
