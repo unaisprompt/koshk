@@ -13,14 +13,18 @@
    <div class="breadcrumbs">
             <ul>
               <li class="home"> <a href="{{url('')}}" title="Go to Home Page">Home</a> <span>/</span> </li>
-              @if($data->category)
-              <li> <a href="{{url('products?category_id='.$data->category->id)}}" title="">{{$data->category->category_name}}</a><input type="hidden" id="category_id" value="{{$data->category->id}}"> @if($data->subcategory)<span>/ </span>@endif </li>
-                @if($data->subcategory)
-                  <li> <a href="{{url('products?category_id='.$data->category->id.'&subcategory_id='.$data->subcategory->id)}}" title="">{{$data->subcategory->subcategory_name}}</a><input type="hidden" id="subcategory_id" value="{{$data->subcategory->id}}"> @if($data->inner_subcategory)<span>/</span>@endif </li>
-                  @if($data->inner_subcategory)
-                   <li> <strong>{{$data->inner_subcategory->innersubcategory_name}}</strong><input type="hidden" id="inner_subcategory_id" value="{{$data->inner_subcategory->id}}"> </li>
+              @if(request()->explore_more)
+              <li> <strong>Explore Offers</strong><input type="hidden" id="explore_more" value="{{request()->explore_more}}"> </li>
+              @else
+                  @if($data->category)
+                  <li> <a href="{{url('products?category_id='.$data->category->id)}}" title="">{{$data->category->category_name}}</a><input type="hidden" id="category_id" value="{{$data->category->id}}"> @if($data->subcategory)<span>/ </span>@endif </li>
+                    @if($data->subcategory)
+                      <li> <a href="{{url('products?category_id='.$data->category->id.'&subcategory_id='.$data->subcategory->id)}}" title="">{{$data->subcategory->subcategory_name}}</a><input type="hidden" id="subcategory_id" value="{{$data->subcategory->id}}"> @if($data->inner_subcategory)<span>/</span>@endif </li>
+                      @if($data->inner_subcategory)
+                      <li> <strong>{{$data->inner_subcategory->innersubcategory_name}}</strong><input type="hidden" id="inner_subcategory_id" value="{{$data->inner_subcategory->id}}"> </li>
+                      @endif
+                    @endif
                   @endif
-                @endif
               @endif
             </ul>
           </div>
@@ -52,7 +56,11 @@
                         </div>
                       </div>
           <div class="page-title">
-                        <h2> @if($data->inner_subcategory)
+                        <h2>
+                          @if(request()->explore_more)
+                           Explore offers
+                          @else
+                           @if($data->inner_subcategory)
                             {{$data->inner_subcategory->innersubcategory_name}}
                             @elseif($data->subcategory)
                             {{$data->subcategory->subcategory_name}}
@@ -60,7 +68,9 @@
                             {{$data->category->category_name}}
                             @else
                             All Category
-                            @endif </h2>
+                            @endif 
+                          @endif
+                          </h2>
                         <p class="font-size-14 text-gray-90 mb-0" id="result_count">Showing {{count($data->products)}}
                           of {{$data->total_count}} results {{request()->search?"for '".request()->search."'":''}}</p>
                       </div>
@@ -411,6 +421,7 @@
         {
           formData.append('type',$('#sort-type').val());
         }
+        formData.append('explore_more',$('#explore_more').val());
         formData.append('lower',$('#lower').val());
         formData.append('upper',$('#upper').val());
            formData.append('page',loadCount);

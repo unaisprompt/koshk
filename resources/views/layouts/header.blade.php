@@ -470,6 +470,7 @@
                  <a href="{{url('products?category_id='.$category->id)}}">{{$category->category_name}}</a>
                  @if($loop->iteration>=5) @break @endif
                 @endforeach
+               <span> <button class="offer-btn" type="button" onclick="window.location='{{url('products?explore_more=1')}}'">Explore Offers</button> </span>
             </div>
           </div>
         </div>

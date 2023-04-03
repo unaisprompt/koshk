@@ -19,6 +19,7 @@ class ApiProductController extends Controller
         $subcategory_id=$request->subcategory_id ?? '';
         $innersubcategory_id=$request->innersubcategory_id ?? '';
         $search=$request->search ?? '';
+        $explore_more=$request->explore_more ?? '';
         if($category_id!=''){
           session()->put('category_id',$category_id);
         }
@@ -32,7 +33,8 @@ class ApiProductController extends Controller
         'category_id' =>$category_id,
         'subcategory_id' =>$subcategory_id,
         'innersubcategory_id'=>$innersubcategory_id,
-        'search'=>$search
+        'search'=>$search,
+        'explore_more'=>$explore_more
         ]);
 
          if($response->successful())
