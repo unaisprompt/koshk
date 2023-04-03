@@ -7,7 +7,7 @@
     <!-- Breadcrumbs -->
     <div class="breadcrumbs">
             <ul>
-              <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
+              <li class="home"> <a href="{{url('')}}" title="Go to Home Page">Home</a> <span>/</span> </li>
               <li> <a href="grid.html" title="">Computers</a> <span>/ </span> </li>
               <li> <a href="grid.html" title="">Components</a> <span>/</span> </li>
               <li> <strong>Motherboard</strong> </li>

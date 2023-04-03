@@ -6,7 +6,7 @@
      <!-- Breadcrumbs -->
     <div class="breadcrumbs">
             <ul>
-              <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
+              <li class="home"> <a href="{{url('')}}" title="Go to Home Page">Home</a> <span>/</span> </li>
               <li> <strong>{{$search}}</strong> </li>
             </ul>
           </div>

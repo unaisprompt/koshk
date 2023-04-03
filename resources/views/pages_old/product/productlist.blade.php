@@ -4,17 +4,17 @@
  @section('content')  
 
  <!-- Start Page Title Area -->
- {{-- <div class="page-title-area">
+ <div class="page-title-area">
     <div class="container">
         <div class="page-title-content">
             <h1>Products</h1>
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{url('')}}">Home</a></li>
                 <li>Products</li>
             </ul>
         </div>
     </div>
-</div> --}}
+</div>
 <!-- End Page Title Area -->
 
 <div class="categories-area pb-0 mb-5 mt-5" style=" background-color: #100f0f0f;">
