@@ -41,9 +41,21 @@ class ApiCartController extends Controller
             $data = $carts;
           //  return $data;
         }
-
-    
-        return view('pages.cart',compact('data'));
+           $product_ids=[];
+           foreach($data as $row)
+           {
+              $product_ids[]=$row['product_id'];
+           }
+            $response = Http::post($this->url."/product/similar-products", [
+                'product_ids' => $product_ids,
+                'user_id'=>session()->get('user_id')
+            ]);
+            $similar_products=[];
+            if($response->successful())
+            {
+             $similar_products=$response->object()->data;
+            }
+        return view('pages.cart',compact('data','similar_products'));
     }
 
     public function addToCart(Request $request){

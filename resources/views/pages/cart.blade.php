@@ -37,8 +37,8 @@
                     {{-- <h3>Brand</h3> --}}
                     <h4>{{$item['product_name']}}</h4> 
 
-                    <small>Ordered {{\Carbon\Carbon::parse($item['created_at'])->diffForHumans(\Carbon\Carbon::now())}}</small>  
-                    <small><b>@if(!($item['shipping_cost']>0)) Free @endif delivery by {{\Carbon\Carbon::now()->addDays($item['est_shipping_days'])->format('l, F jS, Y')}}</b></small>  
+                    @if(isset($item['created_at']))<small>Ordered {{\Carbon\Carbon::parse($item['created_at'])->diffForHumans(\Carbon\Carbon::now())}}</small>@endif 
+                    @if(isset($item['est_shipping_days']))<small><b>@if(!($item['shipping_cost']>0)) Free @endif delivery by {{\Carbon\Carbon::now()->addDays($item['est_shipping_days'])->format('l, F jS, Y')}}</b></small>@endif  
                     <h5>Sold by <b>Gift City</b></h5>  
                     @if(Session::has('user_id'))
                     <a href="{{url('delete-cart')}}/{{$item['id']}}">
@@ -55,7 +55,7 @@
                   <div class="pous2">
                     <p>AED {{$item['price'] * $item['qty']}}</p>
                    @php $total+=$item['price'] * $item['qty'];
-                        $total_discount+=$item['discount_amount'];
+                        $total_discount+=$item['discount_amount']??0;
                         $shipping+=$item['shipping_cost'];
                     @endphp
                     <div class="count-number">
@@ -105,7 +105,7 @@
                       </div>
                   </div>
                   <div class="ctllRv">
-                    <button onclick="window.location='{{url("checkout")}}'">Checkout</button>
+                    <button @if(session()->get('user_id')) onclick="window.location='{{url("checkout")}}'" @else  onclick="$('#myModalsignin').modal('show');"  @endif>Checkout</button>
                   </div>
                   </div>
                 </div>
@@ -130,73 +130,42 @@
             </div>
           </div>
       </section>--}}
-    {{--<div class="slider-items-products">
+    <div class="slider-items-products">
           <div class="bestsell-block">
             <div class="block-title">
               <h2>You May also intrested</h2>
             </div>
             <div id="bestsell-slider" class="product-flexslider hidden-buttons">
               <div class="slider-items slider-width-col4 products-grid block-content">
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="" src="{{asset('assets\products-images\product12.jpg')}}"> </a>
-                        <div class="new-label new-top-left">new</div>
-                        <div class="box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="quick_view.html"></a> </li>
-                            <li><a class="link-wishlist" href="wishlist.html"></a> </li>
-                            <li><a class="link-compare" href="compare.html"></a> </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html">Anti Glare Side Narrow Border Display Laptop</a> </div>
-                        <div class="brand">Tonrex</div>
-                        <div class="star-rating">
-                               <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                               </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$88.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                @foreach ($similar_products as $product)
                 <!-- Item -->
                 <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="" src="{{asset('assets\products-images\product11.jpg')}}"> </a>
+                      <div class="item-img-info"> <a class="product-image" title="{{$product->product_name}}" href="{{url('product-detail')}}?id={{$product->id}}"> 
+                        <img alt="" src="{{$product->productimage->image_url}}"> </a>
                         <div class="box-hover">
                           <ul class="add-to-links">
-                            <li><a class="link-quickview" href="quick_view.html"></a> </li>
-                            <li><a class="link-wishlist" href="wishlist.html"></a> </li>
-                            <li><a class="link-compare" href="compare.html"></a> </li>
+                            <li><a class="link-quickview" href="{{url('product-detail')}}?id={{$product->id}}"></a> </li>
+                            <li><a class="link-wishlist @if($product->is_wishlist) active @endif" href="#" onclick="event.preventDefault();addWishlist({{$product->id}},$(this))"></a> </li>
+                            <!-- <li><a class="link-compare" href="compare.html"></a> </li> -->
                           </ul>
                         </div>
                       </div>
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html"> Stovekraft Induction Stove with Feather touch </a> </div>
-                        <div class="brand">Unicorn</div>
+                        <div class="item-title"> <a title="{{$product->product_name}}" href="{{url('product-detail')}}?id={{$product->id}}"> {{$product->product_name}} </a> </div>
+                        <div class="brand">{{$product->brand->brand_name}}</div>
                         <div class="item-content">
                           <div class="star-rating">
-                               <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
+                               <span style="width:{{(count($product->rattings)>0)?$product->rattings[0]->avg_ratting*2*10:'0'}}%">Rated <strong class="rating">{{count($product->rattings)>0?$product->rattings[0]->avg_ratting:0}}</strong> out of 5</span>
                                </div>
                           <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$325.00</span> </span> </div>
+                            <div class="price-box"> <span class="regular-price"> <span class="price">AED {{$product->discounted_price}}</span> </span> </div>
                           </div>
                           <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
+                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart" data-details="{{json_encode($product)}}" onclick="addCart($(this).data('details'))"><i class="fa fa-shopping-basket"></i></button>
                           </div>
                         </div>
                       </div>
@@ -204,177 +173,12 @@
                   </div>
                 </div>
                 <!-- End Item --> 
-                <!-- Item -->
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="" src="{{asset('assets\products-images\product10.jpg')}}"> </a>
-                        <div class="box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="quick_view.html"></a> </li>
-                            <li><a class="link-wishlist" href="wishlist.html"></a> </li>
-                            <li><a class="link-compare" href="compare.html"></a> </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html"> Home Security Camera with Alarm System </a> </div>
-                        <div class="brand">Harrier</div>
-                        <div class="item-content">
-                          <div class="star-rating">
-                               <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                               </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$245.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Item -->
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="" src="{{asset('assets\products-images\product6.jpg')}}"> </a>
-                        <div class="new-label new-top-left">new</div>
-                        <div class="box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="quick_view.html"></a> </li>
-                            <li><a class="link-wishlist" href="wishlist.html"></a> </li>
-                            <li><a class="link-compare" href="compare.html"></a> </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html"> Fitness Smartwatch with Heart Rate Monitor </a> </div>
-                        <div class="brand">Cruiser</div>
-                        <div class="star-rating">
-                               <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                               </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$88.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Item -->
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="" src="{{asset('assets\products-images\product8.jpg')}}"> </a>
-                        <div class="box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="quick_view.html"></a> </li>
-                            <li><a class="link-wishlist" href="wishlist.html"></a> </li>
-                            <li><a class="link-compare" href="compare.html"></a> </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html">Mixer Grinder with 3 Stainless Steel Jar</a> </div>
-                        <div class="brand">Flipmart</div>
-                        <div class="star-rating">
-                               <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                               </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$88.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Item -->
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="" src="{{asset('assets\products-images\product7.jpg')}}"> </a>
-                        <div class="box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="quick_view.html"></a> </li>
-                            <li><a class="link-wishlist" href="wishlist.html"></a> </li>
-                            <li><a class="link-compare" href="compare.html"></a> </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html">5 Star Direct Cool Single Door Refrigerator</a> </div>
-                        <div class="brand">Nexus</div>
-                        <div class="star-rating">
-                               <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                               </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$88.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Item -->
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="" src="{{asset('assets\products-images\product9.jpg')}}"> </a>
-                        <div class="box-hover">
-                          <ul class="add-to-links">
-                            <li><a class="link-quickview" href="quick_view.html"></a> </li>
-                            <li><a class="link-wishlist" href="wishlist.html"></a> </li>
-                            <li><a class="link-compare" href="compare.html"></a> </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html">Direct Wireless Network Laser Printer</a> </div>
-                        <div class="brand">Dealsdot</div>
-                        <div class="star-rating">
-                               <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                               </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$88.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Item --> 
+                @endforeach
+
               </div>
             </div>
           </div>
-        </div>--}}
+        </div>
       </div>
     </div>
             </div>
@@ -386,7 +190,62 @@
     </div>
   </section>
   <!-- Main Container End -->
+ <script>
+    function addCart(product)
+    {
+      if(product.is_variation==1)
+      {
+        window.location='{{url("product-detail")}}?id='+product.id;
+        return;
+      }
+      var tax=0;
+      if(product.tax_type=="amount")
+      {
+        tax=product.tax;
+      }else{
+        tax=product.discounted_price*product.tax/100;
+      }
+           var setting={
+                        url:'{{url("/add-to-cart")}}',
+                        dataType:'json',
+                        type:'post',
+                        headers: {
+                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                          },
+                        data: { 
+                            product_id: product.id,
+                            product_name: product.product_name,
+                            qty: 1,
+                            price: product.discounted_price,
+                            shipping_cost: product.shipping_cost,
+                            tax: tax,
+                            image: product.productimage.image_url
+                        },
+                      
+                        success:function(response){
+                          // console.log(response);
 
+                          if(response.status==1){
+                            Toastify({
+                        text: "Cart Item Added",
+                        className: "info",
+                        close: true,
+                        style: {
+                            background: "#1cad6a",
+                        }
+                        }).showToast();
+                          }
+                        
+                        },
+                          error: function(xhr) {
+                          
+                      console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                    }
+                    };
+            $.ajax(setting);
+    }
+  </script>
 <script>
         $(document).ready(function () {
           if (jQuery('.mega-menu-category').is(':visible')) {
