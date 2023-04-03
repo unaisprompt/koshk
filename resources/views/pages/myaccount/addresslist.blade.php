@@ -35,6 +35,13 @@
                                                       <a onclick="Addressdelete($(this))" id="delete" class="remove" data-address_id="{{$item['id'] }}"><i class='fa fa-trash'></i></a> 
 
                         </div>
+                         <div style="padding: 3px; margin-left: 8px;">
+                            @if($item['primary']!= 1)
+                                                      <a onclick="SetPrimaryAddress($(this))" data-address_id="{{$item['id'] }}"><i class="fa fa-check-circle" aria-hidden="true" style="color:#000;"></i></a> 
+                              @else
+                              <i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>
+                              @endif
+                        </div>
 </div>
                         
                        
@@ -363,6 +370,48 @@
   $("#city_billing_edit").val($(this).data('city'))
 })
 
+function SetPrimaryAddress(ref) {
+    
+     var address_id = ref.data('address_id');  
+     console.log(address_id);
+     $.ajaxSetup({
+     headers: {
+         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     }
+ });
+     $.ajax({
+     type: "POST",
+     url: '{{ url("address-primary")}}',
+     data: {
+         address_id : address_id ,
+         // qty: qty,
+     },
+     cache: false,
+   success: function (response) {
+                    $(".preloader").hide();
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+location.reload();
+
+                        });
+                        document.getElementById("form").reset();
+                        $('#refresh').click();
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+                },
+         error: function (xhr) {
+             $(".preloader").hide();
+             console.log(xhr.responseText); // this line will save you tons of hours while debugging
+             // do something here because of error
+         }
+     });
+     };
 
 function Addressdelete(ref) {
     

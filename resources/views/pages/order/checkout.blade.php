@@ -112,9 +112,9 @@
                                                 <select name="shipping_address" id="shipping_address"  class="form-control">
                                                     {{-- <option value="">Select Address</option> --}}
                                                 @foreach($finalData['address']['data'] as $address_data) 
-                                                <option value="{{$address_data['id']}}" @if($loop->iteration == 1) selected @endif data-first_name={{$address_data['first_name']}} data-last_name={{$address_data['last_name']}}
+                                                <option value="{{$address_data['id']}}" @if($address_data['primary']==1) selected @endif data-first_name={{$address_data['first_name']}} data-last_name={{$address_data['last_name']}}
                                                     data-street_address={{$address_data['street_address']}} data-landmark={{$address_data['landmark']}}
-                                                    data-mobile={{$address_data['mobile']}} data-city={{$address_data['city']}} data-email={{$address_data['email']}}>{{$address_data['street_address']}}</option>
+                                                    data-mobile={{$address_data['mobile']}} data-city={{$address_data['city']}} data-email={{$address_data['email']}}>{{$address_data['first_name']}} {{$address_data['last_name']}} {{$address_data['street_address']}} {{$address_data['city']}}</option>
                                                 @endforeach   
                                                 </select>
                                                 @endif   
@@ -152,7 +152,7 @@
                                                      @if(!empty($finalData['address']['data']))
                                                     <select name="billing_address" id="billing_address"  class="form-control">
                                                  @foreach($finalData['address']['data'] as $address_data_shipping) 
-                                                <option value="{{$address_data_shipping['id']}}" @if($loop->iteration == 1) selected @endif data-first_name_shipping={{$address_data_shipping['first_name']}} data-last_name_shipping={{$address_data_shipping['last_name']}}
+                                                <option value="{{$address_data_shipping['id']}}"  @if($address_data_shipping['primary']==1) selected @endif data-first_name_shipping={{$address_data_shipping['first_name']}} data-last_name_shipping={{$address_data_shipping['last_name']}}
                                                     data-street_address_shipping={{$address_data_shipping['street_address']}} data-landmark_shipping={{$address_data_shipping['landmark']}}
                                                     data-mobile_shipping={{$address_data_shipping['mobile']}} data-city_shipping={{$address_data_shipping['city']}} data-email_shipping={{$address_data_shipping['email']}}>{{$address_data_shipping['first_name']}} {{$address_data_shipping['last_name']}} {{$address_data_shipping['street_address']}} {{$address_data_shipping['city']}}</option>
                                                 @endforeach   

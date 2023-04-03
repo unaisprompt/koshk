@@ -304,6 +304,32 @@ public function loginPop(Request $request){
      }
         
     }
+    public function setAsPrimaryAddress(Request $request)
+    {
+        $user_id= session()->get('user_id');
+        $token= session()->get('token');
+        if(!$user_id && !$token)
+        return ;
+        $url = $this->url."/setprimartaddress"; 
+    $token= 'Bearer '.session()->get('token');
+    $user_id= session()->get('user_id');
+    $response = Http::withHeaders([
+            'Authorization' => $token
+    ])->post($url,  [
+    'user_id'=>$user_id,
+    'address_id'=>$request->address_id
+        ]);
+        $data = $response->json();
+  if($response['status']==1){
+        return response()->json(['status' => 1,
+                "message"=>$response['message']]);
+     }
+     else{
+        return response()->json(['status' => 0,
+                "message"=>$response['message']]);
+     }
+        
+    }
     public function updateAddress(Request $request)
     {
        // return $request;

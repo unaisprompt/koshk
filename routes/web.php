@@ -58,6 +58,7 @@ Route::get('address',[ApiUserController::class,'getAddress']);
 Route::post('edit-address',[ApiUserController::class,'getAddressEdit'])->name('edit-address');
 Route::post('address-post',[ApiUserController::class,'addAddress']);
 Route::post('address-update',[ApiUserController::class,'updateAddress']);
+Route::post('address-primary',[ApiUserController::class,'setAsPrimaryAddress']);
 Route::post('address-delete',[ApiUserController::class,'deleteAddress']);
 Route::get('edit-profile',[ApiUserController::class,'editProfile']);
 Route::post('update-profile',[ApiUserController::class,'updateProfile']);
