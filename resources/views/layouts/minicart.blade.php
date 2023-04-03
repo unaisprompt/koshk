@@ -37,7 +37,7 @@
                     </ul>
                     <!--actions-->
                     <div class="actions">
-                      <button class="btn-checkout" title="Checkout" type="button"><span>Checkout</span> </button>
+                      <button class="btn-checkout" title="Checkout" type="button" @if(session()->get('user_id')) onclick="window.location='{{url("checkout")}}'" @else  onclick="$('#myModalsignin').modal('show');"  @endif><span>Checkout</span> </button>
                       <a href="{{url('cart')}}" class="view-cart"><span>View Cart</span></a>
                     </div>
         
