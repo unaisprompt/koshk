@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')   
-
+<style>
+  .product-view .product-essential .add-to-links li:first-child {
+    float: left !important;
+}
+</style>
     <div class="container-fluid">
       <div class="row">
         <!-- Slider -->
@@ -76,7 +80,7 @@
                           src="{{$product['productimage']['image_url']}}"> </a>
                       <div class="box-hover">
                         <ul class="add-to-links">
-                          <li><a class="link-quickview openModal"></a></li>
+                          <li><a class="link-quickview openModal" data-details="{{json_encode($product)}}" onClick="setProductDetails($(this).data('details'))"></a></li>
                           <li><a class="link-wishlist add-to-wishlist" data-cpidw="{{$product['id']}}"></li>
                          </ul>
                       </div>
@@ -185,9 +189,8 @@
                             href="{{url('product-detail')}}?id={{$featured_products['id']}}"> <img alt="" src="{{$featured_products['productimage']['image_url']}}"> </a>
                            <div class="box-hover">
                             <ul class="add-to-links">
-                              <li><a class="link-quickview" href="quick_view.html"></a> </li>
-                              <li><a class="link-wishlist add-to-wishlist" data-cpidw="{{$featured_products['id']}}"></a> </li>
-                              <li><a class="link-compare" href="compare.html"></a> </li>
+                              <li><a class="link-quickview openModal" href="#"  data-details="{{json_encode($featured_products)}}" onClick="setProductDetails($(this).data('details'))"></a> </li>
+                              <li><a class="link-wishlist add-to-wishlist"  data-id="{{$featured_products['id']}}"  onclick="event.preventDefault();addWishlist($(this))"></a> </li>
                             </ul>
                           </div>
                         </div>
@@ -820,6 +823,186 @@
         </div>
       </div>
     </div>
+    
+  <div id="myModal" class="modal">
+
+
+
+    <div class="modal-content modal-pad">
+      <div class="button-close" onclick="$('#myModal').modal('hide');">
+        <span class="close">&times;</span>
+      </div>
+
+
+      <div class="product-view">
+        <div class="product-essential">
+          <form action="#" method="post" id="product_addtocart_form">
+            <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
+            <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
+              <div class="new-label new-top-left"> New </div>
+              <div class="product-image">
+                <div class="product-full mag"> <img data-toggle="magnify" src=""
+                    alt="product-image"> </div>
+
+              </div>
+              <!-- end: more-images -->
+
+              <div class="add-to-box">
+                <div class="add-to-cart">
+                  <button onclick="addCart($(this).data('details'))" class="button btn-cart" title="Add to Cart"
+                    type="button" data-details="" id="modal-add-to-cart">Add to Cart</button>
+                  @if(session()->get('user_id')) <button data-details="" onclick="checkout($(this).data('details')); " class="button btn-buy" title="Add to Cart"
+                    type="button" id="modal-add-buy-now">Buy Now</button>@endif
+
+                </div>
+
+              </div>
+              <ul class="add-to-links">
+                <li><a class="link-compare" href="#" onclick="$('#myModal').modal('hide');"><span>Continue Shopping</span></a></li>
+                @if(session()->get('user_id'))<li> <a class="link-wishlist" data-id="" href="#" onclick="event.preventDefault();addWishlist($(this))"><span>Add to Wishlist</span></a></li>@endif
+              </ul>
+            </div>
+            <div class="product-shop col-lg- col-sm-7 col-xs-12">
+
+              <div class="brand"></div>
+              <div class="product-name">
+                <h1></h1>
+              </div>
+              <div class="rating">
+                <div class="star-rating">
+                  <span style="width:0%"></span>
+                </div>
+                <!-- <p class="rating-links"> <a href="#">453 ratings &amp; 61 reviews</a> <span class="separator">|</span>
+                  <a href="#">Add Review</a>
+                </p> -->
+              </div>
+              <div class="price-block">
+                <div class="price-box">
+                  <p class="availability in-stock"><span></span></p>
+                  <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-modal"
+                      class="price">  </span> </p>
+                  <p class="old-price"> <span class="price-label">Regular Price:</span> 
+                  <span class="price" id="product-old-price-modal"></span> </p>
+
+                </div>
+              </div>
+
+              <!-- <div class="list">
+                <div class="heading">Colors</div>
+                <div class="points">
+                  <span style="background-color:rgb(72, 118, 255)"></span>
+                  <span style="background-color:rgb(192, 192, 192)"></span>
+                  <span style="background-color:rgb(255, 195, 0)"></span>
+                </div>
+              </div> -->
+
+              <!-- <div class="list">
+                <div class="heading">Highlights</div>
+                <div class="points">
+                  <ul>
+                    <li>Intel Celeron Dual Core</li>
+                    <li>HDD Capacity 1 TB</li>
+                    <li>RAM 4 GB DDR4</li>
+                    <li>19.5 inch Display</li>
+                  </ul>
+                </div>
+              </div> -->
+
+              <div class="list">
+                <div class="heading">Description</div>
+                <div class="points" id="modal-description">
+                </div>
+              </div>
+
+              <!-- <div class="list">
+            <div class="heading">Seller</div>
+            <div class="points">
+            <h4>ThemesGround Retail</h4>
+            <ul>
+            <li>Free Wordwide Shipping</li>
+            <li>30 Days Return Policy</li>
+            <li>Member Discount</li>
+            </ul>
+            </div>
+            </div>
+             -->
+
+
+
+
+
+
+            </div>
+          </form>
+        </div>
+
+
+        <!-- similar products -->
+
+        <!-- End similar products -->
+
+      </div>
+    </div>
+  </div>
+  <script>
+    
+    function addWishlist(ref)
+    {
+       @if(session()->get('token'))
+        var token="{{session()->get('token')}}";
+        $.ajax({
+        url: '{{config('global.api')}}/addtowishlist',
+        type: 'POST',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer '+token);
+        },
+        data: {product_id:ref.data('id')},
+        success: function (response) {
+            if(response.status==1)
+            {
+                Toastify({
+                text: response.message,
+                className: "info",
+                close: true,
+                style: {
+                    background: "#1cad6a",
+                }
+                }).showToast();
+                ref.addClass('active');
+            }
+        },
+        error: function () { },
+        });
+       @else
+       $('#myModalsignin').modal('show');
+       @endif
+    }
+  </script>
+  <script>
+   function setProductDetails(data)
+   {
+    $('#myModal').modal('show');
+    console.log(data);
+     $('#myModal').find('img').attr('src',data.productimage.image_url);
+     $('#myModal').find('.brand').html(data.brand_name);
+     $('#myModal').find('.product-name').find('h1').html(data.product_name);
+     var ratting=0;
+     if(data.avg_ratting>0)
+     {
+       ratting=data.avg_ratting;
+     }
+    var totalStock= data.stocks.map((item)=>item.quantity).reduce((a, b) => a + b, 0);
+     $('#myModal').find('.star-rating').find('span').css('width',`${ratting*2*10}%`);
+     $('#myModal').find('.star-rating').find('span').html(`Rated <strong class="rating">${ratting}</strong> out of 5`);
+     $('#myModal').find('.in-stock').find('span').html(`${totalStock} in stock`);
+     $('#myModal').find('#product-price-modal').html(`AED ${data.discounted_price}`);
+     $('#myModal').find('#product-old-price-modal').html(`AED ${data.product_price}`);
+     $('#myModal').find('#modal-description').html(data.description);
+     $('#myModal').find('.link-wishlist').data('id',data.id);
+     $('#modal-add-to-cart').data('details',data);
+     $('#modal-add-buy-now').data('details',data);
+    }
+  </script>
   <script>
     jQuery(document).ready(function () {
       jQuery('#rev_slider_4').show().revolution({
@@ -960,35 +1143,35 @@
 
 
 
-    // Get the modal
-    var modal = document.getElementById("myModal");
+    // // Get the modal
+    // var modal = document.getElementById("myModal");
 
-    // Get the button that opens the modal
-    var btn = document.getElementsByClassName("openModal");
+    // // Get the button that opens the modal
+    // var btn = document.getElementsByClassName("openModal");
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
+    // // Get the <span> element that closes the modal
+    // var span = document.getElementsByClassName("close")[0];
 
-    // When the user clicks the button, open the modal
-    btn[0].onclick = function () {
-      modal.style.display = "block";
-    };
+    // // When the user clicks the button, open the modal
+    // btn[0].onclick = function () {
+    //   modal.style.display = "block";
+    // };
 
-    btn[1].onclick = function () {
-      modal.style.display = "block";
-    };
+    // btn[1].onclick = function () {
+    //   modal.style.display = "block";
+    // };
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-      modal.style.display = "none";
-    };
+    // // When the user clicks on <span> (x), close the modal
+    // span.onclick = function () {
+    //   modal.style.display = "none";
+    // };
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    };
+    // // When the user clicks anywhere outside of the modal, close it
+    // window.onclick = function (event) {
+    //   if (event.target == modal) {
+    //     modal.style.display = "none";
+    //   }
+    // };
 
 
 
@@ -1249,6 +1432,61 @@ $.ajax(setting);
                             background: "#1cad6a",
                         }
                         }).showToast();
+                          }
+                        
+                        },
+                          error: function(xhr) {
+                          
+                      console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                    }
+                    };
+            $.ajax(setting);
+    }
+       function checkout(product)
+    {
+      if(product.is_variation==1)
+      {
+        window.location='{{url("product-detail")}}?id='+product.id;
+        return;
+      }
+      var tax=0;
+      if(product.tax_type=="amount")
+      {
+        tax=product.tax;
+      }else{
+        tax=product.discounted_price*product.tax/100;
+      }
+           var setting={
+                        url:'{{url("/add-to-cart")}}',
+                        dataType:'json',
+                        type:'post',
+                        headers: {
+                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                          },
+                        data: { 
+                            product_id: product.id,
+                            product_name: product.product_name,
+                            qty: 1,
+                            price: product.discounted_price,
+                            shipping_cost: product.shipping_cost,
+                            tax: tax,
+                            image: product.productimage.image_url
+                        },
+                      
+                        success:function(response){
+                          // console.log(response);
+
+                          if(response.status==1){
+                            Toastify({
+                        text: "Cart Item Added",
+                        className: "info",
+                        close: true,
+                        style: {
+                            background: "#1cad6a",
+                        }
+                        }).showToast();
+                        window.location="{{url('checkout')}}";
                           }
                         
                         },
