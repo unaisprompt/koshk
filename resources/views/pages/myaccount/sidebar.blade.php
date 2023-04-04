@@ -1,3 +1,6 @@
+@php
+    $sidebanner=topOfferCommon('my_account_left_bottom');
+@endphp
 <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
 
                         <div class="block block-progress">
@@ -27,15 +30,16 @@
          
                             </div>
                         </div>
+                        @if(isset($sidebanner))
                         <div class="featured-add-box">
-                            <div class="featured-add-inner"> <a href="#"> <img src="{{asset('assets\images\hot-trends-banner.jpg')}}"
+                            <div class="featured-add-inner"> <a href="{{$sidebanner->btn_link}}"> <img src="{{$sidebanner->image}}"
                                         alt="f-img"></a>
                                 <div class="banner-content">
-                                    <div class="banner-text">Clearance Sale</div>
-                                    <div class="banner-text1">Hot <span>Sale</span> </div>
-                                    <p>save upto 20%</p>
+                                    <!-- <div class="banner-text">Clearance Sale</div> -->
+                                    <!-- <div class="banner-text1">Hot <span>Sale</span> </div>
+                                    <p>save upto 20%</p> -->
                                 </div>
                             </div>
                         </div>
-
+                        @endif
 </aside>
