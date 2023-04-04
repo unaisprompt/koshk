@@ -101,21 +101,22 @@ class ApiOrderController extends Controller
             'Authorization' => $token
     ])->post($url,  [
     'user_id'=>$user_id,
-    'mobile'=>$request->mobile_shipping,
-    'full_name'=>$request->first_name_shipping.' '.$request->last_name_shipping ,
-    'street_address'=>$request->shipping_address,
+    // 'mobile'=>$request->mobile_shipping,
+    // 'full_name'=>$request->first_name_shipping.' '.$request->last_name_shipping ,
+    // 'street_address'=>$request->shipping_address,
     'billing_address_id'=>$request->billing_address,
     'shipping_address_id'=>$request->shipping_address,
-    'payment_type'=>$request->payment_type,
+    'payment_type'=>$request->check_payment_id,
         ]);
         $data = $response->json();
-        
     if($response['status']==1){
-         return view('pages.thankyou.thankyou');
-    }
-    else{
-        return back()->with('error', $response['message']);
-    } 
+         return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
+       }
+       else{
+           return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
+       }
 
     }
      public function orderCancel(Request $request){
@@ -205,5 +206,9 @@ class ApiOrderController extends Controller
        else{
            return back()->with('error', $response['message']);
        }
+    }
+    public function thankYou()
+    {
+        return view('pages.thankyou.thankyou');
     }
 }

@@ -58,6 +58,7 @@ Route::get('address',[ApiUserController::class,'getAddress']);
 Route::post('edit-address',[ApiUserController::class,'getAddressEdit'])->name('edit-address');
 Route::post('address-post',[ApiUserController::class,'addAddress']);
 Route::post('address-update',[ApiUserController::class,'updateAddress']);
+Route::post('address-primary',[ApiUserController::class,'setAsPrimaryAddress']);
 Route::post('address-delete',[ApiUserController::class,'deleteAddress']);
 Route::get('edit-profile',[ApiUserController::class,'editProfile']);
 Route::post('update-profile',[ApiUserController::class,'updateProfile']);
@@ -86,10 +87,10 @@ Route::get('delete-cart/{id}',[ApiCartController::class,'deleteCart']);
 Route::get('checkout',[ApiOrderController::class,'checkout']);
 Route::get('address-data',[ApiOrderController::class,'addressData']);
 Route::post('address-data-get',[ApiOrderController::class,'getAddressEditByOrder']);
-Route::post('order',[ApiOrderController::class,'order']);
+Route::post('order',[ApiOrderController::class,'order'])->name('order');
 Route::post('order-cancel',[ApiOrderController::class,'orderCancel']);
 Route::get('order-tracking/{id}',[ApiOrderController::class,'OrderTracking']);
-
+Route::get('thankYou',[ApiOrderController::class,'thankYou']);
 Route::post('coupon-add',[ApiOrderController::class,'couponAdd']);
 Route::get('coupon-remove',[ApiOrderController::class,'couponRemove']);
 

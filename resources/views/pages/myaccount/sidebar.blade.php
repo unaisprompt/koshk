@@ -5,9 +5,9 @@
                             <div class="block-content">
 
                                 <div class=" col-md-12 profile-btm">
-                                    <img class="profile-dp" src="{{session()->get('profile_pic')}}" alt="Profile dp">
+                                    <img class="profile-dp" src="{{session()->get('profile_pic')}}" alt="Profile dp" style="width:100px;height:100px;">
                                     <div class="profile-name">
-                                        <div class="user-name">Alfred Christ</div>
+                                        <div class="user-name">{{session()->get('name')}}</div>
                                         <span><a href="{{url('logout')}}">Logout</span>
                                     </div>
 

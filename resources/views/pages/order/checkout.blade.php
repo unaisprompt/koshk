@@ -10,19 +10,19 @@
                     <div class="page-title">
                         <h2>Checkout</h2>
                     </div>
-                      <button type="button" data-toggle="modal" data-target="#myModalAddAddress"
+                      <button type="button" data-toggle="modal" data-target="#myModalAddAddress" 
                             class="button continue mb-7" >Add Address</button>
                     <div class="panel-group accordion-faq" id="faq-accordion">
                         <div class="panel">
                             <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#faq-accordion" href="#question1">
+                                <a data-toggle="collapse" data-parent="#faq-accordion" href="#question1" id="billing_info">
                                     <span class="arrow-down">+</span>
                                     <span class="arrow-up">&#8211;</span> Checkout Method
                                 </a>
                             </div>
                            
                             {{-- modal --}}
-                            <div class="modal fade in" id="myModalAddAddress" role="dialog" style="display: none;">
+                            <div class="modal fade in" id="myModalAddAddress" role="dialog" style="display: none;" >
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header v5c"><button type="button" class="close"
@@ -98,13 +98,13 @@
                             </div>
 
                             {{-- modal end --}}
-                            <div id="question1" class="panel-collapse collapse in">
+                            <div id="question1" class="panel-collapse collapse in" >
                                 <div class="panel-body">
                                     <form id="co-billing-form" action="">
                                         <fieldset class="group-select">
                                             <ul>
                                                 <li>
-                                                    <label for="billing-address-select">Select a billing address from
+                                                    <label for="billing-address-select">Select a shipping address from
                                                         your address
                                                         book or enter a new address.</label>
                                                     <br />
@@ -112,7 +112,9 @@
                                                 <select name="shipping_address" id="shipping_address"  class="form-control">
                                                     {{-- <option value="">Select Address</option> --}}
                                                 @foreach($finalData['address']['data'] as $address_data) 
-                                                <option value="{{$address_data['id']}}" @if($loop->iteration == 1) selected @endif>{{$address_data['street_address']}}</option>
+                                                <option value="{{$address_data['id']}}" @if($address_data['primary']==1) selected @endif data-first_name={{$address_data['first_name']}} data-last_name={{$address_data['last_name']}}
+                                                    data-street_address={{$address_data['street_address']}} data-landmark={{$address_data['landmark']}}
+                                                    data-mobile={{$address_data['mobile']}} data-city={{$address_data['city']}} data-email={{$address_data['email']}}>{{$address_data['first_name']}} {{$address_data['last_name']}} {{$address_data['street_address']}} {{$address_data['city']}}</option>
                                                 @endforeach   
                                                 </select>
                                                 @endif   
@@ -121,7 +123,7 @@
                                             <p class="require">
                                                 <em class="required">* </em>Required Fields
                                             </p>
-                                            <button type="button" class="button continue" onclick="billing.save()">
+                                            <button type="button" class="button continue" onclick="$('#shipping_info').click()">
                                                 <span>Continue</span>
                                             </button>
                                         </fieldset>
@@ -131,7 +133,7 @@
                         </div>
                         <div class="panel">
                             <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#faq-accordion" href="#question3"
+                                <a data-toggle="collapse" id="shipping_info" data-parent="#faq-accordion" href="#question3"
                                     class="collapsed">
                                     <span class="arrow-down">+</span>
                                     <span class="arrow-up">&#8211;</span> Shipping
@@ -143,14 +145,16 @@
                                         <fieldset class="group-select">
                                             <ul>
                                                 <li>
-                                                    <label for="shipping-address-select">Select a shipping address from
+                                                    <label for="shipping-address-select">Select a billing address from
                                                         your address
                                                         book or enter a new address.</label>
                                                     <br />
                                                      @if(!empty($finalData['address']['data']))
                                                     <select name="billing_address" id="billing_address"  class="form-control">
-                                                 @foreach($finalData['address']['data'] as $address_data) 
-                                                <option value="{{$address_data['id']}}" @if($loop->iteration == 1) selected @endif>{{$address_data['first_name']}} {{$address_data['last_name']}} {{$address_data['street_address']}} {{$address_data['city']}}</option>
+                                                 @foreach($finalData['address']['data'] as $address_data_shipping) 
+                                                <option value="{{$address_data_shipping['id']}}"  @if($address_data_shipping['primary']==1) selected @endif data-first_name_shipping={{$address_data_shipping['first_name']}} data-last_name_shipping={{$address_data_shipping['last_name']}}
+                                                    data-street_address_shipping={{$address_data_shipping['street_address']}} data-landmark_shipping={{$address_data_shipping['landmark']}}
+                                                    data-mobile_shipping={{$address_data_shipping['mobile']}} data-city_shipping={{$address_data_shipping['city']}} data-email_shipping={{$address_data_shipping['email']}}>{{$address_data_shipping['first_name']}} {{$address_data_shipping['last_name']}} {{$address_data_shipping['street_address']}} {{$address_data_shipping['city']}}</option>
                                                 @endforeach   
                                                 </select>
                                                 @endif   
@@ -161,10 +165,10 @@
                                                 <em class="required">* </em>Required Fields
                                             </p>
                                             <div class="buttons-set1" id="shipping-buttons-container">
-                                                <button type="button" class="button" onclick="shipping.save()">
+                                                <button type="button" class="button" onclick="$('#payment_info').click()">
                                                     <span>Continue</span>
                                                 </button>
-                                                <a href="#" onclick="checkout.back(); return false;" class="back-link">«
+                                                <a href="#"  onclick="$('#billing_info').click();" class="back-link">«
                                                     Back</a>
                                             </div>
                                         </fieldset>
@@ -172,7 +176,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel">
+                        {{-- <div class="panel">
                             <div class="panel-heading">
                                 <a data-toggle="collapse" data-parent="#faq-accordion" href="#question2"
                                     class="collapsed">
@@ -232,9 +236,9 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="panel">
+                        {{-- <div class="panel">
                             <div class="panel-heading">
                                 <a data-toggle="collapse" data-parent="#faq-accordion" href="#question4"
                                     class="collapsed">
@@ -254,10 +258,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="panel">
                             <div class="panel-heading">
-                                <a data-toggle="collapse" data-parent="#faq-accordion" href="#question5"
+                                <a data-toggle="collapse" data-parent="#faq-accordion" id="payment_info" href="#question5"
                                     class="collapsed">
                                     <span class="arrow-down">+</span>
                                     <span class="arrow-up">&#8211;</span> Payment
@@ -268,154 +272,31 @@
                                     <form action="" id="co-payment-form">
                                         <dl id="checkout-payment-method-load">
                                             <dt>
-                                                <input type="radio" id="p_method_checkmo" value="checkmo"
+                                                <input type="radio" id="check_payment_id" 
                                                     name="payment[method]" title="Check / Money order"
-                                                    onclick="payment.switchMethod('checkmo')" class="radio" />
-                                                <label for="p_method_checkmo">Check / Money order</label>
+                                                     class="radio" value="1"/>
+                                                <label for="p_method_checkmo">cash on delivery</label>
                                             </dt>
                                             <dd>
                                                 <fieldset class="form-list"></fieldset>
                                             </dd>
-                                            <dt>
+                                            {{-- <dt>
                                                 <input type="radio" id="p_method_ccsave" value="ccsave"
                                                     name="payment[method]" title="Credit Card (saved)"
                                                     onclick="payment.switchMethod('ccsave')" class="radio" />
                                                 <label for="p_method_ccsave">Credit Card (saved)</label>
-                                            </dt>
-                                            <dd>
-                                                <fieldset class="form-list">
-                                                    <ul id="payment_form_ccsave" style="display: none">
-                                                        <li>
-                                                            <div class="input-box">
-                                                                <label for="ccsave_cc_owner">Name on Card
-                                                                    <span class="required">*</span></label>
-                                                                <br />
-                                                                <input type="text" disabled="" title="Name on Card"
-                                                                    class="input-text required-entry"
-                                                                    id="ccsave_cc_owner" name="payment[cc_owner]"
-                                                                    value="" />
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="input-box">
-                                                                <label for="ccsave_cc_type">Credit Card Type
-                                                                    <span class="required">*</span></label>
-                                                                <br />
-                                                                <select disabled="" id="ccsave_cc_type"
-                                                                    name="payment[cc_type]"
-                                                                    class="required-entry validate-cc-type-select">
-                                                                    <option value="">
-                                                                        --Please Select--
-                                                                    </option>
-                                                                    <option value="AE">
-                                                                        American Express
-                                                                    </option>
-                                                                    <option value="VI">Visa</option>
-                                                                    <option value="MC">MasterCard</option>
-                                                                    <option value="DI">Discover</option>
-                                                                </select>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="input-box">
-                                                                <label for="ccsave_cc_number">Credit Card Number
-                                                                    <span class="required">*</span></label>
-                                                                <br />
-                                                                <input type="text" disabled="" id="ccsave_cc_number"
-                                                                    name="payment[cc_number]" title="Credit Card Number"
-                                                                    class="input-text validate-cc-number validate-cc-type"
-                                                                    value="" />
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="input-box">
-                                                                <label for="ccsave_expiration">Expiration Date
-                                                                    <span class="required">*</span></label>
-                                                                <br />
-                                                                <div class="v-fix">
-                                                                    <select disabled="" id="ccsave_expiration"
-                                                                        style="width: 140px"
-                                                                        name="payment[cc_exp_month]"
-                                                                        class="required-entry">
-                                                                        <option value="" selected="selected">
-                                                                            Month
-                                                                        </option>
-                                                                        <option value="1">
-                                                                            01 - January
-                                                                        </option>
-                                                                        <option value="2">
-                                                                            02 - February
-                                                                        </option>
-                                                                        <option value="3">03 - March</option>
-                                                                        <option value="4">04 - April</option>
-                                                                        <option value="5">05 - May</option>
-                                                                        <option value="6">06 - June</option>
-                                                                        <option value="7">07 - July</option>
-                                                                        <option value="8">08 - August</option>
-                                                                        <option value="9">
-                                                                            09 - September
-                                                                        </option>
-                                                                        <option value="10">
-                                                                            10 - October
-                                                                        </option>
-                                                                        <option value="11">
-                                                                            11 - November
-                                                                        </option>
-                                                                        <option value="12">
-                                                                            12 - December
-                                                                        </option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="v-fix">
-                                                                    <select disabled="" id="ccsave_expiration_yr"
-                                                                        style="width: 103px" name="payment[cc_exp_year]"
-                                                                        class="required-entry">
-                                                                        <option value="" selected="selected">
-                                                                            Year
-                                                                        </option>
-                                                                        <option value="2011">2011</option>
-                                                                        <option value="2012">2012</option>
-                                                                        <option value="2013">2013</option>
-                                                                        <option value="2014">2014</option>
-                                                                        <option value="2015">2015</option>
-                                                                        <option value="2016">2016</option>
-                                                                        <option value="2017">2017</option>
-                                                                        <option value="2018">2018</option>
-                                                                        <option value="2019">2019</option>
-                                                                        <option value="2020">2020</option>
-                                                                        <option value="2021">2021</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="input-box">
-                                                                <label for="ccsave_cc_cid">Card Verification Number
-                                                                    <span class="required">*</span></label>
-                                                                <br />
-                                                                <div class="v-fix">
-                                                                    <input type="text" disabled=""
-                                                                        title="Card Verification Number"
-                                                                        class="input-text required-entry validate-cc-cvn"
-                                                                        id="ccsave_cc_cid" name="payment[cc_cid]"
-                                                                        style="width: 3em" value="" />
-                                                                </div>
-                                                                <a href="#" class="cvv-what-is-this">What is this?</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </fieldset>
-                                            </dd>
+                                            </dt> --}}
+                                          
                                         </dl>
                                     </form>
                                     <p class="require">
                                         <em class="required">* </em>Required Fields
                                     </p>
                                     <div class="buttons-set1" id="payment-buttons-container">
-                                        <button type="button" class="button" onclick="payment.save()">
-                                            <span>Continue</span>
+                                        <button type="button" class="button" id="place_order" onclick="checkoutOrder()">
+                                            <span>Place Order</span>
                                         </button>
-                                        <a href="#" onclick="checkout.back(); return false;" class="back-link">«
+                                        <a href="#" onclick="$('#shipping_info').click();" class="back-link">«
                                             Back</a>
                                     </div>
                                     <div style="clear: both"></div>
@@ -431,7 +312,7 @@
                             <div class="col-12 col-lg-12 col-md-12">
                                 <div class="position-relative">
                                     <!-- Background -->
-                                    <img class="img-fluid hover-zoom" src="images/popup.jpeg" alt="" />
+                                    <img class="img-fluid hover-zoom" src="{{asset('assets/images/popup.jpeg')}}" alt="" />
                                     <!-- Body -->
                                 </div>
                             </div>
@@ -447,37 +328,35 @@
                         <dl>
                             <dt class="complete">
                                 Billing Address <span class="separator">|</span>
-                                <a onclick="checkout.gotoSection('billing'); return false;" href="#billing">Change</a>
+                               
                             </dt>
                             <dd class="complete">
-                                <address>
-                                    John Doe<br />
-                                    Abc Company<br />
-                                    23 North Main Stree<br />
-                                    Windsor<br />
-                                    Holtsville, New York, 00501<br />
-                                    United States<br />
-                                    T: 5465465 <br />
-                                    F: 466523
+                                  <address>
+                                  <span id="first_name_shipping_show"></span><br>
+                                    <span id="last_name_shipping_show"></span><br>
+                                    <span id="email_shipping_show"></span><br>
+                                    <span id="mobile_shipping_show"></span><br>
+                                    <span id="street_address_shipping_show"></span><br>
+                                    <span id="landmark_shipping_show"></span><br>
+                                    <span id="city_shipping_show"></span><br>
                                 </address>
                             </dd>
                             <dt class="complete">
-                                Shipping Address <span class="separator">|</span>
-                                <a onclick="checkout.gotoSection('shipping');return false;" href="#payment">Change</a>
+                                Shipping Address <span class="separator"></span>                             
                             </dt>
                             <dd class="complete">
                                 <address>
-                                    John Doe<br />
-                                    Abc Company<br />
-                                    23 North Main Stree<br />
-                                    Windsor<br />
-                                    Holtsville, New York, 00501<br />
-                                    United States<br />
-                                    T: 5465465 <br />
-                                    F: 466523
-                                </address>
+                                   <span id="first_name_billing_show"></span><br>
+                                    <span id="last_name_billing_show"></span><br>
+                                    <span id="email_billing_show"></span><br>
+                                    <span id="mobile_billing_show"></span><br>
+                                    <span id="street_address_billing_show"></span><br>
+                                    <span id="landmark_billing_show"></span><br>
+                                    <span id="city_billing_show"></span><br>
+
+                                </address> 
                             </dd>
-                            <dt class="complete">
+                            {{-- <dt class="complete">
                                 Shipping Method <span class="separator">|</span>
                                 <a onclick="checkout.gotoSection('shipping_method'); return false;"
                                     href="#shipping_method">Change</a>
@@ -486,15 +365,15 @@
                                 Flat Rate - Fixed <br />
                                 <span class="price">AED 15.00</span>
                             </dd>
-                            <dt>Payment Method</dt>
+                            <dt>Payment Method</dt> --}}
                         </dl>
                     </div>
-                    anel-heading
+                    
                 </div>
                 <div class="featured-add-box">
                     <div class="featured-add-inner">
                         <a href="#">
-                            <img src="images\hot-trends-banner.jpg" alt="f-img" /></a>
+                            <img src="{{asset('assets\images\hot-trends-banner.jpg')}}" alt="f-img" /></a>
                         <div class="banner-content">
                             <div class="banner-text">Clearance Sale</div>
                             <div class="banner-text1">Hot <span>Sale</span></div>
@@ -507,6 +386,52 @@
     </div>
 </section>
 <script>
+
+        function checkoutOrder()
+   {
+            var shipping_address = $("#shipping_address").val();
+            var billing_address = $("#billing_address").val();
+            var check_payment_id = $("#check_payment_id").val();
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    $.ajax({
+        url:"{{route('order')}}",
+        type:'post',
+         data: {
+                    shipping_address: shipping_address,
+                    billing_address : billing_address,
+                    check_payment_id :check_payment_id
+            },
+        dataType:'json',
+        success: function (response) {
+                    $(".preloader").hide();
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                              window.location.href = "{{url('thankYou')}}";
+                         });
+                        document.getElementById("form").reset();
+                        $('#refresh').click();
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    $(".preloader").hide();
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+    });
+   }
+
+
     $(document).ready(function() {
         $("#street_address").click(function() {
             var address_id = $("#street_address").val();
@@ -658,5 +583,34 @@
             }
         });
     }
+       $('#shipping_address').on('change', function() {
+//    $("#address_id_billing").val($(this).data('id'))
+// alert($(this).find('option:selected').data('first_name'));
+  $("#first_name_shipping_show").html($(this).find('option:selected').data('first_name'))
+  $("#last_name_shipping_show").html($(this).find('option:selected').data('last_name'))
+  $("#street_address_shipping_show").html($(this).find('option:selected').data('street_address'))
+  $("#mobile_shipping_show").html($(this).find('option:selected').data('mobile'))
+  $("#email_shipping_show").html($(this).find('option:selected').data('email'))
+  $("#landmark_shipping_show").html($(this).find('option:selected').data('landmark'))
+  $("#city_shipping_show").html($(this).find('option:selected').data('city'))
+})
+
+       $('#billing_address').on('change', function() {
+//    $("#address_id_billing").val($(this).data('id'))
+// alert($(this).find('option:selected').data('first_name'));
+  $("#first_name_billing_show").html($(this).find('option:selected').data('first_name_shipping'))
+  $("#last_name_billing_show").html($(this).find('option:selected').data('last_name_shipping'))
+  $("#street_address_billing_show").html($(this).find('option:selected').data('street_address_shipping'))
+  $("#mobile_billing_show").html($(this).find('option:selected').data('mobile_shipping'))
+  $("#email_billing_show").html($(this).find('option:selected').data('email_shipping'))
+  $("#landmark_billing_show").html($(this).find('option:selected').data('landmark_shipping'))
+  $("#city_billing_show").html($(this).find('option:selected').data('city_shipping'))
+})
+</script>
+<script>
+    $(document).ready(()=>{
+        $('#shipping_address').change();
+        $('#billing_address').change();
+    })
 </script>
 @endsection
