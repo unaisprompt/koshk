@@ -1,5 +1,8 @@
 @extends('layouts.app')
 @section('content')
+@php
+    $footerbanner=topOfferCommon('my_account_bottom');
+@endphp
 <style>
     @import url("https://fonts.googleapis.com/css?family=PT+Sans");
     @import url("https://fonts.googleapis.com/css?family=Oswald");
@@ -158,14 +161,14 @@
                     </div>
                 </article>
                 <!--	///*///======    End article  ========= //*/// -->
+                @if(isset($footerbanner))
                 <section class="banner-row irf">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 col-lg-12 col-md-12">
                                 <div class="position-relative">
                                     <!-- Background -->
-                                    <img class="img-fluid hover-zoom" src="{{asset('assets\images\popup.jpeg')}}"
-                                        alt="">
+                                    <img class="img-fluid hover-zoom" src="{{$footerbanner->image}}" onclick="window.location='{{$footerbanner->btn_link}}'"  alt="">
                                     <!-- Body -->
 
                                 </div>
@@ -174,6 +177,7 @@
                         </div>
                     </div>
                 </section>
+                @endif
             </div>
 
             @include('pages.myaccount.sidebar')

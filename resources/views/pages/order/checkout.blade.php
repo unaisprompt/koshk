@@ -336,19 +336,24 @@
                             </div>
                         </div>
                 <!--	///*///======    End article  ========= //*/// -->
+@php
+    $footerbanner=topOfferCommon('checkout_bottom');
+@endphp
+@if(isset($footerbanner))
                 <section class="banner-row irf">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 col-lg-12 col-md-12">
                                 <div class="position-relative">
                                     <!-- Background -->
-                                    <img class="img-fluid hover-zoom" src="{{asset('assets/images/popup.jpeg')}}" alt="" />
+                                    <img class="img-fluid hover-zoom"  src="{{$footerbanner->image}}" onclick="window.location='{{$footerbanner->btn_link}}'"  alt="" />
                                     <!-- Body -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
+@endif
             </div>
 
             <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
@@ -400,17 +405,22 @@
                     </div>
                     
                 </div>
+                @php
+                    $sidebanner=topOfferCommon('checkout_left_bottom');
+                @endphp
+                @if(isset($sidebanner))
                 <div class="featured-add-box">
                     <div class="featured-add-inner">
-                        <a href="#">
-                            <img src="{{asset('assets\images\hot-trends-banner.jpg')}}" alt="f-img" /></a>
-                        <div class="banner-content">
+                        <a href="{{$sidebanner->btn_link}}">
+                            <img src="{{$sidebanner->image}}" alt="f-img" /></a>
+                        <!-- <div class="banner-content">
                             <div class="banner-text">Clearance Sale</div>
                             <div class="banner-text1">Hot <span>Sale</span></div>
                             <p>save upto 20%</p>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
+                @endif
             </aside>
         </div>
     </div>

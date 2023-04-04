@@ -93,3 +93,15 @@ function minicart(){
     
         return view('layouts.minicart',compact('data'));
     }
+    function topOfferCommon($page)
+    {
+      $url = config('global.api')."/top-offer-common";
+            $response = Http::post($url, [
+                'page' => $page
+            ]);
+            if($response->status())
+            {
+              return $response->object()->data;
+            }
+            return null;
+    }

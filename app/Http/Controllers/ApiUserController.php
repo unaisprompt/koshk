@@ -22,7 +22,7 @@ class ApiUserController extends Controller
             return redirect('/my-account');
         }
         else{
-            return ;
+            return redirect('/');
         }
     }
     public function getalreadyUserPassReset()
@@ -33,7 +33,7 @@ class ApiUserController extends Controller
          $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
    if($request->password  != $request->conf_password)
    {
      return response()->json(["status"=>0,
@@ -65,7 +65,7 @@ class ApiUserController extends Controller
          $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
 
     $url = $this->url."/getprofile"; 
     $token= 'Bearer '.session()->get('token');
@@ -280,7 +280,7 @@ public function loginPop(Request $request){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
         $url = $this->url."/showAddress"; 
     $token= 'Bearer '.session()->get('token');
     $user_id= session()->get('user_id');
@@ -309,7 +309,7 @@ public function loginPop(Request $request){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
         $url = $this->url."/setprimartaddress"; 
     $token= 'Bearer '.session()->get('token');
     $user_id= session()->get('user_id');
@@ -336,7 +336,7 @@ public function loginPop(Request $request){
           $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
          $url = $this->url."/editaddress"; 
         $token= 'Bearer '.session()->get('token');
         $user_id= session()->get('user_id');
@@ -369,7 +369,7 @@ public function loginPop(Request $request){
     //    $user_id= session()->get('user_id');
     //     $token= session()->get('token');
     //     if(!$user_id && !$token)
-    //     return ;
+    //     return redirect('/');
     //     return view('pages.myaccount.addressadd');
     // }
     public function addAddress(Request $request)
@@ -378,7 +378,7 @@ public function loginPop(Request $request){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
         $url = $this->url."/saveaddress"; 
             $token= 'Bearer '.session()->get('token');
             $user_id= session()->get('user_id');
@@ -412,7 +412,7 @@ public function loginPop(Request $request){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
     $url = $this->url."/getaddress"; 
     $token= 'Bearer '.session()->get('token');
     $user_id= session()->get('user_id');
@@ -436,7 +436,7 @@ public function loginPop(Request $request){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
     $url = $this->url."/deleteaddress"; 
     $token= 'Bearer '.session()->get('token');
     $user_id= session()->get('user_id');
@@ -548,7 +548,7 @@ public function loginPop(Request $request){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
         return view('pages.myaccount.passwordchange');
     }
      public function passwordChange(Request $request)
@@ -556,7 +556,7 @@ public function loginPop(Request $request){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
      $url = $this->url."/changepassword";
      $token= 'Bearer '.session()->get('token');
      $user_id= session()->get('user_id');
@@ -583,7 +583,7 @@ public function editProfile(){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
      $url = $this->url."/getprofile"; 
     $token= 'Bearer '.session()->get('token');
     $user_id= session()->get('user_id');
@@ -605,7 +605,7 @@ public function updateProfile(Request $request){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
      $url = $this->url."/editprofile"; 
     $token= 'Bearer '.session()->get('token');
     $user_id= session()->get('user_id');
@@ -662,7 +662,7 @@ public function getOrderHistory()
      $user_id= session()->get('user_id');
      $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
     $url = $this->url."/orderhistory";
     $tokens= 'Bearer '.session()->get('token');
     $response = Http::withHeaders([
@@ -683,7 +683,7 @@ public function getOrderDetails(Request $request,$orderId)
      $user_id= session()->get('user_id');
      $token= session()->get('token');
         if(!$user_id && !$token)
-        return ;
+        return redirect('/');
     $url = $this->url."/orderdetails";
     $tokens= 'Bearer '.session()->get('token');
     $orderDetailId = decrypt($orderId);
