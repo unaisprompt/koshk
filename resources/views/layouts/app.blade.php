@@ -61,6 +61,13 @@
     <script src="{{asset('assets/js/countdown.js')}}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+    </script>
 </head>
 
 <body class="cms-index-index cms-home-page home">
