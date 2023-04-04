@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
+<style>
+    #place_order:disabled,
+    #place_order[disabled]{
+        background-color:#ccc;
+    }
+</style>
 <section class="main-container col2-left-layout">
     <div class="container">
         <div class="row">
@@ -292,6 +297,9 @@
                                     <p class="require">
                                         <em class="required">* </em>Required Fields
                                     </p>
+                                    <p class="require">
+                                        <em class="required">* </em><input type="checkbox" value="1" checked id="consent" name="consent"> <a href="#"  data-toggle="modal" onclick="$('#myModalTerms').modal('show');">Agree terms and conditions</a>
+                                    </p>
                                     <div class="buttons-set1" id="payment-buttons-container">
                                         <button type="button" class="button" id="place_order" onclick="checkoutOrder()">
                                             <span>Place Order</span>
@@ -305,6 +313,28 @@
                         </div>
                     </div>
                 </article>
+                <div class="modal fade" id="myModalTerms" role="dialog">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header v5c">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form  method="post" id="register_form">
+                                @csrf
+                                <div class="modal-body">
+                                <div class="yhd0d">
+                                    <h2>Terms And Conditions</h2>
+                                </div>
+                                
+                                @if(isset(CmsPage()['termsconditions']))
+                        {{CmsPage()['termsconditions']}}
+                        @endif
+                       
+                                </div>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
                 <!--	///*///======    End article  ========= //*/// -->
                 <section class="banner-row irf">
                     <div class="container">
@@ -611,6 +641,18 @@
     $(document).ready(()=>{
         $('#shipping_address').change();
         $('#billing_address').change();
+   
+const checkbox = $("#consent");
+const button = $("#place_order");
+
+checkbox.change(function() {
+  if (checkbox.prop("checked")) {
+    button.prop("disabled", false);
+  } else {
+    button.prop("disabled", true);
+  }
+});
+
     })
 </script>
 @endsection

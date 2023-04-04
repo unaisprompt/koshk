@@ -12,6 +12,12 @@
 @section('style')
 @endsection
 @section('content')
+<style>
+    #place_order:disabled,
+    #place_order[disabled]{
+        background-color:#ccc;
+    }
+</style>
 <section class="main-container col2-left-layout">
     <div class="container">
         <div class="row">
@@ -51,8 +57,31 @@
                             <span style="color: blue; padding:10px;"> Return Available </span>
                             @endif
                             @if($value['status']=='Order Placed'||$value['status']=='Order Confirmed'||$value['status']=='Order Shipped')
-                           <button type="button" class="btn btn-primary" onclick="CancelOder({{$value['id']}})">Cancel Order</button>
-                                
+                           {{-- <button type="button" class="btn btn-primary" onclick="cancelOder({{$value['id']}})">Cancel Order</button> --}}
+                                <a href="#" class="btn btn-primary" data-toggle="modal" onclick="$('#myModalCancel').modal('show');">Cancel Order</a>
+                           <div class="modal fade" id="myModalCancel" role="dialog">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header v5c">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form  method="post" id="register_form">
+                                @csrf
+                                <div class="modal-body">
+                                <div class="yhd0d">
+                                    <h2>Cancel Order Terms And Conditions</h2>
+                                </div>
+                                @if(isset(CmsPage()['cancellation']['cancellation_content']))
+                        {{CmsPage()['cancellation']['cancellation_content']}}
+                        @endif
+                        <br><br>
+                        <input type="checkbox" value="1" checked id="consent" name="consent"><span id="modalConstant">Agree terms and conditions</span>
+                                <button type="button" class="btn btn-primary" id="place_order"  onclick="cancelOder({{$value['id']}})">Cancel Order</button>
+                                </div>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
                             @endif
                             @else
                             <span style="color: blue"> Order Cancelled </span>
@@ -90,30 +119,21 @@
         </section>
     </div>
 </section>
-@endsection
 <!-- End Cart Area -->
 <script>
-    function CancelOder(id) {
-        var id = id;
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+    function cancelOder(id) {
         $.ajax({
             type: "POST",
             url: '{{ url("order-cancel")}}',
             data: {
                 id: id,
             },
-            cache: false,
             success: function(response) {
                 $(".preloader").hide();
                 if (response.status == 1) {
                     Swal.fire("Success!", response.message, "success").then(() => {
-                        //   location.reload();
-                        window.location = '{{url('
-                        order - history ')}}';
+                        $('#myModalCancel').modal('hide');
+                        window.location = "{{url('order-history')}}";
                     });
                 } else {
                     Swal.fire("Failed!", response.message, "error");
@@ -131,5 +151,16 @@
             }
         });
     };
+
+    const checkbox = $("#consent");
+const button = $("#place_order");
+
+checkbox.change(function() {
+  if (checkbox.prop("checked")) {
+    button.prop("disabled", false);
+  } else {
+    button.prop("disabled", true);
+  }
+});
 </script>
 @endsection
