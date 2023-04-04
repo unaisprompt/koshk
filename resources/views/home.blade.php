@@ -197,7 +197,7 @@
                       </div>
                       <div class="item-info">
                         <div class="info-inner">
-                          <div class="item-title"> <a title="Retis lapen casen" href="product_detail.html">{{$featured_products['product_name']}}</a> </div>
+                          <div class="item-title"> <a title="Retis lapen casen" href="{{url('product-detail')}}?id={{$featured_products['id']}}">{{$featured_products['product_name']}}</a> </div>
                           {{-- <div class="brand">{{!empty($featured_products['brand']['brand_name'])}}</div> --}}
                           <div class="star-rating">
                             {{-- <span style="width:60%">Rated <strong class="rating">{{$featured_products['rattings']}}</strong> out of 5</span> --}}
@@ -471,7 +471,7 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> {{$sale_data['product_name']}} </a> </div>
+                        <div class="item-title"> <a href="{{url('product-detail')}}?id={{$sale_data['id']}}" title="Retis lapen casen"> {{$sale_data['product_name']}} </a> </div>
                         {{-- <div class="brand">{{!empty($sale_data['brand']['brand_name'])}}</div> --}}
                         <div class="item-content">
                           <div class="star-rating">
@@ -488,81 +488,6 @@
                 </div>
                 @endforeach
                 @endif
-                {{-- <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
-                        src="{{asset('assets/products-images/product12.jpg')}}" alt="Retis lapen casen"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> Anti Glare
-                            Side Narrow Border Display Laptop </a> </div>
-                        <div class="brand">Sonet</div>
-                        <div class="item-content">
-                          <div class="star-rating">
-                            <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">AED 125.00</span>
-                              </span> <span class="old-price"><span class="price">AED 199.00</span></span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
-                        src="{{asset('assets/products-images/product4.jpg')}}" alt="Retis lapen casen"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> Anti Glare
-                            Side Narrow Border Display Laptop </a> </div>
-                        <div class="brand">Sonet</div>
-                        <div class="item-content">
-                          <div class="star-rating">
-                            <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">AED 125.00</span>
-                              </span> <span class="old-price"><span class="price">AED 199.00</span></span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
-                        src="{{asset('assets/products-images/product1.jpg')}}"  alt="Retis lapen casen"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> Anti Glare
-                            Side Narrow Border Display Laptop </a> </div>
-                        <div class="brand">Sonet</div>
-                        <div class="item-content">
-                          <div class="star-rating">
-                            <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">AED 125.00</span>
-                              </span> <span class="old-price"><span class="price">AED 199.00</span></span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> --}}
               </div>
             </div>
           </div>
@@ -607,11 +532,11 @@
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> {{$top_rated['product_name']}} </a> </div>
+                        <div class="item-title"> <a href="{{url('product-detail')}}?id={{$top_rated['id']}}" title="Retis lapen casen"> {{$top_rated['product_name']}} </a> </div>
                         <div class="brand">{{!empty($top_rated['brand']['brand_name'])}}</div>
                         <div class="item-content">
                           <div class="star-rating">
-                            <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
+                            <span style="width:{{(count($top_rated['rattings'])>0)?$top_rated['rattings'][0]['avg_ratting']*2*10:'0'}}%">Rated <strong class="rating">{{(count($top_rated['rattings'])>0)?$top_rated['rattings'][0]['avg_ratting']:''}}</strong> out of 5</span>
                           </div>
                           <div class="item-price">
                             <div class="price-box"> <span class="regular-price"> <span class="price">AED {{$top_rated['product_price']}}</span>
@@ -624,81 +549,7 @@
                 </div>
                 @endforeach
                 @endif
-                {{-- <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
-                            src="{{asset('assets/products-images/product6.jpg')}}" alt="Retis lapen casen"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> Anti Glare
-                            Side Narrow Border Display Laptop </a> </div>
-                        <div class="brand">Sonet</div>
-                        <div class="item-content">
-                          <div class="star-rating">
-                            <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">AED 125.00</span>
-                              </span> <span class="old-price"><span class="price">AED 199.00</span></span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
-                            src="{{asset('assets/products-images/product13.jpg')}}" alt="Retis lapen casen"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> Anti Glare
-                            Side Narrow Border Display Laptop </a> </div>
-                        <div class="brand">Sonet</div>
-                        <div class="item-content">
-                          <div class="star-rating">
-                            <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">AED 125.00</span>
-                              </span> <span class="old-price"><span class="price">AED 199.00</span></span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#" title="Retis lapen casen" class="product-image"> <img
-                            src="{{asset('assets/products-images/product8.jpg')}}" alt="Retis lapen casen"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a href="product_detail.html" title="Retis lapen casen"> Anti Glare
-                            Side Narrow Border Display Laptop </a> </div>
-                        <div class="brand">Sonet</div>
-                        <div class="item-content">
-                          <div class="star-rating">
-                            <span style="width:60%">Rated <strong class="rating">3.00</strong> out of 5</span>
-                          </div>
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">AED 125.00</span>
-                              </span> <span class="old-price"><span class="price">AED 199.00</span></span></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> --}}
+               
               </div>
             </div>
           </div>
@@ -724,26 +575,7 @@
           </div>
           @endforeach
          @endif
-          {{-- <div class="article-home">
-            <div class="article-home__image parallax-parent"> <img src="{{asset('assets\images\BLOG_2_square_1000x.jpg')}}"
-                class="parallax-child--second" alt="article image"> </div>
-            <div class="article-home__content">
-              <div class="inside">
-                <h4 class="title">Share your music</h4>
-                <a href="#" class="link">Shop Now <i class="fa fa-chevron-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="article-home">
-            <div class="article-home__image parallax-parent"> <img src="{{asset('assets\images\drake_500x.jpg')}}"
-                class="parallax-child--second" alt="article image"> </div>
-            <div class="article-home__content">
-              <div class="inside">
-                <h4 class="title">Phones</h4>
-                <a href="#" class="link">Shop Now <i class="fa fa-chevron-circle-right"></i></a>
-              </div>
-            </div>
-          </div> --}}
+         
         </div>
       </div>
     </section>

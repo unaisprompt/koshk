@@ -7,7 +7,7 @@
      <!-- Breadcrumbs -->
     <div class="breadcrumbs">
             <ul>
-              <li class="home"> <a href="index.html" title="Go to Home Page">Home</a> <span>/</span> </li>
+              <li class="home"> <a href="{{url('')}}" title="Go to Home Page">Home</a> <span>/</span> </li>
               <li> <strong>Shopping Cart</strong> </li>
             </ul>
           </div>
@@ -148,7 +148,6 @@
                           <ul class="add-to-links">
                             <li><a class="link-quickview" href="{{url('product-detail')}}?id={{$product->id}}"></a> </li>
                             <li><a class="link-wishlist @if($product->is_wishlist) active @endif" href="#" onclick="event.preventDefault();addWishlist({{$product->id}},$(this))"></a> </li>
-                            <!-- <li><a class="link-compare" href="compare.html"></a> </li> -->
                           </ul>
                         </div>
                       </div>

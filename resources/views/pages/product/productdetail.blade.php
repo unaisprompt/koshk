@@ -155,6 +155,8 @@
                         <div class="price-box">
                             @if(collect($data->stocks)->sum('quantity')<=0)
                           <p class="availability in-stock"><span>Sold out</span></p>
+                          @else
+                          <p class="availability in-stock"><span>{{collect($data->stocks)->sum('quantity')}} in stock</span></p>
                           @endif
                           <p class="special-price"> <span class="price-label">Special Price</span> <span
                               id="product-price-48" class="price"> AED {{$price}} </span> </p>
