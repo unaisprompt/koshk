@@ -26,7 +26,7 @@
               </Span>
 
               <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
-              <span class="delivery-content">Phone number - <span>00971 43555577</span> </span>
+              <span class="delivery-content">{{CommonData()->top_header_phone}} </span>
 
             </div>
            <div class="delivery-section delivery-time">
@@ -40,7 +40,7 @@
               <span class="delivery-content" data-container="body" data-toggle="popover" 
               data-trigger="hover" data-placement="bottom" data-content="Vivamus
               sagittis lacus vel augue laoreet rutrum faucibus.">
-              Delivery Slot - <span>9:00 to 6:00</span> </span>
+                 {{CommonData()->top_header_clock}} </span>
             </div>
 
             <div class="delivery-section">
@@ -470,7 +470,7 @@
                  <a href="{{url('products?category_id='.$category->id)}}">{{$category->category_name}}</a>
                  @if($loop->iteration>=5) @break @endif
                 @endforeach
-               <span> <button class="offer-btn" type="button" onclick="window.location='{{url('products?explore_more=1')}}'">Explore Offers</button> </span>
+               <span> <button class="offer-btn" type="button" onclick="window.location='{{url('products?explore_more=1')}}'">{{CommonData()->navigation_button}}</button> </span>
             </div>
           </div>
         </div>
