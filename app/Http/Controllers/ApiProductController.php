@@ -43,6 +43,35 @@ class ApiProductController extends Controller
        }
     }
 
+        public function productGrid(Request $request){
+        $user_id= session()->get('user_id') ?? '';
+        $category_id=$request->category_id ?? '';
+        $subcategory_id=$request->subcategory_id ?? '';
+        $innersubcategory_id=$request->innersubcategory_id ?? '';
+        $search=$request->search ?? '';
+        $explore_more=$request->explore_more ?? '';
+        if($category_id!=''){
+          session()->put('category_id',$category_id);
+        }
+        if($subcategory_id!=''){
+          session()->put('subcategory_id',$subcategory_id);
+        }
+        session()->forget('brand_id');
+        $url = $this->url."/products";
+        $response = Http::post($url,  [
+        'user_id'=>$user_id,
+        'category_id' =>$category_id,
+        'subcategory_id' =>$subcategory_id,
+        'innersubcategory_id'=>$innersubcategory_id,
+        'search'=>$search,
+        'explore_more'=>$explore_more
+        ]);
+
+         if($response->successful())
+       {
+          return view('pages.product.productgrid',["data"=>$response->object()]);
+       }
+    }
     public function productDetail(Request $request){
         $url = $this->url."/productdetails";
         $response = Http::post($url,  [

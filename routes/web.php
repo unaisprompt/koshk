@@ -68,6 +68,7 @@ Route::post('resent-forget-otp',[ApiUserController::class,'resentOtp']);
 ############# Product ############################
 
 Route::get('products',[ApiProductController::class,'productList']);
+Route::get('products-grid',[ApiProductController::class,'productGrid']);
 Route::get('product-detail',[ApiProductController::class,'productDetail']);
 Route::get('search',[ApiProductController::class,'searchProduct']);
 Route::get('brand/products',[ApiProductController::class,'BrandProduct']);
