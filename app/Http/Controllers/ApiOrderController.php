@@ -32,7 +32,35 @@ class ApiOrderController extends Controller
                 "address" => $this->addressData(),
                 "first_address"=>$this->addressData()
                 );
-                return view('pages.order.checkout',compact('finalData'));
+                        $url = $this->url."/getcart";
+        $user_id= session()->get('user_id');
+        $token= 'Bearer '.session()->get('token');
+
+        if($user_id){
+           // return $user_id;
+            $response = Http::withHeaders([
+                'Authorization' => $token
+            ])->post($url, [
+                'user_id' => $user_id
+            ]);
+           
+            
+            $data=$response['data'];
+         //  return $data;
+        }
+
+        else{
+           
+           // $cart = session()->get('cart');
+            // unset($cart[4]);
+          // session()->forget('cart');
+           // session()->put('cart', $cart);
+            $carts = session()->get('cart',[]);
+
+            $data = $carts;
+          //  return $data;
+        }
+                return view('pages.order.checkout',compact('finalData','data'));
             }
             else{
                 return redirect('cart');

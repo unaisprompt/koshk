@@ -95,6 +95,7 @@
 <!-- Main Container End -->
 <script>
   function WishListdelete(ref) {
+     $('.pre-loader').removeClass("hidded");
     var product_id = ref.data('product_id');
     $.ajaxSetup({
       headers: {
@@ -110,7 +111,7 @@
       },
       cache: false,
       success: function(response) {
-        $(".preloader").hide();
+         $(".pre-loader").delay(2000).addClass("hidded");
         if (response.status == 1) {
           Swal.fire("Success!", response.message, "success").then(() => {
             location.reload();
@@ -127,7 +128,7 @@
         }
       },
       error: function(xhr) {
-        $(".preloader").hide();
+         $(".pre-loader").delay(2000).addClass("hidded");
         console.log(xhr.responseText); // this line will save you tons of hours while debugging
         // do something here because of error
       }

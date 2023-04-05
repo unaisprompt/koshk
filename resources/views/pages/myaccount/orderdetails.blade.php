@@ -122,6 +122,7 @@
 <!-- End Cart Area -->
 <script>
     function cancelOder(id) {
+         $('.pre-loader').removeClass("hidded");
         $.ajax({
             type: "POST",
             url: '{{ url("order-cancel")}}',
@@ -129,7 +130,7 @@
                 id: id,
             },
             success: function(response) {
-                $(".preloader").hide();
+                  $(".pre-loader").delay(2000).addClass("hidded");
                 if (response.status == 1) {
                     Swal.fire("Success!", response.message, "success").then(() => {
                         $('#myModalCancel').modal('hide');
@@ -145,7 +146,7 @@
                 }
             },
             error: function(xhr) {
-                $(".preloader").hide();
+                 $(".pre-loader").delay(2000).addClass("hidded");
                 console.log(xhr.responseText); // this line will save you tons of hours while debugging
                 // do something here because of error
             }

@@ -210,4 +210,17 @@ class ApiCartController extends Controller
         // $data=$response['data'];
         return redirect('cart');
     }
-}
+    public function getCommonPage()
+    {
+         $url = $this->url."/cmspages";
+            $response = Http::get($url, [
+                'user_id' => $user_id
+            ]);
+           
+            
+            $data=$response['data'];
+         //  return $data;
+        }
+        
+    }
+

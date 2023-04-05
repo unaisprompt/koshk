@@ -110,9 +110,9 @@
                   </div>
                 </div>
               </div>
-              </div>
+            </div>
               <div class="bestsell-pro mt-0 mb-60">
-      <div>
+              <div>
 
        {{-- <section class="banner-row irf">
           <div class="container">

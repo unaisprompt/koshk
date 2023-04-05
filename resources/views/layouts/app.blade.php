@@ -69,8 +69,34 @@
             });
     </script>
 </head>
-
+<style>
+    /* load fix */
+.pre-loader {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.98);
+    z-index: 101;
+    height: 100%;
+    width: 100%;
+}
+.pre-loader.hidded {
+    display: none;
+}
+    </style>
 <body class="cms-index-index cms-home-page home">
+    <div class="pre-loader">
+    <div class="loading">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+    </div>
     <div id="page">
         {{-- <div class="pre-loader">
             <svg class="gegga">
@@ -117,7 +143,15 @@
 
          @yield('script')
             <script>
+                $(window).on('load', function () {
+    $(".pre-loader").delay(2000).addClass("hidded");
+  })
+    //                   $( document ).ready(function() {
+    // $(".pre-loader").delay(2000).addClass("hidded");
+    //   });
 function newsLetter() {
+   
+            $('.pre-loader').removeClass("hidded");
             var email = $("#email_news").val();
             $.ajaxSetup({
             headers: {
@@ -134,7 +168,7 @@ function newsLetter() {
             cache: false,
             success: function (response) {
                 console.log(response);
-                    $(".preloader").hide();
+                   $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
 
@@ -152,7 +186,7 @@ function newsLetter() {
                     }
                 },
                 error: function (xhr) {
-                    $(".preloader").hide();
+                     $(".pre-loader").delay(2000).addClass("hidded");
                     console.log(xhr.responseText); // this line will save you tons of hours while debugging
                     // do something here because of error
                 }
@@ -169,6 +203,7 @@ function newsLetter() {
     <script>
  function register()
    {
+    $('.pre-loader').removeClass("hidded");
     let name=$('#name').val();
     let email=$('#email_reg').val();
     let password=$('#password_reg').val();
@@ -180,7 +215,7 @@ function newsLetter() {
         data:$('#register_form').serialize(),
         dataType:'json',
         success: function (response) {
-                    $(".preloader").hide();
+                    $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
                             $('#myModalsigninotp').modal('show');
@@ -200,7 +235,7 @@ function newsLetter() {
                     }
                 },
                 error: function (xhr) {
-                    $(".preloader").hide();
+                     $(".pre-loader").delay(2000).addClass("hidded");
                     console.log(xhr.responseText); // this line will save you tons of hours while debugging
                     // do something here because of error
                 }
@@ -210,6 +245,7 @@ function newsLetter() {
     <script>
         function verifyOtp()
    {
+      $('.pre-loader').removeClass("hidded");
     let otp=$('#otp_verify_otp').val();
     let email =$('#email_reg').val();
     $.ajaxSetup({
@@ -226,7 +262,7 @@ function newsLetter() {
             },
         dataType:'json',
         success: function (response) {
-                    $(".preloader").hide();
+                    $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
                              $('#myModalsignin').modal('show');
@@ -247,7 +283,7 @@ function newsLetter() {
                     }
                 },
                 error: function (xhr) {
-                    $(".preloader").hide();
+                     $(".pre-loader").delay(2000).addClass("hidded");
                     console.log(xhr.responseText); // this line will save you tons of hours while debugging
                     // do something here because of error
                 }
@@ -258,6 +294,7 @@ function newsLetter() {
         <script>
         function loginUser()
    {
+     $('.pre-loader').removeClass("hidded");
     let email=$('#email_signup').val();
     let password =$('#password').val();
     $.ajax({
@@ -266,7 +303,7 @@ function newsLetter() {
         data:$('#login_form').serialize(),
         dataType:'json',
         success: function (response) {
-                    $(".preloader").hide();
+                    $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         console.log(response);
                         Swal.fire("Success!", response.message, "success").then(() => {
@@ -290,7 +327,7 @@ function newsLetter() {
                     }
                 },
                 error: function (xhr) {
-                    $(".preloader").hide();
+                     $(".pre-loader").delay(2000).addClass("hidded");
                     console.log(xhr.responseText); // this line will save you tons of hours while debugging
                     // do something here because of error
                 }
@@ -300,6 +337,7 @@ function newsLetter() {
             <script>
         function loginUserPopup()
    {
+     $('.pre-loader').removeClass("hidded");
     let email=$('#email').val();
     let password =$('#password').val();
     $.ajax({
@@ -308,7 +346,7 @@ function newsLetter() {
         data:$('#first_popup').serialize(),
         dataType:'json',
         success: function (response) {
-                    $(".preloader").hide();
+                    $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
                         if(response.data == 1){
@@ -331,7 +369,7 @@ function newsLetter() {
                     }
                 },
                 error: function (xhr) {
-                    $(".preloader").hide();
+                     $(".pre-loader").delay(2000).addClass("hidded");
                     console.log(xhr.responseText); // this line will save you tons of hours while debugging
                     // do something here because of error
                 }
@@ -341,6 +379,7 @@ function newsLetter() {
          <script>
 function ForgetPassword()
    {
+     $('.pre-loader').removeClass("hidded");
     let email=$('#otp_verify_otp').val();
     $.ajax({
         url:"{{url('forget-post')}}",
@@ -348,7 +387,7 @@ function ForgetPassword()
         data:$('#forget_password').serialize(),
         dataType:'json',
         success: function (response) {
-                    $(".preloader").hide();
+                    $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
                         $('#myModalforgot').modal('hide');
@@ -368,7 +407,7 @@ function ForgetPassword()
                     }
                 },
                 error: function (xhr) {
-                    $(".preloader").hide();
+                     $(".pre-loader").delay(2000).addClass("hidded");
                     console.log(xhr.responseText); // this line will save you tons of hours while debugging
                     // do something here because of error
                 }
@@ -378,6 +417,7 @@ function ForgetPassword()
                  <script>
 function ForgetOtp()
    {
+     $('.pre-loader').removeClass("hidded");
      let otp=$('#otp_for').val();
     let email =$('#email').val();
     $.ajax({
@@ -386,7 +426,7 @@ function ForgetOtp()
         data:$('#forget_otp').serialize(),
         dataType:'json',
         success: function (response) {
-                    $(".preloader").hide();
+                    $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
                         $('#myModalforgot').modal('hide');
@@ -404,7 +444,7 @@ function ForgetOtp()
                     }
                 },
                 error: function (xhr) {
-                    $(".preloader").hide();
+                     $(".pre-loader").delay(2000).addClass("hidded");
                     console.log(xhr.responseText); // this line will save you tons of hours while debugging
                     // do something here because of error
                 }
@@ -414,6 +454,7 @@ function ForgetOtp()
                   <script>
 function newPassword()
    {
+     $('.pre-loader').removeClass("hidded");
      let new_pass=$('#new_password').val();
     $.ajax({
         url:"{{url('password-reset')}}",
@@ -421,7 +462,7 @@ function newPassword()
         data:$('#change_password').serialize(),
         dataType:'json',
         success: function (response) {
-                    $(".preloader").hide();
+                    $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
                         $('#myModalchangepass').modal('hide');
@@ -440,7 +481,7 @@ function newPassword()
                     }
                 },
                 error: function (xhr) {
-                    $(".preloader").hide();
+                     $(".pre-loader").delay(2000).addClass("hidded");
                     console.log(xhr.responseText); // this line will save you tons of hours while debugging
                     // do something here because of error
                 }
@@ -485,7 +526,12 @@ function newPassword()
         }
     });
     });
+
             </script>
+         
+          
+
          @yield('script')
+         
      </body>
  </html>

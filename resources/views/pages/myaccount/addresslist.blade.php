@@ -200,6 +200,7 @@
 <!-- Main Container End -->
 <script>
     function addAddress() {
+        $('.pre-loader').removeClass("hidded");
         let first_name = $('#first_name_billing').val();
         let last_name = $('#last_name_billing').val();
         let street_address = $('#street_address_billing').val();
@@ -221,7 +222,7 @@
             },
             dataType: 'json',
             success: function(response) {
-                $(".preloader").hide();
+                $(".pre-loader").delay(2000).addClass("hidded");
                 if (response.status == 1) {
                     Swal.fire("Success!", response.message, "success").then(() => {
                         $('#myModalAddAddress').modal('hide');
@@ -250,6 +251,7 @@
 
 <script>
     function updateAddress() {
+         $('.pre-loader').removeClass("hidded");
         let first_name = $('#first_name_billing_edit').val();
         let last_name = $('#last_name_billing_edit').val();
         let street_address = $('#street_address_billing_edit').val();
@@ -278,7 +280,7 @@
             },
             dataType: 'json',
             success: function(response) {
-                $(".preloader").hide();
+                $(".pre-loader").delay(2000).addClass("hidded");
                 if (response.status == 1) {
                     Swal.fire("Success!", response.message, "success").then(() => {
                         $('#myModalAddAddressEdit').modal('hide');
@@ -306,8 +308,8 @@
 </script>
 
  <script>
-        function AddressEdit(id)
-   {
+        function AddressEdit(id){
+     $('.pre-loader').removeClass("hidded");
     $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -321,7 +323,7 @@
             },
         dataType:'json',
         success: function (response) {
-                    $(".preloader").hide();
+                    $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         $('#myModalAddAddressEdit').modal('show');
                         console.log(response.data)
@@ -371,7 +373,7 @@
 })
 
 function SetPrimaryAddress(ref) {
-    
+     $('.pre-loader').removeClass("hidded");
      var address_id = ref.data('address_id');  
      console.log(address_id);
      $.ajaxSetup({
@@ -388,7 +390,7 @@ function SetPrimaryAddress(ref) {
      },
      cache: false,
    success: function (response) {
-                    $(".preloader").hide();
+                    $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
 location.reload();
@@ -414,7 +416,7 @@ location.reload();
      };
 
 function Addressdelete(ref) {
-    
+     $('.pre-loader').removeClass("hidded");
     var address_id = ref.data('address_id');  
      console.log(address_id);
      $.ajaxSetup({
@@ -431,7 +433,7 @@ function Addressdelete(ref) {
      },
      cache: false,
    success: function (response) {
-                    $(".preloader").hide();
+                   $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
 location.reload();

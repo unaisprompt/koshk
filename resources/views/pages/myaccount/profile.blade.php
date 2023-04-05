@@ -223,6 +223,7 @@
 </div>
 <script>
     function ResetPass() {
+         $('.pre-loader').removeClass("hidded");
         let old_password = $('#old_password').val();
         let new_password = $('#new_password').val();
         let conform_password = $('#conform_password').val();
@@ -232,7 +233,7 @@
             data: $('#password_change_form').serialize(),
             dataType: 'json',
             success: function(response) {
-                $(".preloader").hide();
+                 $(".pre-loader").delay(2000).addClass("hidded");
                 if (response.status == 1) {
                     Swal.fire("Success!", response.message, "success").then(() => {
                         $('#myModalChangePassword').modal('hide');
@@ -251,7 +252,7 @@
                 }
             },
             error: function(xhr) {
-                $(".preloader").hide();
+                 $(".pre-loader").delay(2000).addClass("hidded");
                 console.log(xhr.responseText); // this line will save you tons of hours while debugging
                 // do something here because of error
             }
