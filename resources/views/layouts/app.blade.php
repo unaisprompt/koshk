@@ -86,6 +86,30 @@
 .pre-loader.hidded {
     display: none;
 }
+.features-block span {
+	float: right;
+	padding-top: 6px;
+	/* padding-bottom: 10px; */
+	padding-left: 15px;
+	padding-right: 0px;
+	line-height: normal;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	font-size: 14px;
+	color: #0083c1;
+    text-transform: uppercase;
+
+}
+.offer-btn{
+	padding: 10px;
+	background-color: #333ca1;
+    color: white;
+	transition: 0.5s;
+}
+.offer-btn:hover{
+	background-color: red;
+	transition: 0.5s;
+}
     </style>
 <body class="cms-index-index cms-home-page home">
     <div class="pre-loader">
