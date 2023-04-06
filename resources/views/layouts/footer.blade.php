@@ -78,19 +78,35 @@
           </div>
         </div>
       </div>
-      {{-- {{dd(CmsPage())}} --}}
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-12">
             <div class="social">
               <ul>
-                <li class="fb"><a href="{{CmsPage()['settings']['facebook']}}"></a></li>
-                <li class="tw"><a href="{{CmsPage()['settings']['twitter']}}"></a></li>
-
-
-
-                <li class="linkedin"><a href="{{CmsPage()['settings']['instagram']}}"></a></li>
-                <li class="youtube"><a href="{{CmsPage()['settings']['linkedin']}}"></a></li>
+                @foreach(CmsPage()['social_media_links'] as $social_media_link)
+                <style>
+                  .social .{{$social_media_link['name']}} a:before {
+                        content: "\{{$social_media_link['unicode']}}";
+                        font-family: FontAwesome;
+                    }
+                    .social .{{$social_media_link['name']}} a {
+                        background: {{$social_media_link['color']}};
+                        font-size: 18px;
+                        border-radius: 999px;
+                        line-height: 35px;
+                        display: inline-block;
+                        width: 35px;
+                        height: 35px;
+                        color: #fff;
+                        text-align: center;
+                        padding: 0;
+                    }
+                    .social .{{$social_media_link['name']}} a:hover {
+                        background: {{$social_media_link['color']}};
+                    }
+                </style>
+                <li class="{{$social_media_link['name']}}"><a href="{{$social_media_link['link']}}"></a></li>
+                @endforeach
               </ul>
             </div>
           </div>
