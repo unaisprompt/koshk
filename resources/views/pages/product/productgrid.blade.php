@@ -92,14 +92,14 @@
                                 <div class="product-list-grid">
                                   <ul class="nav">
                                     <li class="nav-item">
-                                      <a href="#" class="button-grid
-                                        nav-link">
+                                      <a href="{{url('products-grid')}}?{{request()->getQueryString()}}" class="button-grid
+                                        nav-link  active">
                                         <i class="fa fa-th-large"></i>
                                       </a>
                                     </li>
                                     <li class="nav-item">
-                                      <a href="list.html" class="button-list
-                                        nav-link active">
+                                      <a href="{{url('products')}}?{{request()->getQueryString()}}" class="button-list
+                                        nav-link">
                                         <i class="fa fa-bars"></i>
                                       </a>
                                     </li>
@@ -152,35 +152,32 @@
                 @foreach ($data->products as $product)
                 <div class="col-md-4">
                  <div class="item  @if($loop->iteration==1) first @elseif ($loop->iteration%2==0) even @elseif ($loop->iteration%1==0) odd @endif listing">
-                  <div class="product-image"> <a href="{{url('product-detail?id='.$product->id)}}" title="{{$product->product_name}}"> <img class="small-image" src="{{$product->productimage->image_url}}" alt="{{$product->product_name}}"> </a>
+                    <div class="product-image"> <a href="{{url('product-detail?id='.$product->id)}}" title="{{$product->product_name}}"> <img class="small-image" src="{{$product->productimage->image_url}}" alt="{{$product->product_name}}"> </a>
 
-                  </div>
-                  <div class="product-shop">
-                    <h2 class="product-name"><a href="{{url('product-detail?id='.$product->id)}}" title="{{$product->product_name}}">{{$product->product_name}}</a></h2>
-                    <div class="ratings">
-                      <div class="rating-box">
-                        <div style="width:{{$product->rattings?$product->rattings[0]->avg_ratting*2*10:'0'}}%" class="rating"></div>
+                    </div>
+                    <div class="product-shop">
+                      <h2 class="product-name" style="height:62px;overflow:hidden"><a href="{{url('product-detail?id='.$product->id)}}" title="{{$product->product_name}}">{{$product->product_name}}</a></h2>
+                      <div class="ratings">
+                        <div class="rating-box">
+                          <div style="width:{{$product->rattings?$product->rattings[0]->avg_ratting*2*10:'0'}}%" class="rating"></div>
+                        </div>
+                        <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
                       </div>
-                      <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
+                      <div class="price-box">
+                        <p class="old-price"> <span class="price-label"></span> <span class="price"> AED {{$product->product_price}} </span> </p>
+                        <p class="special-price"> <span class="price-label"></span> <span class="price"> AED {{$product->discounted_price}} </span> </p>
+                      </div>
+                      <div class="actions">
+                        <button class="button btn-cart ajx-cart" title="Add to Cart" type="button" data-details="{{json_encode($product)}}" onClick="addCart($(this).data('details'))"><span>Add to Cart</span></button>
+                        <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist @if($product->is_wishlist) active @endif" href="#" onclick="event.preventDefault();addWishlist({{$product->id}},$(this))"></a>
+                        <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
+                      </span> </div>
                     </div>
-                    {{-- <div class="desc std">
-                      <p>{{$product->description}} <a class="link-learn" title="" href="{{url('product-detail?id='.$product->id)}}">Learn More</a> </p>
-                    </div> --}}
-                    <div class="price-box">
-                      <p class="old-price"> <span class="price-label"></span> <span class="price"> AED {{$product->product_price}} </span> </p>
-                      <p class="special-price"> <span class="price-label"></span> <span class="price"> AED {{$product->discounted_price}} </span> </p>
-                    </div>
-                    <div class="actions">
-                      <button class="button btn-cart ajx-cart" title="Add to Cart" type="button" data-details="{{json_encode($product)}}" onClick="addCart($(this).data('details'))"><span>Add to Cart</span></button>
-                      <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist @if($product->is_wishlist) active @endif" href="#" onclick="event.preventDefault();addWishlist({{$product->id}},$(this))"></a>
-                      <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
-                     </span> </div>
-                  </div>
-                </div>
-                </div>
+                 </div>
+               </div>
                 @endforeach     
             </div>
-              @if($data->total_count>6)
+              @if($data->total_count>18)
               <a href="#" id="load_more" onclick="event.preventDefault();loadMore()">Load more...</a>
               @endif
             </div>
@@ -436,7 +433,8 @@
         formData.append('explore_more',$('#explore_more').val());
         formData.append('lower',$('#lower').val());
         formData.append('upper',$('#upper').val());
-           formData.append('page',loadCount);
+        formData.append('page',loadCount);
+        formData.append('perpage',18);
         $('.brands').each(function(){
             if($(this).prop('checked'))
             {
@@ -453,32 +451,31 @@
             dataType:'json',
             success:function(response){
                 response.products.forEach(function(product,index){
-                    var item=` <li class="item ${index%2==0?`even`:`odd`} listing">
-                                <div class="product-image"> <a href="{{url('product-detail')}}?id=${product.id}" title="${product.product_name}"> <img class="small-image" src="${product.productimage.image_url}" alt="${product.product_name}"> </a>
+                   var item=`<div class="col-md-4">
+                                <div class="item ${index%2==0?`even`:`odd`} listing">
+                                    <div class="product-image"> <a href="{{url('product-detail')}}?id=${product.id}" title="${product.product_name}"> <img class="small-image" src="${product.productimage.image_url}" alt="${product.product_name}"> </a>
 
+                                    </div>
+                                    <div class="product-shop">
+                                      <h2 class="product-name" style="height:62px;overflow:hidden"><a href="{{url('product-detail')}}?id=${product.id}" title="${product.product_name}">${product.product_name}</a></h2>
+                                      <div class="ratings">
+                                        <div class="rating-box">
+                                          <div style="width:50%" class="rating"></div>
+                                        </div>
+                                        <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
+                                      </div>
+                                      <div class="price-box">
+                                        <p class="old-price"> <span class="price-label"></span> <span class="price"> AED ${product.product_price} </span> </p>
+                                        <p class="special-price"> <span class="price-label"></span> <span class="price"> AED ${product.discounted_price} </span> </p>
+                                      </div>
+                                      <div class="actions">
+                                        <button class="button btn-cart ajx-cart" title="Add to Cart" type="button" data-details="${ product}" onClick="addCart($(this).data('details'))"><span>Add to Cart</span></button>
+                                        <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist  ${product.is_wishlist?'active':''}" href="#" onclick="event.preventDefault();addWishlist(${product.id},$(this))"></a>
+                                        <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
+                                      </span> </div>
+                                    </div>
                                 </div>
-                                <div class="product-shop">
-                                    <h2 class="product-name"><a href="{{url('product-detail')}}?id=${product.id}" title="${product.product_name}">${product.product_name}</a></h2>
-                                    <div class="ratings">
-                                    <div class="rating-box">
-                                        <div style="width:50%" class="rating"></div>
-                                    </div>
-                                    <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#review-form">Add Your Review</a> </p>
-                                    </div>
-                                    <div class="desc std">
-                                    <p>${product.description} <a class="link-learn" title="" href="{{url('product-detail')}}?id=${product.id}">Learn More</a> </p>
-                                    </div>
-                                    <div class="price-box">
-                                    <p class="old-price"> <span class="price-label"></span> <span class="price"> AED ${product.product_price} </span> </p>
-                                    <p class="special-price"> <span class="price-label"></span> <span class="price"> AED ${product.discounted_price} </span> </p>
-                                    </div>
-                                    <div class="actions">
-                                    <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
-                                    <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist ${product.is_wishlist?'active':''}" href="#" onclick="event.preventDefault();addWishlist(${product.id},$(this))"></a>
-                                    <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
-                                    </span> </div>
-                                </div>
-                                </li>`;
+                              </div>`;
                     $('#products-list').append(item);
                 });
 

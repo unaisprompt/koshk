@@ -82,13 +82,13 @@
                                 <div class="product-list-grid">
                                   <ul class="nav">
                                     <li class="nav-item">
-                                      <a href="#" class="button-grid
+                                      <a href="{{url('products-grid')}}?{{request()->getQueryString()}}" class="button-grid
                                         nav-link">
                                         <i class="fa fa-th-large"></i>
                                       </a>
                                     </li>
                                     <li class="nav-item">
-                                      <a href="list.html" class="button-list
+                                      <a href="{{url('products')}}?{{request()->getQueryString()}}" class="button-list
                                         nav-link active">
                                         <i class="fa fa-bars"></i>
                                       </a>
@@ -424,6 +424,7 @@
         formData.append('explore_more',$('#explore_more').val());
         formData.append('lower',$('#lower').val());
         formData.append('upper',$('#upper').val());
+        formData.append('perpage',6);
            formData.append('page',loadCount);
         $('.brands').each(function(){
             if($(this).prop('checked'))
@@ -461,7 +462,7 @@
                                     <p class="special-price"> <span class="price-label"></span> <span class="price"> AED ${product.discounted_price} </span> </p>
                                     </div>
                                     <div class="actions">
-                                    <button class="button btn-cart ajx-cart" title="Add to Cart" type="button"><span>Add to Cart</span></button>
+                                    <button class="button btn-cart ajx-cart" title="Add to Cart" type="button" data-details="${ product}" onClick="addCart($(this).data('details'))"><span>Add to Cart</span></button>
                                     <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist ${product.is_wishlist?'active':''}" href="#" onclick="event.preventDefault();addWishlist(${product.id},$(this))"></a>
                                     <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
                                     </span> </div>

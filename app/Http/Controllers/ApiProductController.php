@@ -34,7 +34,8 @@ class ApiProductController extends Controller
         'subcategory_id' =>$subcategory_id,
         'innersubcategory_id'=>$innersubcategory_id,
         'search'=>$search,
-        'explore_more'=>$explore_more
+        'explore_more'=>$explore_more,
+        'perpage'=>7
         ]);
 
          if($response->successful())
@@ -64,7 +65,8 @@ class ApiProductController extends Controller
         'subcategory_id' =>$subcategory_id,
         'innersubcategory_id'=>$innersubcategory_id,
         'search'=>$search,
-        'explore_more'=>$explore_more
+        'explore_more'=>$explore_more,
+        'perpage'=>18
         ]);
 
          if($response->successful())
