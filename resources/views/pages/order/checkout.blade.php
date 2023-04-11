@@ -225,6 +225,7 @@
                                                 $total=0;
                                                 $shipping=0;
                                                 $total_discount=0;
+                                                $loyality_discount=0;
                                                 @endphp
 
                                                 @if($data)
@@ -250,6 +251,7 @@
                                                         @php $total+=$item['price'] * $item['qty'];
                                                         $total_discount+=$item['discount_amount']??0;
                                                         $shipping+=$item['shipping_cost'];
+                                                        $loyality_discount+=$item['loyality_discount'];
                                                         @endphp
 
                                                     </div>
@@ -283,7 +285,7 @@
                                                             </div>
                                                             <div class="cilop1">
                                                                 <h5>AED {{$total}}</h5>
-                                                                <h5>-AED {{$total_discount}}</h5>
+                                                                <h5>-AED {{$total_discount+$loyality_discount}}</h5>
                                                                 <h5>+AED {{$shipping}}</h5>
                                                             </div>
                                                         </div>
@@ -293,7 +295,7 @@
                                                                 <h5>Net Amount</h5>
                                                             </div>
                                                             <div class="cilop1">
-                                                                <h5>AED {{$total-$total_discount+$shipping}}</h5>
+                                                                <h5>AED {{$total-$total_discount+$shipping-$loyality_discount}}</h5>
                                                             </div>
                                                         </div>
                                                 </div>

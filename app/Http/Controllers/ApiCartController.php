@@ -16,7 +16,9 @@ class ApiCartController extends Controller
         $url = $this->url."/getcart";
         $user_id= session()->get('user_id');
         $token= 'Bearer '.session()->get('token');
-
+        $loyality_points=0;
+        $loyality_discount_applicable=0;
+        $aed_to_loality=0;
         if($user_id){
            // return $user_id;
             $response = Http::withHeaders([
@@ -27,7 +29,9 @@ class ApiCartController extends Controller
            
             
             $data=$response['data'];
-         //  return $data;
+          $loyality_points=$response['loyality_points'];
+          $loyality_discount_applicable=$response['loyality_discount_applicable'];
+          $aed_to_loality=$response['aed_to_loality'];
         }
 
         else{
@@ -55,7 +59,7 @@ class ApiCartController extends Controller
             {
              $similar_products=$response->object()->data;
             }
-        return view('pages.cart',compact('data','similar_products'));
+        return view('pages.cart',compact('data','similar_products','loyality_points','loyality_discount_applicable','aed_to_loality'));
     }
 
     public function addToCart(Request $request){

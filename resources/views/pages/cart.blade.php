@@ -1,6 +1,10 @@
  @extends('layouts.app')
 @section('content') 
-
+<style>
+  .hide{
+    display:none !important;
+  }
+  </style>
   <!-- Main Container -->
   <section class="main-container col1-layout">
     <div class="container">
@@ -25,6 +29,7 @@
                 $total=0; 
                 $shipping=0;
                 $total_discount=0;
+                $total_loyality_discount=0;
                  @endphp
 
                 @if($data)
@@ -57,6 +62,7 @@
                    @php $total+=$item['price'] * $item['qty'];
                         $total_discount+=$item['discount_amount']??0;
                         $shipping+=$item['shipping_cost'];
+                        $total_loyality_discount+=$item['loyality_discount'];
                     @endphp
                     <div class="count-number">
                       <form id="myform" method="POST" class="quantity" action="#">
@@ -93,17 +99,60 @@
                       <div class="cilop1">
                         <h5>AED {{$total}}</h5>
                         <h5>-AED {{$total_discount}}</h5>
-                        <h5>+AED {{$shipping}}</h5>
+                        <h5>+AED {{$shipping}}</h5><br><br>
                       </div>
                   </div><hr>
                   <div class="d-flex justify-content-between">
                       <div class="cilop">
                         <h5>Net Amount</h5>
+                        @if(session()->get('token'))
+                        @php
+                          $net_amount=$total-$total_discount+$shipping;
+                          $applicable_discount=$net_amount*$loyality_discount_applicable/100;
+                          try{
+                            $points_to_discount=$loyality_points/$aed_to_loality;
+                          }catch(Exception $e)
+                          {
+                            $points_to_discount=0;
+                          }
+                          $applied_discount=$points_to_discount;
+                          if($applicable_discount<$points_to_discount)
+                          {
+                            $applied_discount=$applicable_discount;
+                          }
+                        if($total_loyality_discount>0)
+                          {
+                            $applied_discount=$total_loyality_discount;
+                          } 
+                          $percentage=$applied_discount*100/$net_amount;
+                        @endphp
+                        <label><input type="checkbox" id="apply_coins" @if($total_loyality_discount>0) checked @endif onchange="applyCoins({{round($percentage,2)}})">&ensp;Apply {{$applied_discount*$aed_to_loality}} coins</label>
+                        @endif
+                        
                       </div>
                       <div class="cilop1">
                         <h5>AED {{$total-$total_discount+$shipping}}</h5>
                       </div>
                   </div>
+                      <hr>
+                      @if(session()->get('token'))
+                     <div class="d-flex justify-content-between @if($total_loyality_discount==0) hide @endif" id="coins_div" >
+                         <div class="cilop">
+                            <h5>Total Loyality points</h5>
+                            <h5>Applied loyality points</h5>
+                            <h5>Loyality Discount amount</h5>
+                            <h5><b>Subtotal</b></h5>
+                         </div>
+                         <div class="cilop1">
+                           
+                        <h5>{{$loyality_points}}</h5>
+                        
+                        <h5>{{$applied_discount*$aed_to_loality}}</h5>
+                        <h5>AED {{$applied_discount}}</h5>
+                        <h5>AED {{$total-$total_discount+$shipping-$applied_discount}}</h5>
+                         </div>
+                    </div>
+                    @endif
                   <div class="ctllRv">
                     <button @if(session()->get('user_id')) onclick="window.location='{{url("checkout")}}'" @else  onclick="$('#myModalsignin').modal('show');"  @endif>Checkout</button>
                   </div>
@@ -155,7 +204,7 @@
                     <div class="item-info">
                       <div class="info-inner">
                         <div class="item-title"> <a title="{{$product->product_name}}" href="{{url('product-detail')}}?id={{$product->id}}"> {{$product->product_name}} </a> </div>
-                        <div class="brand">{{$product->brand->brand_name}}</div>
+                        <div class="brand">{{$product->brand?$product->brand->brand_name:''}}</div>
                         <div class="item-content">
                           <div class="star-rating">
                                <span style="width:{{(count($product->rattings)>0)?$product->rattings[0]->avg_ratting*2*10:'0'}}%">Rated <strong class="rating">{{count($product->rattings)>0?$product->rattings[0]->avg_ratting:0}}</strong> out of 5</span>
@@ -376,6 +425,42 @@
                  }
               }
             })
+      }
+      function applyCoins(discount_percentage)
+      {
+        if(!$('#apply_coins').prop('checked')){
+          discount_percentage=0;
+        }
+        $.ajax({
+          url:'{{config('global.api')}}/apply_loyality_points',
+          type:'post',
+          beforeSend: function (xhr) {
+              xhr.setRequestHeader('Authorization', 'Bearer {{session()->get('token')}}');
+          },
+          data:{discount_percentage},
+          success:function(response)
+          {
+            if(response.status)
+            { 
+              if(discount_percentage>0)
+              {
+                $('#coins_div').removeClass('hide');
+              }else{
+                $('#coins_div').addClass('hide');
+              }
+            }else{
+              Toastify({
+                        text: response.error,
+                        className: "error",
+                        close: true,
+                        style: {
+                            background: "red",
+                        }
+                        }).showToast();
+            }
+          }
+        })
+
       }
     </script>
  @endsection
