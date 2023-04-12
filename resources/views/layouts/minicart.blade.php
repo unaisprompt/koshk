@@ -63,7 +63,6 @@
                                                                                       </div>
                                                                                     </div>
                                                                                   </li>`;
-                                                                                  console.log(html);
                                                                                    $('#cart-sidebar').append(html);
                                                                                   });
                                                 let totalqty=response.data.map(item=>item.qty).reduce((partialSum, a) => partialSum + a, 0);

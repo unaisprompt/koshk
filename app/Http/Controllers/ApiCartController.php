@@ -243,10 +243,9 @@ class ApiCartController extends Controller
         else{
             $carts = session()->get('cart',[]);
             if($carts&&is_array($carts))
-            $data = $carts;
+            $data = array_values($carts);
         }
 
-    
         return response()->json(["data"=>$data]);
     }
         
