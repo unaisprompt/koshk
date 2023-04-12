@@ -103,13 +103,12 @@ class ApiUserController extends Controller
             session()->put('email', $response['data']['email']);
             session()->put('profile_pic', $response['data']['profile_pic']);
             $carts = session()->get('cart');
-           // return $carts;
             $url = $this->url."/addtocart";
             $user_id= session()->get('user_id');
             $token= 'Bearer '.session()->get('token');
             if($carts){
                 foreach($carts as $cart){
-                    $response = Http::withHeaders([
+                    $responsenew = Http::withHeaders([
                         'Authorization' => $token
                     ])->post($url, [
                         'user_id' => $user_id,
@@ -134,11 +133,7 @@ class ApiUserController extends Controller
         
                 }
 
-                // $cart = session()->get('cart');
-                // session()->forget('cart');
-                // session()->put('cart', $cart);
             }
-            //   dd($response->json());
          return response()->json(["status"=>1,
                             "message"=>$response['message'],
                             "data" =>$response['data']['is_already'] ]);

@@ -62,7 +62,7 @@
                    @php $total+=$item['price'] * $item['qty'];
                         $total_discount+=$item['discount_amount']??0;
                         $shipping+=$item['shipping_cost'];
-                        $total_loyality_discount+=$item['loyality_discount'];
+                        $total_loyality_discount+=isset($item['loyality_discount'])?$item['loyality_discount']:0;
                     @endphp
                     <div class="count-number">
                       <form id="myform" method="POST" class="quantity" action="#">
@@ -341,7 +341,7 @@
               beforeSend: function (xhr) {
                   xhr.setRequestHeader('Authorization', 'Bearer {{session()->get('token')}}');
               },
-              data:{user_id:{{session()->get('user_id')}},coupon_name:$('#coupon_code').val()},
+              data:{user_id:{{session()->get('user_id')??0}},coupon_name:$('#coupon_code').val()},
               dataType:'json',
               success:function(response){
                  if(response.status==1)
