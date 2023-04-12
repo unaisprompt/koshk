@@ -27,6 +27,9 @@
   <link rel="stylesheet" type="text/css" href="{{asset('assets/css/developer.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/newstyle.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/define.css')}}">
+
+   <link rel="stylesheet" href="{{asset('assets/css/splide.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/splide-core.min.css')}}">
   {{-- please dont add/modify script link . if you facing any problem please contact --}}
      {{-- <script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script> --}}
   {{-- please dont add/modify script link . if you facing any problem please contact --}}
@@ -59,6 +62,9 @@
     <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.mobile-menu.min.js')}}"></script>
     <script src="{{asset('assets/js/countdown.js')}}"></script>
+    <script src="{{asset('assets/js/splide.min.js')}}"></script>
+            <script src="{{asset('assets/js/splide-extension-auto-scroll.min.js')}}"></script>
+    <script src="{{asset('assets/js/splide-renderer.min.js')}}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
      <script>
@@ -112,7 +118,7 @@
 }
     </style>
 <body class="cms-index-index cms-home-page home">
-    <div class="pre-loader">
+    {{-- <div class="pre-loader">
     <div class="loading">
   <span></span>
   <span></span>
@@ -120,7 +126,7 @@
   <span></span>
   <span></span>
 </div>
-    </div>
+    </div> --}}
     <div id="page">
         {{-- <div class="pre-loader">
             <svg class="gegga">

@@ -57,7 +57,7 @@
     <!-- ============================================== INFO BOXES ============================================== -->
     <!-- ============================================== SCROLL TABS ============================================== -->
     <div id="product-tabs-slider" class="scroll-tabs">
-      <div class="more-info-tab clearfix">
+      {{-- <div class="more-info-tab clearfix">
         <ul class="nav nav-tabs nav-tab-line container">
           @foreach($finalData['main_data']['category'] as $category)
           <li class="{{$loop->iteration == 1 ? 'active': ''}}"> <a data-transition-type="backSlide" href="#cat_{{$category['id']}}" data-toggle="tab"> <img
@@ -65,7 +65,22 @@
                 @endforeach
         </ul>
         <!-- /.nav-tabs -->
-      </div>
+      </div> --}}
+
+            <div class="splide" id="product-carousel">
+        <div class="splide__track more-info-tab clearfix ">
+          <ul class="splide__list nav nav-tabs nav-tab-line container" style="height: 230px;">
+             @foreach($finalData['main_data']['category'] as $category)
+            <li class="splide__slide {{$loop->iteration == 1 ? 'active': ''}}">
+              <a data-transition-type="backSlide" href="#cat_{{$category['id']}}" data-toggle="tab"> 
+                <img src="{{$category['image_url']}}" alt="mobiles"> 
+                <span> {{$category['category_name']}}</span> 
+              </a> 
+            </li>  
+             @endforeach   
+          </ul>
+        </div>
+            </div>
 
       <div class="tab-content container">
               @foreach($finalData['category_with_product']['category'] as $cat_product)
@@ -1343,5 +1358,29 @@ $.ajax(setting);
             $.ajax(setting);
     }
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    new Splide( '.splide', {
+      type: 'slide',
+      perPage: 7,
+      perMove: 1,
+      gap: 0,
+      autoplay: false,
+      interval: 3000,
+      pauseOnHover: true,
+      breakpoints: {
+        992: {
+          perPage: 3,
+        },
+        768: {
+          perPage: 2,
+        },
+        576: {
+          perPage: 3,
+        },
+      }
+    } ).mount();
+  });
+</script>
 @endsection
        
