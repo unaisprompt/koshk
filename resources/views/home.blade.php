@@ -1220,7 +1220,7 @@ var setting={
          background: "#1cad6a",
      }
      }).showToast();
-
+ localStorage.setItem("cartupdate", 1);
       }
      
      },
@@ -1346,6 +1346,7 @@ $.ajax(setting);
                             background: "#1cad6a",
                         }
                         }).showToast();
+                         localStorage.setItem("cartupdate", 1);
                         window.location="{{url('checkout')}}";
                           }
                         

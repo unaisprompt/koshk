@@ -280,6 +280,7 @@
                             background: "#1cad6a",
                         }
                         }).showToast();
+                         localStorage.setItem("cartupdate", 1);
                           }
                         
                         },
