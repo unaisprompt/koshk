@@ -192,7 +192,7 @@
                 <div>
                   <div class="top-cart-content">
                     <!--block-subtitle-->
-                    <ul class="mini-products-list" id="cart-sidebar">
+                    <ul class="mini-products-list" >
                       <li class="item first cust">
                         {{session()->all()['name']}}<i class="fa fa-user clsicon"></i>
                       </li>
@@ -405,7 +405,7 @@
               </div>
             </div>
             <div class="top-cart-contain">
-                  {{minicart()}}
+                 @include('layouts.minicart');
               <div id="ajaxconfig_info" style="display:none"> <a href="#/"></a>
                 <input value="" type="hidden">
                 <input id="enable_module" value="1" type="hidden">

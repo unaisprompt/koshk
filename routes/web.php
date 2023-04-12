@@ -114,3 +114,4 @@ Route::get('about',[ApiController::class,'about']);
 Route::get('privacy-policy',[ApiController::class,'privacy']);
 Route::get('terms&conditions',[ApiController::class,'terms']);
 Route::get('return-policy',[ApiController::class,'returnPolicy']);
+Route::get('cart_ajax',[ApiCartController::class,'cart_ajax']);

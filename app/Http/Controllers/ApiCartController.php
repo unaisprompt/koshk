@@ -225,6 +225,30 @@ class ApiCartController extends Controller
             $data=$response['data'];
          //  return $data;
         }
+        function cart_ajax(){
+
+        $url = config('global.api')."/getcart";
+        $user_id= session()->get('user_id');
+        $token= 'Bearer '.session()->get('token');
+        $data=[];
+        if($user_id){
+            $response = Http::withHeaders([
+                'Authorization' => $token
+            ])->post($url, [
+                'user_id' => $user_id
+            ]);
+            $data=$response['data'];
+        }
+
+        else{
+            $carts = session()->get('cart',[]);
+            if($carts&&is_array($carts))
+            $data = $carts;
+        }
+
+    
+        return response()->json(["data"=>$data]);
+    }
         
     }
 
