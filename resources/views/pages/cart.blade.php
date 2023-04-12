@@ -138,16 +138,14 @@
                       @if(session()->get('token'))
                      <div class="d-flex justify-content-between @if($total_loyality_discount==0) hide @endif" id="coins_div" >
                          <div class="cilop">
-                            <h5>Total Loyality points</h5>
-                            <h5>Applied loyality points</h5>
+                            <!-- <h5>Total Loyality points</h5> -->
+                            <!-- <h5>Applied loyality points</h5> -->
                             <h5>Loyality Discount amount</h5>
                             <h5><b>Subtotal</b></h5>
                          </div>
                          <div class="cilop1">
-                           
-                        <h5>{{$loyality_points}}</h5>
-                        
-                        <h5>{{$applied_discount*$aed_to_loality}}</h5>
+                        <!-- <h5>{{$loyality_points}}</h5> -->
+                        <!-- <h5>{{$applied_discount*$aed_to_loality}}</h5> -->
                         <h5>AED {{$applied_discount}}</h5>
                         <h5>AED {{$total-$total_discount+$shipping-$applied_discount}}</h5>
                          </div>
