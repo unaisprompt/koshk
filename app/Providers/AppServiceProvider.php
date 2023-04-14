@@ -25,10 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $url = config('global.api')."/categoryWithSubcategory";
-        $response = Http::post($url,  [
-         ]);
+        // $url = config('global.api')."/categoryWithSubcategory";
+        // $response = Http::post($url,  [
+        //  ]);
        //  dd($response['category']);
-        view()->share('menus', $response['category']);
+        // view()->share('menus', $response['category']);
     }
 }
