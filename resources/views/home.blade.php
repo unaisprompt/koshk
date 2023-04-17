@@ -57,7 +57,7 @@
     <!-- ============================================== INFO BOXES ============================================== -->
     <!-- ============================================== SCROLL TABS ============================================== -->
     <div id="product-tabs-slider" class="scroll-tabs">
-      {{-- <div class="more-info-tab clearfix">
+       <div class="more-info-tab clearfix">
         <ul class="nav nav-tabs nav-tab-line container">
           @foreach($finalData['main_data']['category'] as $category)
           <li class="{{$loop->iteration == 1 ? 'active': ''}}"> <a data-transition-type="backSlide" href="#cat_{{$category['id']}}" data-toggle="tab"> <img
@@ -65,9 +65,9 @@
                 @endforeach
         </ul>
         <!-- /.nav-tabs -->
-      </div> --}}
+      </div> 
 
-            <div class="splide" id="product-carousel">
+            {{-- <div class="splide" id="product-carousel">
         <div class="splide__track more-info-tab clearfix ">
           <ul class="splide__list nav nav-tabs nav-tab-line container" style="height: 230px;">
              @foreach($finalData['main_data']['category'] as $category)
@@ -80,7 +80,7 @@
              @endforeach   
           </ul>
         </div>
-            </div>
+            </div> --}}
 
       <div class="tab-content container">
               @foreach($finalData['category_with_product']['category'] as $cat_product)

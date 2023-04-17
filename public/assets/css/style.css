@@ -4429,9 +4429,8 @@ our-features-box .feature-box {
     box-sizing: border-box;
     bottom: 60px;
     left: 50%;
-    z-index: -1;
+    z-index: 1;
     margin-left: -56px;
-    border: 6px solid #000000;
 }
 
 .scroll-tabs .nav-tab-line li.active a:hover {
@@ -15122,9 +15121,9 @@ a.shop-now-btn {
         padding: 0 !important;
     }
 
-    /* .scroll-tabs .more-info-tab {
+    .scroll-tabs .more-info-tab {
         padding-bottom: 150px;
-    } */
+    }
     .scroll-tabs .nav-tab-line li.active a:after {
         display: none;
     }
