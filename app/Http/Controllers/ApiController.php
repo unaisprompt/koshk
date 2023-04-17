@@ -24,6 +24,7 @@ class ApiController extends Controller
                 "main_data" => $response_data,
                 "category_with_product" => $this->categoryWithProduct()
             );
+            // dd($finalData);
       return view('home',compact('finalData'));
     
     }
