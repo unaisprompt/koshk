@@ -1,65 +1,76 @@
+.order-box-wid{
+  width: 100%;
+}
 .icons {
-    color: whitesmoke;
-    display: flex;
-    width: 22px;
-    margin-right: 6px;
+  color: whitesmoke;
+  display: flex;
+  width: 22px;
+  margin-right: 6px;
 }
+
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0 0 0 / 80%);
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0 0 0 / 80%);
 }
+
 .modal-content {
-    background-color: #fefefe;
-    margin: 6% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 74%;
-    z-index: 2000;
+  background-color: #FEFEFE;
+  margin: 6% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 74%;
+  z-index: 2000;
 }
+
 .modal-pad {
-    padding: 10px;
+  padding: 10px;
 }
+
 .close {
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    opacity: 1;
-    background: #f9fe00;
-    color: #1d1d1d;
-    padding: 2px 9px;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  opacity: 1;
+  background: #f9fe00;
+  color: #1d1d1d;
+  padding: 2px 9px;
 }
+
 .close:hover,
 .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
+
 .product-view .add-to-box .btn-buy {
-    font-size: 16px;
-    text-shadow: none;
-    padding: 8px 10px;
-    float: right;
-    margin-top: 0px;
-    font-weight: 600;
-    transition: color 300ms ease-in-out 0s,
-        background-color 300ms ease-in-out 0s,
-        background-position 300ms ease-in-out 0s;
-    border: none;
-    height: 52px;
-    border-radius: 3px;
-    background: #fb641b;
-    color: #fff;
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
-    margin-bottom: 10px;
-    width: 49%;
+  font-size: 16px;
+  text-shadow: none;
+  padding: 8px 10px;
+  float: right;
+  margin-top: 0px;
+  font-weight: 600;
+  transition: color 300ms ease-in-out 0s, background-color 300ms ease-in-out 0s, background-position 300ms ease-in-out 0s;
+  border: none;
+  height: 52px;
+  border-radius: 3px;
+  background: #fb641b;
+  color: #fff;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 20%);
+  margin-bottom: 10px;
+  width: 49%;
 }
+.list-btm{
+  margin-bottom: 10px;
+}
+
 
 /*
 Credits:
@@ -67,17 +78,20 @@ https://github.com/marcaube/bootstrap-magnify
 */
 
 .mag {
-    margin: 0 auto;
-    float: none;
+
+  margin: 0 auto;
+  float: none;
 }
 
 .mag img {
-    max-width: 100%;
+  max-width: 100%;
 }
 
+
+
 .magnify {
-    position: relative;
-    cursor: none;
+  position: relative;
+  cursor: none
 }
 
 /* .magnify-large {
@@ -94,10 +108,12 @@ display: none;
          border-radius: 100%
 } */
 
+
+
 .instructions {
-    text-align: center;
-    font-size: 20px;
-    margin: 15vh;
+  text-align: center;
+  font-size: 20px;
+  margin: 15vh;
 }
 
 /* //////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,68 +121,75 @@ display: none;
 ////////////////////////////////////////////////////////////////////////////////////////////// */
 /*   This is the background overlay   */
 .backgroundOverlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: #000000;
-    opacity: 0.85;
-    filter: alpha(opacity=85);
-    -moz-opacity: 0.85;
-    z-index: 101;
-    display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #000000;
+  opacity: .85;
+  filter: alpha(opacity=85);
+  -moz-opacity: .85;
+  z-index: 101;
+  display: none;
 }
+
 /*   This is the Popup Window   */
 .delayedPopupWindow {
-    display: none;
-    position: fixed;
-    width: auto;
-    max-width: 634px;
-    height: 313px;
-    top: 50%;
-    left: 50%;
-    margin-left: -303px;
-    margin-top: -180px;
+  display: none;
+  position: fixed;
+  width: auto;
+  max-width: 634px;
+  height: 313px;
+  top: 50%;
+  left: 50%;
+  margin-left: -303px;
+  margin-top: -180px;
 
-    z-index: 102;
+
+  z-index: 102;
+
 }
+
 /*   This is the closing button  */
 #btnClose {
-    width: 100%;
-    display: block;
-    text-align: right;
-    text-decoration: none;
-    color: #c90c12;
-    position: absolute;
-    /* width: 30px; */
-    /* background-color: antiquewhite; */
-    float: left;
-    padding-right: 10px;
+  width: 100%;
+  display: block;
+  text-align: right;
+  text-decoration: none;
+  color: #c90c12;
+  position: absolute;
+  /* width: 30px; */
+  /* background-color: antiquewhite; */
+  float: left;
+  padding-right: 10px;
 }
+
 /*   This is the closing button hover state  */
 #btnClose:hover {
-    color: #c90c12;
+  color: #c90c12;
 }
+
 /*   This is the description headline and paragraph for the form   */
-#delayedPopup > div.formDescription {
-    float: left;
-    display: block;
-    width: 44%;
-    padding: 1% 3%;
-    font-size: 18px;
-    color: #666;
-    clear: left;
+#delayedPopup>div.formDescription {
+  float: left;
+  display: block;
+  width: 44%;
+  padding: 1% 3%;
+  font-size: 18px;
+  color: #666;
+  clear: left;
 }
+
 /*   This is the styling for the form's headline   */
-#delayedPopup > div.formDescription h2 {
-    color: #444444;
-    font-size: 36px;
-    line-height: 40px;
+#delayedPopup>div.formDescription h2 {
+  color: #444444;
+  font-size: 36px;
+  line-height: 40px;
 }
 
 /* 
@@ -175,295 +198,377 @@ display: none;
 
 /*   This is the signup form body  */
 #delayedPopup #mc_embed_signup {
-    float: left;
-    width: 47%;
-    padding: 1%;
-    display: block;
-    font-size: 16px;
-    color: #666;
-    margin-left: 1%;
+  float: left;
+  width: 47%;
+  padding: 1%;
+  display: block;
+  font-size: 16px;
+  color: #666;
+  margin-left: 1%;
 }
+
 /*   This is the styling for the signup form inputs  */
 #delayedPopup #mc-embedded-subscribe-form input {
-    width: 95%;
-    height: 30px;
-    font-size: 18px;
-    padding: 3px;
-    margin-bottom: 5px;
+  width: 95%;
+  height: 30px;
+  font-size: 18px;
+  padding: 3px;
+  margin-bottom: 5px;
 }
+
 /*   This is the styling for the signup form inputs when they are being hovered with the mouse  */
 #delayedPopup #mc-embedded-subscribe-form input:hover {
-    border: solid 2px #40c348;
-    box-shadow: 0 1px 3px #aaaaaa;
+  border: solid 2px #40c348;
+  box-shadow: 0 1px 3px #AAAAAA;
 }
+
 /*   This is the styling for the signup form inputs when they are focused  */
 #delayedPopup #mc-embedded-subscribe-form input:focus {
-    border: solid 2px #40c348;
-    box-shadow: none;
+  border: solid 2px #40c348;
+  box-shadow: none;
 }
+
 /*   This is the styling for the signup form submit button  */
 #delayedPopup #mc-embedded-subscribe {
-    width: 100% !important;
-    height: 40px !important;
-    margin: 10px auto 0 auto;
-    background: #5d9e62;
-    border: none;
-    color: #fff;
+  width: 100% !important;
+  height: 40px !important;
+  margin: 10px auto 0 auto;
+  background: #5D9E62;
+  border: none;
+  color: #fff;
 }
+
 /*   This is the styling for the signup form submit button hover state  */
 #delayedPopup #mc-embedded-subscribe:hover {
-    background: #40c348;
-    color: #fff;
-    box-shadow: none !important;
-    cursor: pointer;
+  background: #40c348;
+  color: #fff;
+  box-shadow: none !important;
+  cursor: pointer;
 }
+
 .ban-top {
-    margin-top: 36px;
+  margin-top: 36px;
 }
+
 .button-close {
-    padding-bottom: 28px;
-    width: 100%;
+  padding-bottom: 28px;
+  width: 100%;
 }
+
 
 /* popup */
 
 .AppForm .AppFormLeft h1 {
-    font-size: 35px;
+  font-size: 35px;
 }
+
 .AppForm .AppFormLeft input:focus {
-    border-color: #ced4da;
+  border-color: #ced4da;
 }
+
 .AppForm .AppFormLeft input::placeholder {
-    font-size: 15px;
+  font-size: 15px;
 }
+
 .AppForm .AppFormLeft i {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
+
 .AppForm .AppFormLeft a {
-    color: #3a3e42;
+  color: #3a3e42;
 }
+
 .AppForm .AppFormLeft button {
-    background: linear-gradient(45deg, #8d334c, #cf6964);
-    border-radius: 30px;
+  background: linear-gradient(45deg, #8D334C, #CF6964);
+  border-radius: 30px;
 }
+
 .AppForm .AppFormLeft p span {
-    color: #007bff;
+  color: #007bff;
 }
+
 .AppForm .AppFormRight {
-    background-image: url("https://i.ibb.co/tDLqQtj/bg.jpg");
-    height: 450px;
-    background-size: cover;
-    background-position: center;
+  background-image: url('https://i.ibb.co/tDLqQtj/bg.jpg');
+  height: 450px;
+  background-size: cover;
+  background-position: center;
 }
+
 .AppForm .AppFormRight:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, #8d334c, #cf6964);
-    opacity: 0.5;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #8D334C, #CF6964);
+  opacity: 0.5;
 }
+
 .AppForm .AppFormRight h2 {
-    z-index: 1;
+  z-index: 1;
 }
+
 .AppForm .AppFormRight h2::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: #fff;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
+
 .AppForm .AppFormRight p {
-    z-index: 1;
+  z-index: 1;
 }
+
 
 /* popop */
 .new-con {
-    width: 100%;
-    height: 400px;
+  width: 100%;
+  height: 400px;
 
-    background: #fff;
-    padding: 0;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  background: #fff;
+  padding: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .7);
 
-    font-family: sans-serif;
-}
-
-.new-con .left {
-    float: left;
-    width: 50%;
-    height: 400px;
-    text-align: center;
-    padding: 40px 20px;
-    background: url("../images/Banner-update.jpg");
-    background-size: cover;
-}
-
-.new-con .left h1 {
-    color: #333;
-    padding: 0;
-    margin: 0 0 30px;
-}
-
-.new-con .left p {
-    color: #ffffff;
-    line-height: 1.7;
-    font-size: 15px;
-    margin-top: 50px;
-    margin-bottom: 43px;
-}
-
-.new-con .left button {
-    margin-top: 0;
-    padding: 15px 30px;
-    color: #fff;
-    background: transparent;
-    border: none;
-    font-size: 16px;
-    border-radius: 30px;
-    background: linear-gradient(to right, #e43a15, #e65245);
-    outline: none;
-    cursor: pointer;
+  font-family: sans-serif;
 }
 
 .new-con .right {
-    float: right;
-    width: 50%;
-    height: 400px;
-    padding: 40px 20px;
-}
-
-.new-con .right .title {
-    text-align: center;
+  float: right;
+  width: 50%;
+  height: 400px;
+  text-align: center;
+  padding: 40px 20px;
+  background: url("../images/Banner-update.jpg");
+  background-size: cover;
 }
 
 .new-con .right h1 {
-    color: #333;
-    padding: 0;
-    margin: 0 0 30px;
+  color: #333;
+  padding: 0;
+  margin: 0 0 30px;
 }
 
-.new-con .right form {
-    padding: 0 10px;
+.new-con .right p {
+  color: #ffffff;
+  line-height: 1.7;
+  font-size: 15px;
+  margin-top: 50px;
+  margin-bottom: 43px;
 }
 
-.new-con .right form label,
-.new-con .right form input {
-    display: block;
-    margin-bottom: 10px;
+.new-con .right button {
+  margin-top: 0;
+  padding: 15px 30px;
+  color: #fff;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  border-radius: 30px;
+  background: linear-gradient(to right, #e43a15, #e65245);
+  outline: none;
+  cursor: pointer;
 }
 
-.new-con .right form label {
-    color: #666;
-    font-size: 14px;
-    font-weight: bold;
+.new-con .left {
+  float: left;
+  width: 50%;
+  height: 400px;
+  padding: 40px 20px;
 }
 
-.new-con .right form input {
-    padding: 12px;
-    width: 90%;
-    border: 1px solid #9c9b9b;
-    outline: none;
-    border-radius: 15px;
-    font-size: 12px;
+.new-con .left .title {
+  text-align: center;
 }
 
-.new-con .right form .signin {
-    margin-top: 18px;
-    padding: 8px 26px;
-    color: #ffffff;
-    background: red;
-
-    font-size: 13px;
-
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-    outline: none;
-}
-.new-con .right form .signUp {
-    margin-top: 10px;
-    padding: 8px 26px;
-    color: #333;
-    background: white;
-    border: 1px solid #a9a9a9;
-    font-size: 13px;
-
-    border-radius: 30px;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-    outline: none;
+.new-con .left h1 {
+  color: #333;
+  padding: 0;
+  margin: 0 0 30px;
 }
 
-.new-con .right form button:hover {
-    background: linear-gradient(to right, #e43a15, #e65245);
-    color: #fff;
-    border: none;
+.new-con .left form {
+  padding: 0 10px;
 }
 
-@media only screen and (min-width: 300px) {
-    .logo {
-        width: 100px;
-    }
+.new-con .left form label,
+.new-con .left form input {
+  display: block;
+  margin-bottom: 10px;
 }
-/* loader */
-.loading {
-    --speed-of-animation: 0.9s;
-    --gap: 6px;
-    --first-color: #4c86f9;
-    --second-color: #49a84c;
-    --third-color: #f6bb02;
-    --fourth-color: #f6bb02;
-    --fifth-color: #2196f3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.new-con .left form label {
+  color: #666;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.new-con .left form input {
+  padding: 12px;
+  width: 90%;
+  border: 1px solid #9c9b9b;
+  outline: none;
+  border-radius: 15px;
+  font-size: 12px;
+}
+
+
+.new-con .left form .signin {
+  margin-top: 18px;
+  padding: 8px 26px;
+  color: #ffffff;
+  background: red;
+
+  font-size: 13px;
+
+  border-radius: 30px;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+  outline: none;
+}
+
+.new-con .left form .signUp {
+  margin-top: 10px;
+  padding: 8px 26px;
+  color: #333;
+  background: white;
+  border: 1px solid #a9a9a9;
+  font-size: 13px;
+
+  border-radius: 30px;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+  outline: none;
+}
+
+.new-con .left form button:hover {
+  background: linear-gradient(to right, #e43a15, #e65245);
+  color: #fff;
+  border: none;
+}
+
+
+/* @media only screen and (min-width: 300px) {
+  .logo {
     width: 100px;
-    gap: 6px;
-    height: 100px;
+  }
+} */
+.delivery-time{
+  margin-right: auto;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.index-banner-pad{
+  padding-top: 30px;
+}
+.order-btn{
+  border: 1px solid #333;
+  background-color: white;
+  float: right;
+
+    color: #333;
+   
+    font-size: 15px;
+    font-weight: 400;
+    line-height: normal;
+    padding: 10px 15px;
+    font-family: 'Open Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 3px;
+    transition: 0.5s;
+}
+.order-btn:hover{
+  background-color: #0fb44f;
+  transition: 0.5s;
+  border-color: white;
+  color: white;
+}
+.order-title{
+  font-size: 20px;
+  font-weight: 700;
+}
+.font-clr{
+  color: #000000;
+}
+.profile-dp{
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+}
+.profile-name{
+  float: right;
+  
+    margin-top: 17px;
+    width: 110px;
+}
+.account-tabs{
+  border: none;
+  border-radius: 0;
+  line-height: inherit;
+  margin: 0 0 auto;
+  min-height: inherit;
+  padding: 0;
+  text-align: left;
+  width:100%; 
+}
+.account-tabs li a{
+  color: #222;
+}                 
+
+.account-tabs li a.active{
+  border: 0 solid #00a6ed;
+  color: #2874f0;
+} 
+.profile-btm{
+  margin-bottom: 12px;
+}
+.account-tabs-section{
+  background: #f1f1f1cc;
+  height: auto;
+} 
+.profile-name .user-name{
+  font-weight: 700;
+}
+.profile-name span a{
+  color: #0fb44f;
 }
 
-.loading span {
-    width: 4px;
-    height: 50px;
-    background: var(--first-color);
-    animation: scale var(--speed-of-animation) ease-in-out infinite;
+
+.account-profile .avatar {
+  border-radius: 50%;
+  height: 150px;
+  vertical-align: middle;
+  width: 150px;
+}
+.account-profile .address-add {
+  display: flex;
+  justify-content: flex-end;
+}
+.cart-padding{
+  font-size: 12px;
+}
+ 
+
+
+@media only screen and (max-width: 990px){
+	#search {
+		width: 10% !important;
+	}
+	.logo-block{
+		width: 20%;
+	}
+	.top-cart-contain{
+		margin-top: 10px;
+	}
+	.search-box{
+		margin-top: 22px;
+	}
 }
 
-.loading span:nth-child(2) {
-    background: var(--second-color);
-    animation-delay: -0.8s;
-}
 
-.loading span:nth-child(3) {
-    background: var(--third-color);
-    animation-delay: -0.7s;
-}
-
-.loading span:nth-child(4) {
-    background: var(--fourth-color);
-    animation-delay: -0.6s;
-}
-
-.loading span:nth-child(5) {
-    background: var(--fifth-color);
-    animation-delay: -0.5s;
-}
-
-@keyframes scale {
-    0%,
-    40%,
-    100% {
-        transform: scaleY(0.05);
-    }
-
-    20% {
-        transform: scaleY(1);
-    }
-}

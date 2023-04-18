@@ -5,39 +5,38 @@
 jQuery(document).ready(function () {
     "use strict"; /* Navigation */
     /* Mega Menu */
-    jQuery(".mega-menu-title").on("click", function () {
-        if (jQuery(".mega-menu-category").is(":visible")) {
-            jQuery(".mega-menu-category").slideUp();
+    jQuery('.mega-menu-title').on('click', function () {
+        if (jQuery('.mega-menu-category').is(':visible')) {
+            jQuery('.mega-menu-category').slideUp();
         } else {
-            jQuery(".mega-menu-category").slideDown();
+            jQuery('.mega-menu-category').slideDown();
         }
     });
 
-    jQuery(".mega-menu-category .nav > li.view-more-cat").on(
-        "click",
-        function (e) {
-            if (
-                jQuery(".mega-menu-category .nav > li.more-menu").is(":visible")
-            ) {
-                jQuery(".mega-menu-category .nav > li.more-menu")
-                    .stop()
-                    .slideUp();
-                jQuery(this).find("a").text("More");
-            } else {
-                jQuery(".mega-menu-category .nav > li.more-menu")
-                    .stop()
-                    .slideDown();
-                jQuery(this).find("a").text("Close menu");
-                jQuery(this).find("a").addClass("menu-hide");
-            }
-            e.preventDefault();
+
+
+
+
+
+
+    jQuery('.mega-menu-category .nav > li.view-more-cat').on('click', function (e) {
+        if (jQuery('.mega-menu-category .nav > li.more-menu').is(':visible')) {
+            jQuery('.mega-menu-category .nav > li.more-menu').stop().slideUp();
+            jQuery(this).find('a').text('More');
+        } else {
+            jQuery('.mega-menu-category .nav > li.more-menu').stop().slideDown();
+            jQuery(this).find('a').text('Close menu');
+            jQuery(this).find('a').addClass('menu-hide');
+
         }
-    );
+        e.preventDefault();
+    });
 
     /*  tabs slider */
-    jQuery(".home-owl-carousel").each(function () {
+    jQuery('.home-owl-carousel').each(function () {
+
         var owl = $(this);
-        var itemPerLine = owl.data("item");
+        var itemPerLine = owl.data('item');
         if (!itemPerLine) {
             itemPerLine = 4;
         }
@@ -50,9 +49,12 @@ jQuery(document).ready(function () {
             navigation: true,
             pagination: false,
 
-            navigationText: ["", ""],
+            navigationText: ["", ""]
         });
     });
+
+
+
 
     /*  Best Seller Slider */
     jQuery("#top-categories .slider-items").owlCarousel({
@@ -62,13 +64,11 @@ jQuery(document).ready(function () {
         itemsTablet: [600, 2],
         itemsMobile: [320, 2],
         navigation: !0,
-        navigationText: [
-            '<a class="flex-prev"></a>',
-            '<a class="flex-next"></a>',
-        ],
+        navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
         slideSpeed: 500,
-        pagination: !1,
+        pagination: !1
     }),
+
         /* Bestsell slider */
         jQuery("#bestsell-slider .slider-items").owlCarousel({
             items: 5, //10 items above 1000px browser width
@@ -77,12 +77,9 @@ jQuery(document).ready(function () {
             itemsTablet: [767, 2], //2 items between 600 and 0;
             itemsMobile: [360, 1],
             navigation: true,
-            navigationText: [
-                '<a class="flex-prev"></a>',
-                '<a class="flex-next"></a>',
-            ],
+            navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
             slideSpeed: 500,
-            pagination: false,
+            pagination: false
         });
 
     /* Bestsell slider */
@@ -93,12 +90,9 @@ jQuery(document).ready(function () {
         itemsTablet: [767, 2], //2 items between 600 and 0;
         itemsMobile: [360, 1],
         navigation: true,
-        navigationText: [
-            '<a class="flex-prev"></a>',
-            '<a class="flex-next"></a>',
-        ],
+        navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
         slideSpeed: 500,
-        pagination: false,
+        pagination: false
     });
 
     /* Featured slider */
@@ -109,12 +103,9 @@ jQuery(document).ready(function () {
         itemsTablet: [768, 2], //2 items between 600 and 0;
         itemsMobile: [360, 1],
         navigation: true,
-        navigationText: [
-            '<a class="flex-prev"></a>',
-            '<a class="flex-next"></a>',
-        ],
+        navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
         slideSpeed: 500,
-        pagination: false,
+        pagination: false
     });
     /* New arrivals slider */
     jQuery("#new-arrivals-slider .slider-items").owlCarousel({
@@ -124,12 +115,9 @@ jQuery(document).ready(function () {
         itemsTablet: [767, 2], //2 items between 600 and 0;
         itemsMobile: [360, 1],
         navigation: true,
-        navigationText: [
-            '<a class="flex-prev"></a>',
-            '<a class="flex-next"></a>',
-        ],
+        navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
         slideSpeed: 500,
-        pagination: false,
+        pagination: false
     });
     /* Brand logo slider */
     jQuery("#brand-logo-slider .slider-items").owlCarousel({
@@ -140,12 +128,9 @@ jQuery(document).ready(function () {
         itemsTablet: [600, 2], //2 items between 600 and 0;
         itemsMobile: [320, 1],
         navigation: true,
-        navigationText: [
-            '<a class="flex-prev"></a>',
-            '<a class="flex-next"></a>',
-        ],
+        navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
         slideSpeed: 500,
-        pagination: false,
+        pagination: false
     });
     /* Category desc slider */
     jQuery("#category-desc-slider .slider-items").owlCarousel({
@@ -156,12 +141,9 @@ jQuery(document).ready(function () {
         itemsTablet: [600, 1], //2 items between 600 and 0;
         itemsMobile: [320, 1],
         navigation: true,
-        navigationText: [
-            '<a class="flex-prev"></a>',
-            '<a class="flex-next"></a>',
-        ],
+        navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
         slideSpeed: 500,
-        pagination: false,
+        pagination: false
     });
     /* Related products slider */
     jQuery("#related-products-slider .slider-items").owlCarousel({
@@ -171,12 +153,9 @@ jQuery(document).ready(function () {
         itemsTablet: [600, 2], //2 items between 600 and 0;
         itemsMobile: [360, 1],
         navigation: true,
-        navigationText: [
-            '<a class="flex-prev"></a>',
-            '<a class="flex-next"></a>',
-        ],
+        navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
         slideSpeed: 500,
-        pagination: false,
+        pagination: false
     });
     /* Upsell products slider */
     jQuery("#upsell-products-slider .slider-items").owlCarousel({
@@ -186,12 +165,9 @@ jQuery(document).ready(function () {
         itemsTablet: [600, 2], //2 items between 600 and 0;
         itemsMobile: [360, 1],
         navigation: true,
-        navigationText: [
-            '<a class="flex-prev"></a>',
-            '<a class="flex-next"></a>',
-        ],
+        navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
         slideSpeed: 500,
-        pagination: false,
+        pagination: false
     });
     /* testimonials slider */
     jQuery("#testimonials-slider .slider-items").owlCarousel({
@@ -202,12 +178,10 @@ jQuery(document).ready(function () {
         itemsTablet: [640, 1],
         itemsMobile: [390, 1],
         navigation: false,
-        navigationText: [
-            '<a class="flex-prev"></a>',
-            '<a class="flex-next"></a>',
-        ],
+        navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
         slideSpeed: 500,
-        pagination: false,
+        pagination: false
+
     });
 
     jQuery(document).ready(function () {
@@ -219,13 +193,11 @@ jQuery(document).ready(function () {
             itemsTablet: [767, 1], //2 items between 600 and 0;
             itemsMobile: [360, 1],
             navigation: false,
-            navigationText: [
-                '<a class="flex-prev"></a>',
-                '<a class="flex-next"></a>',
-            ],
+            navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
             slideSpeed: 500,
-            pagination: true,
+            pagination: true
         });
+
     });
 
     /*  menu highlight  */
@@ -233,11 +205,13 @@ jQuery(document).ready(function () {
         if (jQuery(this).find(".wrap-popup").length > 0) {
             jQuery(".container-fluid, .main-container").addClass("overlay");
         }
-    });
+    }
+    );
 
     jQuery(".nav>li").mouseleave(function () {
         jQuery(".container-fluid, .main-container").removeClass("overlay");
-    });
+    }
+    );
 
     /*  sticky header  
         jQuery(window).scroll(function() {
@@ -256,37 +230,43 @@ jQuery(document).ready(function () {
         CollapseMenu: false,
         ClassName: "mobile-menu",
         slidingSubmenus: true,
+
     });
 
     //given this jquery for hiding the mobile handberger clicking outside
-    jQuery("body").click(function () {
+    jQuery('body').click(function () {
         // alert('1')
-        var openValue = jQuery(".mm-toggle-wrap").attr("open-val");
+        var openValue = jQuery('.mm-toggle-wrap').attr("open-val");
 
         if (openValue == 1) {
             // alert('reach')
             jQuery(".mm-toggle").click();
-            jQuery(".mm-toggle-wrap").attr("open-val", 0);
+            jQuery('.mm-toggle-wrap').attr("open-val", 0);
+
         }
     });
 
-    jQuery(".mm-toggle-wrap").click(function () {
+    jQuery('.mm-toggle-wrap').click(function () {
         // alert('2')
-        var openValue = jQuery(".mm-toggle-wrap").attr("open-val");
+        var openValue = jQuery('.mm-toggle-wrap').attr("open-val");
         if (openValue == 0) {
-            jQuery(".mm-toggle-wrap").attr("open-val", 1);
+            jQuery('.mm-toggle-wrap').attr("open-val", 1);
         } else {
-            jQuery(".mm-toggle-wrap").attr("open-val", 0);
+            jQuery('.mm-toggle-wrap').attr("open-val", 0);
         }
         return false;
     });
 
+
+
+
+
     /* side nav categories */
-    if (jQuery(".subDropdown")[0]) {
-        jQuery(".subDropdown").on("click", function () {
-            jQuery(this).toggleClass("");
-            jQuery(this).toggleClass("minus");
-            jQuery(this).parent().find("ul").slideToggle();
+    if (jQuery('.subDropdown')[0]) {
+        jQuery('.subDropdown').on("click", function () {
+            jQuery(this).toggleClass('');
+            jQuery(this).toggleClass('minus');
+            jQuery(this).parent().find('ul').slideToggle();
         });
     }
     jQuery.extend(jQuery.easing, {
@@ -302,27 +282,20 @@ jQuery(document).ready(function () {
             accordion: function () {
                 return this.each(function () {
                     function activate(el, effect) {
-                        jQuery(el)
-                            .siblings(panelSelector)
-                            [effect || activationEffect](
-                                effect == "show"
-                                    ? activationEffectSpeed
-                                    : false,
-                                function () {
-                                    jQuery(el).parents().show();
-                                }
-                            );
+                        jQuery(el).siblings(panelSelector)[(effect || activationEffect)](((effect == "show") ? activationEffectSpeed : false), function () {
+                            jQuery(el).parents().show();
+                        });
                     }
                 });
-            },
+            }
         });
     })(jQuery);
     jQuery(function (jQuery) {
-        jQuery(".accordion").accordion();
-        jQuery(".accordion").each(function (index) {
-            var activeItems = jQuery(this).find("li.active");
+        jQuery('.accordion').accordion();
+        jQuery('.accordion').each(function (index) {
+            var activeItems = jQuery(this).find('li.active');
             activeItems.each(function (i) {
-                jQuery(this).children("ul").css("display", "block");
+                jQuery(this).children('ul').css('display', 'block');
                 if (i == activeItems.length - 1) {
                     jQuery(this).addClass("current");
                 }
@@ -331,33 +304,25 @@ jQuery(document).ready(function () {
     });
     /* Top Cart js */
     function slideEffectAjax() {
-        var timer;
-        jQuery(".top-cart-contain").mouseenter(function () {
-            clearTimeout(timer);
-            var ref = jQuery(this);
-            timer = setTimeout(function () {
-                ref.find(".top-cart-content").stop(true, true).slideDown();
-            }, 500);
+        jQuery('.top-cart-contain').mouseenter(function () {
+            jQuery(this).find(".top-cart-content").stop(true, true).slideDown();
         });
-        jQuery(".top-cart-contain").mouseleave(function () {
-            clearTimeout(timer);
-            var ref = jQuery(this);
-            timer = setTimeout(function () {
-                ref.find(".top-cart-content").stop(true, true).slideUp();
-            }, 500);
+        jQuery('.top-cart-contain').mouseleave(function () {
+            jQuery(this).find(".top-cart-content").stop(true, true).slideUp();
         });
     }
     jQuery(document).ready(function () {
         slideEffectAjax();
     });
+
 });
 /*  Price Filter */
 
-var lowerSlider = document.querySelector("#lower");
-var upperSlider = document.querySelector("#upper");
+var lowerSlider = document.querySelector('#lower');
+var upperSlider = document.querySelector('#upper');
 
-document.querySelector("#two").value = upperSlider.value;
-document.querySelector("#one").value = lowerSlider.value;
+document.querySelector('#two').value = upperSlider.value;
+document.querySelector('#one').value = lowerSlider.value;
 
 var lowerVal = parseInt(lowerSlider.value);
 var upperVal = parseInt(upperSlider.value);
@@ -372,7 +337,7 @@ upperSlider.oninput = function () {
             upperSlider.value = 4;
         }
     }
-    document.querySelector("#two").value = this.value;
+    document.querySelector('#two').value = this.value
 };
 
 lowerSlider.oninput = function () {
@@ -384,79 +349,49 @@ lowerSlider.oninput = function () {
             lowerSlider.value = parseInt(upperSlider.max) - 4;
         }
     }
-    document.querySelector("#one").value = this.value;
+    document.querySelector('#one').value = this.value
 };
+
 
 /*  UItoTop */
 jQuery.fn.UItoTop = function (options) {
     var defaults = {
-        text: "",
+        text: '',
         min: 200,
         inDelay: 600,
         outDelay: 400,
-        containerID: "toTop",
-        containerHoverID: "toTopHover",
+        containerID: 'toTop',
+        containerHoverID: 'toTopHover',
         scrollSpeed: 1200,
-        easingType: "linear",
+        easingType: 'linear'
     };
     var settings = jQuery.extend(defaults, options);
-    var containerIDhash = "#" + settings.containerID;
-    var containerHoverIDHash = "#" + settings.containerHoverID;
-    jQuery("body").append(
-        '<a href="#" id="' +
-            settings.containerID +
-            '">' +
-            settings.text +
-            "</a>"
-    );
-    jQuery(containerIDhash)
-        .hide()
-        .on("click", function () {
-            jQuery("html, body").animate(
-                {
-                    scrollTop: 0,
-                },
-                settings.scrollSpeed,
-                settings.easingType
-            );
-            jQuery("#" + settings.containerHoverID, this)
-                .stop()
-                .animate(
-                    {
-                        opacity: 0,
-                    },
-                    settings.inDelay,
-                    settings.easingType
-                );
-            return false;
-        })
-        .prepend('<span id="' + settings.containerHoverID + '"></span>')
-        .hover(
-            function () {
-                jQuery(containerHoverIDHash, this).stop().animate(
-                    {
-                        opacity: 1,
-                    },
-                    600,
-                    "linear"
-                );
-            },
-            function () {
-                jQuery(containerHoverIDHash, this).stop().animate(
-                    {
-                        opacity: 0,
-                    },
-                    700,
-                    "linear"
-                );
-            }
-        );
+    var containerIDhash = '#' + settings.containerID;
+    var containerHoverIDHash = '#' + settings.containerHoverID;
+    jQuery('body').append('<a href="#" id="' + settings.containerID + '">' + settings.text + '</a>');
+    jQuery(containerIDhash).hide().on("click", function () {
+        jQuery('html, body').animate({
+            scrollTop: 0
+        }, settings.scrollSpeed, settings.easingType);
+        jQuery('#' + settings.containerHoverID, this).stop().animate({
+            'opacity': 0
+        }, settings.inDelay, settings.easingType);
+        return false;
+    }).prepend('<span id="' + settings.containerHoverID + '"></span>').hover(function () {
+        jQuery(containerHoverIDHash, this).stop().animate({
+            'opacity': 1
+        }, 600, 'linear');
+    }, function () {
+        jQuery(containerHoverIDHash, this).stop().animate({
+            'opacity': 0
+        }, 700, 'linear');
+    });
     jQuery(window).scroll(function () {
         var sd = jQuery(window).scrollTop();
         if (typeof document.body.style.maxHeight === "undefined") {
             jQuery(containerIDhash).css({
-                position: "absolute",
-                top: jQuery(window).scrollTop() + jQuery(window).height() - 50,
+                'position': 'absolute',
+                'top': jQuery(window).scrollTop() + jQuery(window).height() - 50
             });
         }
         if (sd > settings.min) jQuery(containerIDhash).fadeIn(settings.inDelay);
@@ -464,19 +399,19 @@ jQuery.fn.UItoTop = function (options) {
     });
 };
 /* mobileMenu */
-var isTouchDevice = "ontouchstart" in window || navigator.msMaxTouchPoints > 0;
+var isTouchDevice = ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0);
 jQuery(window).on("load", function () {
     if (isTouchDevice) {
-        jQuery("#nav a.level-top").on("click", function (e) {
+        jQuery('#nav a.level-top').on("click", function (e) {
             jQueryt = jQuery(this);
             jQueryparent = jQueryt.parent();
-            if (jQueryparent.hasClass("parent")) {
-                if (!jQueryt.hasClass("menu-ready")) {
-                    jQuery("#nav a.level-top").removeClass("menu-ready");
-                    jQueryt.addClass("menu-ready");
+            if (jQueryparent.hasClass('parent')) {
+                if (!jQueryt.hasClass('menu-ready')) {
+                    jQuery('#nav a.level-top').removeClass('menu-ready');
+                    jQueryt.addClass('menu-ready');
                     return false;
                 } else {
-                    jQueryt.removeClass("menu-ready");
+                    jQueryt.removeClass('menu-ready');
                 }
             }
         });
