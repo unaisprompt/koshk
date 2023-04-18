@@ -1,4 +1,10 @@
     <!-- Footer -->
+    @php
+    $categoryList = categoryList();
+    $category = collect($categoryList)->first(function ($value, $key) {
+        return $value->id == request()->category_id;
+    });
+@endphp
     <footer class="footer">
         <div class="news-letter-form">
             <div class="container">
@@ -43,12 +49,19 @@
                         <div class="footer-column pull-left">
                             <h4>Style Advisor</h4>
                             <ul class="links">
-                                <li><a href="login.html" title="Your Account">Your Account</a></li>
+                                @if(!empty(session()->get('token')))
+                                <li><a href="{{url('my-account')}}" title="Your Account">Your Account</a></li>
+                                <li><a href="{{url('address-list')}}" title="Addresses">Addresses</a></li>
+                                <li><a href="{{url('wishlist')}}" title="Wishlist">Wishlist</a></li>
+                                <li><a href="{{url('order-history')}}" title="Orders History">Orders History</a></li>
+                                @else
+                                <li><a href="#" title="Your Account">Your Account</a></li>
                                 <li><a href="#" title="Information">Information</a></li>
                                 <li><a href="#" title="Addresses">Addresses</a></li>
                                 <li><a href="#" title="Addresses">Discount</a></li>
                                 <li><a href="#" title="Orders History">Orders History</a></li>
                                 <li><a href="#" title="Order Tracking">Order Tracking</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -56,11 +69,11 @@
                         <div class="footer-column pull-left">
                             <h4>Information</h4>
                             <ul class="links">
-                                <li><a href="sitemap.html" title="Site Map">Site Map</a></li>
+                                <li><a href="#" title="Site Map">Site Map</a></li>
                                 <li><a href="#" title="Search Terms">Search Terms</a></li>
                                 <li><a href="#" title="Advanced Search">Advanced Search</a></li>
-                                <li><a href="about_us.html" title="About Us">About Us</a></li>
-                                <li><a href="contact_us.html" title="Contact Us">Contact Us</a></li>
+                                <li><a href="#l" title="About Us">About Us</a></li>
+                                <li><a href="#" title="Contact Us">Contact Us</a></li>
                                 <li><a href="#" title="Suppliers">Suppliers</a></li>
                             </ul>
                         </div>
@@ -127,7 +140,7 @@
         <ul>
             <li>
                 <div class="mm-search">
-                    <form id="search1" name="search">
+                    <form id="search1" action="{{ url('products') }}" method="get">
                         <div class="input-group">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><i class="fa fa-search"></i> </button>
@@ -138,93 +151,41 @@
                     </form>
                 </div>
             </li>
-            <li> <a href="#">Home</a>
+            <li> <a href="{{url('/')}}">Home</a>
             </li>
-            <li> <a href="#">Computers</a>
+            <li> <a href="#">{{ $category ? $category->category_name : 'Categories' }}</a>
                 <ul>
                     <li> <a href="#" class="">Laptop</a>
                         <ul>
-                            <li> <a href="grid.html"><span>Microsoft</span></a> </li>
-                            <li> <a href="grid.html"><span>Lenova</span></a> </li>
-                            <li> <a href="grid.html"><span>Apple</span></a> </li>
-                            <li> <a href="grid.html"><span>Touchscreen</span></a> </li>
+                             @foreach ($categoryList as $category)
+                              <li role="presentation"><a
+                                                role="menuitem @if ($category->id == request()->category_id) active @endif"
+                                                tabindex="-1"
+                                                href="{{ url('products?category_id=' . $category->id) }}">-
+                                                {{ $category->category_name }}</a></li>
+                                    @endforeach
                         </ul>
                     </li>
-                    <li> <a href="grid.html">Printers</a>
-                        <ul>
-                            <li> <a href="grid.html">Scanners</a> </li>
-                            <li> <a href="grid.html">3D Printers</a> </li>
-                            <li> <a href="grid.html">Fax Machines</a> </li>
-                            <li> <a href="grid.html">Connectors</a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="grid.html">Components</a>
-                        <ul>
-                            <li> <a href="grid.html">Hard Drives</a> </li>
-                            <li> <a href="grid.html">Motherboards</a> </li>
-                            <li> <a href="grid.html">Graphic Cards </a> </li>
-                            <li> <a href="grid.html">Processors</a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="grid.html">Accessories</a>
-                        <ul>
-                            <li> <a href="grid.html">Keyboards </a> </li>
-                            <li> <a href="grid.html">WebCams</a> </li>
-                            <li> <a href="grid.html">Batteries</a> </li>
-                            <li> <a href="grid.html">Speakers</a> </li>
-                        </ul>
-                    </li>
+                  
                 </ul>
             </li>
-            <li> <a href="grid.html">Appliances</a>
-                <ul>
-                    <li> <a href="grid.html" class="">Kitchen</a>
-                        <ul class="level1">
-                            <li> <a href="grid.html">Refrigerators</a> </li>
-                            <li> <a href="grid.html">Dishwashers</a> </li>
-                            <li> <a href="grid.html">Microwaves</a> </li>
-                            <li> <a href="grid.html">Tosters</a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="grid.html">Cameras</a>
-                        <ul class="level1">
-                            <li> <a href="grid.html"><span>Accessories</span></a> </li>
-                            <li> <a href="grid.html"><span>Binoculars</span></a> </li>
-                            <li> <a href="grid.html"><span>Telescopes</span></a> </li>
-                            <li> <a href="grid.html"><span>Camcorders</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="grid.html">Desktops</a>
-                        <ul class="level1">
-                            <li> <a href="grid.html"><span>Routers &amp; Modems</span></a> </li>
-                            <li> <a href="grid.html"><span>CPUs, Processors</span></a> </li>
-                            <li> <a href="grid.html"><span>PC Gaming Store</span></a> </li>
-                            <li> <a href="grid.html"><span>Components</span></a> </li>
-                        </ul>
-                    </li>
-                    <li> <a href="#.html">Mobile Phones</a>
-                        <ul class="level1">
-                            <li> <a href="grid.html"><span>Apple</span></a> </li>
-                            <li> <a href="grid.html"><span>Samsung</span></a> </li>
-                            <li> <a href="grid.html"><span>Motorola</span></a> </li>
-                            <li> <a href="grid.html"><span>Lenovo</span></a> </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li> <a href="grid.html"> Televisions </a></li>
-            <li> <a href="grid.html"> Cameras</a></li>
-            <li><a href="grid.html"> Mobiles, Tablets</a> </li>
-            <li><a href="grid.html"> Refrigerators</a> </li>
-            <li><a href="grid.html"> Watches</a> </li>
+           
         </ul>
         <div class="top-links">
             <ul class="links">
-                <li><a title="My Account" href="login.html">My Account</a> </li>
-                <li><a title="Wishlist" href="wishlist.html">Wishlist</a> </li>
-                <li><a title="Checkout" href="checkout.html">Checkout</a> </li>
-                <li><a title="Blog" href="blog.html"><span>Blog</span></a> </li>
-                <li class="last"><a title="Login" href="login.html"><span>Login</span></a> </li>
+                @if(!empty(session()->get('token')))
+                                <li><a href="{{url('my-account')}}" title="Your Account">Your Account</a></li>
+                                <li><a href="{{url('address-list')}}" title="Addresses">Addresses</a></li>
+                                <li><a href="{{url('wishlist')}}" title="Wishlist">Wishlist</a></li>
+                                <li><a href="{{url('order-history')}}" title="Orders History">Orders History</a></li>
+                                @else
+                                <li><a href="#" title="Your Account">Your Account</a></li>
+                                <li><a href="#" title="Information">Information</a></li>
+                                <li><a href="#" title="Addresses">Addresses</a></li>
+                                <li><a href="#" title="Addresses">Discount</a></li>
+                                <li><a href="#" title="Orders History">Orders History</a></li>
+                                <li><a href="#" title="Order Tracking">Order Tracking</a></li>
+                                @endif
             </ul>
         </div>
     </div>

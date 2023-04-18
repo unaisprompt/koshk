@@ -35,7 +35,7 @@
         @endif
          <div class="col-sm-8 col-lg-8 mt-3">
         <div class="gcvYcJ">
-          <button type="button">Continue Shopping</button>
+         <a href="{{url('products')}}" style="text-decoration:none;"> <button type="button">Continue Shopping</button></a>
         </div>
          </div>
         <!--	///*///======    End article  ========= //*/// -->

@@ -209,20 +209,21 @@
                     @csrf
                     <div class="mmc5c">
                         <label>Old password</label>
-                        <input type="password" id="old_password" name="old_password" class="form-control"
+                        <input type="password" id="old_password" name="old_password" class="password_old"
                             placeholder="Password" required>
+                            <span onclick="showPasswordOld()"><i class="fa fa-eye-slash"></i></span>
                     </div>
                     <div class="mmc5c">
-                        <label>password</label>
-                        <input type="password" id="new_password" name="new_password" class="form-control"
-                            placeholder="Password" required>
-                        <span><i class="fa fa-eye-slash"></i></span>
+                        <label>New password</label>
+                        <input type="password" id="new_password" name="new_password" class="password_new"
+                            placeholder="New Password" required>
+                        <span onclick="showPasswordNew()"><i class="fa fa-eye-slash"></i></span>
                     </div>
                     <div class="mmc5c">
-                        <label>conform password</label>
-                        <input type="password" id="conform_password" name="conform_password" class="form-control"
+                        <label>Conform password</label>
+                        <input type="password" id="conform_password" name="conform_password"  class="password_conf"
                             placeholder="conform Password" required>
-                        <span><i class="fa fa-eye-slash"></i></span>
+                        <span onclick="showPasswordConf()"><i class="fa fa-eye-slash"></i></span>
                     </div>
                     <button type="button" class="jcdgCW" id="login_btn" onclick="ResetPass()">Reset Password</button>
                 </form>
@@ -268,4 +269,43 @@
         });
     }
 </script>
+<script>
+    function showPasswordOld() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $(".password_old");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+};
+    </script>
+    <script>
+    function showPasswordNew() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $(".password_new");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+};
+    </script>
+    <script>
+    function showPasswordConf() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $(".password_conf");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+};
+    </script>
 @endsection

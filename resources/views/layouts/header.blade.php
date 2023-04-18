@@ -315,8 +315,8 @@
                 </div>
                 <div class="mmc5c">
                     <label>Password</label>
-                    <input type="password" name="password" id="password" value="">
-                    <span><i class="fa fa-eye-slash"></i></span>
+                    <input type="password" name="password" id="password" value="" class="password_signin">
+                    <span class="eyesopen" onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
                 <span class="ipEvhD"
                     onclick="$('#myModalsignup').modal('hide');$('#myModalforgot').modal('show'); "
@@ -348,8 +348,8 @@
                 </div>
                 <div class="mmc5c">
                     <label>Password</label>
-                    <input type="password" id="password" name="password_reg" value="">
-                    <span><i class="fa fa-eye-slash"></i></span>
+                    <input type="password" id="password" name="password_reg" value="" class="password_signin">
+                    <span onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
 
                 <div class="mmc5c">
@@ -451,7 +451,6 @@
                 <div class="mmc5c">
                     <label>otp</label>
                     <input type="number" name="otp" value="" id="otp_for">
-                    <span><i class="fa fa-eye-slash"></i></span>
                 </div>
                 <button type="button" class="jcdgCW" onclick="ForgetOtp()">Verify
                     Otp</button>
@@ -477,7 +476,8 @@
                 </div>
                 <div class="mmc5c">
                     <label>Enter New Password</label>
-                    <input type="text" name="new_password" value="" id="new_password">
+                    <input type="password" name="new_password" value="" id="new_password" class="password_signin">
+                      <span onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
                 <button type="button" class="jcdgCW" onclick="newPassword()">change
                     Password</button>
@@ -486,3 +486,16 @@
     </div>
 </div>
 </div>
+<script>
+    function showPassword() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $(".password_signin");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+};
+    </script>
