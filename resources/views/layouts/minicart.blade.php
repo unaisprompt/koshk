@@ -65,7 +65,7 @@
                                                                                   </li>`;
                                                                                    $('#cart-sidebar').append(html);
                                                                                   });
-                                                let totalqty=response.data.map(item=>item.qty).reduce((partialSum, a) => partialSum + a, 0);
+                                                let totalqty=response.data.map(item=>item.qty).reduce((partialSum, a) => parseInt(partialSum) + parseInt(a), 0);
                                                
                                                 $('#cart_count').html(totalqty);
                                                 localStorage.setItem("cartupdate", 0);

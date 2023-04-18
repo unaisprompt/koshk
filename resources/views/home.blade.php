@@ -93,6 +93,11 @@
                   <div class="item-img">
                     <div class="item-img-info"> <a class="product-image" href="{{url('product-detail')}}?id={{$product['id']}}"> <img alt=""
                           src="{{$product['productimage']['image_url']}}"> </a>
+                          @php $percentage = (($product['product_price'] - $product['discounted_price']) / $product['product_price'])*100; @endphp
+                          <div class="sale-label sale-top-right">{{round($percentage,2)}}%</div>
+                          @if($product['new_item'] == 2)
+                          <div class="new-label new-top-left">new</div>
+                          @endif
                       <div class="box-hover">
                         <ul class="add-to-links">
                           <li><a class="link-quickview openModal" data-details="{{json_encode($product)}}" onClick="setProductDetails($(this).data('details'))"></a></li>
@@ -105,7 +110,7 @@
                   <div class="item-info">
                     <div class="info-inner">
                       <div class="item-title"> <a href="{{url('product-detail')}}?id={{$product['id']}}">{{$product['product_name']}}</a> </div>
-                      {{-- <div class="brand">Datsun</div> --}}
+                      <div class="brand"> {{$product['product_brand']['brand_name']}}</div>
                       <div class="star-rating">
                         <span style="width:60%">Rated <strong class="rating">{{$product['avg_ratting']}}</strong> out of 5</span>
                       </div>
@@ -114,17 +119,17 @@
                           <div class="price-box"> <span class="regular-price"> <span class="price">AED {{$product['discounted_price']}}</span>
                             </span> </div>
                         </div>
-                        {{-- <span style="font-size: 12px
-                        ;">Free Shipping & Free Delivery</span> --}}
-                        {{-- <div class="count-number">
+                      <span style="font-size: 12px
+                        ;">{{$product['delivery_message']}}</span>
+                        <div class="count-number">
                           <form id='myform' method='POST' class='quantity' action='#'>
                             <input type='button' value='-' class='qtyminus minus' field='quantity' />
                             <input type='text' name='quantity' value='0' class='qty' />
                             <input type='button' value='+' class='qtyplus plus' field='quantity' />
                           </form>
-                        </div> --}}
+                        </div>
                         <div class="action">
-                          <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart" data-details="{{json_encode($product)}}" onclick="addCart($(this).data('details'))"><i
+                          <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart" data-details="{{json_encode($product)}}" onclick="addCart($(this).data('details'),$(this).closest('.item').find('.qty').val())"><i
                               class="fa fa-shopping-basket"></i></button>
                         </div>
                       </div>
@@ -1236,7 +1241,7 @@ $.ajax(setting);
 
 
   <script>
-    function addCart(product)
+    function addCart(product,qty)
     {
       if(product.is_variation==1)
       {
@@ -1272,7 +1277,7 @@ $.ajax(setting);
                         data: { 
                             product_id: product.id,
                             product_name: product.product_name,
-                            qty: 1,
+                            qty: qty,
                             price: product.discounted_price,
                             shipping_cost: product.shipping_cost,
                             tax: tax,
