@@ -645,7 +645,7 @@ public function updateProfile(Request $request){
    
         $data = $response->json();
     if($response['status']==1){
-
+      session()->put('profile_pic', $response['data']['profile_pic']);
        return redirect('my-account');
     }
     else{
