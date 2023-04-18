@@ -44,6 +44,8 @@
         integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 </head>
 
 <body class="cms-index-index cms-home-page home">
@@ -52,11 +54,94 @@
         @include('layouts.header')
         @yield('content')
         @include('layouts.footer')
+        <div id="myModal" class="modal">
+            <div class="modal-content modal-pad">
+                <div class="button-close" onclick="$('#myModal').modal('hide');">
+                    <span class="close">&times;</span>
+                </div>
+                <div class="product-view">
+                    <div class="product-essential">
+                        <form action="#" method="post" id="product_addtocart_form">
+                            <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
+                            <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
+                                <div class="new-label new-top-left"> New </div>
+                                <div class="product-image">
+                                    <div class="product-full mag"> <img data-toggle="magnify" src=""
+                                            alt="product-image"> </div>
 
+                                </div>
+                                <!-- end: more-images -->
+
+                                <div class="add-to-box">
+                                    <div class="add-to-cart">
+                                        <button onclick="addCart($(this).data('details'))" class="button btn-cart"
+                                            title="Add to Cart" type="button" data-details=""
+                                            id="modal-add-to-cart">Add to Cart</button>
+                                        @if (session()->get('user_id'))
+                                            <button data-details="" onclick="checkout($(this).data('details')); "
+                                                class="button btn-buy" title="Add to Cart" type="button"
+                                                id="modal-add-buy-now">Buy Now</button>
+                                        @endif
+
+                                    </div>
+
+                                </div>
+                                <ul class="add-to-links">
+                                    <li><a class="link-compare" href="#"
+                                            onclick="$('#myModal').modal('hide');"><span>Continue Shopping</span></a>
+                                    </li>
+                                    @if (session()->get('user_id'))
+                                        <li> <a class="link-wishlist" data-id="" href="#"
+                                                onclick="event.preventDefault();addWishlist($(this))"><span>Add to
+                                                    Wishlist</span></a></li>
+                                    @endif
+                                </ul>
+                            </div>
+                            <div class="product-shop col-lg- col-sm-7 col-xs-12">
+
+                                <div class="brand"></div>
+                                <div class="product-name">
+                                    <h1></h1>
+                                </div>
+                                <div class="rating">
+                                    <div class="star-rating">
+                                        <span style="width:0%"></span>
+                                    </div>
+                                </div>
+                                <div class="price-block">
+                                    <div class="price-box">
+                                        <p class="availability in-stock"><span></span></p>
+                                        <p class="special-price"> <span class="price-label">Special Price</span> <span
+                                                id="product-price-modal" class="price"> </span> </p>
+                                        <p class="old-price"> <span class="price-label">Regular Price:</span>
+                                            <span class="price" id="product-old-price-modal"></span>
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                                <div class="list">
+                                    <div class="heading">Description</div>
+                                    <div class="points" id="modal-description">
+                                    </div>
+                                    <div class="points" id="modal-detail-description">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <!-- similar products -->
+
+                    <!-- End similar products -->
+
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
     <script src="{{ asset('assets/js/revslider.js') }}"></script>
     <script src="{{ asset('assets/js/common.js') }}"></script>
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
@@ -550,6 +635,31 @@
         });
     </script>
 
+    <script>
+        function setProductDetails(data) {
+            console.log(data);
+            $('#myModal').modal('show');
+            $('#myModal').find('img').attr('src', data.productimage.image_url);
+            $('#myModal').find('.brand').html(data.brand_name);
+            $('#myModal').find('.product-name').find('h1').html(data.product_name);
+            var ratting = 0;
+            if (data.avg_ratting > 0) {
+                ratting = data.avg_ratting;
+            }
+            var totalStock = data.stocks.map((item) => item.quantity).reduce((a, b) => a + b, 0);
+            $('#myModal').find('.star-rating').find('span').css('width', `${ratting*2*10}%`);
+            $('#myModal').find('.star-rating').find('span').html(
+                `Rated <strong class="rating">${ratting}</strong> out of 5`);
+            $('#myModal').find('.in-stock').find('span').html(`${totalStock} in stock`);
+            $('#myModal').find('#product-price-modal').html(`AED ${data.discounted_price}`);
+            $('#myModal').find('#product-old-price-modal').html(`AED ${data.product_price}`);
+            $('#myModal').find('#modal-description').html(data.description);
+            $('#myModal').find('#modal-detail-description').html(data.detail_description);
+            $('#myModal').find('.link-wishlist').data('id', data.id);
+            $('#modal-add-to-cart').data('details', data);
+            $('#modal-add-buy-now').data('details', data);
+        }
+    </script>
     @yield('script')
 </body>
 
