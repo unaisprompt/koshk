@@ -118,7 +118,16 @@
                         <div class="row -spacing-a">
                             <div class="col-md-4">
                                 <div class="profile-image">
+                                     @php 
+                                    $currentUrl = session()->get('profile_pic'); // Get the current URL
+                                    $lastSegment = last(explode('/', $currentUrl)); // Get the last segment of the URL
+                                    @endphp
+                                    @if($lastSegment !='default.png')
                                     <img src="{{$data['data']['profile_pic']}}" class="fullwidth" />
+                                    @else
+                                    <img class="fullwidth" src="{{asset('assets\images\pic.jpg')}}" alt="Profile dp" >
+                                    @endif
+
                                     <div class="edit-profile-image">
 
                                     </div>

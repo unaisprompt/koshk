@@ -8,7 +8,15 @@
                             <div class="block-content">
 
                                 <div class=" col-md-12 profile-btm">
+                                   @php 
+                                    $currentUrl = session()->get('profile_pic'); // Get the current URL
+                                    $lastSegment = last(explode('/', $currentUrl)); // Get the last segment of the URL
+                                    @endphp
+                                    @if($lastSegment !='default.png')
                                     <img class="profile-dp" src="{{session()->get('profile_pic')}}" alt="Profile dp" style="width:100px;height:100px;">
+                                    @else
+                                    <img class="profile-dp" src="{{asset('assets\images\pic.jpg')}}" alt="Profile dp" style="width:100px;height:100px;">
+                                    @endif
                                     <div class="profile-name">
                                         <div class="user-name">{{session()->get('name')}}</div>
                                         <span><a href="{{url('logout')}}">Logout</span>

@@ -18,8 +18,10 @@
 
                 <!-- Item -->
                 @if(!empty($data))
+                  {{-- {{dd($data)}} --}}
                 @foreach($data['data'] as $item)
-                <div class="item" style="padding: 0;">
+              
+                <div class="item" style="padding: 2;">
                   <div class="item-inner">
                     <div class="item-img">
                       <div class="item-img-info"> <a class="product-image" title="Retis lapen casen"
