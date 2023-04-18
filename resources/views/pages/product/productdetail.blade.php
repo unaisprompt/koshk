@@ -217,7 +217,7 @@
                     <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
                       <li class="active"> <a href="#product_tabs_description" data-toggle="tab"> Product Description
                         </a> </li>
-                      <!-- <li><a href="#product_tabs_tags" data-toggle="tab">Specifications</a></li> -->
+                    <li><a href="#product_tabs_tags" data-toggle="tab">Specifications</a></li>
                       <li> <a href="#reviews_tabs" data-toggle="tab">Reviews</a> </li>
                       <!-- <li> <a href="#product_tabs_custom" data-toggle="tab">Custom Tab</a> </li> -->
                       <!-- <li> <a href="#product_tabs_custom1" data-toggle="tab">Questions & Answers</a> </li> -->
@@ -226,6 +226,11 @@
                       <div class="tab-pane fade in active" id="product_tabs_description">
                         <div class="std">
                          {!!$data->detail_description!!}
+                        </div>
+                      </div>
+                        <div class="tab-pane fade" id="product_tabs_tags">
+                        <div class="std">
+                         {!!$data->detail_specifications!!}
                         </div>
                       </div>
                       <div class="tab-pane fade" id="reviews_tabs">
