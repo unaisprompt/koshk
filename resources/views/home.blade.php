@@ -105,7 +105,9 @@
                                                                  onClick="setProductDetails($(this).data('details'))"></a>
                                                          </li>
                                                          <li><a class="link-wishlist add-to-wishlist"
-                                                                 data-cpidw="{{ $product['id'] }}"></li>
+                                                                 data-cpidw="{{ $product['id'] }}"
+                                                                 data-id="{{ $product['id'] }}"
+                                                                 onclick="event.preventDefault();addWishlist($(this))"></li>
                                                      </ul>
                                                  </div>
                                              </div>
@@ -441,55 +443,55 @@
      </section>
 
      <!---- <section class="u2n">
-                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="container">
-                                                                                                                                                                                                                                                                                                                                                                                                                      <div class="row">
-                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-6 col-sm-3 col-lg-3">
-                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="yh52d">
-                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj2d">
-                                                                                                                                                                                                                                                                                                                                                                                                                              <img src="images/desc-img2.jpg" alt="" />
-                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj1d">
-                                                                                                                                                                                                                                                                                                                                                                                                                              <h3>catch big deals on the cameras</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                              <a href="#">Shop Now <i class="fa fa-arrow-circle-right"></i></a>
-                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-6 col-sm-3 col-lg-3">
-                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="yh52d">
-                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj2d">
-                                                                                                                                                                                                                                                                                                                                                                                                                              <img src="images/desc-img2.jpg" alt="" />
-                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj1d">
-                                                                                                                                                                                                                                                                                                                                                                                                                              <h3>catch big deals on the cameras</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                              <a href="#">Shop Now <i class="fa fa-arrow-circle-right"></i></a>
-                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-6 col-sm-3 col-lg-3">
-                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="yh52d">
-                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj2d">
-                                                                                                                                                                                                                                                                                                                                                                                                                              <img src="images/desc-img2.jpg" alt="" />
-                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj1d">
-                                                                                                                                                                                                                                                                                                                                                                                                                              <h3>catch big deals on the cameras</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                              <a href="#">Shop Now <i class="fa fa-arrow-circle-right"></i></a>
-                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-6 col-sm-3 col-lg-3">
-                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="yh52d">
-                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj2d">
-                                                                                                                                                                                                                                                                                                                                                                                                                              <img src="images/desc-img2.jpg" alt="" />
-                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj1d">
-                                                                                                                                                                                                                                                                                                                                                                                                                              <h3>catch big deals on the cameras</h3>
-                                                                                                                                                                                                                                                                                                                                                                                                                              <a href="#">Shop Now <i class="fa fa-arrow-circle-right"></i></a>
-                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                  </section>-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                    <div class="container">
+                                                                                                                                                                                                                                                                                                                                                                                                                                      <div class="row">
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-6 col-sm-3 col-lg-3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="yh52d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj2d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <img src="images/desc-img2.jpg" alt="" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj1d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <h3>catch big deals on the cameras</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <a href="#">Shop Now <i class="fa fa-arrow-circle-right"></i></a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-6 col-sm-3 col-lg-3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="yh52d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj2d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <img src="images/desc-img2.jpg" alt="" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj1d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <h3>catch big deals on the cameras</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <a href="#">Shop Now <i class="fa fa-arrow-circle-right"></i></a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-6 col-sm-3 col-lg-3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="yh52d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj2d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <img src="images/desc-img2.jpg" alt="" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj1d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <h3>catch big deals on the cameras</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <a href="#">Shop Now <i class="fa fa-arrow-circle-right"></i></a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        <div class="col-md-6 col-sm-3 col-lg-3">
+                                                                                                                                                                                                                                                                                                                                                                                                                                          <div class="yh52d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj2d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <img src="images/desc-img2.jpg" alt="" />
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            <div class="kj1d">
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <h3>catch big deals on the cameras</h3>
+                                                                                                                                                                                                                                                                                                                                                                                                                                              <a href="#">Shop Now <i class="fa fa-arrow-circle-right"></i></a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                          </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                      </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                  </section>-->
 
      {{--  <div class="ads-block">
          <div class="container">
@@ -754,30 +756,6 @@
          }
      </script>
      <script>
-         function setProductDetails(data) {
-             $('#myModal').modal('show');
-             console.log(data);
-             $('#myModal').find('img').attr('src', data.productimage.image_url);
-             $('#myModal').find('.brand').html(data.brand_name);
-             $('#myModal').find('.product-name').find('h1').html(data.product_name);
-             var ratting = 0;
-             if (data.avg_ratting > 0) {
-                 ratting = data.avg_ratting;
-             }
-             var totalStock = data.stocks.map((item) => item.quantity).reduce((a, b) => a + b, 0);
-             $('#myModal').find('.star-rating').find('span').css('width', `${ratting*2*10}%`);
-             $('#myModal').find('.star-rating').find('span').html(
-                 `Rated <strong class="rating">${ratting}</strong> out of 5`);
-             $('#myModal').find('.in-stock').find('span').html(`${totalStock} in stock`);
-             $('#myModal').find('#product-price-modal').html(`AED ${data.discounted_price}`);
-             $('#myModal').find('#product-old-price-modal').html(`AED ${data.product_price}`);
-             $('#myModal').find('#modal-description').html(data.description);
-             $('#myModal').find('.link-wishlist').data('id', data.id);
-             $('#modal-add-to-cart').data('details', data);
-             $('#modal-add-buy-now').data('details', data);
-         }
-     </script>
-     <script>
          jQuery(document).ready(function() {
              jQuery('#rev_slider_4').show().revolution({
                  dottedOverlay: 'none',
@@ -899,53 +877,8 @@
          var myInput = document.getElementById('myInput')
 
          myModal.addEventListener('shown.bs.modal', function() {
-             myInput.focus()
-         })
-
-
-
-         // $(document).ready(function(){
-         //   $(".openModal").click(function(){
-         //     $("#myModal").show();
-         //   });
-         //   $(".close").click(function(){
-         //     $("#myModal").hide();
-         //   });
-         // });
-
-
-
-
-
-         // Get the modal
-         var modal = document.getElementById("myModal");
-
-         // Get the button that opens the modal
-         var btn = document.getElementsByClassName("openModal");
-
-         // Get the <span> element that closes the modal
-         var span = document.getElementsByClassName("close")[0];
-
-         // When the user clicks the button, open the modal
-         btn[0].onclick = function() {
-             modal.style.display = "block";
-         };
-
-         btn[1].onclick = function() {
-             modal.style.display = "block";
-         };
-
-         // When the user clicks on <span> (x), close the modal
-         span.onclick = function() {
-             modal.style.display = "none";
-         };
-
-         // When the user clicks anywhere outside of the modal, close it
-         window.onclick = function(event) {
-             if (event.target == modal) {
-                 modal.style.display = "none";
-             }
-         };
+                 myInput.focus()
+             })
 
 
 
@@ -953,140 +886,145 @@
 
 
 
-         /*
-         Credits:
-         https://github.com/marcaube/bootstrap-magnify
-         */
 
 
-         ! function($) {
+             /*
+             Credits:
+             https://github.com/marcaube/bootstrap-magnify
+             */
 
-             "use strict"; // jshint ;_;
+
+             ! function($) {
+
+                 "use strict"; // jshint ;_;
 
 
-             /* MAGNIFY PUBLIC CLASS DEFINITION
-              * =============================== */
+                 /* MAGNIFY PUBLIC CLASS DEFINITION
+                  * =============================== */
 
-             var Magnify = function(element, options) {
-                 this.init('magnify', element, options)
-             }
+                 var Magnify = function(element, options) {
+                     this.init('magnify', element, options)
+                 }
 
-             Magnify.prototype = {
+                 Magnify.prototype = {
 
-                 constructor: Magnify
+                     constructor: Magnify
 
-                     ,
-                 init: function(type, element, options) {
-                         var event = 'mousemove',
-                             eventOut = 'mouseleave';
+                         ,
+                     init: function(type, element, options) {
+                             var event = 'mousemove',
+                                 eventOut = 'mouseleave';
 
-                         this.type = type
-                         this.$element = $(element)
-                         this.options = this.getOptions(options)
-                         this.nativeWidth = 0
-                         this.nativeHeight = 0
+                             this.type = type
+                             this.$element = $(element)
+                             this.options = this.getOptions(options)
+                             this.nativeWidth = 0
+                             this.nativeHeight = 0
 
-                         this.$element.wrap('<div class="magnify" \>');
-                         this.$element.parent('.magnify').append('<div class="magnify-large" \>');
-                         this.$element.siblings(".magnify-large").css("background", "url('" + this.$element.attr("src") +
-                             "') no-repeat");
+                             this.$element.wrap('<div class="magnify" \>');
+                             this.$element.parent('.magnify').append('<div class="magnify-large" \>');
+                             this.$element.siblings(".magnify-large").css("background", "url('" + this.$element.attr(
+                                     "src") +
+                                 "') no-repeat");
 
-                         this.$element.parent('.magnify').on(event + '.' + this.type, $.proxy(this.check, this));
-                         this.$element.parent('.magnify').on(eventOut + '.' + this.type, $.proxy(this.check, this));
-                     }
+                             this.$element.parent('.magnify').on(event + '.' + this.type, $.proxy(this.check, this));
+                             this.$element.parent('.magnify').on(eventOut + '.' + this.type, $.proxy(this.check, this));
+                         }
 
-                     ,
-                 getOptions: function(options) {
-                         options = $.extend({}, $.fn[this.type].defaults, options, this.$element.data())
+                         ,
+                     getOptions: function(options) {
+                             options = $.extend({}, $.fn[this.type].defaults, options, this.$element.data())
 
-                         if (options.delay && typeof options.delay == 'number') {
-                             options.delay = {
-                                 show: options.delay,
-                                 hide: options.delay
+                             if (options.delay && typeof options.delay == 'number') {
+                                 options.delay = {
+                                     show: options.delay,
+                                     hide: options.delay
+                                 }
+                             }
+
+                             return options
+                         }
+
+                         ,
+                     check: function(e) {
+                         var container = $(e.currentTarget);
+                         var self = container.children('img');
+                         var mag = container.children(".magnify-large");
+
+                         // Get the native dimensions of the image
+                         if (!this.nativeWidth && !this.nativeHeight) {
+                             var image = new Image();
+                             image.src = self.attr("src");
+
+                             this.nativeWidth = image.width;
+                             this.nativeHeight = image.height;
+
+                         } else {
+
+                             var magnifyOffset = container.offset();
+                             var mx = e.pageX - magnifyOffset.left;
+                             var my = e.pageY - magnifyOffset.top;
+
+                             if (mx < container.width() && my < container.height() && mx > 0 && my > 0) {
+                                 mag.fadeIn(100);
+                             } else {
+                                 mag.fadeOut(100);
+                             }
+
+                             if (mag.is(":visible")) {
+                                 var rx = Math.round(mx / container.width() * this.nativeWidth - mag.width() / 2) * -
+                                     1;
+                                 var ry = Math.round(my / container.height() * this.nativeHeight - mag.height() /
+                                         2) * -
+                                     1;
+                                 var bgp = rx + "px " + ry + "px";
+
+                                 var px = mx - mag.width() / 2;
+                                 var py = my - mag.height() / 2;
+
+                                 mag.css({
+                                     left: px,
+                                     top: py,
+                                     backgroundPosition: bgp
+                                 });
                              }
                          }
 
-                         return options
                      }
-
-                     ,
-                 check: function(e) {
-                     var container = $(e.currentTarget);
-                     var self = container.children('img');
-                     var mag = container.children(".magnify-large");
-
-                     // Get the native dimensions of the image
-                     if (!this.nativeWidth && !this.nativeHeight) {
-                         var image = new Image();
-                         image.src = self.attr("src");
-
-                         this.nativeWidth = image.width;
-                         this.nativeHeight = image.height;
-
-                     } else {
-
-                         var magnifyOffset = container.offset();
-                         var mx = e.pageX - magnifyOffset.left;
-                         var my = e.pageY - magnifyOffset.top;
-
-                         if (mx < container.width() && my < container.height() && mx > 0 && my > 0) {
-                             mag.fadeIn(100);
-                         } else {
-                             mag.fadeOut(100);
-                         }
-
-                         if (mag.is(":visible")) {
-                             var rx = Math.round(mx / container.width() * this.nativeWidth - mag.width() / 2) * -1;
-                             var ry = Math.round(my / container.height() * this.nativeHeight - mag.height() / 2) * -
-                                 1;
-                             var bgp = rx + "px " + ry + "px";
-
-                             var px = mx - mag.width() / 2;
-                             var py = my - mag.height() / 2;
-
-                             mag.css({
-                                 left: px,
-                                 top: py,
-                                 backgroundPosition: bgp
-                             });
-                         }
-                     }
-
                  }
-             }
 
 
-             /* MAGNIFY PLUGIN DEFINITION
-              * ========================= */
+                 /* MAGNIFY PLUGIN DEFINITION
+                  * ========================= */
 
-             $.fn.magnify = function(option) {
-                 return this.each(function() {
-                     var $this = $(this),
-                         data = $this.data('magnify'),
-                         options = typeof option == 'object' && option
-                     if (!data) $this.data('tooltip', (data = new Magnify(this, options)))
-                     if (typeof option == 'string') data[option]()
+                 $.fn.magnify = function(option) {
+                     return this.each(function() {
+                         var $this = $(this),
+                             data = $this.data('magnify'),
+                             options = typeof option == 'object' && option
+                         if (!data) $this.data('tooltip', (data = new Magnify(this, options)))
+                         if (typeof option == 'string') data[option]()
+                     })
+                 }
+
+                 $.fn.magnify.Constructor = Magnify
+
+                 $.fn.magnify.defaults = {
+                     delay: 0
+                 }
+
+
+                 /* MAGNIFY DATA-API
+                  * ================ */
+
+                 $(window).on('load', function() {
+                     $('[data-toggle="magnify"]').each(function() {
+                         var $mag = $(this);
+                         $mag.magnify()
+                     })
                  })
-             }
 
-             $.fn.magnify.Constructor = Magnify
-
-             $.fn.magnify.defaults = {
-                 delay: 0
-             }
-
-
-             /* MAGNIFY DATA-API
-              * ================ */
-
-             $(window).on('load', function() {
-                 $('[data-toggle="magnify"]').each(function() {
-                     var $mag = $(this);
-                     $mag.magnify()
-                 })
-             })
-
-         }(window.jQuery);
+             }(window.jQuery);
      </script>
 
 
