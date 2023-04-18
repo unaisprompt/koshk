@@ -194,16 +194,28 @@
                     </div>
                     <div class="fl-links">
                         <div class="no-js">
-                            <a href="#" title="Company" class="clicker" data-toggle="modal"
-                                data-target="#myModalsignin"></a>
-                            <!-- <div class="fl-nav-links">
-                    <ul class="links">
-                      <li><a href="dashboard.php" title="My Account">My Account</a></li>
-                      <li><a href="wishlist.php" title="Wishlist">Wishlist</a></li>
-                      <li><a href="checkout.php" title="Checkout">Checkout</a></li>
-                      <li class="last"><a href="login.php" title="Login"><span>Login</span></a></li>
-                    </ul>
-                  </div> -->
+                            @if (session()->get('token'))
+                                <a href="#" title="Company" class="clicker"></a>
+                                <div class="fl-nav-links">
+                                    <ul class="links">
+
+                                        <li>
+                                            <a href="{{ url('my-account') }}" title="My Account">
+                                                {{ session()->get('name') }}'s Account</i>
+                                            </a>
+                                        </li>
+                                        <li><a href="{{ url('wishlist') }}" title="Wishlist">Wishlist</a></li>
+                                        <li class="last">
+                                            <a href="{{ url('logout') }}" title="Login">
+                                                <span>Logout</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @else
+                                <a href="#" title="Company" class="clicker" data-toggle="modal"
+                                    data-target="#myModalsignin"></a>
+                            @endif
                         </div>
                     </div>
                 </div>
