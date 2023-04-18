@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/define.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/developer.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/newstyle.css') }}">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
@@ -75,318 +75,71 @@
             }
         });
     </script>
+
+
     <script>
-        jQuery(document).ready(function() {
-            jQuery('#rev_slider_4').show().revolution({
-                dottedOverlay: 'none',
-                delay: 5000,
-                startwidth: 1170,
-                startheight: 310,
+        function minicart() {
+            var setting = {
+                url: '{{ url('/cart_ajax') }}',
+                dataType: 'json',
+                type: 'get',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
 
-                hideThumbs: 200,
-                thumbWidth: 200,
-                thumbHeight: 50,
-                thumbAmount: 2,
+                success: function(response) {
+                    $('#cart-sidebar').empty();
+                    response.data.forEach((item) => {
+                        let html = ` <li class="item first">
+                                                                                    <div class="item-inner"> <a class="product-image" title="${item.product_name}" href="#">
+                                                                                        <img alt="${item.product_name}" src="${item.image_url}"> </a>
+                                                                                      <div class="product-details">
+                                                                                        <div class="access">
+                                                                                            @if (Session::has('user_id'))
+                                                                                            <a class="btn-remove1" title="Remove This Item" href="{{ url('delete-cart') }}/${item.id}">Remove</a>
+                                                                                            @else
+                                                                                            <a class="btn-remove1" title="Remove This Item" href="{{ url('delete-cart') }}/${item.product_id}">Remove</a>
+                                                                                            @endif
+                                                                                        </div>
+                                                                                        <p class="product-name"><a href="#">${item.product_name}</a>
+                                                                                        </p>
+                                                                                        <!-- <div class="count-number">
+                                                                                          <form id='myform' method='POST' class='quantity' action='#'>
+                                                                                            <input type='button' value='-' class='qtyminus minus' field='quantity' />
+                                                                                            <input type='text' name='quantity' value='0' class='qty' />
+                                                                                            <input type='button' value='+' class='qtyplus plus' field='quantity' />
+                                                                                          </form>
+                                                                                        </div> -->
+                                                                                        ${item.qty} x <span class="price">AED ${item.price}</span>
 
-                navigationType: 'thumb',
-                navigationArrows: 'solo',
-                navigationStyle: 'round',
+                                                                                      </div>
+                                                                                    </div>
+                                                                                  </li>`;
+                        $('#cart-sidebar').append(html);
+                    });
+                    let totalqty = response.data.map(item => item.qty).reduce((partialSum, a) => parseInt(
+                        partialSum) + parseInt(a), 0);
 
-                touchenabled: 'on',
-                onHoverStop: 'on',
+                    $('#cart_count').html(totalqty);
+                    localStorage.setItem("cartupdate", 0);
+                },
+                error: function(xhr) {
 
-                swipe_velocity: 0.7,
-                swipe_min_touches: 1,
-                swipe_max_touches: 1,
-                drag_block_vertical: false,
-
-                spinner: 'spinner0',
-                keyboardNavigation: 'off',
-
-                navigationHAlign: 'center',
-                navigationVAlign: 'bottom',
-                navigationHOffset: 0,
-                navigationVOffset: 20,
-
-                soloArrowLeftHalign: 'left',
-                soloArrowLeftValign: 'center',
-                soloArrowLeftHOffset: 20,
-                soloArrowLeftVOffset: 0,
-
-                soloArrowRightHalign: 'right',
-                soloArrowRightValign: 'center',
-                soloArrowRightHOffset: 20,
-                soloArrowRightVOffset: 0,
-
-                shadow: 0,
-                fullWidth: 'on',
-                fullScreen: 'off',
-
-                stopLoop: 'off',
-                stopAfterLoops: -1,
-                stopAtSlide: -1,
-
-                shuffle: 'off',
-
-                autoHeight: 'off',
-                forceFullWidth: 'on',
-                fullScreenAlignForce: 'off',
-                minFullScreenHeight: 0,
-                hideNavDelayOnMobile: 1500,
-
-                hideThumbsOnMobile: 'off',
-                hideBulletsOnMobile: 'off',
-                hideArrowsOnMobile: 'off',
-                hideThumbsUnderResolution: 0,
-
-                hideSliderAtLimit: 0,
-                hideCaptionAtLimit: 0,
-                hideAllCaptionAtLilmit: 0,
-                startWithSlide: 0,
-                fullScreenOffsetContainer: ''
-            });
-        });
-
-        function hasScrolled() {
-            var st = $(this).scrollTop();
-
-            // Make sure they scroll more than delta
-            if (Math.abs(lastScrollTop - st) <= delta)
-                return;
-
-            // If they scrolled down and are past the navbar, add class .nav-up.
-            // This is necessary so you never see what is "behind" the navbar.
-            if (st > lastScrollTop && st > navbarHeight) {
-                // Scroll Down
-                $('header').removeClass('nav-down').addClass('nav-up');
-            } else {
-                // Scroll Up
-                if (st + $(window).height() < $(document).height()) {
-                    $('header').removeClass('nav-up').addClass('nav-down');
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
                 }
-            }
-
-            lastScrollTop = st;
+            };
+            $.ajax(setting);
         }
-
-
-
-
-
-        jQuery(document).ready(($) => {
-            $('.quantity').on('click', '.plus', function(e) {
-                let $input = $(this).prev('input.qty');
-                let val = parseInt($input.val());
-                $input.val(val + 1).change();
-            });
-
-            $('.quantity').on('click', '.minus',
-                function(e) {
-                    let $input = $(this).next('input.qty');
-                    var val = parseInt($input.val());
-                    if (val > 0) {
-                        $input.val(val - 1).change();
-                    }
-                });
-        });
-
-
-
-
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
-
-        myModal.addEventListener('shown.bs.modal', function() {
-            myInput.focus()
-        })
-
-
-
-        // $(document).ready(function(){
-        //   $(".openModal").click(function(){
-        //     $("#myModal").show();
-        //   });
-        //   $(".close").click(function(){
-        //     $("#myModal").hide();
-        //   });
-        // });
-
-
-
-
-
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementsByClassName("openModal");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal
-        btn[0].onclick = function() {
-            modal.style.display = "block";
-        };
-
-        btn[1].onclick = function() {
-            modal.style.display = "block";
-        };
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        };
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        };
-
-
-
-
-
-
-
-        /*
-        Credits:
-        https://github.com/marcaube/bootstrap-magnify
-        */
-
-
-        ! function($) {
-
-            "use strict"; // jshint ;_;
-
-
-            /* MAGNIFY PUBLIC CLASS DEFINITION
-             * =============================== */
-
-            var Magnify = function(element, options) {
-                this.init('magnify', element, options)
-            }
-
-            Magnify.prototype = {
-
-                constructor: Magnify
-
-                    ,
-                init: function(type, element, options) {
-                        var event = 'mousemove',
-                            eventOut = 'mouseleave';
-
-                        this.type = type
-                        this.$element = $(element)
-                        this.options = this.getOptions(options)
-                        this.nativeWidth = 0
-                        this.nativeHeight = 0
-
-                        this.$element.wrap('<div class="magnify" \>');
-                        this.$element.parent('.magnify').append('<div class="magnify-large" \>');
-                        this.$element.siblings(".magnify-large").css("background", "url('" + this.$element.attr("src") +
-                            "') no-repeat");
-
-                        this.$element.parent('.magnify').on(event + '.' + this.type, $.proxy(this.check, this));
-                        this.$element.parent('.magnify').on(eventOut + '.' + this.type, $.proxy(this.check, this));
-                    }
-
-                    ,
-                getOptions: function(options) {
-                        options = $.extend({}, $.fn[this.type].defaults, options, this.$element.data())
-
-                        if (options.delay && typeof options.delay == 'number') {
-                            options.delay = {
-                                show: options.delay,
-                                hide: options.delay
-                            }
-                        }
-
-                        return options
-                    }
-
-                    ,
-                check: function(e) {
-                    var container = $(e.currentTarget);
-                    var self = container.children('img');
-                    var mag = container.children(".magnify-large");
-
-                    // Get the native dimensions of the image
-                    if (!this.nativeWidth && !this.nativeHeight) {
-                        var image = new Image();
-                        image.src = self.attr("src");
-
-                        this.nativeWidth = image.width;
-                        this.nativeHeight = image.height;
-
-                    } else {
-
-                        var magnifyOffset = container.offset();
-                        var mx = e.pageX - magnifyOffset.left;
-                        var my = e.pageY - magnifyOffset.top;
-
-                        if (mx < container.width() && my < container.height() && mx > 0 && my > 0) {
-                            mag.fadeIn(100);
-                        } else {
-                            mag.fadeOut(100);
-                        }
-
-                        if (mag.is(":visible")) {
-                            var rx = Math.round(mx / container.width() * this.nativeWidth - mag.width() / 2) * -1;
-                            var ry = Math.round(my / container.height() * this.nativeHeight - mag.height() / 2) * -
-                                1;
-                            var bgp = rx + "px " + ry + "px";
-
-                            var px = mx - mag.width() / 2;
-                            var py = my - mag.height() / 2;
-
-                            mag.css({
-                                left: px,
-                                top: py,
-                                backgroundPosition: bgp
-                            });
-                        }
-                    }
-
+        $(document).ready(function() {
+            minicart();
+            setInterval(function() {
+                if (localStorage.getItem('cartupdate') == 1) {
+                    minicart();
                 }
-            }
-
-
-            /* MAGNIFY PLUGIN DEFINITION
-             * ========================= */
-
-            $.fn.magnify = function(option) {
-                return this.each(function() {
-                    var $this = $(this),
-                        data = $this.data('magnify'),
-                        options = typeof option == 'object' && option
-                    if (!data) $this.data('tooltip', (data = new Magnify(this, options)))
-                    if (typeof option == 'string') data[option]()
-                })
-            }
-
-            $.fn.magnify.Constructor = Magnify
-
-            $.fn.magnify.defaults = {
-                delay: 0
-            }
-
-
-            /* MAGNIFY DATA-API
-             * ================ */
-
-            $(window).on('load', function() {
-                $('[data-toggle="magnify"]').each(function() {
-                    var $mag = $(this);
-                    $mag.magnify()
-                })
-            })
-
-        }(window.jQuery);
+            }, 3000);
+        })
     </script>
-
 
 
     <script type="text/javascript">
