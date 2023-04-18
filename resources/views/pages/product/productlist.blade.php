@@ -141,7 +141,13 @@
                 @foreach ($data->products as $product)
                  <li class="item  @if($loop->iteration==1) first @elseif ($loop->iteration%2==0) even @elseif ($loop->iteration%1==0) odd @endif listing">
                   <div class="product-image"> <a href="{{url('product-detail?id='.$product->id)}}" title="{{$product->product_name}}"> <img class="small-image" src="{{$product->productimage->image_url}}" alt="{{$product->product_name}}"> </a>
-
+                     @php $percentage = (($product->product_price - $product->discounted_price) / $product->product_price)*100;
+                        @endphp
+                    @if($product->is_new == 2 )
+                    @if($product->is_new == 2 )<div class="new-label new-top-left">New</div> @endif
+                    @else
+                    <div class="sale-label sale-top-left"> {{round($percentage)}}%</div>
+                    @endif
                   </div>
                   <div class="product-shop">
                     <h2 class="product-name"><a href="{{url('product-detail?id='.$product->id)}}" title="{{$product->product_name}}">{{$product->product_name}}</a></h2>
@@ -158,8 +164,15 @@
                       <p class="old-price"> <span class="price-label"></span> <span class="price"> AED {{$product->product_price}} </span> </p>
                       <p class="special-price"> <span class="price-label"></span> <span class="price"> AED {{$product->discounted_price}} </span> </p>
                     </div>
+                    <div class="count-number list-btm">
+                      <form id="myform" method="POST" class="quantity" action="#">
+                        <input type="button" value="-" class="qtyminus minus" field="quantity">
+                        <input type="text" name="quantity" value="0" class="qty">
+                        <input type="button" value="+" class="qtyplus plus" field="quantity">
+                      </form>
+                    </div>
                     <div class="actions">
-                      <button class="button btn-cart ajx-cart" title="Add to Cart" type="button" data-details="{{json_encode($product)}}" onClick="addCart($(this).data('details'))"><span>Add to Cart</span></button>
+                      <button class="button btn-cart ajx-cart" title="Add to Cart" type="button" data-details="{{json_encode($product)}}" onClick="addCart($(this).data('details'),$(this).closest('.item').find('.qty').val())"><span>Add to Cart</span></button>
                       <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist @if($product->is_wishlist) active @endif" href="#" onclick="event.preventDefault();addWishlist({{$product->id}},$(this))"></a>
                       <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
                      </span> </div>
@@ -461,8 +474,15 @@
                                     <p class="old-price"> <span class="price-label"></span> <span class="price"> AED ${product.product_price} </span> </p>
                                     <p class="special-price"> <span class="price-label"></span> <span class="price"> AED ${product.discounted_price} </span> </p>
                                     </div>
+                                    <div class="count-number list-btm">
+                                    <form id="myform" method="POST" class="quantity" action="#">
+                                      <input type="button" value="-" class="qtyminus minus" field="quantity">
+                                      <input type="text" name="quantity" value="0" class="qty">
+                                      <input type="button" value="+" class="qtyplus plus" field="quantity">
+                                    </form>
+                                  </div>
                                     <div class="actions">
-                                    <button class="button btn-cart ajx-cart" title="Add to Cart" type="button" data-details="${ product}" onClick="addCart($(this).data('details'))"><span>Add to Cart</span></button>
+                                    <button class="button btn-cart ajx-cart" title="Add to Cart" type="button" data-details="${ product}" onClick="addCart($(this).data('details'),$(this).closest('.item').find('.qty').val())"><span>Add to Cart</span></button>
                                     <span class="add-to-links"> <a title="Add to Wishlist" class="button link-wishlist ${product.is_wishlist?'active':''}" href="#" onclick="event.preventDefault();addWishlist(${product.id},$(this))"></a>
                                     <!-- <a title="Add to Compare" class="button link-compare" href="compare.html"></a> -->
                                     </span> </div>
@@ -530,8 +550,9 @@
     }
   </script>
   <script>
-    function addCart(product)
+    function addCart(product,qty=1)
     {
+    
       if(product.is_variation==1)
       {
         window.location='{{url("product-detail")}}?id='+product.id;
@@ -566,7 +587,7 @@
                         data: { 
                             product_id: product.id,
                             product_name: product.product_name,
-                            qty: 1,
+                            qty: qty,
                             price: product.discounted_price,
                             shipping_cost: product.shipping_cost,
                             tax: tax,
@@ -598,4 +619,59 @@
             $.ajax(setting);
     }
   </script>
+  
+   <script>
+        jQuery(document).ready(($) => {
+                $('.quantity').on('click', '.plus', function(e) {
+                    let $input = $(this).prev('input.qty');
+                    let val = parseInt($input.val());
+                    $input.val( val+1 ).change();
+                    // updateCart(val+1,$input.data('cart_id'));
+                });
+        
+                $('.quantity').on('click', '.minus', 
+                    function(e) {
+                    let $input = $(this).next('input.qty');
+                    var val = parseInt($input.val());
+                    // if (val > 1) {
+                    //     $input.val( val-1 ).change();
+                    //       updateCart(val-1,$input.data('cart_id'));
+                    // } 
+                });
+            });
+
+               function updateCart(qty,cartid)
+           {
+                   var setting={
+                        url:'{{url("/update-cart")}}',
+                          dataType:'json',
+                          type:'post',
+                          headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                          data: {
+                              qty: qty,
+                              cart_id: cartid
+                          },
+                          success:function(response){
+                          if(response.status==1){
+                              Toastify({
+                                        text: "Cart Item Updated",
+                                        className: "info",
+                                        close: true,
+                                        style: {
+                                            background: "#1CAD6A",
+                                        }
+                                        }).showToast();
+                                        location.reload();
+                          }
+                          },
+                          error: function(xhr) {
+                      console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                      // do something here because of error
+                    }
+            };
+                 $.ajax(setting);
+           }
+    </script>
 @endsection
