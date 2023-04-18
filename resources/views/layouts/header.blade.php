@@ -220,7 +220,7 @@
                     </div>
                 </div>
 
-                @include('layouts.minicart');
+                @include('layouts.minicart')
                 <!-- thm wishlist -->
             </div>
         </div>
@@ -315,7 +315,8 @@
                 </div>
                 <div class="mmc5c">
                     <label>Password</label>
-                    <input type="password" name="password" id="password" value="" class="password_signin">
+                    <input type="password" name="password" id="password" value=""
+                        class="password_signin">
                     <span class="eyesopen" onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
                 <span class="ipEvhD"
@@ -348,7 +349,8 @@
                 </div>
                 <div class="mmc5c">
                     <label>Password</label>
-                    <input type="password" id="password" name="password_reg" value="" class="password_signin">
+                    <input type="password" id="password" name="password_reg" value=""
+                        class="password_signin">
                     <span onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
 
@@ -476,8 +478,9 @@
                 </div>
                 <div class="mmc5c">
                     <label>Enter New Password</label>
-                    <input type="password" name="new_password" value="" id="new_password" class="password_signin">
-                      <span onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
+                    <input type="password" name="new_password" value="" id="new_password"
+                        class="password_signin">
+                    <span onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
                 <button type="button" class="jcdgCW" onclick="newPassword()">change
                     Password</button>
@@ -489,13 +492,13 @@
 <script>
     function showPassword() {
 
-  $(this).toggleClass("fa-eye fa-eye-slash");
-  var input = $(".password_signin");
-  if (input.attr("type") === "password") {
-    input.attr("type", "text");
-  } else {
-    input.attr("type", "password");
-  }
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $(".password_signin");
+        if (input.attr("type") === "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
 
-};
-    </script>
+    };
+</script>
