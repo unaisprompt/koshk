@@ -9253,7 +9253,7 @@ ol#compare-items li.last {
     letter-spacing: 1px;
 }
 .yh32d .item {
-    width: 49%;
+    width: 43%;
     display: inline-block;
 }
 .bb5b {
@@ -9747,7 +9747,7 @@ ol#compare-items li.last {
     margin-bottom: 10px;
     width: 49%;
     color: #333;
-    cursor: none;
+    cursor: pointer;
 }
 
 .product-view .add-to-box .btn-cart:before {
@@ -19276,4 +19276,25 @@ element.style {
 }
 .offer_color {
     color: #000;
+}
+
+
+
+.item-title a {
+    display: block;
+    transition: transform 0.3s ease-in-out;
+    padding-right: 20px;
+    white-space: nowrap;
+    width: 100%;
+   
+   
+}
+
+.item-title:hover a {
+    transform: translateX(-50%);
+}
+
+.item-title::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar invisible */
 }
