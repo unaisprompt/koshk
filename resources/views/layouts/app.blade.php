@@ -132,6 +132,9 @@
                                 </div>
 
                                 <div class="list">
+                                    <div class="heading">Highlights</div>
+                                    <div class="points" id="modal-highlights">
+                                    </div>
                                     <div class="heading">Description</div>
                                     <div class="points" id="modal-description">
                                     </div>
@@ -607,47 +610,48 @@
     </script>
     <script>
         /*   $('.add-to-wishlist').click(function(e) {
-                    e.preventDefault();
-                    // $('#review_button').prop('disabled', true);
-                    $.ajax({
-                        type: "POST",
-                        url: '{{ url('wishlist-add') }}',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            product_id: $(this).data('cpidw')
-                        },
-                        success: function(response) {
-                            if (response.status == 1) {
-                                $("#my_btn_heart").css({
-                                    'color': 'red'
-                                });
-                                Toastify({
-                                    text: "Product Added",
-                                    className: "info",
-                                    close: true,
-                                    style: {
-                                        background: "#1cad6a",
-                                    }
-                                }).showToast();
-                            } else {
-                                Toastify({
-                                    text: 'product already added',
-                                    className: "info",
-                                    close: true,
-                                    style: {
-                                        background: "#e11414",
-                                    }
-                                }).showToast();
-                            }
-                        }
-                    });
-                }); */
+                                    e.preventDefault();
+                                    // $('#review_button').prop('disabled', true);
+                                    $.ajax({
+                                        type: "POST",
+                                        url: '{{ url('wishlist-add') }}',
+                                        headers: {
+                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                        },
+                                        data: {
+                                            product_id: $(this).data('cpidw')
+                                        },
+                                        success: function(response) {
+                                            if (response.status == 1) {
+                                                $("#my_btn_heart").css({
+                                                    'color': 'red'
+                                                });
+                                                Toastify({
+                                                    text: "Product Added",
+                                                    className: "info",
+                                                    close: true,
+                                                    style: {
+                                                        background: "#1cad6a",
+                                                    }
+                                                }).showToast();
+                                            } else {
+                                                Toastify({
+                                                    text: 'product already added',
+                                                    className: "info",
+                                                    close: true,
+                                                    style: {
+                                                        background: "#e11414",
+                                                    }
+                                                }).showToast();
+                                            }
+                                        }
+                                    });
+                                }); */
     </script>
 
     <script>
         function setProductDetails(data) {
+            console.log(data);
             $('#myModal').modal('show');
             $('#myModal').find('img').attr('src', data.productimage.image_url);
             $('#myModal').find('.brand').html(data.brand_name);
@@ -665,9 +669,130 @@
             $('#myModal').find('#product-old-price-modal').html(`AED ${data.product_price}`);
             $('#myModal').find('#modal-description').html(data.description);
             $('#myModal').find('#modal-detail-description').html(data.detail_description);
+            $('#myModal').find('#modal-highlights').html(data.highlights);
             $('#myModal').find('.link-wishlist').data('id', data.id);
             $('#modal-add-to-cart').data('details', data);
             $('#modal-add-buy-now').data('details', data);
+        }
+    </script>
+    <script>
+        function addCart(product, qty = 1) {
+            if (product.is_variation == 1) {
+                window.location = '{{ url('product-detail') }}?id=' + product.id;
+                return;
+            }
+            var tax = 0;
+            if (product.tax_type == "amount") {
+                tax = product.tax;
+            } else {
+                tax = product.discounted_price * product.tax / 100;
+            }
+            var stocks = product.stocks.map(item => item.quantity).reduce((a, b) => a + b, 0);
+            if (!(stocks > 0)) {
+                Toastify({
+                    text: "Not enough stocks",
+                    className: "info",
+                    close: true,
+                    style: {
+                        background: "red",
+                    }
+                }).showToast();
+            }
+            var setting = {
+                url: '{{ url('/add-to-cart') }}',
+                dataType: 'json',
+                type: 'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    product_id: product.id,
+                    product_name: product.product_name,
+                    qty: qty,
+                    price: product.discounted_price,
+                    shipping_cost: product.shipping_cost,
+                    tax: tax,
+                    image: product.productimage.image_url
+                },
+
+                success: function(response) {
+                    // console.log(response);
+
+                    if (response.status == 1) {
+                        Toastify({
+                            text: "Cart Item Added",
+                            className: "info",
+                            close: true,
+                            style: {
+                                background: "#1cad6a",
+                            }
+                        }).showToast();
+                        localStorage.setItem("cartupdate", 1);
+                    }
+
+                },
+                error: function(xhr) {
+
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+            };
+            $.ajax(setting);
+        }
+    </script>
+    <script>
+        function checkout(product) {
+            if (product.is_variation == 1) {
+                window.location = '{{ url('product-detail') }}?id=' + product.id;
+                return;
+            }
+            var tax = 0;
+            if (product.tax_type == "amount") {
+                tax = product.tax;
+            } else {
+                tax = product.discounted_price * product.tax / 100;
+            }
+            var setting = {
+                url: '{{ url('/add-to-cart') }}',
+                dataType: 'json',
+                type: 'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    product_id: product.id,
+                    product_name: product.product_name,
+                    qty: 1,
+                    price: product.discounted_price,
+                    shipping_cost: product.shipping_cost,
+                    tax: tax,
+                    image: product.productimage.image_url
+                },
+
+                success: function(response) {
+                    // console.log(response);
+
+                    if (response.status == 1) {
+                        Toastify({
+                            text: "Cart Item Added",
+                            className: "info",
+                            close: true,
+                            style: {
+                                background: "#1cad6a",
+                            }
+                        }).showToast();
+                        localStorage.setItem("cartupdate", 1);
+                        window.location = "{{ url('checkout') }}";
+                    }
+
+                },
+                error: function(xhr) {
+
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+            };
+            $.ajax(setting);
         }
     </script>
     @yield('script')

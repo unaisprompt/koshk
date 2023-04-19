@@ -161,9 +161,10 @@
                                         </ul>
                                     </div>
                                     <div class="product-shop col-lg- col-sm-7 col-xs-12">
-                                        <div class="product-next-prev"> <a class="product-next"
-                                                href="#"><span></span></a> <a class="product-prev"
-                                                href="#"><span></span></a> </div>
+                                        {{-- <div class="product-next-prev">
+                                            <a class="product-next" href="#"><span></span></a>
+                                            <a class="product-prev" href="#"><span></span></a>
+                                        </div> --}}
                                         <div class="brand">{{ $data->brand->brand_name }}</div>
                                         <div class="product-name">
                                             <h1>{{ $data->product_name }}</h1>
@@ -187,10 +188,10 @@
                                         </div>
                                         <div class="price-block">
                                             <!-- <div class="count-number">
-                                                            <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                                                            <input type='text'id="pro_qty" name='quantity' value='1' class='qty' />
-                                                            <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                                                        </div> -->
+                                                                    <input type='button' value='-' class='qtyminus minus' field='quantity' />
+                                                                    <input type='text'id="pro_qty" name='quantity' value='1' class='qty' />
+                                                                    <input type='button' value='+' class='qtyplus plus' field='quantity' />
+                                                                </div> -->
                                             <div class="price-box">
                                                 @if (collect($data->stocks)->sum('quantity') <= 0)
                                                     <p class="availability in-stock"><span>Sold out</span></p>
