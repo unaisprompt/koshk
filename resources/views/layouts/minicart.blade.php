@@ -3,7 +3,7 @@
              @endphp
              <div class="top-cart-contain">
                  <!-- Top Cart -->
-                 <div class="mini-cart">
+                 <div class="mini-cart" id="mini-cart" onclick="showModalOnMobile()">
                      <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a
                              href="{{ url('cart') }}"> <span class="cart_count"
                                  id="cart_count">{{ collect($data)->sum('qty') }}</span>
@@ -34,3 +34,13 @@
                      <input class="title_shopping_cart" value="Go to shopping cart" type="hidden">
                  </div>
              </div>
+<script>
+    function showModalOnMobile() {
+        if (window.innerWidth < 768) { // replace 768 with your preferred screen size
+            if($('.top-cart-content').css('display')==='none')
+            $('.top-cart-content').show(); // replace myModalsignin with your modal ID
+            else
+            $('.top-cart-content').hide();
+        }
+    }
+</script>
