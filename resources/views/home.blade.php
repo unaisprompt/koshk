@@ -441,8 +441,7 @@
              </div>
          </div>
      </section>
-
-     {{--  <div class="ads-block">
+      <div class="ads-block">
          <div class="container">
              <div class="row">
                  <div class="banner-text-big"><span>Smartphones,
@@ -450,12 +449,9 @@
                          & Wearables</span> <br>
                      50% or more off</div>
                  <button class="shop" title="Subscribe" type="submit"><span>Shop now</span></button>
-
-
              </div>
          </div>
-     </div> --}}
-
+     </div>
      <section class="bb5b">
          <div class="container">
              <div class="row">
