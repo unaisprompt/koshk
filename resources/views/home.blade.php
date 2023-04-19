@@ -1101,7 +1101,7 @@
 
 
      <script>
-         function addCart(product, qty) {
+         function addCart(product, qty=1) {
              if (product.is_variation == 1) {
                  window.location = '{{ url('product-detail') }}?id=' + product.id;
                  return;
