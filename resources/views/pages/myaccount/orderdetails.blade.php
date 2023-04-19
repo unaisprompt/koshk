@@ -12,16 +12,12 @@
 @section('style')
 @endsection
 @section('content')
-<style>
-    #place_order:disabled,
-    #place_order[disabled]{
-        background-color:#ccc;
-    }
-</style>
-<section class="main-container col2-left-layout">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-9 col-sm-push-3">
+
+
+<div class="container bootstrap snippets bootdey">
+<div class="row">
+            @include('pages.myaccount.sidebar')
+            <div class="col-sm-9 ">
                 <div class="page-title">
                     <h2>Orders</h2>
                 </div>
@@ -102,23 +98,8 @@
                 @endif
                 <!--	///*///======    End article  ========= //*/// -->
             </div>
-            @include('pages.myaccount.sidebar')
-        </div>
-        <section class="banner-row irf mt-2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-lg-12 col-md-12">
-                        {{-- <div class="position-relative">
-                            <!-- Background -->
-                            <img class="img-fluid hover-zoom" src="{{asset('assets\images\popup.jpeg')}}" alt="">
-                            <!-- Body -->
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-</section>
+</div>
+</div>
 <!-- End Cart Area -->
 <script>
     function cancelOder(id) {

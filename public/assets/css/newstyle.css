@@ -506,8 +506,9 @@ display: none;
   float: right;
   
     margin-top: 17px;
-    width: 110px;
-}
+      width: 110px;
+    padding: 14px;
+    }
 .account-tabs{
   border: none;
   border-radius: 0;
