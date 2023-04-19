@@ -28,6 +28,15 @@
                     @if (request()->explore_more)
                         <li> <strong>Explore Offers</strong><input type="hidden" id="explore_more"
                                 value="{{ request()->explore_more }}"> </li>
+                    @elseif (request()->new_arrival)
+                        <li> <strong>New Arrival</strong><input type="hidden" id="new_arrival"
+                                value="{{ request()->new_arrival }}"> </li>
+                    @elseif (request()->best_seller)
+                        <li> <strong>Best Seller</strong><input type="hidden" id="best_seller"
+                                value="{{ request()->best_seller }}"> </li>
+                    @elseif (request()->featured_product)
+                        <li> <strong>Featured Products</strong><input type="hidden" id="featured_product"
+                                value="{{ request()->featured_product }}"> </li>
                     @else
                         @if ($data->category)
                             <li> <a href="{{ url('products?category_id=' . $data->category->id) }}"
@@ -70,10 +79,10 @@
                                             <div class="item"> <a href="#"><img alt=""
                                                         src="{{ $banner->image_url }}"></a>
                                                 <!-- <div class="cat-img-title cat-bg cat-box">
-                                                      <div class="small-tag">Season 2021</div>
-                                                      <h2 class="cat-heading">Televisions</h2>
-                                                      <p>GET 40% OFF &sdot; Free Delivery </p>
-                                                    </div> -->
+                                                                  <div class="small-tag">Season 2021</div>
+                                                                  <h2 class="cat-heading">Televisions</h2>
+                                                                  <p>GET 40% OFF &sdot; Free Delivery </p>
+                                                                </div> -->
                                             </div>
                                             <!-- End Item -->
                                         @endforeach
@@ -86,6 +95,12 @@
                         <h2>
                             @if (request()->explore_more)
                                 Explore offers
+                            @elseif (request()->new_arrival)
+                                New Arrivals
+                            @elseif (request()->best_seller)
+                                Best Seller
+                            @elseif (request()->featured_product)
+                                Featured Products
                             @else
                                 @if ($data->inner_subcategory)
                                     {{ $data->inner_subcategory->innersubcategory_name }}
@@ -131,17 +146,17 @@
 
                                     <div class="col-xl-6 col-lg-6 col-md-6 col-9">
                                         <!-- <div class="pro-sorting">
-                                                      <form class="woocommerce-showing" style="margin-bottom: 0px;">
-                                                        <select name="showby" aria-label="show"
-                                                          class="show-filter">
-                                                          <option value="Show 20"
-                                                            selected="selected">Show 20
-                                                            <option value="Show 30">Show 30
-                                                              <option value="Show 40">Show 40
-                                                                <option value="Show 50">Show 50
-                                                                </select>
-                                                              </form>
-                                                            </div> -->
+                                                                  <form class="woocommerce-showing" style="margin-bottom: 0px;">
+                                                                    <select name="showby" aria-label="show"
+                                                                      class="show-filter">
+                                                                      <option value="Show 20"
+                                                                        selected="selected">Show 20
+                                                                        <option value="Show 30">Show 30
+                                                                          <option value="Show 40">Show 40
+                                                                            <option value="Show 50">Show 50
+                                                                            </select>
+                                                                          </form>
+                                                                        </div> -->
                                         <div class="pro-sorting">
                                             <form class="woocommerce-ordering" style="margin-bottom: 0px;">
                                                 <select name="orderby" aria-label="Shop order" id="sort-type"
@@ -238,14 +253,14 @@
                                 @endif
                             </div>
                             <!-- <div class="pages">
-                                           <ul class="pagination">
-                                        <li><a href="#">&laquo;</a></li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">&raquo;</a></li>
-                                      </ul>
-                                </div> -->
+                                                       <ul class="pagination">
+                                                    <li><a href="#">&laquo;</a></li>
+                                                    <li class="active"><a href="#">1</a></li>
+                                                    <li><a href="#">2</a></li>
+                                                    <li><a href="#">3</a></li>
+                                                    <li><a href="#">&raquo;</a></li>
+                                                  </ul>
+                                            </div> -->
                             <br>
                         </div>
                     </article>
@@ -312,62 +327,62 @@
                         </div>
 
                         <!-- <div class="widget-color">
-                                <h5 class="widget-title">Colors</h5>
-                                <div class="custom-control custom-checkbox mb-2">
-                                  <input type="checkbox" class="custom-control-input" id="colorCheck1">
-                                  <label class="custom-control-label" for="colorCheck1"><span style="background-color: rgb(60, 179, 113);"></span> Green</label>
-                                </div>
-                                <div class="custom-control custom-checkbox mb-2">
-                                  <input type="checkbox" class="custom-control-input" id="colorCheck2">
-                                  <label class="custom-control-label" for="colorCheck2"><span style="background-color:rgb(72, 118, 255)"></span> Blue</label>
-                                </div>
-                                <div class="custom-control custom-checkbox mb-2">
-                                  <input type="checkbox" class="custom-control-input" id="colorCheck3">
-                                  <label class="custom-control-label" for="colorCheck3"><span style="background-color:rgb(249, 79, 21)"></span> Orange</label>
-                                </div>
-                                <div class="custom-control custom-checkbox mb-2">
-                                  <input type="checkbox" class="custom-control-input" id="colorCheck4">
-                                  <label class="custom-control-label" for="colorCheck4"><span style="background: rgb(92, 36, 110);"></span> Purple</label>
-                                </div>
-                                <div class="custom-control custom-checkbox mb-2">
-                                  <input type="checkbox" class="custom-control-input" id="colorCheck5">
-                                  <label class="custom-control-label" for="colorCheck5"><span style="background-color:rgb(255, 195, 0)"></span> Yellow</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="colorCheck6">
-                                  <label class="custom-control-label" for="colorCheck6"><span style="background-color:rgb(192, 192, 192)"></span> Silver</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="colorCheck7">
-                                  <label class="custom-control-label" for="colorCheck7"><span style="background-color:rgb(41, 36, 33)"></span> Black</label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                  <input type="checkbox" class="custom-control-input" id="colorCheck8">
-                                  <label class="custom-control-label" for="colorCheck8"><span style="background-color:rgb(128, 0, 0)"></span> Maroon</label>
-                                </div>
+                                            <h5 class="widget-title">Colors</h5>
+                                            <div class="custom-control custom-checkbox mb-2">
+                                              <input type="checkbox" class="custom-control-input" id="colorCheck1">
+                                              <label class="custom-control-label" for="colorCheck1"><span style="background-color: rgb(60, 179, 113);"></span> Green</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mb-2">
+                                              <input type="checkbox" class="custom-control-input" id="colorCheck2">
+                                              <label class="custom-control-label" for="colorCheck2"><span style="background-color:rgb(72, 118, 255)"></span> Blue</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mb-2">
+                                              <input type="checkbox" class="custom-control-input" id="colorCheck3">
+                                              <label class="custom-control-label" for="colorCheck3"><span style="background-color:rgb(249, 79, 21)"></span> Orange</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mb-2">
+                                              <input type="checkbox" class="custom-control-input" id="colorCheck4">
+                                              <label class="custom-control-label" for="colorCheck4"><span style="background: rgb(92, 36, 110);"></span> Purple</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mb-2">
+                                              <input type="checkbox" class="custom-control-input" id="colorCheck5">
+                                              <label class="custom-control-label" for="colorCheck5"><span style="background-color:rgb(255, 195, 0)"></span> Yellow</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                              <input type="checkbox" class="custom-control-input" id="colorCheck6">
+                                              <label class="custom-control-label" for="colorCheck6"><span style="background-color:rgb(192, 192, 192)"></span> Silver</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                              <input type="checkbox" class="custom-control-input" id="colorCheck7">
+                                              <label class="custom-control-label" for="colorCheck7"><span style="background-color:rgb(41, 36, 33)"></span> Black</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox">
+                                              <input type="checkbox" class="custom-control-input" id="colorCheck8">
+                                              <label class="custom-control-label" for="colorCheck8"><span style="background-color:rgb(128, 0, 0)"></span> Maroon</label>
+                                            </div>
 
-                              </div>   -->
+                                          </div>   -->
 
                         <!-- <div class="widget-ratings">
-                                <h5 class="widget-title">Customer Ratings</h5>
-                                <div class="custom-control custom-checkbox mb-2">
-                                  <input type="checkbox" class="custom-control-input" id="rateCheck1">
-                                  <label class="custom-control-label" for="rateCheck1"> 4 <i class="fa fa-star" aria-hidden="true"></i> and above </label>
-                                </div>
-                                <div class="custom-control custom-checkbox mb-2">
-                                  <input type="checkbox" class="custom-control-input" id="rateCheck2">
-                                  <label class="custom-control-label" for="rateCheck2"> 3 <i class="fa fa-star" aria-hidden="true"></i> and above</label>
-                                </div>
-                                <div class="custom-control custom-checkbox mb-2">
-                                  <input type="checkbox" class="custom-control-input" id="rateCheck3">
-                                  <label class="custom-control-label" for="rateCheck3"> 2 <i class="fa fa-star" aria-hidden="true"></i> and above</label>
-                                </div>
-                                <div class="custom-control custom-checkbox mb-2">
-                                  <input type="checkbox" class="custom-control-input" id="rateCheck4">
-                                  <label class="custom-control-label" for="rateCheck4"> 1 <i class="fa fa-star" aria-hidden="true"></i> and above</label>
-                                </div>
+                                            <h5 class="widget-title">Customer Ratings</h5>
+                                            <div class="custom-control custom-checkbox mb-2">
+                                              <input type="checkbox" class="custom-control-input" id="rateCheck1">
+                                              <label class="custom-control-label" for="rateCheck1"> 4 <i class="fa fa-star" aria-hidden="true"></i> and above </label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mb-2">
+                                              <input type="checkbox" class="custom-control-input" id="rateCheck2">
+                                              <label class="custom-control-label" for="rateCheck2"> 3 <i class="fa fa-star" aria-hidden="true"></i> and above</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mb-2">
+                                              <input type="checkbox" class="custom-control-input" id="rateCheck3">
+                                              <label class="custom-control-label" for="rateCheck3"> 2 <i class="fa fa-star" aria-hidden="true"></i> and above</label>
+                                            </div>
+                                            <div class="custom-control custom-checkbox mb-2">
+                                              <input type="checkbox" class="custom-control-input" id="rateCheck4">
+                                              <label class="custom-control-label" for="rateCheck4"> 1 <i class="fa fa-star" aria-hidden="true"></i> and above</label>
+                                            </div>
 
-                              </div>     -->
+                                          </div>     -->
 
                         <div class="widget-price">
                             <h5>Price Range</h5>
@@ -520,6 +535,9 @@
                 formData.append('type', $('#sort-type').val());
             }
             formData.append('explore_more', $('#explore_more').val());
+            formData.append('new_arrival', $('#new_arrival').val());
+            formData.append('best_seller', $('#best_seller').val());
+            formData.append('featured_product', $('#featured_product').val());
             formData.append('lower', $('#lower').val());
             formData.append('upper', $('#upper').val());
             formData.append('page', loadCount);
@@ -628,68 +646,68 @@
     </script>
     <script>
         /*   function addCart(product) {
-                    if (product.is_variation == 1) {
-                        window.location = '{{ url('product-detail') }}?id=' + product.id;
-                        return;
-                    }
-                    var tax = 0;
-                    if (product.tax_type == "amount") {
-                        tax = product.tax;
-                    } else {
-                        tax = product.discounted_price * product.tax / 100;
-                    }
-                    var stocks = product.stocks.map(item => item.quantity).reduce((a, b) => a + b, 0);
-                    if (!(stocks > 0)) {
-                        Toastify({
-                            text: "Not enough stocks",
-                            className: "info",
-                            close: true,
-                            style: {
-                                background: "red",
-                            }
-                        }).showToast();
-                    }
-                    var setting = {
-                        url: '{{ url('/add-to-cart') }}',
-                        dataType: 'json',
-                        type: 'post',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            product_id: product.id,
-                            product_name: product.product_name,
-                            qty: 1,
-                            price: product.discounted_price,
-                            shipping_cost: product.shipping_cost,
-                            tax: tax,
-                            image: product.productimage.image_url
-                        },
+                                if (product.is_variation == 1) {
+                                    window.location = '{{ url('product-detail') }}?id=' + product.id;
+                                    return;
+                                }
+                                var tax = 0;
+                                if (product.tax_type == "amount") {
+                                    tax = product.tax;
+                                } else {
+                                    tax = product.discounted_price * product.tax / 100;
+                                }
+                                var stocks = product.stocks.map(item => item.quantity).reduce((a, b) => a + b, 0);
+                                if (!(stocks > 0)) {
+                                    Toastify({
+                                        text: "Not enough stocks",
+                                        className: "info",
+                                        close: true,
+                                        style: {
+                                            background: "red",
+                                        }
+                                    }).showToast();
+                                }
+                                var setting = {
+                                    url: '{{ url('/add-to-cart') }}',
+                                    dataType: 'json',
+                                    type: 'post',
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    data: {
+                                        product_id: product.id,
+                                        product_name: product.product_name,
+                                        qty: 1,
+                                        price: product.discounted_price,
+                                        shipping_cost: product.shipping_cost,
+                                        tax: tax,
+                                        image: product.productimage.image_url
+                                    },
 
-                        success: function(response) {
-                            // console.log(response);
+                                    success: function(response) {
+                                        // console.log(response);
 
-                            if (response.status == 1) {
-                                Toastify({
-                                    text: "Cart Item Added",
-                                    className: "info",
-                                    close: true,
-                                    style: {
-                                        background: "#1cad6a",
+                                        if (response.status == 1) {
+                                            Toastify({
+                                                text: "Cart Item Added",
+                                                className: "info",
+                                                close: true,
+                                                style: {
+                                                    background: "#1cad6a",
+                                                }
+                                            }).showToast();
+                                            localStorage.setItem("cartupdate", 1);
+                                        }
+
+                                    },
+                                    error: function(xhr) {
+
+                                        console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                                        // do something here because of error
                                     }
-                                }).showToast();
-                                localStorage.setItem("cartupdate", 1);
-                            }
-
-                        },
-                        error: function(xhr) {
-
-                            console.log(xhr.responseText); // this line will save you tons of hours while debugging
-                            // do something here because of error
-                        }
-                    };
-                    $.ajax(setting);
-                } */
+                                };
+                                $.ajax(setting);
+                            } */
     </script>
     <script>
         function qtyUpdate() {
