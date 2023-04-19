@@ -195,7 +195,7 @@
                     <div class="fl-links">
                         <div class="no-js">
                             @if (session()->get('token'))
-                                <a href="#" title="Company" class="clicker"></a>
+                                <a href="{{ url('my-account') }}" title="Company" class="clicker"></a>
                                 <div class="fl-nav-links">
                                     <ul class="links">
 
