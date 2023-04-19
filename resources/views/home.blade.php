@@ -441,16 +441,13 @@
              </div>
          </div>
      </section>
-
-  <div class="ads-block">
+  <div class="ads-block" style="background-image: url({{$finalData['main_data']['ad_block']['image_url']}});">
 
          <div class="container">
              <div class="row">
-                 <div class="banner-text-big"><span>Smartphones,
-                         Tablets
-                         & Wearables</span> <br>
-                     50% or more off</div>
-                 <button class="shop" title="Subscribe" type="submit"><span>Shop now</span></button>
+                 <div class="banner-text-big"><span>{{$finalData['main_data']['ad_block']['title']}}</span> <br>
+                     {{$finalData['main_data']['ad_block']['title1']}}</div>
+                 <a href="{{$finalData['main_data']['ad_block']['btn_link']}}" style="text-decoration:none;"><button class="shop" title="Subscribe" type="submit"><span>{{$finalData['main_data']['ad_block']['btn_name']}}</span></button></a>
              </div>
          </div>
      </div>
