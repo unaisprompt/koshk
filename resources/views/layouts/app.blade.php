@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/define.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/developer.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/newstyle.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800'
@@ -610,43 +610,43 @@
     </script>
     <script>
         /*   $('.add-to-wishlist').click(function(e) {
-                                    e.preventDefault();
-                                    // $('#review_button').prop('disabled', true);
-                                    $.ajax({
-                                        type: "POST",
-                                        url: '{{ url('wishlist-add') }}',
-                                        headers: {
-                                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                        },
-                                        data: {
-                                            product_id: $(this).data('cpidw')
-                                        },
-                                        success: function(response) {
-                                            if (response.status == 1) {
-                                                $("#my_btn_heart").css({
-                                                    'color': 'red'
-                                                });
-                                                Toastify({
-                                                    text: "Product Added",
-                                                    className: "info",
-                                                    close: true,
-                                                    style: {
-                                                        background: "#1cad6a",
-                                                    }
-                                                }).showToast();
-                                            } else {
-                                                Toastify({
-                                                    text: 'product already added',
-                                                    className: "info",
-                                                    close: true,
-                                                    style: {
-                                                        background: "#e11414",
-                                                    }
-                                                }).showToast();
+                                        e.preventDefault();
+                                        // $('#review_button').prop('disabled', true);
+                                        $.ajax({
+                                            type: "POST",
+                                            url: '{{ url('wishlist-add') }}',
+                                            headers: {
+                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                            },
+                                            data: {
+                                                product_id: $(this).data('cpidw')
+                                            },
+                                            success: function(response) {
+                                                if (response.status == 1) {
+                                                    $("#my_btn_heart").css({
+                                                        'color': 'red'
+                                                    });
+                                                    Toastify({
+                                                        text: "Product Added",
+                                                        className: "info",
+                                                        close: true,
+                                                        style: {
+                                                            background: "#1cad6a",
+                                                        }
+                                                    }).showToast();
+                                                } else {
+                                                    Toastify({
+                                                        text: 'product already added',
+                                                        className: "info",
+                                                        close: true,
+                                                        style: {
+                                                            background: "#e11414",
+                                                        }
+                                                    }).showToast();
+                                                }
                                             }
-                                        }
-                                    });
-                                }); */
+                                        });
+                                    }); */
     </script>
 
     <script>
