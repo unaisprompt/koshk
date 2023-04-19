@@ -28,7 +28,7 @@
                                     <ul class="nav flex-column account-tabs">
                                         <li class="nav-item"><a class="nav-link " href="{{url('my-account')}}">Profile</a></li>
                                         <li class="nav-item"><a class="nav-link" href="{{url('order-history')}}">Orders</a></li>
-                                        <li class="nav-item"><a class="nav-link active" href="{{url('wishlist')}}">Wishlist</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{url('wishlist')}}">Wishlist</a></li>
                                         <li class="nav-item"><a class="nav-link" href="{{url('address-list')}}">Address</a></li>
                                     </ul>
                                 </div>
