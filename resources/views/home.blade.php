@@ -209,8 +209,8 @@
                                          alt="" />
                              </div>
                              <div class="uyd">
-                                 <h1>{{ $offer_banner['title'] }}</h1>
-                                 <h2>{{ $offer_banner['category']['category_name'] }}</h2></a>
+                                 <h1 class="offer_color">{{ $offer_banner['title'] }}</h1>
+                                 <h2 class="offer_color">{{ $offer_banner['category']['category_name'] }}</h2></a>
                              </div>
                          </div>
                      @endforeach
@@ -662,8 +662,8 @@
                                          alt="" />
                              </div>
                              <div class="uyd">
-                                 <h1>{{ $offer_banner['title'] }}</h1>
-                                 <h2>{{ $offer_banner['category']['category_name'] }}</h2>
+                                 <h1 class="offer_color">{{ $offer_banner['title'] }}</h1>
+                                 <h2 class="offer_color">{{ $offer_banner['category']['category_name'] }}</h2>
                              </div>
                          </div>
                      @endforeach
