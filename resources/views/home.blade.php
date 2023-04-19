@@ -209,8 +209,8 @@
                                          alt="" />
                              </div>
                              <div class="uyd">
-                                 <h1 class="offer_color">{{ $offer_banner['title'] }}</h1>
-                                 <h2 class="offer_color">{{ $offer_banner['category']['category_name'] }}</h2></a>
+                                 <h1>{{ $offer_banner['title'] }}</h1>
+                                 <h2>{{ $offer_banner['category']['category_name'] }}</h2></a>
                              </div>
                          </div>
                      @endforeach
@@ -442,7 +442,8 @@
          </div>
      </section>
 
-     {{--  <div class="ads-block">
+  <div class="ads-block">
+
          <div class="container">
              <div class="row">
                  <div class="banner-text-big"><span>Smartphones,
@@ -450,12 +451,9 @@
                          & Wearables</span> <br>
                      50% or more off</div>
                  <button class="shop" title="Subscribe" type="submit"><span>Shop now</span></button>
-
-
              </div>
          </div>
-     </div> --}}
-
+     </div>
      <section class="bb5b">
          <div class="container">
              <div class="row">
@@ -555,10 +553,13 @@
                                              </div>
                                              <div class="item-info">
                                                  <div class="info-inner">
-                                                     <div class="item-title"> <a
-                                                             href="{{ url('product-detail') }}?id={{ $top_rated['id'] }}"
-                                                             title="{{ $top_rated['product_name'] }}">
-                                                             {{ $top_rated['product_name'] }} </a> </div>
+<div class="item-title" style="max-height: 50px;  ">
+    <a href="{{ url('product-detail') }}?id={{ $top_rated['id'] }}" title="{{ $top_rated['product_name'] }}">
+        {{ $top_rated['product_name'] }}
+    </a>
+</div>
+
+
                                                      <div class="brand">
                                                          {{ $top_rated['brand'] ? $top_rated['brand']['brand_name'] : '' }}
                                                      </div>
@@ -660,8 +661,8 @@
                                          alt="" />
                              </div>
                              <div class="uyd">
-                                 <h1 class="offer_color">{{ $offer_banner['title'] }}</h1>
-                                 <h2 class="offer_color">{{ $offer_banner['category']['category_name'] }}</h2>
+                                 <h1>{{ $offer_banner['title'] }}</h1>
+                                 <h2>{{ $offer_banner['category']['category_name'] }}</h2>
                              </div>
                          </div>
                      @endforeach

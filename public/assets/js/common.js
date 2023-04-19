@@ -246,16 +246,16 @@ jQuery(document).ready(function () {
         }
     });
 
-    jQuery('.mm-toggle-wrap').click(function () {
-        // alert('2')
-        var openValue = jQuery('.mm-toggle-wrap').attr("open-val");
-        if (openValue == 0) {
-            jQuery('.mm-toggle-wrap').attr("open-val", 1);
-        } else {
-            jQuery('.mm-toggle-wrap').attr("open-val", 0);
-        }
-        return false;
-    });
+    // jQuery('.mm-toggle-wrap').click(function () {
+    //     // alert('2')
+    //     var openValue = jQuery('.mm-toggle-wrap').attr("open-val");
+    //     if (openValue == 0) {
+    //         jQuery('.mm-toggle-wrap').attr("open-val", 1);
+    //     } else {
+    //         jQuery('.mm-toggle-wrap').attr("open-val", 0);
+    //     }
+    //     return false;
+    // });
 
 
 
