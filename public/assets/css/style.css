@@ -19377,7 +19377,7 @@ z-index: 1;
 }
 
 .profile-nav .user-heading {
-    background: #fbc02d;
+    background: #0062bd;
     color: #fff;
     border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
@@ -19432,7 +19432,7 @@ z-index: 1;
 
 .profile-nav ul > li > a:hover, .profile-nav ul > li > a:focus, .profile-nav ul li.active  a {
     background: #f8f7f5 !important;
-    border-left: 5px solid #fbc02d;
+    border-left: 5px solid #0088cc;
     color: #89817f !important;
 }
 
@@ -19490,7 +19490,7 @@ z-index: 1;
     font-size: 22px;
     font-weight: 300;
     margin: 0 0 20px;
-}
+}   
 
 .bio-row {
     width: 50%;

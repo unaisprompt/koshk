@@ -278,7 +278,8 @@
     }
 </script>
 <script>
-    function showPasswordOld() {
+    function showPasswordOld() 
+{
 
   $(this).toggleClass("fa-eye fa-eye-slash");
   var input = $(".password_old");
@@ -288,8 +289,9 @@
     input.attr("type", "password");
   }
 
-};
-    </script>
+}
+</script>
+
     <script>
     function showPasswordNew() {
 

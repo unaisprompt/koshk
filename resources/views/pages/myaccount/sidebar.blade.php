@@ -55,16 +55,24 @@
       <div class="panel">
           <div class="user-heading round">
               <a href="#">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                 @php 
+                                    $currentUrl = session()->get('profile_pic'); // Get the current URL
+                                    $lastSegment = last(explode('/', $currentUrl)); // Get the last segment of the URL
+                                    @endphp
+                                    @if($lastSegment !='default.png')
+                                    <img  src="{{session()->get('profile_pic')}}" alt="Profile dp" >
+                                    @else
+                                    <img src="{{asset('assets\images\pic.jpg')}}" alt="Profile dp" >
+                                    @endif
               </a>
-              <h1>Camila Smith</h1>
-              <p>deydey@theEmail.com</p>
+              <h1>{{session()->get('name')}}</h1>
+              <p>{{session()->get('email')}}</p>
           </div>
 
           <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="{{url('my-account')}}"> <i class="fa fa-user"></i> Profile</a></li>
                 <li><a href="{{url('order-history')}}"><i class="fa fa-shopping-cart"></i> Orders <span class="label label-warning pull-right r-activity">9</span></a></li>
-                <li><a href="{{url('wishlist')}}"> <i class="fa fa-heart"></i> Wishlist <span class="label label-warning pull-right r-activity">9</span></a></li>
+                <li><a href="{{url('wishlist')}}"> <i class="fa fa-heart"></i> Wishlist <span class="label label-success pull-right r-activity">9</span></a></li>
                 <li><a href="{{url('address-list')}}"> <i class="fa fa-map-marker"></i> Address</a></li>           
               <li><a href="{{url('edit-profile')}}"> <i class="fa fa-edit"></i> Edit Profile</a></li>
                 <li><a href="#" onclick="$('#myModalChangePassword').modal('show');"> <i class="fa fa-lock"></i> Change Password</a></li>
@@ -107,3 +115,83 @@
         </div>
     </div>
 </div>
+
+<script>
+    function ResetPass() {
+         $('.pre-loader').removeClass("hidded");
+        let old_password = $('#old_password').val();
+        let new_password = $('#new_password').val();
+        let conform_password = $('#conform_password').val();
+        $.ajax({
+            url: "{{url('change-password')}}",
+            type: 'post',
+            data: $('#password_change_form').serialize(),
+            dataType: 'json',
+            success: function(response) {
+                 $(".pre-loader").delay(2000).addClass("hidded");
+                if (response.status == 1) {
+                    Swal.fire("Success!", response.message, "success").then(() => {
+                        $('#myModalChangePassword').modal('hide');
+                        // $('myModalforgetotp').modal('hide');
+                        //  location.reload();
+                    });
+                    document.getElementById("form").reset();
+                    $('#refresh').click();
+                } else {
+                    Swal.fire("Failed!", response.message, "error");
+                    if (response.hasOwnProperty('error_list')) {
+                        for (x in response.error_list) {
+                            $('#error_' + x).html(response.error_list[x])
+                        }
+                    }
+                }
+            },
+            error: function(xhr) {
+                 $(".pre-loader").delay(2000).addClass("hidded");
+                console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                // do something here because of error
+            }
+        });
+    }
+</script>
+<script>
+    function showPasswordOld() 
+{
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $(".password_old");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+}
+</script>
+
+    <script>
+    function showPasswordNew() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $(".password_new");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+};
+    </script>
+    <script>
+    function showPasswordConf() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $(".password_conf");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+};
+    </script>

@@ -120,26 +120,22 @@
               <h1>Profile</h1>
               <div class="row">
                   <div class="bio-row">
-                      <p><span>First Name </span>: Camila</p>
+                      <p><span>First Name </span>:{{$data['data']['name']}}</p>
                   </div>
-                  <div class="bio-row">
-                      <p><span>Last Name </span>: Smith</p>
-                  </div>
+              </div>
 
-                 
+            
+              <div class="row">     
                   <div class="bio-row">
-                      <p><span>Email </span>: jsmith@flatlab.com</p>
+                      <p><span>Email </span>:  {{$data['data']['email']}}</p>
                   </div>
+              </div>
+              <div class="row">  
                   <div class="bio-row">
-                      <p><span>Mobile </span>: (12) 03 4567890</p>
+                      <p><span>Mobile </span>: {{$data['data']['mobile']}}</p>
                   </div>
-                  <div class="bio-row">
-                      <p><span>Phone </span>: 88 (02) 123456</p>
-                  </div>
-
-                     <div class="bio-row">
-                      <p><span>Delivery Address </span>: 123 Main Street Apt 1A Anytown, </p>
-                  </div>
+              </div>  
+                    
               </div>
           </div>
       </div>
