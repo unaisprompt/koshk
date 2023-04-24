@@ -72,7 +72,8 @@
                                                  </div>
                                                  <div class="pous2">
                                                      <p>AED {{ $item['price'] * $item['qty'] }}</p>
-                                                     @php$total += $item['price'] * $item['qty'];
+                                                     @php
+                                                         $total += $item['price'] * $item['qty'];
                                                          $total_discount += $item['discount_amount'] ?? 0;
                                                          $shipping += $item['shipping_cost'];
                                                          $total_loyality_discount += isset($item['loyality_discount']) ? $item['loyality_discount'] : 0;
@@ -176,7 +177,8 @@
                                                          <!-- <h5>{{ $loyality_points }}</h5> -->
                                                          <!-- <h5>{{ $applied_discount * $aed_to_loality }}</h5> -->
                                                          <h5>AED {{ $applied_discount }}</h5>
-                                                         <h5>AED {{ $total - $total_discount + $shipping - $applied_discount }}
+                                                         <h5>AED
+                                                             {{ $total - $total_discount + $shipping - $applied_discount }}
                                                          </h5>
                                                      </div>
                                                  </div>
@@ -228,8 +230,10 @@
                                                                          </a>
                                                                          <div class="box-hover">
                                                                              <ul class="add-to-links">
-                                                                                 <li><a class="link-quickview"
-                                                                                         href="{{ url('product-detail') }}?id={{ $product->id }}"></a>
+                                                                                 <li><a class="link-quickview openModal"
+                                                                                         href="#"
+                                                                                         data-details="{{ json_encode($product) }}"
+                                                                                         onClick="setProductDetails($(this).data('details'))"></a>
                                                                                  </li>
                                                                                  <li><a class="link-wishlist @if ($product->is_wishlist) active @endif"
                                                                                          href="#"
@@ -516,6 +520,38 @@
                  }
              })
 
+         }
+
+         function addWishlist(id, ref) {
+             @if (session()->get('token'))
+                 var token = "{{ session()->get('token') }}";
+                 $.ajax({
+                     url: '{{ config('global.api') }}/addtowishlist',
+                     type: 'POST',
+                     beforeSend: function(xhr) {
+                         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                     },
+                     data: {
+                         product_id: id
+                     },
+                     success: function(response) {
+                         if (response.status == 1) {
+                             Toastify({
+                                 text: response.message,
+                                 className: "info",
+                                 close: true,
+                                 style: {
+                                     background: "#1cad6a",
+                                 }
+                             }).showToast();
+                             ref.addClass('active');
+                         }
+                     },
+                     error: function() {},
+                 });
+             @else
+                 $('#myModalsignin').modal('show');
+             @endif
          }
      </script>
  @endsection

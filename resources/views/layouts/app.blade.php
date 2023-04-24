@@ -56,6 +56,10 @@
         .box-hover .add-to-links li a.link-wishlist.active:after {
             background: #fdd922;
         }
+
+        #myModalsignin {
+            z-index: 2999;
+        }
     </style>
 </head>
 
@@ -92,6 +96,10 @@
                                             <button data-details="" onclick="checkout($(this).data('details')); "
                                                 class="button btn-buy" title="Add to Cart" type="button"
                                                 id="modal-add-buy-now">Buy Now</button>
+                                        @else
+                                            <button data-details="" onclick="$('#myModalsignin').modal('show')"
+                                                class="button btn-buy" title="Add to Cart" type="button"
+                                                id="modal-add-buy-now">Buy Now</button>
                                         @endif
 
                                     </div>
@@ -104,6 +112,11 @@
                                     @if (session()->get('user_id'))
                                         <li> <a class="link-wishlist" data-id="" href="#"
                                                 onclick="event.preventDefault();addWishlist($(this))"><span>Add to
+                                                    Wishlist</span></a></li>
+                                    @else
+                                        <li> <a class="link-wishlist" data-id="" href="#"
+                                                onclick="event.preventDefault();$('#myModalsignin').modal('show')"><span>Add
+                                                    to
                                                     Wishlist</span></a></li>
                                     @endif
                                 </ul>
@@ -135,6 +148,8 @@
                                     <div class="heading">Highlights</div>
                                     <div class="points" id="modal-highlights">
                                     </div>
+                                </div>
+                                <div class="list">
                                     <div class="heading">Description</div>
                                     <div class="points" id="modal-description">
                                     </div>
@@ -610,43 +625,43 @@
     </script>
     <script>
         /*   $('.add-to-wishlist').click(function(e) {
-                                        e.preventDefault();
-                                        // $('#review_button').prop('disabled', true);
-                                        $.ajax({
-                                            type: "POST",
-                                            url: '{{ url('wishlist-add') }}',
-                                            headers: {
-                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                            },
-                                            data: {
-                                                product_id: $(this).data('cpidw')
-                                            },
-                                            success: function(response) {
-                                                if (response.status == 1) {
-                                                    $("#my_btn_heart").css({
-                                                        'color': 'red'
-                                                    });
-                                                    Toastify({
-                                                        text: "Product Added",
-                                                        className: "info",
-                                                        close: true,
-                                                        style: {
-                                                            background: "#1cad6a",
-                                                        }
-                                                    }).showToast();
-                                                } else {
-                                                    Toastify({
-                                                        text: 'product already added',
-                                                        className: "info",
-                                                        close: true,
-                                                        style: {
-                                                            background: "#e11414",
-                                                        }
-                                                    }).showToast();
-                                                }
-                                            }
-                                        });
-                                    }); */
+                                                        e.preventDefault();
+                                                        // $('#review_button').prop('disabled', true);
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: '{{ url('wishlist-add') }}',
+                                                            headers: {
+                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                            },
+                                                            data: {
+                                                                product_id: $(this).data('cpidw')
+                                                            },
+                                                            success: function(response) {
+                                                                if (response.status == 1) {
+                                                                    $("#my_btn_heart").css({
+                                                                        'color': 'red'
+                                                                    });
+                                                                    Toastify({
+                                                                        text: "Product Added",
+                                                                        className: "info",
+                                                                        close: true,
+                                                                        style: {
+                                                                            background: "#1cad6a",
+                                                                        }
+                                                                    }).showToast();
+                                                                } else {
+                                                                    Toastify({
+                                                                        text: 'product already added',
+                                                                        className: "info",
+                                                                        close: true,
+                                                                        style: {
+                                                                            background: "#e11414",
+                                                                        }
+                                                                    }).showToast();
+                                                                }
+                                                            }
+                                                        });
+                                                    }); */
     </script>
 
     <script>
