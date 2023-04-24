@@ -192,12 +192,23 @@
 
     <header class="nav-down css-h5j">
         <ul>
-            <li><a class="footer-menu-active" href="#" tabindex="1"><i class="fa fa-home"></i>
+            <li><a class="footer-menu-active" href="{{url('/')}}" tabindex="1"><i class="fa fa-home"></i>
                     <br />Home</a></li>
-            <li><a href="#" tabindex="2"><i class="fa fa-list-alt"></i> <br />Categories</a></li>
-            <li><a href="#" tabindex="3" style="color: #edb22b;"><i class="fa fa-gift"></i>
-                    <br />Clearance</a></li>
-            <li><a href="#" tabindex="4"><i class="fa fa-user"></i> <br />My Account</a></li>
-            <li><a href="#" tabindex="5"><i class="fa fa-shopping-cart"></i> <br />Cart</a></li>
+            <li><a href="{{url('products')}}" tabindex="2"><i class="fa fa-list-alt"></i> <br />products</a></li>
+            @if (session()->get('token'))
+            <li><a href="{{url('wishlist')}}" tabindex="3" style="color: #edb22b;"><i class="fa fa-heart"></i><br />wishlist</a></li>
+             @else
+            <li><a href="#" tabindex="3" style="color: #edb22b;" data-toggle="modal" data-target="#myModalsignin"><i class="fa fa-heart"></i><br />wishlist</a></li>
+             @endif
+           @if (session()->get('token'))
+            <li><a href="{{ url('my-account') }}" tabindex="4"><i class="fa fa-user"></i> <br />My Account</a></li>
+            @else
+             <li><a href="#" tabindex="4"  data-toggle="modal" data-target="#myModalsignin"><i class="fa fa-user"></i> <br />My Account</a></li>
+             @endif
+             @if (session()->get('token'))
+            <li><a href="{{url('cart')}}" tabindex="5" ><i class="fa fa-shopping-cart"></i> <br />Cart</a></li>
+            @else
+             <li><a href="#" tabindex="4"  data-toggle="modal" data-target="#myModalsignin"><i class="fa fa-shopping-cart"></i> <br />Cart</a></li>
+             @endif
         </ul>
     </header>
