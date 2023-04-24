@@ -5,7 +5,7 @@
 @endphp
 <style>
 .colorcls{
-    color:"#000";
+    color:#000;
 }
 </style>
      <div class="container-fluid">
