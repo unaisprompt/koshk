@@ -9224,7 +9224,7 @@ ol#compare-items li.last {
     text-align: left;
 }
 .ads-block {
-    background: url(../images/blog-img7.jpg) no-repeat top center;
+    /* background: url(../images/blog-img7.jpg) no-repeat top center; */
     padding: 10% 0 10% 0;
     text-align: center;
     margin-top: 0px;
@@ -14522,7 +14522,7 @@ a.shop-now-btn {
     }
 
     .ads-block {
-        background: url(../images/ad-banner.jpg) no-repeat top center;
+        /* background: url(../images/ad-banner.jpg) no-repeat top center; */
         padding: 10% 10% 25% 10%;
         text-align: center;
         margin-top: 32px;
@@ -17470,7 +17470,7 @@ element.style {
     }
 
     .ads-block {
-        background: url(../images/ad-banner.jpg) no-repeat top center;
+        /* background: url(../images/ad-banner.jpg) no-repeat top center; */
         padding: 6% 0 15% 0;
     }
 
@@ -18484,7 +18484,7 @@ element.style {
     }
 
     .ads-block {
-        background: url(../images/ad-banner.jpg) no-repeat top center;
+        /* background: url(../images/ad-banner.jpg) no-repeat top center; */
         padding: 6% 0 12% 0;
     }
 
@@ -19278,16 +19278,12 @@ element.style {
     color: #000;
 }
 
-
-
 .item-title a {
     display: block;
     transition: transform 0.3s ease-in-out;
     padding-right: 20px;
     white-space: nowrap;
     width: 100%;
-   
-   
 }
 
 .item-title:hover a {
