@@ -449,13 +449,8 @@
              </div>
          </div>
      </section>
-<<<<<<< HEAD
+
   <div class="ads-block" style="background-image: url({{$finalData['main_data']['ad_block']['image_url']}});">
-=======
-
-     <div class="ads-block">
->>>>>>> 8260e4da4553307a7c00dcdcc0f4058d9302635f
-
          <div class="container">
              <div class="row">
                  <div class="banner-text-big"><span>{{$finalData['main_data']['ad_block']['title']}}</span> <br>
