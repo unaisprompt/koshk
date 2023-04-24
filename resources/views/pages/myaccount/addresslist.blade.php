@@ -2,55 +2,61 @@
 
 @section('content')
 <!-- Main Container -->
-<section class="main-container col2-left-layout">
-
-    <div class="container">
-        <div class="row">
-
-            <div class="col-sm-9 col-sm-push-3">
+<div class="container bootstrap snippets bootdey">
+       <div class="row">
+            @include('pages.myaccount.sidebar')
+            <div class="col-sm-9">
                 <div class="page-title">
                     <h2>Address</h2>
                 </div>
                 @foreach($data['data'] as $item)
-                <div class="col-sm-8 col-lg-8">
-                    <div class="uthssk">
-                        <div class="pous1">
-                            <h2>{{$item['first_name']}} {{$item['last_name']}}</h2>
-                            <h4>{{$item['street_address']}}</h4>
-                            <h4>City : {{$item['city']}}</h4>
-                            <h4>Phone number : {{$item['mobile']}}</h4>
-                            <h4>E-mail : {{$item['email']}}</h4>
-                            <h4>Land mark : {{$item['landmark']}}</h4>
-                            <!-- <small><b>Free delivery by Tomorrow, Dec 28</b></small>  
-                                <h5><b>noon Fashion</b></h5>   -->
-                        </div>
-<div style="display:flex">
-<div>
-                             <a data-toggle="modal" data-toggle="tooltip"  data-id="{{ $item['id'] }}" data-first_name="{{ $item['first_name'] }}" data-last_name="{{ $item['last_name'] }}"
-                         data-street_address="{{  $item['street_address'] }}" data-city="{{ $item['city']}}" data-mobile="{{$item['mobile']}}" data-email="{{$item['email']}}" 
-                         data-landmark="{{$item['landmark']}}" onclick="$('#myModalAddAddressEdit').modal('show');" class=" edit-button" style="color:#000;"><i class="fa fa-edit"></i> Edit</a>
-                        
-                        </div>
-                        <div style="padding: 3px; margin-left: 8px;">
-                                                      <a onclick="Addressdelete($(this))" id="delete" class="remove" data-address_id="{{$item['id'] }}"><i class='fa fa-trash'></i></a> 
+                    <div class="col-sm-8 col-lg-8">
+                        <div class="uthssk">
+                            <div class="pous1">
+                                <h2>{{$item['first_name']}} {{$item['last_name']}}</h2>
+                                <h4>{{$item['street_address']}}</h4>
+                                <h4>City : {{$item['city']}}</h4>
+                                <h4>Phone number : {{$item['mobile']}}</h4>
+                                <h4>E-mail : {{$item['email']}}</h4>
+                                <h4>Land mark : {{$item['landmark']}}</h4>
+                                <!-- <small><b>Free delivery by Tomorrow, Dec 28</b></small>  
+                                    <h5><b>noon Fashion</b></h5>   -->
+                            </div>
+                            <div style="display:flex">
+                                <div>
+                                            <a data-toggle="modal" data-toggle="tooltip"  data-id="{{ $item['id'] }}" data-first_name="{{ $item['first_name'] }}" data-last_name="{{ $item['last_name'] }}"
+                                        data-street_address="{{  $item['street_address'] }}" data-city="{{ $item['city']}}" data-mobile="{{$item['mobile']}}" data-email="{{$item['email']}}" 
+                                        data-landmark="{{$item['landmark']}}" onclick="$('#myModalAddAddressEdit').modal('show');" class=" edit-button" style="color:#000;"><i class="fa fa-edit"></i> Edit</a>
+                                        
+                                </div>
+                                <div style="padding: 3px; margin-left: 8px;">
+                                                                    <a onclick="Addressdelete($(this))" id="delete" class="remove" data-address_id="{{$item['id'] }}"><i class='fa fa-trash'></i></a> 
 
+                                </div>
+                                <div style="padding: 3px; margin-left: 8px;">
+                                    @if($item['primary']!= 1)
+                                                            <a onclick="SetPrimaryAddress($(this))" data-address_id="{{$item['id'] }}"><i class="fa fa-check-circle" aria-hidden="true" style="color:#000;"></i></a> 
+                                    @else
+                                    <i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
-                         <div style="padding: 3px; margin-left: 8px;">
-                            @if($item['primary']!= 1)
-                                                      <a onclick="SetPrimaryAddress($(this))" data-address_id="{{$item['id'] }}"><i class="fa fa-check-circle" aria-hidden="true" style="color:#000;"></i></a> 
-                              @else
-                              <i class="fa fa-check-circle" aria-hidden="true" style="color:green;"></i>
-                              @endif
-                        </div>
-</div>
-                        
-                       
-                         {{-- <i class="fa fa-edit" onclick="AddressEdit({{$item['id']}})"aria-hidden="true"></i> --}}
-                        <!-- ----------------modal------------------- -->
+                    </div>
+                @endforeach
+
+                <div class="col-sm-8 col-lg-8 mt-2">
+                    <div class="gcvYcJ">
+                        <button type="button" data-toggle="modal" data-target="#myModalAddAddress"
+                            class="button continue">Add Address</button>
                     </div>
                 </div>
-                
-                @endforeach
+                <!--	///*///======    End article  ========= //*/// -->
+
+            </div>
+        </div>
+</div>
+<!-- Main Container End -->
                 <div class="modal fade in" id="myModalAddAddress" role="dialog" style="display: none;">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -182,22 +188,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-8 col-lg-8 mt-2">
-                    <div class="gcvYcJ">
-                        <button type="button" data-toggle="modal" data-target="#myModalAddAddress"
-                            class="button continue">Add Address</button>
-                    </div>
-                </div>
-                <!--	///*///======    End article  ========= //*/// -->
-
-            </div>
-
-            @include('pages.myaccount.sidebar')
-
-        </div>
-    </div>
-</section>
-<!-- Main Container End -->
 <script>
     function addAddress() {
         $('.pre-loader').removeClass("hidded");

@@ -2,10 +2,11 @@
 @section('style')
 @endsection
 @section('content')
-<section class="main-container col2-left-layout">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-sm-push-3">
+
+<div class="container bootstrap snippets bootdey">
+<div class="row">
+      @include('pages.myaccount.sidebar')
+      <div class="col-sm-9 ">
         <div class="page-title">
           <h2>Orders</h2>
         </div>
@@ -40,8 +41,6 @@
          </div>
         <!--	///*///======    End article  ========= //*/// -->
       </div>
-      @include('pages.myaccount.sidebar')
-    </div>
-  </div>
-</section>
+</div>
+</div>
 @endsection
