@@ -94,7 +94,8 @@
 
     <div class="container">
         @if (!session()->get('token'))
-            <div class="positionsa">
+    
+            <div class="positionsa" id="signinpopup">
                 <div id="bkgOverlay" class="backgroundOverlay"></div>
 
                 <div id="delayedPopup" class="delayedPopupWindow">
@@ -120,28 +121,17 @@
                                 <button type="button" class="signin" type="button" onclick="loginUserPopup()">
                                     SIGN IN
                                 </button>
-                                <button class="signUp" type="button">SIGN UP</button>
+                                <button class="signUp" type="button"   onclick="$('#myModalsignup').modal('show');">SIGN UP</button>
                             </form>
 
                         </div>
                         <div class="right">
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus reiciendis. </p>
-
-
-
                         </div>
-
                     </div>
-
-
                 </div>
-
-
-
-
-
                 <!-- End MailChimp Signup Form -->
-            </div>
+        </div>
         @endif
 
 
