@@ -662,7 +662,7 @@
                      @foreach ($finalData['main_data']['offer_banner'] as $offer_banner)
                          <div class="bb5g">
                              <div class="yuhd">
-                                 <a href="@if($offer_banner['product_id'] != 0){{ url('products') }}?id={{ $offer_banner['product_id'] }} @elseif($offer_banner['cat_id'] != 0){{ url('products') }}?cat_id={{ $offer_banner['cat_id'] }}@endif"
+                                 <a href="@if($offer_banner['product_id'] != 0){{ url('products-detail') }}?id={{ $offer_banner['product_id'] }} @elseif($offer_banner['cat_id'] != 0){{ url('products') }}?cat_id={{ $offer_banner['cat_id'] }}@endif"
                                      style="text-decoration:none;"><img src="{{ $offer_banner['image'] }}"
                                          alt="" />
                              </div>
