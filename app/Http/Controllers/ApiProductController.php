@@ -20,6 +20,9 @@ class ApiProductController extends Controller
         $innersubcategory_id=$request->innersubcategory_id ?? '';
         $search=$request->search ?? '';
         $explore_more=$request->explore_more ?? '';
+        $new_arrival=$request->new_arrival ?? '';
+        $best_seller=$request->best_seller ?? '';
+        $featured_product=$request->featured_product ?? '';
         if($category_id!=''){
           session()->put('category_id',$category_id);
         }
@@ -35,6 +38,9 @@ class ApiProductController extends Controller
         'innersubcategory_id'=>$innersubcategory_id,
         'search'=>$search,
         'explore_more'=>$explore_more,
+        'new_arrival'=>$new_arrival,
+        'best_seller'=>$best_seller,
+        'featured_product'=>$featured_product,
         'perpage'=>7
         ]);
 
@@ -51,6 +57,9 @@ class ApiProductController extends Controller
         $innersubcategory_id=$request->innersubcategory_id ?? '';
         $search=$request->search ?? '';
         $explore_more=$request->explore_more ?? '';
+        $new_arrival=$request->new_arrival ?? '';
+        $best_seller=$request->best_seller ?? '';
+        $featured_product=$request->featured_product ?? '';
         if($category_id!=''){
           session()->put('category_id',$category_id);
         }
@@ -66,6 +75,9 @@ class ApiProductController extends Controller
         'innersubcategory_id'=>$innersubcategory_id,
         'search'=>$search,
         'explore_more'=>$explore_more,
+        'new_arrival'=>$new_arrival,
+        'best_seller'=>$best_seller,
+        'featured_product'=>$featured_product,
         'perpage'=>18
         ]);
 

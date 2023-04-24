@@ -385,7 +385,7 @@
                              @endforeach
                          @endif
                          <div class="iu5d">
-                             <a href="#">See all offers</a>
+                             <a href="{{ url('products') }}?new_arrival=1">See all offers</a>
                          </div>
                      </div>
                  </div>
@@ -413,7 +413,7 @@
                              @endforeach
                          @endif
                          <div class="iu5d">
-                             <a href="#">See all offers</a>
+                             <a href="{{ url('products') }}?best_seller=1">See all offers</a>
                          </div>
                      </div>
                  </div>
@@ -442,14 +442,19 @@
                          @endif
 
                          <div class="iu5d">
-                             <a href="#">See all offers</a>
+                             <a href="{{ url('products') }}?featured_product=1">See all offers</a>
                          </div>
                      </div>
                  </div>
              </div>
          </div>
      </section>
+<<<<<<< HEAD
   <div class="ads-block" style="background-image: url({{$finalData['main_data']['ad_block']['image_url']}});">
+=======
+
+     <div class="ads-block">
+>>>>>>> 8260e4da4553307a7c00dcdcc0f4058d9302635f
 
          <div class="container">
              <div class="row">
@@ -558,11 +563,12 @@
                                              </div>
                                              <div class="item-info">
                                                  <div class="info-inner">
-<div class="item-title" style="max-height: 50px;  ">
-    <a href="{{ url('product-detail') }}?id={{ $top_rated['id'] }}" title="{{ $top_rated['product_name'] }}">
-        {{ $top_rated['product_name'] }}
-    </a>
-</div>
+                                                     <div class="item-title" style="max-height: 50px;  ">
+                                                         <a href="{{ url('product-detail') }}?id={{ $top_rated['id'] }}"
+                                                             title="{{ $top_rated['product_name'] }}">
+                                                             {{ $top_rated['product_name'] }}
+                                                         </a>
+                                                     </div>
 
 
                                                      <div class="brand">

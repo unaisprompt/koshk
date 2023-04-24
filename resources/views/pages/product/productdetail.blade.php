@@ -5,7 +5,7 @@
     @endphp
     <style>
         .product-view .product-essential .add-to-links .link-wishlist.active {
-            background: blue;
+            background: #6e6eff;
             color: white;
         }
 
@@ -14,7 +14,7 @@
         }
 
         .box-hover .add-to-links li a.link-wishlist.active {
-            color: blue;
+            color: #6e6eff;
         }
     </style>
     <section class="main-container col1-layout">

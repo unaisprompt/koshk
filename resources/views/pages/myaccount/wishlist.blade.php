@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-
-<!-- Main Container -->
-<section class="main-container col2-left-layout">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-9 col-sm-push-3">
+<div class="container bootstrap snippets bootdey">
+<div class="row">
+ @include('pages.myaccount.sidebar')
+      <div class="col-sm-9 ">
         <article class="col-main">
           <div class="page-title">
             <h2>Wishlist</h2>
@@ -89,11 +87,9 @@
         </section>
 @endif
       </div>
-
-      @include('pages.myaccount.sidebar')
-  </div>
-  </div>
-</section>
+</div>
+</div>
+     
 <!-- Main Container End -->
 <script>
   function WishListdelete(ref) {
