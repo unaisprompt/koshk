@@ -70,11 +70,11 @@
           </div>
 
           <ul class="nav nav-pills nav-stacked">
-              <li class="active"><a href="{{url('my-account')}}"> <i class="fa fa-user"></i> Profile</a></li>
-                <li><a href="{{url('order-history')}}"><i class="fa fa-shopping-cart"></i> Orders <span class="label label-warning pull-right r-activity">9</span></a></li>
-                <li><a href="{{url('wishlist')}}"> <i class="fa fa-heart"></i> Wishlist <span class="label label-success pull-right r-activity">9</span></a></li>
-                <li><a href="{{url('address-list')}}"> <i class="fa fa-map-marker"></i> Address</a></li>           
-              <li><a href="{{url('edit-profile')}}"> <i class="fa fa-edit"></i> Edit Profile</a></li>
+              <li class=@if(last(request()->segments()) == 'my-account') 'active' @endif><a href="{{url('my-account')}}"> <i class="fa fa-user"></i> Profile</a></li>
+                <li class=@if(last(request()->segments()) == 'order-history') 'active' @endif><a href="{{url('order-history')}}"><i class="fa fa-shopping-cart"></i> Orders </a></li>
+                <li class=@if(last(request()->segments()) == 'wishlist') 'active' @endif><a href="{{url('wishlist')}}"> <i class="fa fa-heart"></i> Wishlist</a></li>
+                <li class=@if(last(request()->segments()) == 'address-list') 'active' @endif><a href="{{url('address-list')}}"> <i class="fa fa-map-marker"></i> Address</a></li>           
+                <li class=@if(last(request()->segments()) == 'edit-profile') 'active' @endif><a href="{{url('edit-profile')}}"> <i class="fa fa-edit"></i> Edit Profile</a></li>
                 <li><a href="#" onclick="$('#myModalChangePassword').modal('show');"> <i class="fa fa-lock"></i> Change Password</a></li>
           </ul>
       </div>
