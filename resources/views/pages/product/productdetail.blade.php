@@ -136,12 +136,12 @@
                                         <div class="add-to-box">
                                             <div class="add-to-cart">
                                                 <button
-                                                    onclick="cartadd({{ $data->id }},{{ $variation ? $variation->id : 0 }})"
+                                                    onclick="cartadd({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val())"
                                                     type="button" id="cart_button" style="cursor:pointer;"
                                                     value="{{ $data->id }}"
                                                     class="button btn-cart"title="Add to Cart">Add to Cart</button>
                                                 <button class="button btn-buy" title="Add to Cart"
-                                                    onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }})"
+                                                    onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val())"
                                                     type="button" id="buynow_button" style="cursor:pointer;"
                                                     value="{{ $data->id }}">Buy
                                                     Now</button>
@@ -187,11 +187,13 @@
                                                     class="separator">|</span> <a href="#">Add Review</a> </p>
                                         </div>
                                         <div class="price-block">
-                                            <!-- <div class="count-number">
-                                                                    <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                                                                    <input type='text'id="pro_qty" name='quantity' value='1' class='qty' />
-                                                                    <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                                                                </div> -->
+                                            <div class="count-number">
+                                                <input type='button' value='-' class='qtyminus minus'
+                                                    field='quantity' />
+                                                <input type='text' name='quantity' value='1' class='qty' />
+                                                <input type='button' value='+' class='qtyplus plus'
+                                                    field='quantity' />
+                                            </div>
                                             <div class="price-box">
                                                 @if (collect($data->stocks)->sum('quantity') <= 0)
                                                     <p class="availability in-stock"><span>Sold out</span></p>
@@ -587,7 +589,7 @@
             function(e) {
                 let $input = $(this).next('input.qty');
                 var val = parseInt($input.val());
-                if (val > 0) {
+                if (val > 1) {
                     $input.val(val - 1).change();
                 }
             });
@@ -595,7 +597,7 @@
 
 
 
-    function cartadd(id, variation_id) {
+    function cartadd(id, variation_id, qty) {
 
         @php
             
@@ -623,7 +625,7 @@
             data: {
                 product_id: id,
                 product_name: $("#pro_name").val(),
-                qty: 1,
+                qty: qty,
                 price: $("#pro_price").val(),
                 shipping_cost: '{{ $data->shipping_cost }}',
                 tax: {{ $tax }},
@@ -661,7 +663,7 @@
         $.ajax(setting);
     }
 
-    function buynow(id, variation_id) {
+    function buynow(id, variation_id, qty) {
 
         @php
             
@@ -689,7 +691,7 @@
             data: {
                 product_id: id,
                 product_name: $("#pro_name").val(),
-                qty: 1,
+                qty: qty,
                 price: $("#pro_price").val(),
                 shipping_cost: '{{ $data->shipping_cost }}',
                 tax: {{ $tax }},
