@@ -502,24 +502,59 @@ public function loginPop(Request $request){
                             "message"=>$response['message']]);
        }
     }
-
     public function resentOtp(Request $request)
     {
-      $url = $this->url."/forgotPassword";
-      $response = Http::post($url,  [
-     'email'=>$request->email,
-      ]);
+        $data = $request->session()->all();
+     $url = $this->url."/forgotPassword";
+        $response = Http::post($url,  [
+       'email'=>$data['email'],
+        ]);
+         $data = $response->json();
+        // dd($data);
+       if($response['status']==1){
+        return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
+       }
+       else{
+           return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
+       }
+    }
+        public function emailOtpVerify(Request $request)
+    {
+        $data = $request->session()->all();
+     $url = $this->url."/forgotPassword";
+        $response = Http::post($url,  [
+       'email'=>$request->email_reg,
+        ]);
+         $data = $response->json();
+        // dd($data);
+       if($response['status']==1){
+        return response()->json(["status"=>1,
+                            "message"=>$response['message']]);
+       }
+       else{
+           return response()->json(["status"=>0,
+                            "message"=>$response['message']]);
+       }
+    }
+//     public function resentOtp(Request $request)
+//     {
+//       $url = $this->url."/forgotPassword";
+//       $response = Http::post($url,  [
+//      'email'=>$request->email,
+//       ]);
       
-      $data=$request->email;
-     if($response['status']==1){
-        return response()->json(['status' => 1],200);
+//       $data=$request->email;
+//      if($response['status']==1){
+//         return response()->json(['status' => 1],200);
 
-     }
-     else{
-        return response()->json(['status' => 0],200);
+//      }
+//      else{
+//         return response()->json(['status' => 0],200);
 
-     }
-  }
+//      }
+//   }
     public function passwordReset(Request $request)
     {
      $data = $request->session()->all();

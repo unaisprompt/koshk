@@ -65,6 +65,7 @@ Route::post('update-profile',[ApiUserController::class,'updateProfile']);
 Route::get('order-history',[ApiUserController::class,'getOrderHistory']);
 Route::get('order-detail/{id}',[ApiUserController::class,'getOrderDetails']);
 Route::post('resent-forget-otp',[ApiUserController::class,'resentOtp']);
+Route::post('resent-email-otp',[ApiUserController::class,'emailOtpVerify']);
 ############# Product ############################
 
 Route::get('products',[ApiProductController::class,'productList']);

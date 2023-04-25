@@ -378,6 +378,7 @@
             @csrf
             <div class="modal-body">
                 <div class="yhd0d">
+                     <div id="some_div_time"></div>
                     <h1>Verify Your Account</h1>
                     {{-- <h2>Sign in to your account</h2> --}}
                     <h3>Don't have an account? <a href="#" data-toggle="modal"
@@ -391,6 +392,9 @@
                 <a class="ipEvhD" href="#">Forgot your password?</a>
                 <button type="button" class="jcdgCW" onclick="verifyOtp()">Verify
                     Otp</button>
+                     <button type="button" id="resend_btn" onclick="ResendEmailOtp()" style="display:none;" >Reseend
+                    Otp</button>
+                    
             </div>
         </form>
     </div>
@@ -436,6 +440,7 @@
             @csrf
             <div class="modal-body">
                 <div class="yhd0d">
+                    <div id="some_div"></div>
                     <h1>Otp Enter</h1>
                     {{-- <h2>Sign in to your account</h2> --}}
                     {{-- <h3>Don't have an account? <a href="#" data-toggle="modal" onclick="$('#myModalsignup').modal('show');">Sign Up</a></h3> --}}
@@ -446,6 +451,9 @@
                 </div>
                 <button type="button" class="jcdgCW" onclick="ForgetOtp()">Verify
                     Otp</button>
+                     <button type="button" id="resend_btn_otp" onclick="ResendOtp()" style="display:none;">Resend
+                    Otp</button>
+                    
             </div>
         </form>
     </div>
@@ -492,3 +500,4 @@
 
     };
 </script>
+
