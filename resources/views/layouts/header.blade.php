@@ -356,7 +356,7 @@
                 </div>
 
                 <div class="mmc5c">
-                    <label>mobile</label>
+                    <label>Mobile</label>
                     <input type="text" id="phone" name="phone" value="">
                 </div>
                 <button type="button" class="jcdgCW" id="register_btn" onclick="register()">Create an
