@@ -104,9 +104,9 @@
                         <span onclick="showPasswordNew()"><i class="fa fa-eye-slash"></i></span>
                     </div>
                     <div class="mmc5c">
-                        <label>Conform password</label>
+                        <label>Confirm password</label>
                         <input type="password" id="conform_password" name="conform_password"  class="password_conf"
-                            placeholder="conform Password" required>
+                            placeholder="Confirm Password" required>
                         <span onclick="showPasswordConf()"><i class="fa fa-eye-slash"></i></span>
                     </div>
                     <button type="button" class="jcdgCW" id="login_btn" onclick="ResetPass()">Reset Password</button>
