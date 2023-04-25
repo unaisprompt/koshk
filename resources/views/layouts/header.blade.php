@@ -310,7 +310,7 @@
                     <span class="eyesopen" onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
                 <span class="ipEvhD"
-                    onclick="$('#myModalsignup').modal('hide');$('#myModalforgot').modal('show'); "
+                    onclick="$('#myModalsignup').modal('hide');$('#myModalsignin').modal('hide');$('#myModalforgot').modal('show'); "
                     style="cursor:pointer;">Forgot your password?</span>
                 <button type="button" class="jcdgCW" id="login_btn" onclick="loginUser()">Sign In</button>
             </form>
@@ -386,7 +386,7 @@
                 </div>
                 <div class="mmc5c">
                     <label>otp</label>
-                    <input type="number" name="otp_verify_otp" value="" id="otp_verify_otp">
+                    <input type="number" name="otp_verify_otp" value="" min="0" id="otp_verify_otp">
                 </div>
                 <a class="ipEvhD" href="#">Forgot your password?</a>
                 <button type="button" class="jcdgCW" onclick="verifyOtp()">Verify
@@ -442,7 +442,7 @@
                 </div>
                 <div class="mmc5c">
                     <label>otp</label>
-                    <input type="number" name="otp" value="" id="otp_for">
+                    <input type="number" name="otp" value="" id="otp_for" min="0">
                 </div>
                 <button type="button" class="jcdgCW" onclick="ForgetOtp()">Verify
                     Otp</button>
