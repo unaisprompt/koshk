@@ -42,10 +42,10 @@
                                                      {{-- <h3>Brand</h3> --}}
                                                      <h4>{{ $item['product_name'] }}</h4>
 
-                                                     @if (isset($item['created_at']))
+                                                     {{-- @if (isset($item['created_at']))
                                                          <small>Ordered
                                                              {{ \Carbon\Carbon::parse($item['created_at'])->diffForHumans(\Carbon\Carbon::now()) }}</small>
-                                                     @endif
+                                                     @endif --}}
                                                      @if (isset($item['est_shipping_days']))
                                                          <small><b>
                                                                  @if (!($item['shipping_cost'] > 0))
