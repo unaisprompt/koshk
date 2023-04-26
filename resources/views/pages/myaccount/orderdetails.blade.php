@@ -65,7 +65,7 @@
                                 @csrf
                                 <div class="modal-body">
                                 <div class="yhd0d">
-                                    <h2>Cancel Order Terms And Conditions</h2>
+                                    <h2>I Cancel Order Terms And Conditions</h2>
                                 </div>
                                 @if(isset(CmsPage()['cancellation']['cancellation_content']))
                         {{CmsPage()['cancellation']['cancellation_content']}}
