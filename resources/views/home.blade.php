@@ -83,8 +83,8 @@
          <div class="more-info-tab clearfix">
              <ul class="nav nav-tabs nav-tab-line container my-slider">
                  @foreach ($finalData['main_data']['category'] as $category)
-                     <li class="{{ $loop->iteration == 1 ? 'active' : '' }}"> <a data-transition-type="backSlide"
-                             href="#cat_{{ $category['id'] }}" data-toggle="tab">
+                     <li class="{{ $loop->iteration == 1 ? 'active' : '' }}" onClick="toggleActive($(this))"> <a
+                             data-transition-type="backSlide" href="#cat_{{ $category['id'] }}" data-toggle="tab">
                              <img src="{{ $category['image_url'] }}" alt="{{ $category['category_name'] }}"> <span>
                                  {{ $category['category_name'] }}</span> </a> </li>
                  @endforeach
@@ -1085,5 +1085,12 @@
                  }
              }).mount();
          });
+     </script>
+     <script>
+         function toggleActive(ref) {
+             $('.slick-slide').each(function() {
+                 $(this).removeClass('active');
+             });
+         }
      </script>
  @endsection
