@@ -24,6 +24,7 @@
                 @php $total=1;@endphp
                 @if(!empty($data))
                 @foreach($data['order_data'] as $value)
+                {{-- {{dd($value)}} --}}
                 <div class="col-sm-8 col-lg-8 order-box-wid">
                     <div class="uthssk">
                         <div class="cart-table table-responsive" style="overflow-x: hidden;">
@@ -37,6 +38,7 @@
                             <p class="card-title">qty : {{$value['qty']}}</p>
                             <p class="card-title">status : {{$value['status']}}</p>
                             <p class="card-title">Shipping Cost : {{$value['shipping_cost']}}</p>
+                            <p class="card-title">Loyality Point: {{$value['loyality_discount']}} AED</p>
                             <p class="card-title">tax : {{$value['tax']}}</p>
                            <p class="card-title">Status : {{$value['status']}}</p><br>
                            <div class="d-flex" style="justify-content: space-between;">
@@ -80,7 +82,7 @@
                         </div>
                             @endif
                             @else
-                            <span style="color: blue"> Order Cancelled </span>
+                            <span style="color: blue;padding: 21px;" > Order Cancelled </span>
                                 @endif
                                 @else
                                 <span style="color: blue">{{$value['status']}}</span>

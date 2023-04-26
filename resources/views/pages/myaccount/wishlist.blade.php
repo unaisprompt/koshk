@@ -48,8 +48,13 @@
                           </div>
 
                           <div class="action">
-                            <button class="button btn-cart cart-padding" type="button" title=""
-                              data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button>
+                            {{-- <button class="button btn-cart cart-padding" type="button" title=""
+                              data-original-title="Add to Cart"><i class="fa fa-shopping-basket"></i></button> --}}
+                              <button class="button btn-cart" type="button" title=""
+                                                             data-original-title="Add to Cart"
+                                                             data-details="{{ json_encode($item) }}"
+                                                           onclick="addCart($(this).data('details'))"><i
+                                                                 class="fa fa-shopping-basket"></i></button>
                           </div>
                         </div>
                       </div>
@@ -133,4 +138,5 @@
     });
   };
 </script>
+
 @endsection

@@ -140,21 +140,22 @@
                                                     type="button" id="cart_button" style="cursor:pointer;"
                                                     value="{{ $data->id }}"
                                                     class="button btn-cart"title="Add to Cart">Add to Cart</button>
-                                                <button class="button btn-buy" title="Add to Cart"
-                                                    onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val())"
-                                                    type="button" id="buynow_button" style="cursor:pointer;"
-                                                    value="{{ $data->id }}">Buy
-                                                    Now</button>
+                                                
                                                 @if (collect($data->stocks)->sum('quantity') <= 0)
                                                     <button class="button btn-buy" title="Add to Cart"
                                                         type="button">Sold
                                                         Out</button>
+                                                @else<button class="button btn-buy" title="Add to Cart"
+                                                    onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val())"
+                                                    type="button" id="buynow_button" style="cursor:pointer;"
+                                                    value="{{ $data->id }}">Buy
+                                                    Now</button>
                                                 @endif
                                             </div>
 
                                         </div>
                                         <ul class="add-to-links">
-                                            <li> <a class="link-wishlist active" href="#"><span>Add to
+                                            <li> <a class="link-wishlist  @if ($data->is_wishlist) active @endif" id="wishlist_act" href="#" onclick="addWishlist({{ $data->id }},$(this))"><span>Add to
                                                         Wishlist</span></a></li>
                                             <li><a class="link-compare" href="{{ url('products') }}"><span>Continue
                                                         Shopping</span></a></li>
@@ -873,6 +874,7 @@
                 },
                 success: function(response) {
                     if (response.status == 1) {
+                         $("#wishlist_act").addClass("active");
                         Toastify({
                             text: response.message,
                             className: "info",
