@@ -133,11 +133,13 @@
                                                      @if (session()->get('token'))
                                                          @php
                                                              $net_amount = $total - $total_discount + $shipping;
-                                                             $applicable_discount = ($net_amount * $loyality_discount_applicable) / 100;
+                                                             
                                                              try {
+                                                             $applicable_discount = ($net_amount * $loyality_discount_applicable) / 100;
                                                                  $points_to_discount = $loyality_points / $aed_to_loality;
                                                              } catch (Exception $e) {
                                                                  $points_to_discount = 0;
+                                                                  $applicable_discount =0;
                                                              }
                                                              $applied_discount = $points_to_discount;
                                                              if ($applicable_discount < $points_to_discount) {
