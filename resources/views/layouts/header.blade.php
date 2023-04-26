@@ -310,7 +310,7 @@
                     <span class="eyesopen" onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
                 <span class="ipEvhD"
-                    onclick="$('#myModalsignup').modal('hide');$('#myModalforgot').modal('show'); "
+                    onclick="$('#myModalsignup').modal('hide');$('#myModalsignin').modal('hide');$('#myModalforgot').modal('show'); "
                     style="cursor:pointer;">Forgot your password?</span>
                 <button type="button" class="jcdgCW" id="login_btn" onclick="loginUser()">Sign In</button>
             </form>
@@ -356,7 +356,7 @@
                 </div>
 
                 <div class="mmc5c">
-                    <label>mobile</label>
+                    <label>Mobile</label>
                     <input type="text" id="phone" name="phone" value="">
                 </div>
                 <button type="button" class="jcdgCW" id="register_btn" onclick="register()">Create an
@@ -378,6 +378,7 @@
             @csrf
             <div class="modal-body">
                 <div class="yhd0d">
+                     <div id="some_div_time"></div>
                     <h1>Verify Your Account</h1>
                     {{-- <h2>Sign in to your account</h2> --}}
                     <h3>Don't have an account? <a href="#" data-toggle="modal"
@@ -386,11 +387,14 @@
                 </div>
                 <div class="mmc5c">
                     <label>otp</label>
-                    <input type="number" name="otp_verify_otp" value="" id="otp_verify_otp">
+                    <input type="number" name="otp_verify_otp" value="" min="0" id="otp_verify_otp">
                 </div>
                 <a class="ipEvhD" href="#">Forgot your password?</a>
                 <button type="button" class="jcdgCW" onclick="verifyOtp()">Verify
                     Otp</button>
+                     <button type="button" id="resend_btn" onclick="ResendEmailOtp()" style="display:none;" >Reseend
+                    Otp</button>
+                    
             </div>
         </form>
     </div>
@@ -436,16 +440,20 @@
             @csrf
             <div class="modal-body">
                 <div class="yhd0d">
+                    <div id="some_div"></div>
                     <h1>Otp Enter</h1>
                     {{-- <h2>Sign in to your account</h2> --}}
                     {{-- <h3>Don't have an account? <a href="#" data-toggle="modal" onclick="$('#myModalsignup').modal('show');">Sign Up</a></h3> --}}
                 </div>
                 <div class="mmc5c">
                     <label>otp</label>
-                    <input type="number" name="otp" value="" id="otp_for">
+                    <input type="number" name="otp" value="" id="otp_for" min="0">
                 </div>
                 <button type="button" class="jcdgCW" onclick="ForgetOtp()">Verify
                     Otp</button>
+                     <button type="button" id="resend_btn_otp" onclick="ResendOtp()" style="display:none;">Resend
+                    Otp</button>
+                    
             </div>
         </form>
     </div>
@@ -492,3 +500,4 @@
 
     };
 </script>
+
