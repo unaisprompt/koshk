@@ -54,7 +54,7 @@
                             @endif
                             @if($value['status']=='Order Placed'||$value['status']=='Order Confirmed'||$value['status']=='Order Shipped')
                            {{-- <button type="button" class="btn btn-primary" onclick="cancelOder({{$value['id']}})">Cancel Order</button> --}}
-                                <a href="#" class="btn btn-primary" data-toggle="modal" onclick="$('#myModalCancel').modal('show');">Cancel Order</a>
+                                <a href="#" class="btn btn-primary" data-toggle="modal" onclick="$('#myModalCancel').modal('show');" style=" margin: 9px;">Cancel Order</a>
                            <div class="modal fade" id="myModalCancel" role="dialog">
                             <div class="modal-dialog">
                             <div class="modal-content">
@@ -85,7 +85,7 @@
                                 @else
                                 <span style="color: blue">{{$value['status']}}</span>
                                 @endif
-                              <button type="button" class="btn btn-success" style="padding: 10px;"><a href="{{url('order-tracking/'.encrypt($value['id']))}}" style="text-decoration: none;color:#fff;">Track Your Order</a></button> <br>  
+                              <button type="button" class="btn btn-success" style="padding: 10px;margin: 9px;"  ><a href="{{url('order-tracking/'.encrypt($value['id']))}}" style="text-decoration: none;color:#fff;">Track Your Order</a></button> <br>  
                            </div>
                                         </div>
                                     </div>
