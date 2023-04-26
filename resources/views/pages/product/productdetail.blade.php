@@ -165,7 +165,7 @@
                                             <a class="product-next" href="#"><span></span></a>
                                             <a class="product-prev" href="#"><span></span></a>
                                         </div> --}}
-                                        <div class="brand">{{ $data->brand->brand_name }}</div>
+                                        <div class="brand">{{ $data->brand ? $data->brand->brand_name : '' }}</div>
                                         <div class="product-name">
                                             <h1>{{ $data->product_name }}</h1>
                                             <input type="hidden" value="{{ $data->product_name }}" name="pro_name"
