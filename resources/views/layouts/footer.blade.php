@@ -55,11 +55,9 @@
                                 <li><a href="{{url('order-history')}}" title="Orders History">Orders History</a></li>
                                 @else
                                 <li><a href="#" title="Your Account">Your Account</a></li>
-                                <li><a href="#" title="Information">Information</a></li>
                                 <li><a href="#" title="Addresses">Addresses</a></li>
-                                <li><a href="#" title="Addresses">Discount</a></li>
-                                <li><a href="#" title="Orders History">Orders History</a></li>
-                                <li><a href="#" title="Order Tracking">Order Tracking</a></li>
+                                <li><a href="#" title="Wishlist">Wishlist</a></li>
+                                <li><a href="#" title="Orders History">Orders History</a></li> 
                                 @endif
                             </ul>
                         </div>

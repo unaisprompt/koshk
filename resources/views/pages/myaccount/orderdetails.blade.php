@@ -46,7 +46,7 @@
                             @if($value['status'] != 'cancelled')
                              @if($value['return_number'] == NULL)
                           
-                             @if( $value['status']=='Order Delivered')
+                             @if( $value['status']=='Order Delivered' && $value['isreturn'] !=0)
                             <a href="{{url('return/'.encrypt($data['order_info']['order_number']).'/'.encrypt($value['id']))}}" class="btn btn-primary">Return</a> 
                             @else
                                 <span style="color: blue; padding:10px;"> Return Not Available </span>
