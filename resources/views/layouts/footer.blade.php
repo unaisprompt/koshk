@@ -36,18 +36,17 @@
                         <div class="footer-column pull-left">
                             <h4>Shopping Guide</h4>
                             <ul class="links">
-                                <li><a href="blog.html" title="How to buy">Blog</a></li>
-                                <li><a href="faq.html" title="FAQs">FAQs</a></li>
+                                <li><a href="#" title="How to buy">Blog</a></li>
+                                <li><a href="#" title="FAQs">FAQs</a></li>
                                 <li><a href="#" title="Payment">Payment</a></li>
                                 <li><a href="#" title="Shipment">Shipment</a></li>
-                                <li><a href="#" title="Where is my order?">Where is my order?</a></li>
                                 <li><a href="#" title="Return policy">Return policy</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column pull-left">
-                            <h4>Style Advisor</h4>
+                            <h4>My profile</h4>
                             <ul class="links">
                                 @if(!empty(session()->get('token')))
                                 <li><a href="{{url('my-account')}}" title="Your Account">Your Account</a></li>
