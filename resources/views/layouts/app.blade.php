@@ -60,8 +60,13 @@
         #myModalsignin {
             z-index: 2999;
         }
+
         .swal2-container {
-            z-index:3001 !important;
+            z-index: 3001 !important;
+        }
+
+        a:focus {
+            outline: none !important;
         }
     </style>
 </head>
@@ -365,8 +370,8 @@
                             $('#myModalsigninotp').modal('show');
                             $('#myModalsignup').modal('hide');
                             $('#myModalsignin').modal('hide');
-                         timeLeft =30;
-                        timerId = setInterval(countdowntime, 1000);
+                            timeLeft = 30;
+                            timerId = setInterval(countdowntime, 1000);
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
@@ -534,8 +539,8 @@
                             $('#myModalforgot').modal('hide');
                             $('#myModalsignin').modal('hide');
                             $('#myModalforgetotp').modal('show');
-                          timeLeft =30;
-                        timerId = setInterval(countdowntime, 1000);
+                            timeLeft = 30;
+                            timerId = setInterval(countdowntime, 1000);
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
@@ -632,7 +637,7 @@
     <script>
         function ResendOtp() {
             $('.pre-loader').removeClass("hidded");
-          
+
             $.ajax({
                 url: "{{ url('resent-forget-otp') }}",
                 type: 'post',
@@ -642,8 +647,8 @@
                     $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
-                            timeLeft =30;
-                        timerId = setInterval(countdown, 1000);
+                            timeLeft = 30;
+                            timerId = setInterval(countdown, 1000);
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
@@ -664,10 +669,10 @@
             });
         }
     </script>
-      <script>
+    <script>
         function ResendEmailOtp() {
             $('.pre-loader').removeClass("hidded");
-          
+
             $.ajax({
                 url: "{{ url('resent-email-otp') }}",
                 type: 'post',
@@ -677,8 +682,8 @@
                     $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
-                            timeLeft =30;
-                        timerId = setInterval(countdowntime, 1000);
+                            timeLeft = 30;
+                            timerId = setInterval(countdowntime, 1000);
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
@@ -701,43 +706,43 @@
     </script>
     <script>
         /*   $('.add-to-wishlist').click(function(e) {
-                                                        e.preventDefault();
-                                                        // $('#review_button').prop('disabled', true);
-                                                        $.ajax({
-                                                            type: "POST",
-                                                            url: '{{ url('wishlist-add') }}',
-                                                            headers: {
-                                                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                                            },
-                                                            data: {
-                                                                product_id: $(this).data('cpidw')
-                                                            },
-                                                            success: function(response) {
-                                                                if (response.status == 1) {
-                                                                    $("#my_btn_heart").css({
-                                                                        'color': 'red'
-                                                                    });
-                                                                    Toastify({
-                                                                        text: "Product Added",
-                                                                        className: "info",
-                                                                        close: true,
-                                                                        style: {
-                                                                            background: "#1cad6a",
-                                                                        }
-                                                                    }).showToast();
-                                                                } else {
-                                                                    Toastify({
-                                                                        text: 'product already added',
-                                                                        className: "info",
-                                                                        close: true,
-                                                                        style: {
-                                                                            background: "#e11414",
-                                                                        }
-                                                                    }).showToast();
+                                                            e.preventDefault();
+                                                            // $('#review_button').prop('disabled', true);
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: '{{ url('wishlist-add') }}',
+                                                                headers: {
+                                                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                                },
+                                                                data: {
+                                                                    product_id: $(this).data('cpidw')
+                                                                },
+                                                                success: function(response) {
+                                                                    if (response.status == 1) {
+                                                                        $("#my_btn_heart").css({
+                                                                            'color': 'red'
+                                                                        });
+                                                                        Toastify({
+                                                                            text: "Product Added",
+                                                                            className: "info",
+                                                                            close: true,
+                                                                            style: {
+                                                                                background: "#1cad6a",
+                                                                            }
+                                                                        }).showToast();
+                                                                    } else {
+                                                                        Toastify({
+                                                                            text: 'product already added',
+                                                                            className: "info",
+                                                                            close: true,
+                                                                            style: {
+                                                                                background: "#e11414",
+                                                                            }
+                                                                        }).showToast();
+                                                                    }
                                                                 }
-                                                            }
-                                                        });
-                                                    }); */
+                                                            });
+                                                        }); */
     </script>
 
     <script>
@@ -886,46 +891,46 @@
             $.ajax(setting);
         }
     </script>
-<script>
-    var timeLeft = 0;
-var elem = document.getElementById('some_div');
-var timerId = setInterval(countdown, 1000);
+    <script>
+        var timeLeft = 0;
+        var elem = document.getElementById('some_div');
+        var timerId = setInterval(countdown, 1000);
 
-function countdown() {
-    if (timeLeft == -1) {
-        clearTimeout(timerId);
-       $('#resend_btn_otp').show();
-    } else {
-        elem.innerHTML = timeLeft + ' seconds remaining';
-        timeLeft--;
-          $('#resend_btn_otp').hide();
-    }
-}
+        function countdown() {
+            if (timeLeft == -1) {
+                clearTimeout(timerId);
+                $('#resend_btn_otp').show();
+            } else {
+                elem.innerHTML = timeLeft + ' seconds remaining';
+                timeLeft--;
+                $('#resend_btn_otp').hide();
+            }
+        }
 
-// function doSomething() {
-//     alert("Hi");
-// }
+        // function doSomething() {
+        //     alert("Hi");
+        // }
     </script>
 
     <script>
-    var timeLeft = 0;
-var elem = document.getElementById('some_div_time');
-var timerId = setInterval(countdowntime, 1000);
+        var timeLeft = 0;
+        var elem = document.getElementById('some_div_time');
+        var timerId = setInterval(countdowntime, 1000);
 
-function countdowntime() {
-    if (timeLeft == -1) {
-        clearTimeout(timerId);
-       $('#resend_btn').show();
-    } else {
-        elem.innerHTML = timeLeft + ' seconds remaining';
-        timeLeft--;
-          $('#resend_btn').hide();
-    }
-}
+        function countdowntime() {
+            if (timeLeft == -1) {
+                clearTimeout(timerId);
+                $('#resend_btn').show();
+            } else {
+                elem.innerHTML = timeLeft + ' seconds remaining';
+                timeLeft--;
+                $('#resend_btn').hide();
+            }
+        }
 
-// function doSomething() {
-//     alert("Hi");
-// }
+        // function doSomething() {
+        //     alert("Hi");
+        // }
     </script>
     @yield('script')
 </body>
