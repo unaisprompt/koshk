@@ -69,6 +69,11 @@
             outline: none !important;
         }
     </style>
+    <script>
+        $(document).bind("contextmenu", function(e) {
+            return false;
+        });
+    </script>
 </head>
 
 <body class="cms-index-index cms-home-page home">
@@ -706,43 +711,43 @@
     </script>
     <script>
         /*   $('.add-to-wishlist').click(function(e) {
-                                                            e.preventDefault();
-                                                            // $('#review_button').prop('disabled', true);
-                                                            $.ajax({
-                                                                type: "POST",
-                                                                url: '{{ url('wishlist-add') }}',
-                                                                headers: {
-                                                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                                                },
-                                                                data: {
-                                                                    product_id: $(this).data('cpidw')
-                                                                },
-                                                                success: function(response) {
-                                                                    if (response.status == 1) {
-                                                                        $("#my_btn_heart").css({
-                                                                            'color': 'red'
-                                                                        });
-                                                                        Toastify({
-                                                                            text: "Product Added",
-                                                                            className: "info",
-                                                                            close: true,
-                                                                            style: {
-                                                                                background: "#1cad6a",
-                                                                            }
-                                                                        }).showToast();
-                                                                    } else {
-                                                                        Toastify({
-                                                                            text: 'product already added',
-                                                                            className: "info",
-                                                                            close: true,
-                                                                            style: {
-                                                                                background: "#e11414",
-                                                                            }
-                                                                        }).showToast();
+                                                                e.preventDefault();
+                                                                // $('#review_button').prop('disabled', true);
+                                                                $.ajax({
+                                                                    type: "POST",
+                                                                    url: '{{ url('wishlist-add') }}',
+                                                                    headers: {
+                                                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                                    },
+                                                                    data: {
+                                                                        product_id: $(this).data('cpidw')
+                                                                    },
+                                                                    success: function(response) {
+                                                                        if (response.status == 1) {
+                                                                            $("#my_btn_heart").css({
+                                                                                'color': 'red'
+                                                                            });
+                                                                            Toastify({
+                                                                                text: "Product Added",
+                                                                                className: "info",
+                                                                                close: true,
+                                                                                style: {
+                                                                                    background: "#1cad6a",
+                                                                                }
+                                                                            }).showToast();
+                                                                        } else {
+                                                                            Toastify({
+                                                                                text: 'product already added',
+                                                                                className: "info",
+                                                                                close: true,
+                                                                                style: {
+                                                                                    background: "#e11414",
+                                                                                }
+                                                                            }).showToast();
+                                                                        }
                                                                     }
-                                                                }
-                                                            });
-                                                        }); */
+                                                                });
+                                                            }); */
     </script>
 
     <script>
