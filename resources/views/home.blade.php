@@ -220,7 +220,8 @@
                              <div class="uyd">
                                  <h1 class="colorcls">{{ $offer_banner['title'] }}</h1>
                                  <h2 class="colorcls">
-                                     {{ \Illuminate\Support\Str::limit($offer_banner['heading'], 25, '...') }}</h2></a>
+                                     {{ isset($offer_banner['heading']) ? \Illuminate\Support\Str::limit($offer_banner['heading'], 25, '...') : '' }}
+                                 </h2></a>
                              </div>
                          </div>
                      @endforeach
@@ -673,7 +674,8 @@
                              <div class="uyd">
                                  <h1 class="colorcls">{{ $offer_banner['title'] }}</h1>
                                  <h2 class="colorcls">
-                                     {{ \Illuminate\Support\Str::limit($offer_banner['heading'], 25, '...') }}</h2></a>
+                                     {{ isset($offer_banner['heading']) ? \Illuminate\Support\Str::limit($offer_banner['heading'], 25, '...') : '' }}
+                                 </h2></a>
                              </div>
                          </div>
                      @endforeach
