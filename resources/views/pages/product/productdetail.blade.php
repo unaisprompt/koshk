@@ -215,7 +215,7 @@
                                                         {{ $data->is_variation ? $variation->price : $data->product_price }}
                                                     </span>
                                                 </p>
-                                                <p{{ $data->delivery_message }}< /p>
+                                                <p>{{ $data->delivery_message }}</p>
 
                                             </div>
                                         </div>
@@ -290,7 +290,12 @@
                                             <div class="std">
                                                 {!! $data->detail_description !!}
                                             </div>
-                                        </div>
+                                            @if($data->youtube_link != NULL)
+                                            <div class="std">
+                                                <iframe src="https://www.youtube.com/embed/{{$data->youtube_link}}" title="description"></iframe>
+                                            </div>
+                                            @endif
+                                            </div>
                                         <div class="tab-pane fade" id="product_tabs_tags">
                                             <div class="std">
                                                 {!! $data->detail_specifications !!}
