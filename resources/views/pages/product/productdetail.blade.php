@@ -45,8 +45,8 @@
                                         <div class="product-image">
                                             @if ($data->is_variation)
                                                 @if ($variation->video)
-                                                    <video width="420" height="340" controls id="product-video"
-                                                        style="display: none;">
+                                                    <video width="420" height="340" controls controlsList="nodownload"
+                                                        id="product-video" style="display: none;">
                                                         <source src="{{ $variation->video }}" type="video/mp4">
 
                                                         Your browser does not support the video tag.
@@ -64,7 +64,8 @@
                                             @else
                                                 <div class="product-full mag" id="image-carosel-full">
                                                     @if ($data->product_video)
-                                                        <video width="420" height="340" controls id="product-video"
+                                                        <video width="420" height="340" controls
+                                                            controlsList="nodownload" id="product-video"
                                                             style="display: none;">
                                                             <source src="{{ $data->product_video }}" type="video/mp4">
 
