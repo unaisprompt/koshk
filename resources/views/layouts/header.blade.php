@@ -93,46 +93,7 @@
     </div>
 
     <div class="container">
-        @if (!session()->get('token'))
-    
-            <div class="positionsa" id="signinpopup">
-                <div id="bkgOverlay" class="backgroundOverlay"></div>
 
-                <div id="delayedPopup" class="delayedPopupWindow">
-                    <!-- This is the close button -->
-                    <a href="#" id="btnClose" title="Click here to close this deal box.">[ X ]</a>
-                    <!-- This is the left side of the popup for the description -->
-
-                    <!-- Begin MailChimp Signup Form -->
-                    <div class="new-con">
-
-                        <div class="left">
-
-                            <div class="title">
-                                <h1>Sign In</h1>
-                            </div>
-
-                            <form id="first_popup">
-                                @csrf
-                                <label>Your email</label>
-                                <input type="email" name="email" id="email" placeholder="email">
-                                <label>Password</label>
-                                <input type="password" name="password" id="password" placeholder="password">
-                                <button type="button" class="signin" type="button" onclick="loginUserPopup()">
-                                    SIGN IN
-                                </button>
-                                <button class="signUp" type="button"   onclick="$('#myModalsignup').modal('show');">SIGN UP</button>
-                            </form>
-
-                        </div>
-                        <div class="right">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus reiciendis. </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- End MailChimp Signup Form -->
-        </div>
-        @endif
 
 
 
@@ -165,9 +126,8 @@
                             </li>
                         </ul>
                         <input type="hidden" name="category_id" value="{{ request()->category_id }}" />
-                        <input id="search" type="text" name="search"
-                            placeholder="Search entire store here..." class="searchbox" maxlength="128"
-                            value={{ request()->search }}>
+                        <input id="search" type="text" name="search" placeholder="Search entire store here..."
+                            class="searchbox" maxlength="128" value={{ request()->search }}>
                         <button type="submit" title="Search" class="search-btn-bg" id="submit-button"></button>
                     </form>
                 </div>
@@ -378,7 +338,7 @@
             @csrf
             <div class="modal-body">
                 <div class="yhd0d">
-                     <div id="some_div_time"></div>
+                    <div id="some_div_time"></div>
                     <h1>Verify Your Account</h1>
                     {{-- <h2>Sign in to your account</h2> --}}
                     <h3>Don't have an account? <a href="#" data-toggle="modal"
@@ -387,14 +347,15 @@
                 </div>
                 <div class="mmc5c">
                     <label>otp</label>
-                    <input type="number" name="otp_verify_otp" value="" min="0" id="otp_verify_otp">
+                    <input type="number" name="otp_verify_otp" value="" min="0"
+                        id="otp_verify_otp">
                 </div>
                 <a class="ipEvhD" href="#">Forgot your password?</a>
                 <button type="button" class="jcdgCW" onclick="verifyOtp()">Verify
                     Otp</button>
-                     <button type="button" id="resend_btn" onclick="ResendEmailOtp()" style="display:none;" >Reseend
+                <button type="button" id="resend_btn" onclick="ResendEmailOtp()" style="display:none;">Reseend
                     Otp</button>
-                    
+
             </div>
         </form>
     </div>
@@ -451,9 +412,9 @@
                 </div>
                 <button type="button" class="jcdgCW" onclick="ForgetOtp()">Verify
                     Otp</button>
-                     <button type="button" id="resend_btn_otp" onclick="ResendOtp()" style="display:none;">Resend
+                <button type="button" id="resend_btn_otp" onclick="ResendOtp()" style="display:none;">Resend
                     Otp</button>
-                    
+
             </div>
         </form>
     </div>
@@ -500,4 +461,3 @@
 
     };
 </script>
-
