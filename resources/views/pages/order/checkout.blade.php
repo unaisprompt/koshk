@@ -316,6 +316,11 @@
                                                                         {{ number_format($total - $total_discount + $shipping - $loyality_discount + $total_tax, 2) }}
                                                                     </h5>
                                                                 </div>
+
+                                                                @php
+                                                                $token= session()->get('token');
+                                                                $gtotal=number_format($total - $total_discount + $shipping - $loyality_discount + $total_tax, 2);
+                                                                @endphp
                                                             </div>
                                                         </div>
                                                     </div>
@@ -338,15 +343,24 @@
                                         <form action="" id="co-payment-form">
                                             <dl id="checkout-payment-method-load">
                                                 <dt>
-                                                    <input type="radio" id="check_payment_id" name="payment[method]"
+                                                    <input type="radio" id="check_cash" name="payment"
                                                         title="Check / Money order" class="radio" value="1" />
-                                                    <label for="p_method_checkmo">cash on delivery</label>
+                                                    <label for="check_cash">cash on delivery</label>
+                                                </dt>
+
+                                                <dt>
+                                                    <input type="radio" id="check_strip" name="payment"
+                                                        title="Check / Money order" class="radio" value="2" />
+                                                    <label for="check_strip">online payment</label><br>
+                                                    <img src="{{asset('assets/images/stripe.png')}}" alt="stripe">
+
                                                 </dt>
                                                 <dd>
                                                     <fieldset class="form-list"></fieldset>
                                                 </dd>
 
                                             </dl>
+                                            <input type="hidden" value="" name="transaction_id" id="transaction_id">
                                         </form>
                                         <p class="require">
                                             <em class="required">* </em>Required Fields
@@ -393,6 +407,57 @@
                         </div>
                     </div>
                     <!--	///*///======    End article  ========= //*/// -->
+
+
+                    <!-- Stripe -->
+                <div class="modal fade" id="stripeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Stripe</h5>
+                        {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> --}}
+                        </div>
+                        <div class="modal-body">
+                            <div class='form-row row'>
+                            
+                                <div class='col-xs-12 col-md-12 form-group required'>
+                                <label class='control-label'>Card Number</label> 
+                                <input autocomplete='off' class='form-control card-number' id="card_number" placeholder='card number' min="1" size='20' type='number'>
+                                </div>                           
+                            </div> 
+                            <div class='form-row row'>
+                                <div class='col-xs-12 col-md-4 form-group cvc required'>
+                                <label class='control-label'>CVV</label> 
+                                <input autocomplete='off' class='form-control card-cvc' id="cvv" placeholder='ex. 311' min="1" size='4' type='number'>
+                                </div>
+                                <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                <label class='control-label'>Exp Month</label> 
+                                <input class='form-control card-expiry-month' placeholder='MM' id="exp_month" size='2' min="1" type='number'>
+                                </div>
+                                <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                <label class='control-label'>Exp Year</label> 
+                                <select class="form-control card-expiry-year" id="exp_year" name="year">
+                                    @foreach(range(date('Y'), date('Y') + 20) as $year)
+                                        <option value="{{$year}}">{{$year}}</option>
+                                    @endforeach
+                                </select>
+                                {{-- <input class='form-control card-expiry-year' placeholder='YYYY' id="exp_year" size='4' type='number'> --}}
+                                </div>
+                            </div>
+                            <div class='form-row row'>
+                                <p id="stripe_alert"></p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" id="strpe_pay" class="btn btn-primary">Continue</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
                     @php
                         $footerbanner = topOfferCommon('checkout_bottom');
                     @endphp
@@ -424,7 +489,7 @@
                                     Billing Address <span class="separator">|</span>
 
                                 </dt>
-                                <dd class="complete">
+                                <dd class=check_payment_idra"complete">
                                     <address>
                                         <span id="first_name_shipping_show"></span><br>
                                         <span id="last_name_shipping_show"></span><br>
@@ -484,11 +549,25 @@
             </div>
         </div>
     </section>
+
+
+
     <script>
+
+      $('#check_strip').click(function() {
+            $('#stripeModal').modal('show');
+            $('#place_order').prop('disabled', true);
+        });
+
+        $('#check_cash').click(function() {
+            $('#place_order').prop('disabled', false);
+        });
+
         function checkoutOrder() {
             var shipping_address = $("#shipping_address").val();
             var billing_address = $("#billing_address").val();
-            var check_payment_id = $("#check_payment_id").val();
+            var check_payment_id = $('input[name="payment"]:checked').val();
+            var transaction_id = $("#transaction_id").val();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -500,7 +579,8 @@
                 data: {
                     shipping_address: shipping_address,
                     billing_address: billing_address,
-                    check_payment_id: check_payment_id
+                    check_payment_id: check_payment_id,
+                    transaction_id :transaction_id,
                 },
                 dataType: 'json',
                 success: function(response) {
@@ -735,5 +815,63 @@
                 }
             });
         })
+
+        $("#strpe_pay").click(function() {
+            $('strpe_pay').prop('disabled', true);
+            var form = $("#order_form");
+
+            var amount = {{$gtotal}};
+            var token= '{{$token}}';
+            var cardNumber = $("#card_number").val();
+            var month = $("#exp_month").val();
+            var year = $("#exp_year").val();
+            var cvv = $("#cvv").val();
+
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Authorization': `Bearer  ${token}` 
+            }
+        });
+            $.ajax({
+            type: "POST",
+            url: 'http://127.0.0.1:8050/api/webapp/stripe_payment',
+            data: {
+                amount: amount,
+                cardNumber: cardNumber,
+                month: month,
+                year: year,
+                cvv: cvv,
+            },
+            cache: false,
+            success: function (response) {
+                    // $(".preloader").hide();
+                    if (response.status == 1) {
+                       
+                        Swal.fire("Success!", response.message);
+                        $('#stripeModal').modal('hide');
+
+                        $('#transaction_id').val(response.payment_id);
+                        // form.append("<input type='hidden' name='payment_id' value='" + response.payment_id + "'/>");
+
+                        setTimeout(function() {
+                            checkoutOrder();
+                        }, 2000);
+                       
+                        // $('.pre-loader').removeClass("hidded");
+
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        $('strpe_pay').prop('disabled', false);
+
+                    }
+                },
+                error: function (xhr) {
+                    // $(".preloader").hide();
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
+                }
+            });
+            });
     </script>
 @endsection

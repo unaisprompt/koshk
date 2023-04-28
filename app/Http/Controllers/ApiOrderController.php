@@ -131,7 +131,7 @@ class ApiOrderController extends Controller
     'user_id'=>$user_id,
     // 'mobile'=>$request->mobile_shipping,
     // 'full_name'=>$request->first_name_shipping.' '.$request->last_name_shipping ,
-    // 'street_address'=>$request->shipping_address,
+     'transaction_id'=>$request->transaction_id,
     'billing_address_id'=>$request->billing_address,
     'shipping_address_id'=>$request->shipping_address,
     'payment_type'=>$request->check_payment_id,
