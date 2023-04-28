@@ -343,13 +343,13 @@
                                         <form action="" id="co-payment-form">
                                             <dl id="checkout-payment-method-load">
                                                 <dt>
-                                                    <input type="radio" id="check_cash" name="payment[method]"
+                                                    <input type="radio" id="check_cash" name="payment"
                                                         title="Check / Money order" class="radio" value="1" />
                                                     <label for="check_cash">cash on delivery</label>
                                                 </dt>
 
                                                 <dt>
-                                                    <input type="radio" id="check_strip" name="payment[method]"
+                                                    <input type="radio" id="check_strip" name="payment"
                                                         title="Check / Money order" class="radio" value="2" />
                                                     <label for="check_strip">online payment</label><br>
                                                     <img src="{{asset('assets/images/stripe.png')}}" alt="stripe">
@@ -360,6 +360,7 @@
                                                 </dd>
 
                                             </dl>
+                                            <input type="hidden" value="" name="transaction_id" id="transaction_id">
                                         </form>
                                         <p class="require">
                                             <em class="required">* </em>Required Fields
@@ -488,7 +489,7 @@
                                     Billing Address <span class="separator">|</span>
 
                                 </dt>
-                                <dd class="complete">
+                                <dd class=check_payment_idra"complete">
                                     <address>
                                         <span id="first_name_shipping_show"></span><br>
                                         <span id="last_name_shipping_show"></span><br>
@@ -565,7 +566,8 @@
         function checkoutOrder() {
             var shipping_address = $("#shipping_address").val();
             var billing_address = $("#billing_address").val();
-            var check_payment_id = $("#check_payment_id").val();
+            var check_payment_id = $('input[name="payment"]:checked').val();
+            var transaction_id = $("#transaction_id").val();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -577,7 +579,8 @@
                 data: {
                     shipping_address: shipping_address,
                     billing_address: billing_address,
-                    check_payment_id: check_payment_id
+                    check_payment_id: check_payment_id,
+                    transaction_id :transaction_id,
                 },
                 dataType: 'json',
                 success: function(response) {
@@ -832,7 +835,7 @@
         });
             $.ajax({
             type: "POST",
-            url: 'https://gift-city.prompttechdemohosting.com/api/webapp/stripe_payment',
+            url: 'http://127.0.0.1:8050/api/webapp/stripe_payment',
             data: {
                 amount: amount,
                 cardNumber: cardNumber,
@@ -848,7 +851,8 @@
                         Swal.fire("Success!", response.message);
                         $('#stripeModal').modal('hide');
 
-                        form.append("<input type='hidden' name='payment_id' value='" + response.payment_id + "'/>");
+                        $('#transaction_id').val(response.payment_id);
+                        // form.append("<input type='hidden' name='payment_id' value='" + response.payment_id + "'/>");
 
                         setTimeout(function() {
                             checkoutOrder();
