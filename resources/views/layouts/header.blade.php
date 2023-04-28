@@ -127,7 +127,7 @@
                         </ul>
                         <input type="hidden" name="category_id" value="{{ request()->category_id }}" />
                         <input id="search" type="text" name="search" placeholder="Search entire store here..."
-                            class="searchbox" maxlength="128" value={{ request()->search }}>
+                            class="searchbox" maxlength="128" value="{{ request()->search }}">
                         <button type="submit" title="Search" class="search-btn-bg" id="submit-button"></button>
                     </form>
                 </div>
