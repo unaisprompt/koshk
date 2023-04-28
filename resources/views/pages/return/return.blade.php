@@ -18,11 +18,11 @@
                             @csrf
                          <input type="hidden" name="orderid" value="{{$productid}}">
                             <div class="form-group">
-                                <label>Return Reason</label>
-                                <textarea type="text" name="return_reason" class="form-control" placeholder="" required></textarea>
+                                <label style="align-items: center;">Return Reason</label>
+                                <textarea type="text" name="return_reason" class="form-control" placeholder="Please enter return Reason" required></textarea>
                             </div>
                            
-                            <button type="submit">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
 
                     </div>
