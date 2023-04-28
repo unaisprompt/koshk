@@ -30,6 +30,7 @@
                                          $shipping = 0;
                                          $total_discount = 0;
                                          $total_loyality_discount = 0;
+                                         $total_tax = 0;
                                      @endphp
 
                                      @if ($data)
@@ -77,6 +78,7 @@
                                                          $total_discount += $item['discount_amount'] ?? 0;
                                                          $shipping += $item['shipping_cost'];
                                                          $total_loyality_discount += isset($item['loyality_discount']) ? $item['loyality_discount'] : 0;
+                                                         $total_tax += isset($item['tax']) ? $item['tax'] : 0;
                                                      @endphp
                                                      <div class="count-number">
                                                          <form id="myform" method="POST" class="quantity"
@@ -119,11 +121,13 @@
                                                      <h5>Total</h5>
                                                      <h5>Discount</h5>
                                                      <h5>Delivery charges</h5>
+                                                     <h5>Tax</h5>
                                                  </div>
                                                  <div class="cilop1">
-                                                     <h5>AED {{ $total }}</h5>
-                                                     <h5>-AED {{ $total_discount }}</h5>
-                                                     <h5>+AED {{ $shipping }}</h5><br><br>
+                                                     <h5>AED {{ number_format($total, 2) }}</h5>
+                                                     <h5>-AED {{ number_format($total_discount, 2) }}</h5>
+                                                     <h5>+AED {{ number_format($shipping, 2) }}</h5>
+                                                     <h5>+AED {{ number_format($total_tax, 2) }}</h5>
                                                  </div>
                                              </div>
                                              <hr>
@@ -132,14 +136,14 @@
                                                      <h5>Net Amount</h5>
                                                      @if (session()->get('token'))
                                                          @php
-                                                             $net_amount = $total - $total_discount + $shipping;
+                                                             $net_amount = $total - $total_discount + $shipping + $total_tax;
                                                              
                                                              try {
-                                                             $applicable_discount = ($net_amount * $loyality_discount_applicable) / 100;
+                                                                 $applicable_discount = ($net_amount * $loyality_discount_applicable) / 100;
                                                                  $points_to_discount = $loyality_points / $aed_to_loality;
                                                              } catch (Exception $e) {
                                                                  $points_to_discount = 0;
-                                                                  $applicable_discount =0;
+                                                                 $applicable_discount = 0;
                                                              }
                                                              $applied_discount = $points_to_discount;
                                                              if ($applicable_discount < $points_to_discount) {
@@ -162,7 +166,7 @@
 
                                                  </div>
                                                  <div class="cilop1">
-                                                     <h5>AED {{ $total - $total_discount + $shipping }}</h5>
+                                                     <h5>AED {{ number_format($net_amount, 2) }}</h5>
                                                  </div>
                                              </div>
                                              <hr>
@@ -180,7 +184,7 @@
                                                          <!-- <h5>{{ $applied_discount * $aed_to_loality }}</h5> -->
                                                          <h5>AED {{ $applied_discount }}</h5>
                                                          <h5>AED
-                                                             {{ $total - $total_discount + $shipping - $applied_discount }}
+                                                             {{ $net_amount - $applied_discount }}
                                                          </h5>
                                                      </div>
                                                  </div>
