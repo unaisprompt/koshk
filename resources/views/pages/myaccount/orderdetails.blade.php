@@ -2,20 +2,20 @@
 
 @section('content')
 
-<!-- Start Page Title Area -->
+    <!-- Start Page Title Area -->
 
-<!-- End Page Title Area -->
+    <!-- End Page Title Area -->
 
-<!-- Start Cart Area -->
+    <!-- Start Cart Area -->
 
-@extends('layouts.app')
+    @extends('layouts.app')
 @section('style')
 @endsection
 @section('content')
 
 
-<div class="container bootstrap snippets bootdey">
-<div class="row">
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
             @include('pages.myaccount.sidebar')
             <div class="col-sm-9 ">
                 <div class="page-title">
@@ -89,62 +89,62 @@
                                 @endif
                               <button type="button" class="btn btn-success" style="padding: 10px;margin: 9px;"  ><a href="{{url('order-tracking/'.encrypt($value['id']))}}" style="text-decoration: none;color:#fff;">Track Your Order</a></button> <br>  
                            </div>
+=======
+               
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                @endforeach
+                    @endforeach
                 @endif
                 <!--	///*///======    End article  ========= //*/// -->
             </div>
-</div>
-</div>
-<!-- End Cart Area -->
-<script>
-    function cancelOder(id) {
-         $('.pre-loader').removeClass("hidded");
-        $.ajax({
-            type: "POST",
-            url: '{{ url("order-cancel")}}',
-            data: {
-                id: id,
-            },
-            success: function(response) {
-                  $(".pre-loader").delay(2000).addClass("hidded");
-                if (response.status == 1) {
-                    Swal.fire("Success!", response.message, "success").then(() => {
-                        $('#myModalCancel').modal('hide');
-                        window.location = "{{url('order-history')}}";
-                    });
-                } else {
-                    Swal.fire("Failed!", response.message, "error");
-                    if (response.hasOwnProperty('error_list')) {
-                        for (x in response.error_list) {
-                            $('#error_' + x).html(response.error_list[x])
+        </div>
+    </div>
+    <!-- End Cart Area -->
+    <script>
+        function cancelOder(id) {
+            $('.pre-loader').removeClass("hidded");
+            $.ajax({
+                type: "POST",
+                url: '{{ url('order-cancel') }}',
+                data: {
+                    id: id,
+                },
+                success: function(response) {
+                    $(".pre-loader").delay(2000).addClass("hidded");
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                            $('#myModalCancel').modal('hide');
+                            window.location = "{{ url('order-history') }}";
+                        });
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
                         }
                     }
+                },
+                error: function(xhr) {
+                    $(".pre-loader").delay(2000).addClass("hidded");
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
                 }
-            },
-            error: function(xhr) {
-                 $(".pre-loader").delay(2000).addClass("hidded");
-                console.log(xhr.responseText); // this line will save you tons of hours while debugging
-                // do something here because of error
+            });
+        };
+
+        const checkbox = $("#consent");
+        const button = $("#place_order");
+
+        checkbox.change(function() {
+            if (checkbox.prop("checked")) {
+                button.prop("disabled", false);
+            } else {
+                button.prop("disabled", true);
             }
         });
-    };
-
-    const checkbox = $("#consent");
-const button = $("#place_order");
-
-checkbox.change(function() {
-  if (checkbox.prop("checked")) {
-    button.prop("disabled", false);
-  } else {
-    button.prop("disabled", true);
-  }
-});
-</script>
+    </script>
 @endsection

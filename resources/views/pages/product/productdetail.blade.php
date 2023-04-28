@@ -45,8 +45,8 @@
                                         <div class="product-image">
                                             @if ($data->is_variation)
                                                 @if ($variation->video)
-                                                    <video width="420" height="340" controls id="product-video"
-                                                        style="display: none;">
+                                                    <video width="420" height="340" controls controlsList="nodownload"
+                                                        id="product-video" style="display: none;">
                                                         <source src="{{ $variation->video }}" type="video/mp4">
 
                                                         Your browser does not support the video tag.
@@ -64,7 +64,8 @@
                                             @else
                                                 <div class="product-full mag" id="image-carosel-full">
                                                     @if ($data->product_video)
-                                                        <video width="420" height="340" controls id="product-video"
+                                                        <video width="420" height="340" controls
+                                                            controlsList="nodownload" id="product-video"
                                                             style="display: none;">
                                                             <source src="{{ $data->product_video }}" type="video/mp4">
 
@@ -140,22 +141,23 @@
                                                     type="button" id="cart_button" style="cursor:pointer;"
                                                     value="{{ $data->id }}"
                                                     class="button btn-cart"title="Add to Cart">Add to Cart</button>
-                                                
+
                                                 @if (collect($data->stocks)->sum('quantity') <= 0)
-                                                    <button class="button btn-buy" title="Add to Cart"
-                                                        type="button">Sold
+                                                    <button class="button btn-buy" title="Add to Cart" type="button">Sold
                                                         Out</button>
                                                 @else<button class="button btn-buy" title="Add to Cart"
-                                                    onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val())"
-                                                    type="button" id="buynow_button" style="cursor:pointer;"
-                                                    value="{{ $data->id }}">Buy
-                                                    Now</button>
+                                                        onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val())"
+                                                        type="button" id="buynow_button" style="cursor:pointer;"
+                                                        value="{{ $data->id }}">Buy
+                                                        Now</button>
                                                 @endif
                                             </div>
 
                                         </div>
                                         <ul class="add-to-links">
-                                            <li> <a class="link-wishlist  @if ($data->is_wishlist) active @endif" id="wishlist_act" href="#" onclick="addWishlist({{ $data->id }},$(this))"><span>Add to
+                                            <li> <a class="link-wishlist  @if ($data->is_wishlist) active @endif"
+                                                    id="wishlist_act" href="#"
+                                                    onclick="addWishlist({{ $data->id }},$(this))"><span>Add to
                                                         Wishlist</span></a></li>
                                             <li><a class="link-compare" href="{{ url('products') }}"><span>Continue
                                                         Shopping</span></a></li>
@@ -290,12 +292,13 @@
                                             <div class="std">
                                                 {!! $data->detail_description !!}
                                             </div>
-                                            @if($data->youtube_link != NULL)
-                                            <div class="std">
-                                                <iframe src="https://www.youtube.com/embed/{{$data->youtube_link}}" title="description"></iframe>
-                                            </div>
+                                            @if ($data->youtube_link != null)
+                                                <div class="std">
+                                                    <iframe src="https://www.youtube.com/embed/{{ $data->youtube_link }}"
+                                                        title="description"></iframe>
+                                                </div>
                                             @endif
-                                            </div>
+                                        </div>
                                         <div class="tab-pane fade" id="product_tabs_tags">
                                             <div class="std">
                                                 {!! $data->detail_specifications !!}
@@ -879,7 +882,7 @@
                 },
                 success: function(response) {
                     if (response.status == 1) {
-                         $("#wishlist_act").addClass("active");
+                        $("#wishlist_act").addClass("active");
                         Toastify({
                             text: response.message,
                             className: "info",

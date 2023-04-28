@@ -1519,11 +1519,11 @@ $(document).ready(function() {
 $(".indiviual-image").click(function(e){
 	if($(this).attr("image-video")=="1"){
 		
-		$("#product-zoom").show();
+		$("#product-zoom,.zoomContainer").show();
 		$("#product-video").hide();
 	}else{
 		
-		$("#product-zoom").hide();
+		$("#product-zoom,.zoomContainer").hide();
 		$("#product-video").show();
 	}
 	
