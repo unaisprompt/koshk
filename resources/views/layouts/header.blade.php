@@ -21,7 +21,7 @@
                     </Span>
 
                     <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
-                    <span class="delivery-content">Phone number - <span>00971 43555577</span> </span>
+                    <span class="delivery-content">{{ CommonData()->top_header_phone }} </span>
 
                 </div>
 
@@ -43,7 +43,7 @@
                         data-placement="bottom"
                         data-content="Vivamus
               sagittis lacus vel augue laoreet rutrum faucibus.">
-                        Delivery Slot - <span>9:00 to 6:00</span> </span>
+                        {{ CommonData()->top_header_clock }} </span>
 
 
                 </div>
@@ -59,7 +59,7 @@
                     </Span>
 
                     <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
-                    <span class="delivery-content">Fast & Free Delivery</span>
+                    <span class="delivery-content"> {{ CommonData()->top_header3 }}</span>
 
                 </div>
 
@@ -71,7 +71,7 @@
                                 d="M10 2.5a2.5 2.5 0 0 0-4 2V6H5a1 1 0 0 0-1 1v8a3 3 0 0 0 3 3h6.5a2.5 2.5 0 0 0 2.5-2.5V7a1 1 0 0 0-1-1h-1V4.5a2.5 2.5 0 0 0-4-2Zm-3 2a1.5 1.5 0 1 1 3 0V6H7V4.5Zm3.667-1.248A1.5 1.5 0 0 1 13 4.5V6h-2V4.5c0-.454-.121-.88-.333-1.248ZM7 17a2 2 0 0 1-2-2V7h6v8.5c0 .563.186 1.082.5 1.5H7Zm8-1.5a1.5 1.5 0 0 1-3 0V7h3v8.5Z" />
                         </svg>
                     </span>
-                    <span class="delivery-content">Shop from over 1 million products</span>
+                    <span class="delivery-content">{{ CommonData()->top_header2 }}</span>
 
                 </div>
 
@@ -83,7 +83,7 @@
                                 d="M184 104v32a8 8 0 0 1-8 8H99.3l10.4 10.3a8.1 8.1 0 0 1 0 11.4a8.2 8.2 0 0 1-11.4 0l-24-24a8.1 8.1 0 0 1 0-11.4l24-24a8.1 8.1 0 0 1 11.4 11.4L99.3 128H168v-24a8 8 0 0 1 16 0Zm48-48v144a16 16 0 0 1-16 16H40a16 16 0 0 1-16-16V56a16 16 0 0 1 16-16h176a16 16 0 0 1 16 16Zm-16 144V56H40v144Z" />
                         </svg>
                     </span>
-                    <span class="delivery-content">Free Returns</span>
+                    <span class="delivery-content">{{ CommonData()->top_header1 }}</span>
 
                 </div>
 
