@@ -47,6 +47,7 @@
                                                          <small>Ordered
                                                              {{ \Carbon\Carbon::parse($item['created_at'])->diffForHumans(\Carbon\Carbon::now()) }}</small>
                                                      @endif --}}
+                                                     <small>Stock:{{ $item['stock'] }}</small>
                                                      @if (isset($item['est_shipping_days']))
                                                          <small><b>
                                                                  @if (!($item['shipping_cost'] > 0))
@@ -87,6 +88,7 @@
                                                                  field='quantity' />
                                                              <input type='text' name='quantity'
                                                                  data-cart_id="{{ Session::has('user_id') ? $item['id'] : $item['product_id'] }}"
+                                                                 data-stock="{{ $item['stock'] }}"
                                                                  value='{{ $item['qty'] }}' class='qty' />
                                                              <input type='button' value='+' class='qtyplus plus'
                                                                  field='quantity' />
@@ -134,9 +136,11 @@
                                              <div class="d-flex justify-content-between">
                                                  <div class="cilop">
                                                      <h5>Net Amount</h5>
+                                                     @php
+                                                         $net_amount = $total - $total_discount + $shipping + $total_tax;
+                                                     @endphp
                                                      @if (session()->get('token'))
                                                          @php
-                                                             $net_amount = $total - $total_discount + $shipping + $total_tax;
                                                              
                                                              try {
                                                                  $applicable_discount = ($net_amount * $loyality_discount_applicable) / 100;
@@ -399,16 +403,16 @@
          }
 
          function applyCoupon() {
-             if($('#coupon_code').val() == ''){
-                     return  Toastify({
-                             text: 'coupon code field is required',
-                             className: "info",
-                             close: true,
-                             style: {
-                                 background: "red",
-                             }
-                         }).showToast();
-                 }
+             if ($('#coupon_code').val() == '') {
+                 return Toastify({
+                     text: 'coupon code field is required',
+                     className: "info",
+                     close: true,
+                     style: {
+                         background: "red",
+                     }
+                 }).showToast();
+             }
              $.ajax({
                  url: '{{ config('global.api') }}/checkout',
                  type: 'post',
@@ -419,7 +423,7 @@
                      user_id: {{ session()->get('user_id') ?? 0 }},
                      coupon_name: $('#coupon_code').val()
                  },
-                
+
                  dataType: 'json',
                  success: function(response) {
                      if (response.status == 1) {
@@ -452,17 +456,43 @@
              $('.quantity').on('click', '.plus', function(e) {
                  let $input = $(this).prev('input.qty');
                  let val = parseInt($input.val());
-                 $input.val(val + 1).change();
-                 updateCart(val + 1, $input.data('cart_id'));
+                 let qty = val + 1;
+                 let stock = parseInt($input.data('stock'));
+                 if (qty > stock) {
+                     Toastify({
+                         text: "Please check stock",
+                         className: "error",
+                         close: true,
+                         style: {
+                             background: "red",
+                         }
+                     }).showToast();
+                     return;
+                 }
+                 $input.val(qty).change();
+                 updateCart(qty, $input.data('cart_id'));
              });
 
              $('.quantity').on('click', '.minus',
                  function(e) {
                      let $input = $(this).next('input.qty');
                      var val = parseInt($input.val());
+                     let qty = val - 1;
+                     let stock = parseInt($input.data('stock'));
+                     if (qty > stock) {
+                         Toastify({
+                             text: "Please check stock",
+                             className: "error",
+                             close: true,
+                             style: {
+                                 background: "red",
+                             }
+                         }).showToast();
+                         qty = stock;
+                     }
                      if (val > 1) {
-                         $input.val(val - 1).change();
-                         updateCart(val - 1, $input.data('cart_id'));
+                         $input.val(qty).change();
+                         updateCart(qty, $input.data('cart_id'));
                      }
                  });
          });
