@@ -399,6 +399,16 @@
          }
 
          function applyCoupon() {
+             if($('#coupon_code').val() == ''){
+                     return  Toastify({
+                             text: 'coupon code field is required',
+                             className: "info",
+                             close: true,
+                             style: {
+                                 background: "red",
+                             }
+                         }).showToast();
+                 }
              $.ajax({
                  url: '{{ config('global.api') }}/checkout',
                  type: 'post',
@@ -409,6 +419,7 @@
                      user_id: {{ session()->get('user_id') ?? 0 }},
                      coupon_name: $('#coupon_code').val()
                  },
+                
                  dataType: 'json',
                  success: function(response) {
                      if (response.status == 1) {
