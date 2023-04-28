@@ -683,6 +683,46 @@
              </div>
          </div>
      </div>
+     @if (!session()->get('token'))
+         <div class="positionsa" id="signinpopup">
+             <div id="bkgOverlay" class="backgroundOverlay"></div>
+
+             <div id="delayedPopup" class="delayedPopupWindow">
+                 <!-- This is the close button -->
+                 <a href="#" id="btnClose" title="Click here to close this deal box.">[ X ]</a>
+                 <!-- This is the left side of the popup for the description -->
+
+                 <!-- Begin MailChimp Signup Form -->
+                 <div class="new-con">
+
+                     <div class="left">
+
+                         <div class="title">
+                             <h1>Sign In</h1>
+                         </div>
+
+                         <form id="first_popup">
+                             @csrf
+                             <label>Your email</label>
+                             <input type="email" name="email" id="email" placeholder="email">
+                             <label>Password</label>
+                             <input type="password" name="password" id="password" placeholder="password">
+                             <button type="button" class="signin" type="button" onclick="loginUserPopup()">
+                                 SIGN IN
+                             </button>
+                             <button class="signUp" type="button" onclick="$('#myModalsignup').modal('show');">SIGN
+                                 UP</button>
+                         </form>
+
+                     </div>
+                     <div class="right">
+                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus reiciendis. </p>
+                     </div>
+                 </div>
+             </div>
+             <!-- End MailChimp Signup Form -->
+         </div>
+     @endif
  @endsection
  @section('script')
      <script>

@@ -2,6 +2,7 @@
 @section('content')
     @php
         $price = $data->is_variation ? $variation->discounted_variation_price : $data->discounted_price;
+        $stock = $data->is_variation ? $variation->stock->quantity : collect($data->stocks)->sum('quantity');
     @endphp
     <style>
         .product-view .product-essential .add-to-links .link-wishlist.active {
@@ -137,16 +138,17 @@
                                         <div class="add-to-box">
                                             <div class="add-to-cart">
                                                 <button
-                                                    onclick="cartadd({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val())"
+                                                    onclick="cartadd({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val(),{{ $stock }})"
                                                     type="button" id="cart_button" style="cursor:pointer;"
                                                     value="{{ $data->id }}"
                                                     class="button btn-cart"title="Add to Cart">Add to Cart</button>
 
-                                                @if (collect($data->stocks)->sum('quantity') <= 0)
+                                                @if ($stock <= 0)
                                                     <button class="button btn-buy" title="Add to Cart" type="button">Sold
                                                         Out</button>
-                                                @else<button class="button btn-buy" title="Add to Cart"
-                                                        onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val())"
+                                                @else
+                                                    <button class="button btn-buy" title="Add to Cart"
+                                                        onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val(),{{ $stock }})"
                                                         type="button" id="buynow_button" style="cursor:pointer;"
                                                         value="{{ $data->id }}">Buy
                                                         Now</button>
@@ -198,11 +200,11 @@
                                                     field='quantity' />
                                             </div>
                                             <div class="price-box">
-                                                @if (collect($data->stocks)->sum('quantity') <= 0)
+                                                @if ($stock <= 0)
                                                     <p class="availability in-stock"><span>Sold out</span></p>
                                                 @else
                                                     <p class="availability in-stock">
-                                                        <span>{{ collect($data->stocks)->sum('quantity') }} in stock</span>
+                                                        <span>{{ $stock }} in stock</span>
                                                     </p>
                                                 @endif
                                                 <p class="special-price"> <span class="price-label">Special Price</span>
@@ -606,8 +608,18 @@
 
 
 
-    function cartadd(id, variation_id, qty) {
-
+    function cartadd(id, variation_id, qty, stock) {
+        if (qty > stock) {
+            Toastify({
+                text: "Please check stock",
+                className: "error",
+                close: true,
+                style: {
+                    background: "red",
+                }
+            }).showToast();
+            return;
+        }
         @php
             
             $tax = $data->tax;
@@ -672,8 +684,18 @@
         $.ajax(setting);
     }
 
-    function buynow(id, variation_id, qty) {
-
+    function buynow(id, variation_id, qty, stock) {
+        if (qty > stock) {
+            Toastify({
+                text: "Please check stock",
+                className: "error",
+                close: true,
+                style: {
+                    background: "red",
+                }
+            }).showToast();
+            return;
+        }
         @php
             
             $tax = $data->tax;

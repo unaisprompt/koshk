@@ -1,14 +1,5 @@
 @extends('layouts.app')
 
-@section('content')
-
-    <!-- Start Page Title Area -->
-
-    <!-- End Page Title Area -->
-
-    <!-- Start Cart Area -->
-
-    @extends('layouts.app')
 @section('style')
 @endsection
 @section('content')
@@ -24,7 +15,6 @@
                 @php $total=1;@endphp
                 @if(!empty($data))
                 @foreach($data['order_data'] as $value)
-                {{-- {{dd($value)}} --}}
                 <div class="col-sm-8 col-lg-8 order-box-wid">
                     <div class="uthssk">
                         <div class="cart-table table-responsive" style="overflow-x: hidden;">
@@ -48,11 +38,11 @@
                           
                              @if( $value['status']=='Order Delivered' && $value['isreturn'] !=0)
                             <a href="{{url('return/'.encrypt($data['order_info']['order_number']).'/'.encrypt($value['id']))}}" class="btn btn-primary">Return</a> 
-                            @else
-                                <span style="color: blue; padding:10px;"> Return Not Available </span>
+                            {{-- @else
+                                <span style="color: blue; padding:10px;"> Return Not Available This Product </span> --}}
                             @endif
                             @else
-                            <span style="color: blue; padding:10px;"> Return Available </span>
+                            <span style="color: blue; padding:10px;"> Returned </span>
                             @endif
                             @if($value['status']=='Order Placed'||$value['status']=='Order Confirmed'||$value['status']=='Order Shipped')
                            {{-- <button type="button" class="btn btn-primary" onclick="cancelOder({{$value['id']}})">Cancel Order</button> --}}
@@ -89,17 +79,18 @@
                                 @endif
                               <button type="button" class="btn btn-success" style="padding: 10px;margin: 9px;"  ><a href="{{url('order-tracking/'.encrypt($value['id']))}}" style="text-decoration: none;color:#fff;">Track Your Order</a></button> <br>  
                            </div>
-=======
-               
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                @endif
+                  
                 <!--	///*///======    End article  ========= //*/// -->
             </div>
+        </div>
+          @endforeach
+                @endif
+    </div>
         </div>
     </div>
     <!-- End Cart Area -->

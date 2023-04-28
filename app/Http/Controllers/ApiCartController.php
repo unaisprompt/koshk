@@ -35,15 +35,19 @@ class ApiCartController extends Controller
         }
 
         else{
-           
-           // $cart = session()->get('cart');
-            // unset($cart[4]);
-          // session()->forget('cart');
-           // session()->put('cart', $cart);
             $carts = session()->get('cart',[]);
-
             $data = $carts;
-          //  return $data;
+            if($data)
+            {
+                    $response = Http::post($this->url."/product/stock-check", [
+                        'data' => $data
+                    ]);
+                    if($response->successful())
+                    {
+                    $data=$response['data'];
+                    }
+
+            }
         }
            $product_ids=[];
            foreach($data as $row)
