@@ -32,7 +32,18 @@ Route::get('view-checkout', function () {
 Route::get('view-cart', function () {
     return view('pages.cart');
 });
-
+Route::get('terms_and_condition', function () {
+    return view('pages.terms_and_condition');
+});
+Route::get('blog', function () {
+    return view('pages.blog');
+});
+Route::get('faq', function () {
+    return view('pages.faq');
+});
+Route::get('blog-detail', function () {
+    return view('pages.blog-detail');
+});
 Route::get('/',[ApiController::class, 'home']);
 
 ############# User ############################
