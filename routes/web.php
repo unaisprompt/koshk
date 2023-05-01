@@ -8,6 +8,7 @@ use App\Http\Controllers\ApiCartController;
 use App\Http\Controllers\ApiOrderController;
 use App\Http\Controllers\ApiReturnController;
 use App\Http\Controllers\ApiWishlistController;
+use App\Http\Controllers\ApiCommonCms;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -44,6 +45,14 @@ Route::get('faq', function () {
 Route::get('blog-detail', function () {
     return view('pages.blog-detail');
 });
+Route::get('about_us',[ApiCommonCms::class, 'about_us']);
+Route::get('privacy_policy',[ApiCommonCms::class, 'privacy_policy']);
+Route::get('terms_and_condition',[ApiCommonCms::class, 'terms_and_condition']);
+Route::get('search_terms',[ApiCommonCms::class, 'search_terms']);
+Route::get('return_policy',[ApiCommonCms::class, 'return_policy']);
+Route::get('faq',[ApiCommonCms::class, 'faq']);
+Route::get('payment',[ApiCommonCms::class, 'payment']);
+Route::get('shippment',[ApiCommonCms::class, 'shippment']);
 Route::get('/',[ApiController::class, 'home']);
 
 ############# User ############################

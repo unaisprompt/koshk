@@ -105,3 +105,12 @@ function minicart(){
             }
             return null;
     }
+    function getCommonFields()
+    {
+        $url = config('global.api')."/cmspages";
+        $response = Http::get($url);
+       if($response->successful())
+       {
+        return $response->object();
+       }
+    }

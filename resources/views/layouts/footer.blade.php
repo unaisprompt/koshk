@@ -37,10 +37,10 @@
                             <h4>Shopping Guide</h4>
                             <ul class="links">
                                 <li><a href="#" title="How to buy">Blog</a></li>
-                                <li><a href="#" title="FAQs">FAQs</a></li>
-                                <li><a href="#" title="Payment">Payment</a></li>
-                                <li><a href="#" title="Shipment">Shipment</a></li>
-                                <li><a href="#" title="Return policy">Return policy</a></li>
+                                <li><a href="{{ url('faq') }}" title="FAQs">FAQs</a></li>
+                                <li><a href="{{ url('payment') }}" title="Payment">Payment</a></li>
+                                <li><a href="{{ url('shippment') }}" title="Shipment">Shipment</a></li>
+                                <li><a href="{{ url('return_policy') }}" title="Return policy">Return policy</a></li>
                             </ul>
                         </div>
                     </div>
@@ -55,10 +55,10 @@
                                     <li><a href="{{ url('order-history') }}" title="Orders History">Orders History</a>
                                     </li>
                                 @else
-                                <li><a href="#" title="Your Account">Your Account</a></li>
-                                <li><a href="#" title="Addresses">Addresses</a></li>
-                                <li><a href="#" title="Wishlist">Wishlist</a></li>
-                                <li><a href="#" title="Orders History">Orders History</a></li> 
+                                    <li><a href="#" title="Your Account">Your Account</a></li>
+                                    <li><a href="#" title="Addresses">Addresses</a></li>
+                                    <li><a href="#" title="Wishlist">Wishlist</a></li>
+                                    <li><a href="#" title="Orders History">Orders History</a></li>
                                 @endif
                             </ul>
                         </div>
@@ -67,10 +67,13 @@
                         <div class="footer-column pull-left">
                             <h4>Information</h4>
                             <ul class="links">
-                                <li><a href="#" title="Site Map">Site Map</a></li>
-                                <li><a href="#" title="Search Terms">Search Terms</a></li>
-                                <li><a href="#l" title="About Us">About Us</a></li>
-                                <li><a href="#" title="Contact Us">Contact Us</a></li>
+                                <li><a href="{{ url('search_terms') }}" title="Search Terms">Search Terms</a>
+                                </li>
+                                <li><a href="{{ url('terms_and_condition') }}" title="Terms and condition">Terms and
+                                        condition</a>
+                                </li>
+                                <li><a href="{{ url('privacy_policy') }}">Privacy policy</a></li>
+                                <li><a href="{{ url('about_us') }}" title="About Us">About Us</a></li>
                             </ul>
                         </div>
                     </div>
