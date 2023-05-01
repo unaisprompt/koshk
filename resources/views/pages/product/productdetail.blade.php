@@ -2,6 +2,7 @@
 @section('content')
     @php
         $price = $data->is_variation ? $variation->discounted_variation_price : $data->discounted_price;
+        $stock = $data->is_variation ? $variation->stock->quantity : collect($data->stocks)->sum('quantity');
     @endphp
     <style>
         .product-view .product-essential .add-to-links .link-wishlist.active {
@@ -45,8 +46,8 @@
                                         <div class="product-image">
                                             @if ($data->is_variation)
                                                 @if ($variation->video)
-                                                    <video width="420" height="340" controls id="product-video"
-                                                        style="display: none;">
+                                                    <video width="420" height="340" controls controlsList="nodownload"
+                                                        id="product-video" style="display: none;">
                                                         <source src="{{ $variation->video }}" type="video/mp4">
 
                                                         Your browser does not support the video tag.
@@ -64,7 +65,8 @@
                                             @else
                                                 <div class="product-full mag" id="image-carosel-full">
                                                     @if ($data->product_video)
-                                                        <video width="420" height="340" controls id="product-video"
+                                                        <video width="420" height="340" controls
+                                                            controlsList="nodownload" id="product-video"
                                                             style="display: none;">
                                                             <source src="{{ $data->product_video }}" type="video/mp4">
 
@@ -136,25 +138,28 @@
                                         <div class="add-to-box">
                                             <div class="add-to-cart">
                                                 <button
-                                                    onclick="cartadd({{ $data->id }},{{ $variation ? $variation->id : 0 }})"
+                                                    onclick="cartadd({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val(),{{ $stock }})"
                                                     type="button" id="cart_button" style="cursor:pointer;"
                                                     value="{{ $data->id }}"
                                                     class="button btn-cart"title="Add to Cart">Add to Cart</button>
-                                                <button class="button btn-buy" title="Add to Cart"
-                                                    onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }})"
-                                                    type="button" id="buynow_button" style="cursor:pointer;"
-                                                    value="{{ $data->id }}">Buy
-                                                    Now</button>
-                                                @if (collect($data->stocks)->sum('quantity') <= 0)
-                                                    <button class="button btn-buy" title="Add to Cart"
-                                                        type="button">Sold
+
+                                                @if ($stock <= 0)
+                                                    <button class="button btn-buy" title="Add to Cart" type="button">Sold
                                                         Out</button>
+                                                @else
+                                                    <button class="button btn-buy" title="Add to Cart"
+                                                        onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val(),{{ $stock }})"
+                                                        type="button" id="buynow_button" style="cursor:pointer;"
+                                                        value="{{ $data->id }}">Buy
+                                                        Now</button>
                                                 @endif
                                             </div>
 
                                         </div>
                                         <ul class="add-to-links">
-                                            <li> <a class="link-wishlist active" href="#"><span>Add to
+                                            <li> <a class="link-wishlist  @if ($data->is_wishlist) active @endif"
+                                                    id="wishlist_act" href="#"
+                                                    onclick="addWishlist({{ $data->id }},$(this))"><span>Add to
                                                         Wishlist</span></a></li>
                                             <li><a class="link-compare" href="{{ url('products') }}"><span>Continue
                                                         Shopping</span></a></li>
@@ -165,7 +170,7 @@
                                             <a class="product-next" href="#"><span></span></a>
                                             <a class="product-prev" href="#"><span></span></a>
                                         </div> --}}
-                                        <div class="brand">{{ $data->brand->brand_name }}</div>
+                                        <div class="brand">{{ $data->brand ? $data->brand->brand_name : '' }}</div>
                                         <div class="product-name">
                                             <h1>{{ $data->product_name }}</h1>
                                             <input type="hidden" value="{{ $data->product_name }}" name="pro_name"
@@ -187,17 +192,19 @@
                                                     class="separator">|</span> <a href="#">Add Review</a> </p>
                                         </div>
                                         <div class="price-block">
-                                            <!-- <div class="count-number">
-                                                                    <input type='button' value='-' class='qtyminus minus' field='quantity' />
-                                                                    <input type='text'id="pro_qty" name='quantity' value='1' class='qty' />
-                                                                    <input type='button' value='+' class='qtyplus plus' field='quantity' />
-                                                                </div> -->
+                                            <div class="count-number">
+                                                <input type='button' value='-' class='qtyminus minus'
+                                                    field='quantity' />
+                                                <input type='text' name='quantity' value='1' class='qty' />
+                                                <input type='button' value='+' class='qtyplus plus'
+                                                    field='quantity' />
+                                            </div>
                                             <div class="price-box">
-                                                @if (collect($data->stocks)->sum('quantity') <= 0)
+                                                @if ($stock <= 0)
                                                     <p class="availability in-stock"><span>Sold out</span></p>
                                                 @else
                                                     <p class="availability in-stock">
-                                                        <span>{{ collect($data->stocks)->sum('quantity') }} in stock</span>
+                                                        <span>{{ $stock }} in stock</span>
                                                     </p>
                                                 @endif
                                                 <p class="special-price"> <span class="price-label">Special Price</span>
@@ -212,7 +219,7 @@
                                                         {{ $data->is_variation ? $variation->price : $data->product_price }}
                                                     </span>
                                                 </p>
-                                                <p{{ $data->delivery_message }}< /p>
+                                                <p>{{ $data->delivery_message }}</p>
 
                                             </div>
                                         </div>
@@ -287,6 +294,12 @@
                                             <div class="std">
                                                 {!! $data->detail_description !!}
                                             </div>
+                                            @if ($data->youtube_link != null)
+                                                <div class="std">
+                                                    <iframe src="https://www.youtube.com/embed/{{ $data->youtube_link }}"
+                                                        title="description"></iframe>
+                                                </div>
+                                            @endif
                                         </div>
                                         <div class="tab-pane fade" id="product_tabs_tags">
                                             <div class="std">
@@ -587,7 +600,7 @@
             function(e) {
                 let $input = $(this).next('input.qty');
                 var val = parseInt($input.val());
-                if (val > 0) {
+                if (val > 1) {
                     $input.val(val - 1).change();
                 }
             });
@@ -595,8 +608,18 @@
 
 
 
-    function cartadd(id, variation_id) {
-
+    function cartadd(id, variation_id, qty, stock) {
+        if (qty > stock) {
+            Toastify({
+                text: "Please check stock",
+                className: "error",
+                close: true,
+                style: {
+                    background: "red",
+                }
+            }).showToast();
+            return;
+        }
         @php
             
             $tax = $data->tax;
@@ -623,7 +646,7 @@
             data: {
                 product_id: id,
                 product_name: $("#pro_name").val(),
-                qty: 1,
+                qty: qty,
                 price: $("#pro_price").val(),
                 shipping_cost: '{{ $data->shipping_cost }}',
                 tax: {{ $tax }},
@@ -661,8 +684,18 @@
         $.ajax(setting);
     }
 
-    function buynow(id, variation_id) {
-
+    function buynow(id, variation_id, qty, stock) {
+        if (qty > stock) {
+            Toastify({
+                text: "Please check stock",
+                className: "error",
+                close: true,
+                style: {
+                    background: "red",
+                }
+            }).showToast();
+            return;
+        }
         @php
             
             $tax = $data->tax;
@@ -689,7 +722,7 @@
             data: {
                 product_id: id,
                 product_name: $("#pro_name").val(),
-                qty: 1,
+                qty: qty,
                 price: $("#pro_price").val(),
                 shipping_cost: '{{ $data->shipping_cost }}',
                 tax: {{ $tax }},
@@ -871,6 +904,7 @@
                 },
                 success: function(response) {
                     if (response.status == 1) {
+                        $("#wishlist_act").addClass("active");
                         Toastify({
                             text: response.message,
                             className: "info",

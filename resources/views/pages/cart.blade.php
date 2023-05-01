@@ -30,6 +30,7 @@
                                          $shipping = 0;
                                          $total_discount = 0;
                                          $total_loyality_discount = 0;
+                                         $total_tax = 0;
                                      @endphp
 
                                      @if ($data)
@@ -42,10 +43,11 @@
                                                      {{-- <h3>Brand</h3> --}}
                                                      <h4>{{ $item['product_name'] }}</h4>
 
-                                                     @if (isset($item['created_at']))
+                                                     {{-- @if (isset($item['created_at']))
                                                          <small>Ordered
                                                              {{ \Carbon\Carbon::parse($item['created_at'])->diffForHumans(\Carbon\Carbon::now()) }}</small>
-                                                     @endif
+                                                     @endif --}}
+                                                     <small>Stock:{{ $item['stock'] }}</small>
                                                      @if (isset($item['est_shipping_days']))
                                                          <small><b>
                                                                  @if (!($item['shipping_cost'] > 0))
@@ -72,10 +74,12 @@
                                                  </div>
                                                  <div class="pous2">
                                                      <p>AED {{ $item['price'] * $item['qty'] }}</p>
-                                                     @php$total += $item['price'] * $item['qty'];
+                                                     @php
+                                                         $total += $item['price'] * $item['qty'];
                                                          $total_discount += $item['discount_amount'] ?? 0;
                                                          $shipping += $item['shipping_cost'];
                                                          $total_loyality_discount += isset($item['loyality_discount']) ? $item['loyality_discount'] : 0;
+                                                         $total_tax += isset($item['tax']) ? $item['tax'] : 0;
                                                      @endphp
                                                      <div class="count-number">
                                                          <form id="myform" method="POST" class="quantity"
@@ -84,6 +88,7 @@
                                                                  field='quantity' />
                                                              <input type='text' name='quantity'
                                                                  data-cart_id="{{ Session::has('user_id') ? $item['id'] : $item['product_id'] }}"
+                                                                 data-stock="{{ $item['stock'] }}"
                                                                  value='{{ $item['qty'] }}' class='qty' />
                                                              <input type='button' value='+' class='qtyplus plus'
                                                                  field='quantity' />
@@ -118,25 +123,31 @@
                                                      <h5>Total</h5>
                                                      <h5>Discount</h5>
                                                      <h5>Delivery charges</h5>
+                                                     <h5>Tax</h5>
                                                  </div>
                                                  <div class="cilop1">
-                                                     <h5>AED {{ $total }}</h5>
-                                                     <h5>-AED {{ $total_discount }}</h5>
-                                                     <h5>+AED {{ $shipping }}</h5><br><br>
+                                                     <h5>AED {{ number_format($total, 2) }}</h5>
+                                                     <h5>-AED {{ number_format($total_discount, 2) }}</h5>
+                                                     <h5>+AED {{ number_format($shipping, 2) }}</h5>
+                                                     <h5>+AED {{ number_format($total_tax, 2) }}</h5>
                                                  </div>
                                              </div>
                                              <hr>
                                              <div class="d-flex justify-content-between">
                                                  <div class="cilop">
                                                      <h5>Net Amount</h5>
+                                                     @php
+                                                         $net_amount = $total - $total_discount + $shipping + $total_tax;
+                                                     @endphp
                                                      @if (session()->get('token'))
                                                          @php
-                                                             $net_amount = $total - $total_discount + $shipping;
-                                                             $applicable_discount = ($net_amount * $loyality_discount_applicable) / 100;
+                                                             
                                                              try {
+                                                                 $applicable_discount = ($net_amount * $loyality_discount_applicable) / 100;
                                                                  $points_to_discount = $loyality_points / $aed_to_loality;
                                                              } catch (Exception $e) {
                                                                  $points_to_discount = 0;
+                                                                 $applicable_discount = 0;
                                                              }
                                                              $applied_discount = $points_to_discount;
                                                              if ($applicable_discount < $points_to_discount) {
@@ -159,7 +170,7 @@
 
                                                  </div>
                                                  <div class="cilop1">
-                                                     <h5>AED {{ $total - $total_discount + $shipping }}</h5>
+                                                     <h5>AED {{ number_format($net_amount, 2) }}</h5>
                                                  </div>
                                              </div>
                                              <hr>
@@ -176,7 +187,8 @@
                                                          <!-- <h5>{{ $loyality_points }}</h5> -->
                                                          <!-- <h5>{{ $applied_discount * $aed_to_loality }}</h5> -->
                                                          <h5>AED {{ $applied_discount }}</h5>
-                                                         <h5>AED {{ $total - $total_discount + $shipping - $applied_discount }}
+                                                         <h5>AED
+                                                             {{ $net_amount - $applied_discount }}
                                                          </h5>
                                                      </div>
                                                  </div>
@@ -228,8 +240,10 @@
                                                                          </a>
                                                                          <div class="box-hover">
                                                                              <ul class="add-to-links">
-                                                                                 <li><a class="link-quickview"
-                                                                                         href="{{ url('product-detail') }}?id={{ $product->id }}"></a>
+                                                                                 <li><a class="link-quickview openModal"
+                                                                                         href="#"
+                                                                                         data-details="{{ json_encode($product) }}"
+                                                                                         onClick="setProductDetails($(this).data('details'))"></a>
                                                                                  </li>
                                                                                  <li><a class="link-wishlist @if ($product->is_wishlist) active @endif"
                                                                                          href="#"
@@ -389,6 +403,16 @@
          }
 
          function applyCoupon() {
+             if ($('#coupon_code').val() == '') {
+                 return Toastify({
+                     text: 'coupon code field is required',
+                     className: "info",
+                     close: true,
+                     style: {
+                         background: "red",
+                     }
+                 }).showToast();
+             }
              $.ajax({
                  url: '{{ config('global.api') }}/checkout',
                  type: 'post',
@@ -399,6 +423,7 @@
                      user_id: {{ session()->get('user_id') ?? 0 }},
                      coupon_name: $('#coupon_code').val()
                  },
+
                  dataType: 'json',
                  success: function(response) {
                      if (response.status == 1) {
@@ -431,17 +456,43 @@
              $('.quantity').on('click', '.plus', function(e) {
                  let $input = $(this).prev('input.qty');
                  let val = parseInt($input.val());
-                 $input.val(val + 1).change();
-                 updateCart(val + 1, $input.data('cart_id'));
+                 let qty = val + 1;
+                 let stock = parseInt($input.data('stock'));
+                 if (qty > stock) {
+                     Toastify({
+                         text: "Please check stock",
+                         className: "error",
+                         close: true,
+                         style: {
+                             background: "red",
+                         }
+                     }).showToast();
+                     return;
+                 }
+                 $input.val(qty).change();
+                 updateCart(qty, $input.data('cart_id'));
              });
 
              $('.quantity').on('click', '.minus',
                  function(e) {
                      let $input = $(this).next('input.qty');
                      var val = parseInt($input.val());
+                     let qty = val - 1;
+                     let stock = parseInt($input.data('stock'));
+                     if (qty > stock) {
+                         Toastify({
+                             text: "Please check stock",
+                             className: "error",
+                             close: true,
+                             style: {
+                                 background: "red",
+                             }
+                         }).showToast();
+                         qty = stock;
+                     }
                      if (val > 1) {
-                         $input.val(val - 1).change();
-                         updateCart(val - 1, $input.data('cart_id'));
+                         $input.val(qty).change();
+                         updateCart(qty, $input.data('cart_id'));
                      }
                  });
          });
@@ -516,6 +567,38 @@
                  }
              })
 
+         }
+
+         function addWishlist(id, ref) {
+             @if (session()->get('token'))
+                 var token = "{{ session()->get('token') }}";
+                 $.ajax({
+                     url: '{{ config('global.api') }}/addtowishlist',
+                     type: 'POST',
+                     beforeSend: function(xhr) {
+                         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                     },
+                     data: {
+                         product_id: id
+                     },
+                     success: function(response) {
+                         if (response.status == 1) {
+                             Toastify({
+                                 text: response.message,
+                                 className: "info",
+                                 close: true,
+                                 style: {
+                                     background: "#1cad6a",
+                                 }
+                             }).showToast();
+                             ref.addClass('active');
+                         }
+                     },
+                     error: function() {},
+                 });
+             @else
+                 $('#myModalsignin').modal('show');
+             @endif
          }
      </script>
  @endsection

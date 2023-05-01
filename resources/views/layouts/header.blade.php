@@ -21,7 +21,7 @@
                     </Span>
 
                     <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
-                    <span class="delivery-content">Phone number - <span>00971 43555577</span> </span>
+                    <span class="delivery-content">{!! CommonData()->top_header_phone !!} </span>
 
                 </div>
 
@@ -43,7 +43,7 @@
                         data-placement="bottom"
                         data-content="Vivamus
               sagittis lacus vel augue laoreet rutrum faucibus.">
-                        Delivery Slot - <span>9:00 to 6:00</span> </span>
+                        {!! CommonData()->top_header_clock !!} </span>
 
 
                 </div>
@@ -59,7 +59,7 @@
                     </Span>
 
                     <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
-                    <span class="delivery-content">Fast & Free Delivery</span>
+                    <span class="delivery-content"> {!! CommonData()->top_header3 !!}</span>
 
                 </div>
 
@@ -71,7 +71,7 @@
                                 d="M10 2.5a2.5 2.5 0 0 0-4 2V6H5a1 1 0 0 0-1 1v8a3 3 0 0 0 3 3h6.5a2.5 2.5 0 0 0 2.5-2.5V7a1 1 0 0 0-1-1h-1V4.5a2.5 2.5 0 0 0-4-2Zm-3 2a1.5 1.5 0 1 1 3 0V6H7V4.5Zm3.667-1.248A1.5 1.5 0 0 1 13 4.5V6h-2V4.5c0-.454-.121-.88-.333-1.248ZM7 17a2 2 0 0 1-2-2V7h6v8.5c0 .563.186 1.082.5 1.5H7Zm8-1.5a1.5 1.5 0 0 1-3 0V7h3v8.5Z" />
                         </svg>
                     </span>
-                    <span class="delivery-content">Shop from over 1 million products</span>
+                    <span class="delivery-content">{!! CommonData()->top_header2 !!}</span>
 
                 </div>
 
@@ -83,7 +83,7 @@
                                 d="M184 104v32a8 8 0 0 1-8 8H99.3l10.4 10.3a8.1 8.1 0 0 1 0 11.4a8.2 8.2 0 0 1-11.4 0l-24-24a8.1 8.1 0 0 1 0-11.4l24-24a8.1 8.1 0 0 1 11.4 11.4L99.3 128H168v-24a8 8 0 0 1 16 0Zm48-48v144a16 16 0 0 1-16 16H40a16 16 0 0 1-16-16V56a16 16 0 0 1 16-16h176a16 16 0 0 1 16 16Zm-16 144V56H40v144Z" />
                         </svg>
                     </span>
-                    <span class="delivery-content">Free Returns</span>
+                    <span class="delivery-content">{!! CommonData()->top_header1 !!}</span>
 
                 </div>
 
@@ -93,46 +93,7 @@
     </div>
 
     <div class="container">
-        @if (!session()->get('token'))
-    
-            <div class="positionsa" id="signinpopup">
-                <div id="bkgOverlay" class="backgroundOverlay"></div>
 
-                <div id="delayedPopup" class="delayedPopupWindow">
-                    <!-- This is the close button -->
-                    <a href="#" id="btnClose" title="Click here to close this deal box.">[ X ]</a>
-                    <!-- This is the left side of the popup for the description -->
-
-                    <!-- Begin MailChimp Signup Form -->
-                    <div class="new-con">
-
-                        <div class="left">
-
-                            <div class="title">
-                                <h1>Sign In</h1>
-                            </div>
-
-                            <form id="first_popup">
-                                @csrf
-                                <label>Your email</label>
-                                <input type="email" name="email" id="email" placeholder="email">
-                                <label>Password</label>
-                                <input type="password" name="password" id="password" placeholder="password">
-                                <button type="button" class="signin" type="button" onclick="loginUserPopup()">
-                                    SIGN IN
-                                </button>
-                                <button class="signUp" type="button"   onclick="$('#myModalsignup').modal('show');">SIGN UP</button>
-                            </form>
-
-                        </div>
-                        <div class="right">
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus reiciendis. </p>
-                        </div>
-                    </div>
-                </div>
-                <!-- End MailChimp Signup Form -->
-        </div>
-        @endif
 
 
 
@@ -165,9 +126,8 @@
                             </li>
                         </ul>
                         <input type="hidden" name="category_id" value="{{ request()->category_id }}" />
-                        <input id="search" type="text" name="search"
-                            placeholder="Search entire store here..." class="searchbox" maxlength="128"
-                            value={{ request()->search }}>
+                        <input id="search" type="text" name="search" placeholder="Search entire store here..."
+                            class="searchbox" maxlength="128" value="{{ request()->search }}">
                         <button type="submit" title="Search" class="search-btn-bg" id="submit-button"></button>
                     </form>
                 </div>
@@ -274,7 +234,7 @@
                         @endif
                     @endforeach
                     <span> <button class="offer-btn" type="button"
-                            onclick="window.location='{{ url('products?explore_more=1') }}'">{{ CommonData()->navigation_button }}</button>
+                            onclick="window.location='{{ url('products?explore_more=1') }}'">{!! CommonData()->navigation_button !!}</button>
                     </span>
                 </div>
             </div>
@@ -310,7 +270,7 @@
                     <span class="eyesopen" onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
                 <span class="ipEvhD"
-                    onclick="$('#myModalsignup').modal('hide');$('#myModalforgot').modal('show'); "
+                    onclick="$('#myModalsignup').modal('hide');$('#myModalsignin').modal('hide');$('#myModalforgot').modal('show'); "
                     style="cursor:pointer;">Forgot your password?</span>
                 <button type="button" class="jcdgCW" id="login_btn" onclick="loginUser()">Sign In</button>
             </form>
@@ -356,7 +316,7 @@
                 </div>
 
                 <div class="mmc5c">
-                    <label>mobile</label>
+                    <label>Mobile</label>
                     <input type="text" id="phone" name="phone" value="">
                 </div>
                 <button type="button" class="jcdgCW" id="register_btn" onclick="register()">Create an
@@ -378,6 +338,7 @@
             @csrf
             <div class="modal-body">
                 <div class="yhd0d">
+                    <div id="some_div_time"></div>
                     <h1>Verify Your Account</h1>
                     {{-- <h2>Sign in to your account</h2> --}}
                     <h3>Don't have an account? <a href="#" data-toggle="modal"
@@ -386,11 +347,15 @@
                 </div>
                 <div class="mmc5c">
                     <label>otp</label>
-                    <input type="number" name="otp_verify_otp" value="" id="otp_verify_otp">
+                    <input type="number" name="otp_verify_otp" value="" min="0"
+                        id="otp_verify_otp">
                 </div>
                 <a class="ipEvhD" href="#">Forgot your password?</a>
                 <button type="button" class="jcdgCW" onclick="verifyOtp()">Verify
                     Otp</button>
+                <button type="button" id="resend_btn" onclick="ResendEmailOtp()" style="display:none;">Reseend
+                    Otp</button>
+
             </div>
         </form>
     </div>
@@ -436,16 +401,20 @@
             @csrf
             <div class="modal-body">
                 <div class="yhd0d">
+                    <div id="some_div"></div>
                     <h1>Otp Enter</h1>
                     {{-- <h2>Sign in to your account</h2> --}}
                     {{-- <h3>Don't have an account? <a href="#" data-toggle="modal" onclick="$('#myModalsignup').modal('show');">Sign Up</a></h3> --}}
                 </div>
                 <div class="mmc5c">
                     <label>otp</label>
-                    <input type="number" name="otp" value="" id="otp_for">
+                    <input type="number" name="otp" value="" id="otp_for" min="0">
                 </div>
                 <button type="button" class="jcdgCW" onclick="ForgetOtp()">Verify
                     Otp</button>
+                <button type="button" id="resend_btn_otp" onclick="ResendOtp()" style="display:none;">Resend
+                    Otp</button>
+
             </div>
         </form>
     </div>

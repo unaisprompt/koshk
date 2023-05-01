@@ -50,7 +50,7 @@ class ApiProductController extends Controller
        }
     }
 
-        public function productGrid(Request $request){
+    public function productGrid(Request $request){
         $user_id= session()->get('user_id') ?? '';
         $category_id=$request->category_id ?? '';
         $subcategory_id=$request->subcategory_id ?? '';

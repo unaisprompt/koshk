@@ -1,13 +1,13 @@
  @extends('layouts.app')
  @section('content')
-@php
-    use Illuminate\Support\Str;
-@endphp
-<style>
-.colorcls{
-    color:"#000";
-}
-</style>
+     @php
+         use Illuminate\Support\Str;
+     @endphp
+     <style>
+         .colorcls {
+             color: #000;
+         }
+     </style>
      <div class="container-fluid">
          <div class="row">
              <!-- Slider -->
@@ -34,7 +34,7 @@
                                                                      data-splitout='none' data-elementdelay='0.1'
                                                                      data-endelementdelay='0.1'
                                                                      style='z-index:2; white-space:nowrap;'>
-                                                                     <span>{{ $banner['title1'] }}d</span>
+                                                                     <span>{{ $banner['title1'] }}</span>
                                                                  </div>
                                                                  <div class='tp-caption LargeTitle sfl  tp-resizeme '
                                                                      data-endspeed='500' data-speed='500' data-start='1300'
@@ -43,6 +43,7 @@
                                                                      data-endelementdelay='0.1'
                                                                      style='z-index:3; white-space:nowrap;'><span
                                                                          style="font-weight:normal; display:block">{{ $banner['title2'] }}</span>
+                                                                     {{ $banner['title3'] }}
                                                                  </div>
                                                                  @if ($banner['btn_name'])
                                                                      <div class='tp-caption sfb  tp-resizeme '
@@ -82,8 +83,8 @@
          <div class="more-info-tab clearfix">
              <ul class="nav nav-tabs nav-tab-line container my-slider">
                  @foreach ($finalData['main_data']['category'] as $category)
-                     <li class="{{ $loop->iteration == 1 ? 'active' : '' }}"> <a data-transition-type="backSlide"
-                             href="#cat_{{ $category['id'] }}" data-toggle="tab">
+                     <li class="{{ $loop->iteration == 1 ? 'active' : '' }}" onClick="toggleActive($(this))"> <a
+                             data-transition-type="backSlide" href="#cat_{{ $category['id'] }}" data-toggle="tab">
                              <img src="{{ $category['image_url'] }}" alt="{{ $category['category_name'] }}"> <span>
                                  {{ $category['category_name'] }}</span> </a> </li>
                  @endforeach
@@ -212,13 +213,15 @@
                      @foreach ($finalData['main_data']['offer_banner'] as $offer_banner)
                          <div class="bb5g">
                              <div class="yuhd">
-                                 <a href="{{ url('products') }}?category_id={{ $offer_banner['heading_id'] }}"
+                                 <a href="@if ($offer_banner['product_id'] != 0) {{ url('product-detail') }}?id={{ $offer_banner['product_id'] }} @elseif($offer_banner['cat_id'] != 0){{ url('products') }}?cat_id={{ $offer_banner['cat_id'] }} @endif"
                                      style="text-decoration:none;"><img src="{{ $offer_banner['image'] }}"
                                          alt="" />
                              </div>
                              <div class="uyd">
                                  <h1 class="colorcls">{{ $offer_banner['title'] }}</h1>
-                                 <h2 class="colorcls">{{ \Illuminate\Support\Str::limit($offer_banner['heading'], 25, '...') }}</h2></a>
+                                 <h2 class="colorcls">
+                                     {{ isset($offer_banner['heading']) ? \Illuminate\Support\Str::limit($offer_banner['heading'], 25, '...') : '' }}
+                                 </h2></a>
                              </div>
                          </div>
                      @endforeach
@@ -450,12 +453,14 @@
          </div>
      </section>
 
-  <div class="ads-block" style="background-image: url({{$finalData['main_data']['ad_block']['image_url']}});">
+     <div class="ads-block" style="background-image: url({{ $finalData['main_data']['ad_block']['image_url'] }});">
          <div class="container">
              <div class="row">
-                 <div class="banner-text-big"><span>{{$finalData['main_data']['ad_block']['title']}}</span> <br>
-                     {{$finalData['main_data']['ad_block']['title1']}}</div>
-                 <a href="{{$finalData['main_data']['ad_block']['btn_link']}}" style="text-decoration:none;"><button class="shop" title="Subscribe" type="submit"><span>{{$finalData['main_data']['ad_block']['btn_name']}}</span></button></a>
+                 <div class="banner-text-big"><span>{{ $finalData['main_data']['ad_block']['title'] }}</span> <br>
+                     {{ $finalData['main_data']['ad_block']['title1'] }}</div>
+                 <a href="{{ $finalData['main_data']['ad_block']['btn_link'] }}" style="text-decoration:none;"><button
+                         class="shop" title="Subscribe"
+                         type="submit"><span>{{ $finalData['main_data']['ad_block']['btn_name'] }}</span></button></a>
              </div>
          </div>
      </div>
@@ -578,8 +583,8 @@
                                                              
                                                          @endphp
                                                          <div class="star-rating">
-                                                             <span style="width:{{ $avg_rating * 2 * 10 }}%">Rated <strong
-                                                                     class="rating">{{ $avg_rating }}</strong> out
+                                                             <span style="width:{{ $avg_rating * 2 * 10 }}%">Rated
+                                                                 <strong class="rating">{{ $avg_rating }}</strong> out
                                                                  of 5</span>
                                                          </div>
                                                          <div class="item-price">
@@ -662,13 +667,15 @@
                      @foreach ($finalData['main_data']['offer_banner'] as $offer_banner)
                          <div class="bb5g">
                              <div class="yuhd">
-                                 <a href="@if($offer_banner['product_id'] != 0){{ url('products') }}?id={{ $offer_banner['product_id'] }} @elseif($offer_banner['cat_id'] != 0){{ url('products') }}?cat_id={{ $offer_banner['cat_id'] }}@endif"
+                                 <a href="@if ($offer_banner['product_id'] != 0) {{ url('products-detail') }}?id={{ $offer_banner['product_id'] }} @elseif($offer_banner['cat_id'] != 0){{ url('products') }}?cat_id={{ $offer_banner['cat_id'] }} @endif"
                                      style="text-decoration:none;"><img src="{{ $offer_banner['image'] }}"
                                          alt="" />
                              </div>
                              <div class="uyd">
                                  <h1 class="colorcls">{{ $offer_banner['title'] }}</h1>
-                                 <h2 class="colorcls">{{ \Illuminate\Support\Str::limit($offer_banner['heading'], 25, '...') }}</h2></a>
+                                 <h2 class="colorcls">
+                                     {{ isset($offer_banner['heading']) ? \Illuminate\Support\Str::limit($offer_banner['heading'], 25, '...') : '' }}
+                                 </h2></a>
                              </div>
                          </div>
                      @endforeach
@@ -676,6 +683,46 @@
              </div>
          </div>
      </div>
+     @if (!session()->get('token'))
+         <div class="positionsa" id="signinpopup">
+             <div id="bkgOverlay" class="backgroundOverlay"></div>
+
+             <div id="delayedPopup" class="delayedPopupWindow">
+                 <!-- This is the close button -->
+                 <a href="#" id="btnClose" title="Click here to close this deal box.">[ X ]</a>
+                 <!-- This is the left side of the popup for the description -->
+
+                 <!-- Begin MailChimp Signup Form -->
+                 <div class="new-con">
+
+                     <div class="left">
+
+                         <div class="title">
+                             <h1>Sign In</h1>
+                         </div>
+
+                         <form id="first_popup">
+                             @csrf
+                             <label>Your email</label>
+                             <input type="email" name="email" id="email" placeholder="email">
+                             <label>Password</label>
+                             <input type="password" name="password" id="password" placeholder="password">
+                             <button type="button" class="signin" type="button" onclick="loginUserPopup()">
+                                 SIGN IN
+                             </button>
+                             <button class="signUp" type="button" onclick="$('#myModalsignup').modal('show');">SIGN
+                                 UP</button>
+                         </form>
+
+                     </div>
+                     <div class="right">
+                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus reiciendis. </p>
+                     </div>
+                 </div>
+             </div>
+             <!-- End MailChimp Signup Form -->
+         </div>
+     @endif
  @endsection
  @section('script')
      <script>
@@ -1080,5 +1127,12 @@
                  }
              }).mount();
          });
+     </script>
+     <script>
+         function toggleActive(ref) {
+             $('.slick-slide').each(function() {
+                 $(this).removeClass('active');
+             });
+         }
      </script>
  @endsection

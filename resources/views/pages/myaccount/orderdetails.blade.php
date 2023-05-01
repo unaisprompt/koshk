@@ -1,21 +1,12 @@
 @extends('layouts.app')
 
-@section('content')
-
-<!-- Start Page Title Area -->
-
-<!-- End Page Title Area -->
-
-<!-- Start Cart Area -->
-
-@extends('layouts.app')
 @section('style')
 @endsection
 @section('content')
 
 
-<div class="container bootstrap snippets bootdey">
-<div class="row">
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
             @include('pages.myaccount.sidebar')
             <div class="col-sm-9 ">
                 <div class="page-title">
@@ -37,6 +28,7 @@
                             <p class="card-title">qty : {{$value['qty']}}</p>
                             <p class="card-title">status : {{$value['status']}}</p>
                             <p class="card-title">Shipping Cost : {{$value['shipping_cost']}}</p>
+                            <p class="card-title">Loyality Point: {{$value['loyality_discount']}} AED</p>
                             <p class="card-title">tax : {{$value['tax']}}</p>
                            <p class="card-title">Status : {{$value['status']}}</p><br>
                            <div class="d-flex" style="justify-content: space-between;">
@@ -44,17 +36,17 @@
                             @if($value['status'] != 'cancelled')
                              @if($value['return_number'] == NULL)
                           
-                             @if( $value['status']=='Order Delivered')
+                             @if( $value['status']=='Order Delivered' && $value['isreturn'] !=0)
                             <a href="{{url('return/'.encrypt($data['order_info']['order_number']).'/'.encrypt($value['id']))}}" class="btn btn-primary">Return</a> 
-                            @else
-                                <span style="color: blue; padding:10px;"> Return Not Available </span>
+                            {{-- @else
+                                <span style="color: blue; padding:10px;"> Return Not Available This Product </span> --}}
                             @endif
                             @else
-                            <span style="color: blue; padding:10px;"> Return Available </span>
+                            <span style="color: blue; padding:10px;"> Returned </span>
                             @endif
                             @if($value['status']=='Order Placed'||$value['status']=='Order Confirmed'||$value['status']=='Order Shipped')
                            {{-- <button type="button" class="btn btn-primary" onclick="cancelOder({{$value['id']}})">Cancel Order</button> --}}
-                                <a href="#" class="btn btn-primary" data-toggle="modal" onclick="$('#myModalCancel').modal('show');">Cancel Order</a>
+                                <a href="#" class="btn btn-primary" data-toggle="modal" onclick="$('#myModalCancel').modal('show');" style=" margin: 9px;">Cancel Order</a>
                            <div class="modal fade" id="myModalCancel" role="dialog">
                             <div class="modal-dialog">
                             <div class="modal-content">
@@ -65,7 +57,7 @@
                                 @csrf
                                 <div class="modal-body">
                                 <div class="yhd0d">
-                                    <h2>Cancel Order Terms And Conditions</h2>
+                                    <h2>I Cancel Order Terms And Conditions</h2>
                                 </div>
                                 @if(isset(CmsPage()['cancellation']['cancellation_content']))
                         {{CmsPage()['cancellation']['cancellation_content']}}
@@ -80,69 +72,70 @@
                         </div>
                             @endif
                             @else
-                            <span style="color: blue"> Order Cancelled </span>
+                            <span style="color: blue;padding: 21px;" > Order Cancelled </span>
                                 @endif
                                 @else
                                 <span style="color: blue">{{$value['status']}}</span>
                                 @endif
-                              <button type="button" class="btn btn-success" style="padding: 10px;"><a href="{{url('order-tracking/'.encrypt($value['id']))}}" style="text-decoration: none;color:#fff;">Track Your Order</a></button> <br>  
+                              <button type="button" class="btn btn-success" style="padding: 10px;margin: 9px;"  ><a href="{{url('order-tracking/'.encrypt($value['id']))}}" style="text-decoration: none;color:#fff;">Track Your Order</a></button> <br>  
                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                @endforeach
-                @endif
+                  
                 <!--	///*///======    End article  ========= //*/// -->
             </div>
-</div>
-</div>
-<!-- End Cart Area -->
-<script>
-    function cancelOder(id) {
-         $('.pre-loader').removeClass("hidded");
-        $.ajax({
-            type: "POST",
-            url: '{{ url("order-cancel")}}',
-            data: {
-                id: id,
-            },
-            success: function(response) {
-                  $(".pre-loader").delay(2000).addClass("hidded");
-                if (response.status == 1) {
-                    Swal.fire("Success!", response.message, "success").then(() => {
-                        $('#myModalCancel').modal('hide');
-                        window.location = "{{url('order-history')}}";
-                    });
-                } else {
-                    Swal.fire("Failed!", response.message, "error");
-                    if (response.hasOwnProperty('error_list')) {
-                        for (x in response.error_list) {
-                            $('#error_' + x).html(response.error_list[x])
+        </div>
+          @endforeach
+                @endif
+    </div>
+        </div>
+    </div>
+    <!-- End Cart Area -->
+    <script>
+        function cancelOder(id) {
+            $('.pre-loader').removeClass("hidded");
+            $.ajax({
+                type: "POST",
+                url: '{{ url('order-cancel') }}',
+                data: {
+                    id: id,
+                },
+                success: function(response) {
+                    $(".pre-loader").delay(2000).addClass("hidded");
+                    if (response.status == 1) {
+                        Swal.fire("Success!", response.message, "success").then(() => {
+                            $('#myModalCancel').modal('hide');
+                            window.location = "{{ url('order-history') }}";
+                        });
+                    } else {
+                        Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
                         }
                     }
+                },
+                error: function(xhr) {
+                    $(".pre-loader").delay(2000).addClass("hidded");
+                    console.log(xhr.responseText); // this line will save you tons of hours while debugging
+                    // do something here because of error
                 }
-            },
-            error: function(xhr) {
-                 $(".pre-loader").delay(2000).addClass("hidded");
-                console.log(xhr.responseText); // this line will save you tons of hours while debugging
-                // do something here because of error
+            });
+        };
+
+        const checkbox = $("#consent");
+        const button = $("#place_order");
+
+        checkbox.change(function() {
+            if (checkbox.prop("checked")) {
+                button.prop("disabled", false);
+            } else {
+                button.prop("disabled", true);
             }
         });
-    };
-
-    const checkbox = $("#consent");
-const button = $("#place_order");
-
-checkbox.change(function() {
-  if (checkbox.prop("checked")) {
-    button.prop("disabled", false);
-  } else {
-    button.prop("disabled", true);
-  }
-});
-</script>
+    </script>
 @endsection
