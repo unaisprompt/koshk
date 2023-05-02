@@ -9,6 +9,7 @@ use App\Http\Controllers\ApiOrderController;
 use App\Http\Controllers\ApiReturnController;
 use App\Http\Controllers\ApiWishlistController;
 use App\Http\Controllers\ApiCommonCms;
+use App\Http\Controllers\BlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,15 +37,12 @@ Route::get('view-cart', function () {
 Route::get('terms_and_condition', function () {
     return view('pages.terms_and_condition');
 });
-Route::get('blog', function () {
-    return view('pages.blog');
-});
 Route::get('faq', function () {
     return view('pages.faq');
 });
-Route::get('blog-detail', function () {
-    return view('pages.blog-detail');
-});
+
+Route::get('blog-detail/{id}',[BlogController::class, 'blogDetail']);
+Route::get('blog',[BlogController::class, 'blogList']);
 Route::get('about_us',[ApiCommonCms::class, 'about_us']);
 Route::get('privacy_policy',[ApiCommonCms::class, 'privacy_policy']);
 Route::get('terms_and_condition',[ApiCommonCms::class, 'terms_and_condition']);
