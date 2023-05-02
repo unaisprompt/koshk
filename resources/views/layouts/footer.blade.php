@@ -36,7 +36,7 @@
                         <div class="footer-column pull-left">
                             <h4>Shopping Guide</h4>
                             <ul class="links">
-                                <li><a href="#" title="How to buy">Blog</a></li>
+                                <li><a href="{{url('blog')}}" title="How to buy">Blog</a></li>
                                 <li><a href="{{ url('faq') }}" title="FAQs">FAQs</a></li>
                                 <li><a href="{{ url('payment') }}" title="Payment">Payment</a></li>
                                 <li><a href="{{ url('shippment') }}" title="Shipment">Shipment</a></li>
