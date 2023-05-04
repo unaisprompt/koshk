@@ -39,17 +39,19 @@
       </article>
     </a>
   </div> --}}
+  @foreach($data as $blog)
   <div class="item-4">
-    <a href="" class="card">
-      <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/landing.png);"></div>
+    <a href="{{url('blog-detail/').'/'.$blog->slug}}" class="card">
+      <div class="thumb" style="background-image: url({{$blog->image_url}});"></div>
       <article>
-        <h1>How to Code a Scrolling “Alien Lander” Website</h1>
-        <p>We’ll be putting things together so that as you scroll down from the top of the page you’ll see an “Alien Lander” making its way to touch down.</p>
-        <span>Kezz Bracey</span>
+        <h1>{{$blog->heading}}</h1>
+        <p>{!!Str::limit($blog->description, 70, '...')!!}</p>
+        <span>{{$blog->writer_name}}</span>
       </article>
     </a>
   </div>
-  <div class="item-5">
+  @endforeach
+  {{-- <div class="item-5">
     <a href="" class="card">
       <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/strange.jpg);"></div>
       <article>
@@ -76,7 +78,7 @@
         <span>Kendra Schaefer</span>
       </article>
     </a>
-  </div>
+  </div> --}}
 </div>
 
 @endsection
