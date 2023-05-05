@@ -544,7 +544,7 @@
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
-                    } else {
+                    }else if(response.status == 2){
                         Swal.fire("Failed!", response.message, "error");
                         if (response.hasOwnProperty('error_list')) {
                             location.reload();
@@ -552,6 +552,9 @@
                                 $('#error_' + x).html(response.error_list[x])
                             }
                         }
+                        $('#email_reg').val()==response.email;
+                        $('#myModalsigninotp').modal('show');
+                        $('#myModalsignin').modal('hide');
                     }
                 },
                 error: function(xhr) {

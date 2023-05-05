@@ -139,8 +139,8 @@ class ApiUserController extends Controller
                             "data" =>$response['data']['is_already'] ]);
 
            }
-           else{
-                 return response()->json(["status"=>0,
+          else{
+                 return response()->json(["status"=>$response['status'],
                             "message"=>$response['message']]);
            }
     }
@@ -679,6 +679,7 @@ public function updateProfile(Request $request){
     }
    
         $data = $response->json();
+        // dd($response);
     if($response['status']==1){
       session()->put('profile_pic', $response['data']['profile_pic']);
        return redirect('my-account');
