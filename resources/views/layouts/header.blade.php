@@ -317,7 +317,7 @@
 
                 <div class="mmc5c">
                     <label>Mobile</label>
-                    <input type="text" id="phone" name="phone" value="">
+                    <input type="number" id="phone" min="0" name="phone" value="">
                 </div>
                 <button type="button" class="jcdgCW" id="register_btn" onclick="register()">Create an
                     account</button>
