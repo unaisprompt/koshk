@@ -831,6 +831,10 @@
             var year = $("#exp_year").val();
             var cvv = $("#cvv").val();
 
+             var shipping_address_id = $("#shipping_address").val();
+            var billing_address_id = $("#billing_address").val();
+            var check_payment_id = $('input[name="payment"]:checked').val();
+            var transaction_id = $("#transaction_id").val();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -846,6 +850,11 @@
                     month: month,
                     year: year,
                     cvv: cvv,
+
+                    shipping_address_id: shipping_address_id,
+                    billing_address_id :billing_address_id,
+                    check_payment_id :check_payment_id,
+                    transaction_id :transaction_id,
                 },
                 cache: false,
                 success: function(response) {
@@ -853,6 +862,7 @@
                     if (response.status == 1) {
 
                         Swal.fire("Success!", response.message);
+                         window.location.href = "{{ url('thankYou') }}";
                         $('#stripeModal').modal('hide');
 
                         $('#transaction_id').val(response.payment_id);
