@@ -35,6 +35,7 @@
 
                                      @if ($data)
                                          @foreach ($data as $item)
+                                         <a href="{{url('product-detail?id='.$item['product_id'])}}" style="text-decoration:none;color:black;">
                                              <div class="uthssk">
                                                  <div class="pous">
                                                      <img src="{{ $item['image_url'] }}" alt="">
@@ -96,6 +97,7 @@
                                                      </div>
                                                  </div>
                                              </div>
+                                         </a>
                                          @endforeach
                                      @endif
 

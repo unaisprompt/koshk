@@ -587,6 +587,8 @@ public function loginPop(Request $request){
         $token= session()->get('token');
         if(!$user_id && !$token)
         return redirect('/');
+        if($request->new_password != $request->conform_password)
+        return response()->json(['status'=>0,'message'=>'password is not matching'],200);
      $url = $this->url."/changepassword";
      $token= 'Bearer '.session()->get('token');
      $user_id= session()->get('user_id');

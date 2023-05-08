@@ -23,7 +23,7 @@
                   <div class="item-inner">
                     <div class="item-img">
                       <div class="item-img-info"> <a class="product-image" title="Retis lapen casen"
-                          href="product_detail.html"> <img alt="" src="{{$item['productimage']['image_url']}}"> </a>
+                          href="{{url('product-detail?id='.$item['id'])}}"> <img alt="" src="{{$item['productimage']['image_url']}}"> </a>
                         <div class="new-label new-top-right"><i class="fa fa-times" onclick="WishListdelete($(this))"
                             data-product_id="{{$item['id'] }}" aria-hidden="true"></i></div>
                         <div class="box-hover">

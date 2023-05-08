@@ -173,6 +173,7 @@
                             </div>
                             <div class="category-products">
                                 <ol class="products-list" id="products-list">
+                                    @if(count($data->products)!=0)
                                     @foreach ($data->products as $product)
                                         <li
                                             class="item  @if ($loop->iteration == 1) first @elseif ($loop->iteration % 2 == 0) even @elseif ($loop->iteration % 1 == 0) odd @endif listing">
@@ -243,6 +244,10 @@
                                             </div>
                                         </li>
                                     @endforeach
+                                    @else
+                                    <img src="{{asset('assets/images/notfound.jpg')}}">
+                                  {{-- <h1 style="color:red; align-item:center;"> Item Not Found</h1> --}}
+                                    @endif
 
                                 </ol>
                                 @if ($data->total_count > 6)

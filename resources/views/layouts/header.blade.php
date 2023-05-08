@@ -306,13 +306,13 @@
 
                 <div class="mmc5c">
                     <label> Name *</label>
-                    <input type="text" id="name" name="name" value="">
+                    <input type="text" id="name" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" name="name" value="">
                 </div>
 
 
                 <div class="mmc5c">
                     <label> Last Name</label>
-                    <input type="text" id="last_name" name="last_name" value="">
+                    <input type="text" id="last_name" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" name="last_name" value="">
                 </div>
 
                 <div class="mmc5c">
@@ -350,7 +350,7 @@
                     <input type="number" name="otp_verify_otp" value="" min="0"
                         id="otp_verify_otp">
                 </div>
-                <a class="ipEvhD" href="#">Forgot your password?</a>
+            
                 <button type="button" class="jcdgCW" onclick="verifyOtp()">Verify
                     Otp</button>
                 <button type="button" id="resend_btn" onclick="ResendEmailOtp()" style="display:none;">Reseend

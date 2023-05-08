@@ -491,7 +491,7 @@
                                                                                 </li>
                                                                                 <li><a class="link-wishlist @if ($related_product->is_wishlist) active @endif"
                                                                                         href="#"
-                                                                                        onclick="event.preventDefault();addWishlist({{ $related_product->id }},$(this))"></a>
+                                                                                        onclick="addWishlist({{ $related_product->id }},$(this))"></a>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
@@ -521,12 +521,21 @@
                                                                                             {{ $related_product->discounted_price }}</span>
                                                                                     </span> </div>
                                                                             </div>
-                                                                            <div class="action">
+                                                                            {{-- <div class="action">
                                                                                 <button class="button btn-cart"
                                                                                     type="button" title=""
+                                                                                     data-details="{{ json_encode($related_product) }}"
+                                                                                      onclick="addCart($(this).data('details'))"
                                                                                     data-original-title="Add to Cart"><i
                                                                                         class="fa fa-shopping-basket"></i></button>
-                                                                            </div>
+                                                                            </div> --}}
+                                                                               <div class="action">
+                                                         <button class="button btn-cart" type="button" title=""
+                                                             data-original-title="Add to Cart"
+                                                             data-details="{{ json_encode($related_product) }}"
+                                                             onclick="addCart($(this).data('details'))"><i
+                                                                 class="fa fa-shopping-basket"></i></button>
+                                                     </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -891,6 +900,7 @@
 </script>
 <script>
     function addWishlist(id, ref) {
+        console.log(id);
         @if (session()->get('token'))
             var token = "{{ session()->get('token') }}";
             $.ajax({

@@ -711,7 +711,10 @@
                                  SIGN IN
                              </button>
                              <button class="signUp" type="button" onclick="$('#myModalsignup').modal('show');">SIGN
-                                 UP</button>
+                                 UP</button><br />
+                                 <span class="ipEvhD"
+                    onclick="$('#myModalsignup').modal('hide');$('#myModalsignin').modal('hide');$('#myModalforgot').modal('show'); "
+                    style="cursor:pointer;">Forgot your password?</span>
                          </form>
 
                      </div>
