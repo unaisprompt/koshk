@@ -294,18 +294,18 @@
                             In</a></h3>
                 </div>
                 <div class="mmc5c">
-                    <label>Email</label>
+                    <label>Email *</label>
                     <input type="text" id="email_reg" name="email_reg" value="">
                 </div>
                 <div class="mmc5c">
-                    <label>Password</label>
+                    <label>Password *</label>
                     <input type="password" id="password" name="password_reg" value=""
                         class="password_signin">
                     <span onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
 
                 <div class="mmc5c">
-                    <label> Name</label>
+                    <label> Name *</label>
                     <input type="text" id="name" name="name" value="">
                 </div>
 
@@ -316,7 +316,7 @@
                 </div>
 
                 <div class="mmc5c">
-                    <label>Mobile</label>
+                    <label>Mobile *</label>
                     <input type="number" id="phone" min="0" name="phone" value="">
                 </div>
                 <button type="button" class="jcdgCW" id="register_btn" onclick="register()">Create an
