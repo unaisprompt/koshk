@@ -340,6 +340,12 @@
                                 </div>
                                 <div id="question5" class="panel-collapse collapse">
                                     <div class="panel-body">
+
+                                        <p class="require">
+                                            <em class="required">* </em> <a href="#" data-toggle="modal"
+                                                onclick="$('#myModalTerms').modal('show');">Click to Agree terms and conditions</a>
+                                        </p>
+
                                         <form action="" id="co-payment-form">
                                             <dl id="checkout-payment-method-load">
                                                 <dt>
@@ -363,14 +369,10 @@
                                             <input type="hidden" value="" name="transaction_id"
                                                 id="transaction_id">
                                         </form>
-                                        <p class="require">
+                                        {{-- <p class="require">
                                             <em class="required">* </em>Required Fields
-                                        </p>
-                                        <p class="require">
-                                            <em class="required">* </em><input type="checkbox" value="1" checked
-                                                id="consent" name="consent"> <a href="#" data-toggle="modal"
-                                                onclick="$('#myModalTerms').modal('show');">Agree terms and conditions</a>
-                                        </p>
+                                        </p> --}}
+                                       
                                         <div class="buttons-set1" id="payment-buttons-container">
                                             <button type="button" class="button" id="place_order"
                                                 onclick="checkoutOrder()">
@@ -401,6 +403,9 @@
                                         @if (isset(CmsPage()['termsconditions']))
                                             {{ CmsPage()['termsconditions'] }}
                                         @endif
+                                         <br>
+                                        <em class="required">* </em><input type="checkbox" value="1" checked
+                                        id="consent" name="consent"> <a>I Agree terms and conditions</a>
 
                                     </div>
                                 </form>
@@ -814,8 +819,11 @@
             checkbox.change(function() {
                 if (checkbox.prop("checked")) {
                     button.prop("disabled", false);
+                    $('.radio').prop("disabled", false);
                 } else {
                     button.prop("disabled", true);
+                    $('.radio').prop("disabled", true);
+
                 }
             });
         })
