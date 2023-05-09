@@ -544,7 +544,7 @@
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
-                    }else if(response.status == 2){
+                    }else if(response.status == 2 || response.status == 0){
                         Swal.fire("Failed!", response.message, "error");
                         if (response.hasOwnProperty('error_list')) {
                             location.reload();
