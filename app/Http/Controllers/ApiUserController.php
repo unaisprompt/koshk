@@ -684,6 +684,7 @@ public function updateProfile(Request $request){
         // dd($response);
     if($response['status']==1){
       session()->put('profile_pic', $response['data']['profile_pic']);
+    session()->put('name', $response['data']['name']);
        return redirect('my-account');
     }
     else{

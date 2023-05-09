@@ -37,7 +37,6 @@ class ApiReturnController extends Controller
     }
     public function returnPost(Request $request)
     {
-        
           $user_id= session()->get('user_id');
      $token= session()->get('token');
         if(!$user_id && !$token)
@@ -54,7 +53,7 @@ class ApiReturnController extends Controller
         ]);
     $data = $response->json();
        if($response['status']==1){
-        return redirect('order-history');
+       return $data;
        }
        else{
            return back()->with('error', $response['message']);

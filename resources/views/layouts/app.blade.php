@@ -535,6 +535,7 @@
                     if (response.status == 1) {
                         console.log(response);
                         Swal.fire("Success!", response.message, "success").then(() => {
+                             $('#myModalsignin').modal('hide');
                             if (response.data == 1) {
                                 $('#myModalsignin').modal('hide');
                                 window.location.href = "{{ url('user-password-new') }}";

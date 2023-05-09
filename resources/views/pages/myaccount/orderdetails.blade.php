@@ -25,17 +25,17 @@
                                           <h5 class="card-title">order Number : {{$data['order_info']['order_number']}}</h5>
                        <img src="{{$value['image_url']}}" style="width:50px;height:50px;">
                             <p class="card-title">Product Name : {{$value['product_name']}}</p>
-                            <p class="card-title">qty : {{$value['qty']}}</p>
-                            <p class="card-title">status : {{$value['status']}}</p>
+                            <p class="card-title">Qty : {{$value['qty']}}</p>
+                            <p class="card-title">Status : {{$value['status']}}</p>
                             <p class="card-title">Shipping Cost : {{$value['shipping_cost']}}</p>
                             <p class="card-title">Loyality Point: {{$value['loyality_discount']}} AED</p>
-                            <p class="card-title">tax : {{$value['tax']}}</p>
+                            <p class="card-title">Tax : {{$value['tax']}}</p>
                            <p class="card-title">Status : {{$value['status']}}</p><br>
+                        
                            <div class="d-flex" style="justify-content: space-between;">
                             @if($value['status'] != 'Return request raised' || $value['status'] != 'Return in progress'|| $value['status'] != 'Return in completed'|| $value['status'] != 'Return request rejected' )
                             @if($value['status'] != 'cancelled')
                              @if($value['return_number'] == NULL)
-                          
                              @if( $value['status']=='Order Delivered' && $value['isreturn'] !=0)
                             <a href="{{url('return/'.encrypt($data['order_info']['order_number']).'/'.encrypt($value['id']))}}" class="btn btn-primary">Return</a> 
                             {{-- @else
