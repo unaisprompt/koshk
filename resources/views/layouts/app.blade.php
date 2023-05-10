@@ -199,7 +199,7 @@
                                     </li>
                                     @if (session()->get('user_id'))
                                         <li> <a class="link-wishlist" data-id="" href="#"
-                                                onclick="addWishlist($(this))"><span>Add to
+                                                onclick="addWishlist($(this).data('id'),$(this))"><span>Add to
                                                     Wishlist</span></a></li>
                                     @else
                                         <li> <a class="link-wishlist" data-id="" href="#"

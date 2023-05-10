@@ -729,7 +729,7 @@
  @endsection
  @section('script')
      <script>
-         function addWishlist(ref) {
+         function addWishlist(id,ref) {
              @if (session()->get('token'))
                  var token = "{{ session()->get('token') }}";
                  $.ajax({
@@ -739,7 +739,7 @@
                          xhr.setRequestHeader('Authorization', 'Bearer ' + token);
                      },
                      data: {
-                         product_id: ref.data('id')
+                         product_id: id
                      },
                      success: function(response) {
                          if (response.status == 1) {
