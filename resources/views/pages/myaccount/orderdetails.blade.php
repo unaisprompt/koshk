@@ -48,28 +48,47 @@
                            {{-- <button type="button" class="btn btn-primary" onclick="cancelOder({{$value['id']}})">Cancel Order</button> --}}
                                 <a href="#" class="btn btn-primary" data-toggle="modal" onclick="$('#myModalCancel').modal('show');" style=" margin: 9px;">Cancel Order</a>
                            <div class="modal fade" id="myModalCancel" role="dialog">
-                            <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header v5c">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <form  method="post" id="register_form">
-                                @csrf
-                                <div class="modal-body">
-                                <div class="yhd0d">
-                                    <h2>I Cancel Order Terms And Conditions</h2>
-                                </div>
-                                @if(isset(CmsPage()['cancellation']['cancellation_content']))
-                        {{CmsPage()['cancellation']['cancellation_content']}}
-                        @endif
-                        <br><br>
-                        <input type="checkbox" value="1" checked id="consent" name="consent"><span id="modalConstant">Agree terms and conditions</span>
-                                <button type="button" class="btn btn-primary" id="place_order"  onclick="cancelOder({{$value['id']}})">Cancel Order</button>
-                                </div>
-                                </form>
-                            </div>
-                            </div>
-                        </div>
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header v5c">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <form  method="post" id="register_form">
+                                        @csrf
+                                        <div class="modal-body">
+                                        <div class="yhd0d">
+                                            <h2>I Cancel Order Terms And Conditions</h2>
+                                        </div>
+                                        @if(isset(CmsPage()['cancellation']['cancellation_content']))
+                                {{CmsPage()['cancellation']['cancellation_content']}}
+                                @endif
+                                <br><br>
+                                <input type="checkbox" value="1" checked id="consent" name="consent"><span id="modalConstant">Agree terms and conditions</span>
+                                        <button type="button" class="btn btn-primary" id="place_order"  onclick="$('#myModalCancelReason').modal('show');$('#myModalCancel').modal('hide');">Cancel Order</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                          </div>
+                             <div class="modal fade" id="myModalCancelReason" role="dialog">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header v5c">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <form  method="post" id="register_form">
+                                        @csrf
+                                        <div class="modal-body">
+                                        <div class="yhd0d">
+                                           <textarea name="cancel_reason" id="cancel_reason" placeholder="Cancel Reason" row="5" class="form-control"></textarea>
+                                        </div>
+                                        <br>
+                                        <button type="button" class="btn btn-primary" id="place_order"  onclick="cancelOder({{$value['id']}})">Cancel Order</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                          </div>
                             @endif
                             @else
                             <span style="color: blue;padding: 21px;" > Order Cancelled </span>
@@ -97,11 +116,13 @@
     <script>
         function cancelOder(id) {
             $('.pre-loader').removeClass("hidded");
+             let reason = $('#cancel_reason').val();
             $.ajax({
                 type: "POST",
                 url: '{{ url('order-cancel') }}',
                 data: {
                     id: id,
+                    reason:reason,
                 },
                 success: function(response) {
                     $(".pre-loader").delay(2000).addClass("hidded");
