@@ -159,6 +159,7 @@ class ApiOrderController extends Controller
         ])->post($url,  [
        'user_id'=>$user_id,
        'order_id'=>$request->id,
+       'reason'=>$request->reason,
         'status'=>6
         ]);
        

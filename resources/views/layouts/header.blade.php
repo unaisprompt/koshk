@@ -298,30 +298,30 @@
                             In</a></h3>
                 </div>
                 <div class="mmc5c">
-                    <label>Email</label>
+                    <label>Email *</label>
                     <input type="text" id="email_reg" name="email_reg" value="">
                 </div>
                 <div class="mmc5c">
-                    <label>Password</label>
+                    <label>Password *</label>
                     <input type="password" id="password" name="password_reg" value=""
                         class="password_signin">
                     <span onclick="showPassword()"><i class="fa fa-eye-slash"></i></span>
                 </div>
 
                 <div class="mmc5c">
-                    <label> Name</label>
-                    <input type="text" id="name" name="name" value="">
+                    <label> Name *</label>
+                    <input type="text" id="name" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" name="name" value="">
                 </div>
 
 
                 <div class="mmc5c">
                     <label> Last Name</label>
-                    <input type="text" id="last_name" name="last_name" value="">
+                    <input type="text" id="last_name" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" name="last_name" value="">
                 </div>
 
                 <div class="mmc5c">
-                    <label>Mobile</label>
-                    <input type="text" id="phone" name="phone" value="">
+                    <label>Mobile *</label>
+                    <input type="number" id="phone" min="0" name="phone" value="">
                 </div>
                 <button type="button" class="jcdgCW" id="register_btn" onclick="register()">Create an
                     account</button>
@@ -354,7 +354,7 @@
                     <input type="number" name="otp_verify_otp" value="" min="0"
                         id="otp_verify_otp">
                 </div>
-                <a class="ipEvhD" href="#">Forgot your password?</a>
+            
                 <button type="button" class="jcdgCW" onclick="verifyOtp()">Verify
                     Otp</button>
                 <button type="button" id="resend_btn" onclick="ResendEmailOtp()" style="display:none;">Reseend

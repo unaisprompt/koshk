@@ -68,6 +68,73 @@
         a:focus {
             outline: none !important;
         }
+        .loading {
+ --speed-of-animation: 0.9s;
+ --gap: 6px;
+ --first-color: #4c86f9;
+ --second-color: #49a84c;
+ --third-color: #f6bb02;
+ --fourth-color: #f6bb02;
+ --fifth-color: #2196f3;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ width: 100px;
+ gap: 6px;
+ height: 100px;
+}
+
+.loading span {
+ width: 4px;
+ height: 50px;
+ background: var(--first-color);
+ animation: scale var(--speed-of-animation) ease-in-out infinite;
+}
+
+.loading span:nth-child(2) {
+ background: var(--second-color);
+ animation-delay: -0.8s;
+}
+
+.loading span:nth-child(3) {
+ background: var(--third-color);
+ animation-delay: -0.7s;
+}
+
+.loading span:nth-child(4) {
+ background: var(--fourth-color);
+ animation-delay: -0.6s;
+}
+
+.loading span:nth-child(5) {
+ background: var(--fifth-color);
+ animation-delay: -0.5s;
+}
+
+@keyframes scale {
+ 0%, 40%, 100% {
+  transform: scaleY(0.05);
+ }
+
+ 20% {
+  transform: scaleY(1);
+ }
+}
+.pre-loader {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.98);
+  z-index: 101;
+  height: 100%;
+  width: 100%;
+}
+.pre-loader.hidded {
+  display: none;
+}
     </style>
     <script>
         $(document).bind("contextmenu", function(e) {
@@ -78,7 +145,15 @@
 
 <body class="cms-index-index cms-home-page home">
     <div id="page">
-
+        <div class="pre-loader hidded" style="z-index: 3002">
+<div class="loading">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+        </div>
         @include('layouts.header')
         @yield('content')
         @include('layouts.footer')
@@ -124,7 +199,7 @@
                                     </li>
                                     @if (session()->get('user_id'))
                                         <li> <a class="link-wishlist" data-id="" href="#"
-                                                onclick="event.preventDefault();addWishlist($(this))"><span>Add to
+                                                onclick="addWishlist($(this).data('id'),$(this))"><span>Add to
                                                     Wishlist</span></a></li>
                                     @else
                                         <li> <a class="link-wishlist" data-id="" href="#"
@@ -298,9 +373,9 @@
         }
     </script>
     <script>
-        $(window).on('load', function() {
-            $(".pre-loader").delay(2000).addClass("hidded");
-        })
+        // $(window).on('load', function() {
+        //     $(".pre-loader").delay(2000).addClass("hidded");
+        // })
         //                   $( document ).ready(function() {
         // $(".pre-loader").delay(2000).addClass("hidded");
         //   });
@@ -460,6 +535,7 @@
                     if (response.status == 1) {
                         console.log(response);
                         Swal.fire("Success!", response.message, "success").then(() => {
+                             $('#myModalsignin').modal('hide');
                             if (response.data == 1) {
                                 $('#myModalsignin').modal('hide');
                                 window.location.href = "{{ url('user-password-new') }}";
@@ -469,7 +545,7 @@
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
-                    } else {
+                    }else if(response.status == 2 || response.status == 0){
                         Swal.fire("Failed!", response.message, "error");
                         if (response.hasOwnProperty('error_list')) {
                             location.reload();
@@ -477,6 +553,9 @@
                                 $('#error_' + x).html(response.error_list[x])
                             }
                         }
+                        $('#email_reg').val()==response.email;
+                        $('#myModalsigninotp').modal('show');
+                        $('#myModalsignin').modal('hide');
                     }
                 },
                 error: function(xhr) {

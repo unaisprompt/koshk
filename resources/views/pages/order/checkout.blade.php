@@ -340,6 +340,12 @@
                                 </div>
                                 <div id="question5" class="panel-collapse collapse">
                                     <div class="panel-body">
+
+                                        <p class="require">
+                                            <em class="required">* </em> <a href="#" data-toggle="modal"
+                                                onclick="$('#myModalTerms').modal('show');">Click to Agree terms and conditions</a>
+                                        </p>
+
                                         <form action="" id="co-payment-form">
                                             <dl id="checkout-payment-method-load">
                                                 <dt>
@@ -363,14 +369,10 @@
                                             <input type="hidden" value="" name="transaction_id"
                                                 id="transaction_id">
                                         </form>
-                                        <p class="require">
+                                        {{-- <p class="require">
                                             <em class="required">* </em>Required Fields
-                                        </p>
-                                        <p class="require">
-                                            <em class="required">* </em><input type="checkbox" value="1" checked
-                                                id="consent" name="consent"> <a href="#" data-toggle="modal"
-                                                onclick="$('#myModalTerms').modal('show');">Agree terms and conditions</a>
-                                        </p>
+                                        </p> --}}
+                                       
                                         <div class="buttons-set1" id="payment-buttons-container">
                                             <button type="button" class="button" id="place_order"
                                                 onclick="checkoutOrder()">
@@ -401,6 +403,9 @@
                                         @if (isset(CmsPage()['termsconditions']))
                                             {{ CmsPage()['termsconditions'] }}
                                         @endif
+                                         <br>
+                                        <em class="required">* </em><input type="checkbox" value="1" checked
+                                        id="consent" name="consent"> <a>I Agree terms and conditions</a>
 
                                     </div>
                                 </form>
@@ -814,8 +819,11 @@
             checkbox.change(function() {
                 if (checkbox.prop("checked")) {
                     button.prop("disabled", false);
+                    $('.radio').prop("disabled", false);
                 } else {
                     button.prop("disabled", true);
+                    $('.radio').prop("disabled", true);
+
                 }
             });
         })
@@ -831,6 +839,10 @@
             var year = $("#exp_year").val();
             var cvv = $("#cvv").val();
 
+             var shipping_address_id = $("#shipping_address").val();
+            var billing_address_id = $("#billing_address").val();
+            var check_payment_id = $('input[name="payment"]:checked').val();
+            var transaction_id = $("#transaction_id").val();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
@@ -846,6 +858,11 @@
                     month: month,
                     year: year,
                     cvv: cvv,
+
+                    shipping_address_id: shipping_address_id,
+                    billing_address_id :billing_address_id,
+                    check_payment_id :check_payment_id,
+                    transaction_id :transaction_id,
                 },
                 cache: false,
                 success: function(response) {
@@ -853,6 +870,7 @@
                     if (response.status == 1) {
 
                         Swal.fire("Success!", response.message);
+                         window.location.href = "{{ url('thankYou') }}";
                         $('#stripeModal').modal('hide');
 
                         $('#transaction_id').val(response.payment_id);
