@@ -202,7 +202,11 @@
                                                     <div class="row">
                                                         @foreach ($category->subcategory as $subcategory)
                                                             <div class="col-md-4 col-sm-6">
-                                                                <h3>{{ $subcategory->subcategory_name }}</h3>
+                                                                <h3><a
+                                                                        href="{{ url('products?category_id=' . $category->id . '&subcategory_id=' . $subcategory->id) }}">
+                                                                        {{ $subcategory->subcategory_name }}
+                                                                    </a>
+                                                                </h3>
                                                                 <ul class="nav">
                                                                     @foreach ($subcategory->inner_category as $inner_category)
                                                                         <li> <a
