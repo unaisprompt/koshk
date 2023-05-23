@@ -259,7 +259,11 @@
                                             <div class="points">
                                                 <h4>Shipping & Return</h4>
                                                 <ul>
-                                                    <li>{{ ($data->free_shipping!=2 || $data->shipping_cost == 0) ? 'Free Shipping' : "Shipping Cost $data->shipping_cost" }}
+                                                    <li>@if($data->free_shipping!=2)
+                                                        Free Shipping
+                                                        @elseif ($data->shipping_cost)
+                                                        Shipping Cost {{$data->shipping_cost}}
+                                                         @endif
                                                     </li>
                                                     <li>{{ $data->est_shipping_days > 0 ? 'Estimated shipping days ' . $data->est_shipping_days : 'Shipping days may vary' }}
                                                     </li>
