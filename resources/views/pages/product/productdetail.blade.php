@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
     @php
-       dd($data);
         $price = $data->is_variation ? $variation->discounted_variation_price : $data->discounted_price;
         $stock = $data->is_variation ? $variation->stock->quantity : collect($data->stocks)->sum('quantity');
     @endphp
@@ -260,7 +259,7 @@
                                             <div class="points">
                                                 <h4>Shipping & Return</h4>
                                                 <ul>
-                                                    <li>{{ $data->free_shipping || $data->shipping_cost == 0 ? 'Free Shipping' : "Shipping Cost $data->shipping_cost" }}
+                                                    <li>{{ $data->free_shipping==2 || $data->shipping_cost == 0 ? 'Free Shipping' : "Shipping Cost $data->shipping_cost" }}
                                                     </li>
                                                     <li>{{ $data->est_shipping_days > 0 ? 'Estimated shipping days ' . $data->est_shipping_days : 'Shipping days may vary' }}
                                                     </li>
