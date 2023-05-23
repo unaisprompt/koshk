@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     @php
+       dd($data);
         $price = $data->is_variation ? $variation->discounted_variation_price : $data->discounted_price;
         $stock = $data->is_variation ? $variation->stock->quantity : collect($data->stocks)->sum('quantity');
     @endphp
@@ -630,7 +631,7 @@
             return;
         }
         @php
-            
+
             $tax = $data->tax;
             if ($data->tax_type == 'percentage') {
                 $tax = round(($price * $tax) / 100, 2);
@@ -706,7 +707,7 @@
             return;
         }
         @php
-            
+
             $tax = $data->tax;
             if ($data->tax_type == 'percentage') {
                 $tax = round(($price * $tax) / 100, 2);
