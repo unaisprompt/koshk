@@ -7,6 +7,16 @@
          .colorcls {
              color: #000;
          }
+
+         .delayedPopupWindow {
+             min-width: 600px;
+         }
+
+         @media only screen and (max-width: 600px) {
+             .delayedPopupWindow {
+                 min-width: unset;
+             }
+         }
      </style>
      <div class="container-fluid">
          <div class="row">
@@ -712,14 +722,15 @@
                              </button>
                              <button class="signUp" type="button" onclick="$('#myModalsignup').modal('show');">SIGN
                                  UP</button><br />
-                                 <span class="ipEvhD"
-                    onclick="$('#myModalsignup').modal('hide');$('#myModalsignin').modal('hide');$('#myModalforgot').modal('show'); "
-                    style="cursor:pointer;">Forgot your password?</span>
+                             <span class="ipEvhD"
+                                 onclick="$('#myModalsignup').modal('hide');$('#myModalsignin').modal('hide');$('#myModalforgot').modal('show'); "
+                                 style="cursor:pointer;">Forgot your password?</span>
                          </form>
 
                      </div>
-                     <div class="right">
-                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus reiciendis. </p>
+                     <div class="right"
+                         style="background:url('{{ $finalData['main_data']['login_popup']['image'] }}')">
+                         <p>{{ $finalData['main_data']['login_popup']['description'] }}</p>
                      </div>
                  </div>
              </div>
@@ -729,7 +740,7 @@
  @endsection
  @section('script')
      <script>
-         function addWishlist(id,ref) {
+         function addWishlist(id, ref) {
              @if (session()->get('token'))
                  var token = "{{ session()->get('token') }}";
                  $.ajax({
