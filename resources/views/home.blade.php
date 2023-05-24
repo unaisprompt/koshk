@@ -729,7 +729,7 @@
 
                      </div>
                      <div class="right"
-                         style="background:url('{{ $finalData['main_data']['login_popup']['image'] }}')">
+                         style="background:url('{{ $finalData['main_data']['login_popup']['image'] }}');background-size:cover">
                          <p>{{ $finalData['main_data']['login_popup']['description'] }}</p>
                      </div>
                  </div>
