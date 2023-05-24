@@ -204,7 +204,7 @@
                                                     <p class="availability in-stock"><span>Sold out</span></p>
                                                 @else
                                                     <p class="availability in-stock">
-                                                        <span>{{ $stock }} in stock</span>
+                                                        <span @if($stock < 5)style="background:red;"@elseif($stock <10)style="background:yellow;" @elseif($stock >10)style="background:green;"@endif>{{ $stock }} in stock</span>
                                                     </p>
                                                 @endif
                                                 <p class="special-price"> <span class="price-label">Special Price</span>
@@ -259,8 +259,12 @@
                                             <div class="points">
                                                 <h4>Shipping & Return</h4>
                                                 <ul>
-                                                    <li>{{ $data->free_shipping || $data->shipping_cost == 0 ? 'Free Shipping' : "Shipping Cost $data->shipping_cost" }}
+                                                    @if($data->free_shipping!=2)
+                                                    <li>Free Shipping
                                                     </li>
+                                                        @elseif ($data->shipping_cost)
+                                                        <li>Shipping Cost {{$data->shipping_cost}}</li>
+                                                         @endif
                                                     <li>{{ $data->est_shipping_days > 0 ? 'Estimated shipping days ' . $data->est_shipping_days : 'Shipping days may vary' }}
                                                     </li>
                                                     <li>{{ $data->is_return ? "$data->return_days Days Return Policy" : 'No return Available' }}
@@ -630,7 +634,7 @@
             return;
         }
         @php
-            
+
             $tax = $data->tax;
             if ($data->tax_type == 'percentage') {
                 $tax = round(($price * $tax) / 100, 2);
@@ -706,7 +710,7 @@
             return;
         }
         @php
-            
+
             $tax = $data->tax;
             if ($data->tax_type == 'percentage') {
                 $tax = round(($price * $tax) / 100, 2);
