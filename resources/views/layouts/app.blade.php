@@ -135,6 +135,19 @@
 .pre-loader.hidded {
   display: none;
 }
+
+    .yellow-bg {
+      background: yellow !important;
+    }
+    
+    .red-bg {
+      background: red !important;
+    }
+    
+    .green-bg {
+      background: green !important;
+    }
+
     </style>
     <script>
         $(document).bind("contextmenu", function(e) {
@@ -830,30 +843,66 @@
     </script>
 
     <script>
-        function setProductDetails(data) {
-            console.log(data);
-            $('#myModal').modal('show');
-            $('#myModal').find('img').attr('src', data.productimage.image_url);
-            $('#myModal').find('.brand').html(data.brand_name);
-            $('#myModal').find('.product-name').find('h1').html(data.product_name);
-            var ratting = 0;
-            if (data.avg_ratting > 0) {
-                ratting = data.avg_ratting;
-            }
-            var totalStock = data.stocks.map((item) => item.quantity).reduce((a, b) => a + b, 0);
-            $('#myModal').find('.star-rating').find('span').css('width', `${ratting*2*10}%`);
-            $('#myModal').find('.star-rating').find('span').html(
-                `Rated <strong class="rating">${ratting}</strong> out of 5`);
-            $('#myModal').find('.in-stock').find('span').html(`${totalStock} in stock`);
-            $('#myModal').find('#product-price-modal').html(`AED ${data.discounted_price}`);
-            $('#myModal').find('#product-old-price-modal').html(`AED ${data.product_price}`);
-            $('#myModal').find('#modal-description').html(data.description);
-            $('#myModal').find('#modal-detail-description').html(data.detail_description);
-            $('#myModal').find('#modal-highlights').html(data.highlights);
-            $('#myModal').find('.link-wishlist').data('id', data.id);
-            $('#modal-add-to-cart').data('details', data);
-            $('#modal-add-buy-now').data('details', data);
-        }
+        // function setProductDetails(data) {
+        //     console.log(data);
+        //     $('#myModal').modal('show');
+        //     $('#myModal').find('img').attr('src', data.productimage.image_url);
+        //     $('#myModal').find('.brand').html(data.brand_name);
+        //     $('#myModal').find('.product-name').find('h1').html(data.product_name);
+        //     var ratting = 0;
+        //     if (data.avg_ratting > 0) {
+        //         ratting = data.avg_ratting;
+        //     }
+        //     var totalStock = data.stocks.map((item) => item.quantity).reduce((a, b) => a + b, 0);
+        //     $('#myModal').find('.star-rating').find('span').css('width', `${ratting*2*10}%`);
+        //     $('#myModal').find('.star-rating').find('span').html(
+        //         `Rated <strong class="rating">${ratting}</strong> out of 5`);
+        //      $('#myModal').find('.in-stock').find('span').html(`${totalStock} in stock`);
+        //     $('#myModal').find('#product-price-modal').html(`AED ${data.discounted_price}`);
+        //     $('#myModal').find('#product-old-price-modal').html(`AED ${data.product_price}`);
+        //     $('#myModal').find('#modal-description').html(data.description);
+        //     $('#myModal').find('#modal-detail-description').html(data.detail_description);
+        //     $('#myModal').find('#modal-highlights').html(data.highlights);
+        //     $('#myModal').find('.link-wishlist').data('id', data.id);
+        //     $('#modal-add-to-cart').data('details', data);
+        //     $('#modal-add-buy-now').data('details', data);
+        // }
+      function setProductDetails(data) {
+    console.log(data);
+    $('#myModal').modal('show');
+    $('#myModal').find('img').attr('src', data.productimage.image_url);
+    $('#myModal').find('.brand').html(data.brand_name);
+    $('#myModal').find('.product-name').find('h1').html(data.product_name);
+    
+    var rating = 0;
+    if (data.avg_rating > 0) {
+        rating = data.avg_rating;
+    }
+    
+    var totalStock = data.stocks.map(item => item.quantity).reduce((a, b) => a + b, 0);
+    var stockElement = $('#myModal').find('.in-stock').find('span');
+    stockElement.html(`${totalStock} in stock`);
+    
+    if (totalStock < 5) {
+        stockElement.addClass('red-bg');
+    } else if (totalStock < 10) {
+        stockElement.addClass('yellow-bg');
+    } else {
+        stockElement.addClass('green-bg');
+    }
+    
+    $('#myModal').find('.star-rating').find('span').css('width', `${rating * 2 * 10}%`);
+    $('#myModal').find('.star-rating').find('span').html(`Rated <strong class="rating">${rating}</strong> out of 5`);
+    $('#myModal').find('#product-price-modal').html(`AED ${data.discounted_price}`);
+    $('#myModal').find('#product-old-price-modal').html(`AED ${data.product_price}`);
+    $('#myModal').find('#modal-description').html(data.description);
+    $('#myModal').find('#modal-detail-description').html(data.detail_description);
+    $('#myModal').find('#modal-highlights').html(data.highlights);
+    $('#myModal').find('.link-wishlist').data('id', data.id);
+    $('#modal-add-to-cart').data('details', data);
+    $('#modal-add-buy-now').data('details', data);
+}
+
     </script>
     <script>
         function addCart(product, qty = 1) {

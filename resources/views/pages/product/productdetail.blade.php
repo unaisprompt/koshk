@@ -204,7 +204,7 @@
                                                     <p class="availability in-stock"><span>Sold out</span></p>
                                                 @else
                                                     <p class="availability in-stock">
-                                                        <span>{{ $stock }} in stock</span>
+                                                        <span @if($stock < 5)style="background:red;"@elseif($stock <10)style="background:yellow;" @elseif($stock >10)style="background:green;"@endif>{{ $stock }} in stock</span>
                                                     </p>
                                                 @endif
                                                 <p class="special-price"> <span class="price-label">Special Price</span>
