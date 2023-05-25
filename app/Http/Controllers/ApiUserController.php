@@ -347,6 +347,8 @@ public function loginPop(Request $request){
         'mobile'=>$request->mobile,
         'email'=>$request->email,
         'landmark'=>$request->landmark,
+        'emirate_id'=>$request->emirate_id,
+        'region_id'=>$request->region_id,
         ]);
         $data = $response->json();
       if($response['status']==1){
@@ -389,6 +391,8 @@ public function loginPop(Request $request){
             'email'=>$request->email,
             'pincode'=>0,
             'landmark'=>$request->landmark,
+            'emirate_id'=>$request->emirate_id,
+            'region_id'=>$request->region_id,
         ]);
         $data = $response->json();
    if($response['status']==1){
@@ -403,6 +407,17 @@ public function loginPop(Request $request){
 
      }
     }
+  private function emirateList()
+  {
+    $data=[];
+        $url = $this->url."/get-emirates-list"; 
+        $response = Http::get($url);
+        if($response->successful())
+        {
+        return  $data=$response->json();
+        }
+    return $data;
+  }
   public function addressList(){
         $user_id= session()->get('user_id');
         $token= session()->get('token');
@@ -418,8 +433,8 @@ public function loginPop(Request $request){
         ]);
         $data = $response->json();
     if($response['status']==1){
-
-        return view('pages.myaccount.addresslist',compact('data'));
+         $emirate_list= $this->emirateList();   
+        return view('pages.myaccount.addresslist',compact('data','emirate_list'));
     }
     else{
         return back()->with('error', $response['message']);
