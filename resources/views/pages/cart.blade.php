@@ -35,69 +35,70 @@
 
                                      @if ($data)
                                          @foreach ($data as $item)
-                                         <a href="{{url('product-detail?id='.$item['product_id'])}}" style="text-decoration:none;color:black;">
-                                             <div class="uthssk">
-                                                 <div class="pous">
-                                                     <img src="{{ $item['image_url'] }}" alt="">
-                                                 </div>
-                                                 <div class="pous1">
-                                                     {{-- <h3>Brand</h3> --}}
-                                                     <h4>{{ $item['product_name'] }}</h4>
+                                             <a href="{{ url('product-detail?id=' . $item['product_id']) }}"
+                                                 style="text-decoration:none;color:black;">
+                                                 <div class="uthssk">
+                                                     <div class="pous">
+                                                         <img src="{{ $item['image_url'] }}" alt="">
+                                                     </div>
+                                                     <div class="pous1">
+                                                         {{-- <h3>Brand</h3> --}}
+                                                         <h4>{{ $item['product_name'] }}</h4>
 
-                                                     {{-- @if (isset($item['created_at']))
+                                                         {{-- @if (isset($item['created_at']))
                                                          <small>Ordered
                                                              {{ \Carbon\Carbon::parse($item['created_at'])->diffForHumans(\Carbon\Carbon::now()) }}</small>
                                                      @endif --}}
-                                                     <small>Stock:{{ $item['stock'] }}</small>
-                                                     @if (isset($item['est_shipping_days']))
-                                                         <small><b>
-                                                                 @if (!($item['shipping_cost'] > 0))
-                                                                     Free
-                                                                 @endif delivery by
-                                                                 {{ \Carbon\Carbon::now()->addDays($item['est_shipping_days'])->format('l, F jS, Y') }}
-                                                             </b></small>
-                                                     @endif
-                                                     <h5>Sold by <b>Gift City</b></h5>
-                                                     @if (Session::has('user_id'))
-                                                         <a href="{{ url('delete-cart') }}/{{ $item['id'] }}">
-                                                             <span><i class="fa fa-trash"></i> Remove</span> </a>
-                                                         @if ($item['coupon_name'])
-                                                             <br />
-                                                             COUPON : {{ $item['coupon_name'] }} <button
-                                                                 class="btn btn-danger btn-sm btn-rounded"
-                                                                 onclick="removeCoupon({{ $item['id'] }})"><i
-                                                                     class="fa fa-trash"></i></button>
+                                                         <small>Stock:{{ $item['stock'] }}</small>
+                                                         @if (isset($item['est_shipping_days']))
+                                                             <small><b>
+                                                                     @if (!($item['shipping_cost'] > 0))
+                                                                         Free
+                                                                     @endif delivery by
+                                                                     {{ \Carbon\Carbon::now()->addDays($item['est_shipping_days'])->format('l, F jS, Y') }}
+                                                                 </b></small>
                                                          @endif
-                                                     @else
-                                                         <a href="{{ url('delete-cart') }}/{{ $item['product_id'] }}">
-                                                             <span><i class="fa fa-trash"></i> Remove</span> </a>
-                                                     @endif
-                                                 </div>
-                                                 <div class="pous2">
-                                                     <p>AED {{ $item['price'] * $item['qty'] }}</p>
-                                                     @php
-                                                         $total += $item['price'] * $item['qty'];
-                                                         $total_discount += $item['discount_amount'] ?? 0;
-                                                         $shipping += $item['shipping_cost'];
-                                                         $total_loyality_discount += isset($item['loyality_discount']) ? $item['loyality_discount'] : 0;
-                                                         $total_tax += isset($item['tax']) ? $item['tax'] : 0;
-                                                     @endphp
-                                                     <div class="count-number">
-                                                         <form id="myform" method="POST" class="quantity"
-                                                             action="#">
-                                                             <input type='button' value='-' class='qtyminus minus'
-                                                                 field='quantity' />
-                                                             <input type='text' name='quantity'
-                                                                 data-cart_id="{{ Session::has('user_id') ? $item['id'] : $item['product_id'] }}"
-                                                                 data-stock="{{ $item['stock'] }}"
-                                                                 value='{{ $item['qty'] }}' class='qty' />
-                                                             <input type='button' value='+' class='qtyplus plus'
-                                                                 field='quantity' />
-                                                         </form>
+                                                         <h5>Sold by <b>Gift City</b></h5>
+                                                         @if (Session::has('user_id'))
+                                                             <a href="{{ url('delete-cart') }}/{{ $item['id'] }}">
+                                                                 <span><i class="fa fa-trash"></i> Remove</span> </a>
+                                                             @if ($item['coupon_name'])
+                                                                 <br />
+                                                                 COUPON : {{ $item['coupon_name'] }} <button
+                                                                     class="btn btn-danger btn-sm btn-rounded"
+                                                                     onclick="removeCoupon({{ $item['id'] }})"><i
+                                                                         class="fa fa-trash"></i></button>
+                                                             @endif
+                                                         @else
+                                                             <a href="{{ url('delete-cart') }}/{{ $item['product_id'] }}">
+                                                                 <span><i class="fa fa-trash"></i> Remove</span> </a>
+                                                         @endif
+                                                     </div>
+                                                     <div class="pous2">
+                                                         <p>AED {{ $item['price'] * $item['qty'] }}</p>
+                                                         @php
+                                                             $total += $item['price'] * $item['qty'];
+                                                             $total_discount += $item['discount_amount'] ?? 0;
+                                                             $shipping += $item['shipping_cost'];
+                                                             $total_loyality_discount += isset($item['loyality_discount']) ? $item['loyality_discount'] : 0;
+                                                             $total_tax += isset($item['tax']) ? $item['tax'] : 0;
+                                                         @endphp
+                                                         <div class="count-number">
+                                                             <form id="myform" method="POST" class="quantity"
+                                                                 action="#">
+                                                                 <input type='button' value='-' class='qtyminus minus'
+                                                                     field='quantity' />
+                                                                 <input type='text' name='quantity'
+                                                                     data-cart_id="{{ Session::has('user_id') ? $item['id'] : $item['product_id'] }}"
+                                                                     data-stock="{{ $item['stock'] }}"
+                                                                     value='{{ $item['qty'] }}' class='qty' />
+                                                                 <input type='button' value='+' class='qtyplus plus'
+                                                                     field='quantity' />
+                                                             </form>
+                                                         </div>
                                                      </div>
                                                  </div>
-                                             </div>
-                                         </a>
+                                             </a>
                                          @endforeach
                                      @endif
 
@@ -124,13 +125,13 @@
                                                  <div class="cilop">
                                                      <h5>Total</h5>
                                                      <h5>Discount</h5>
-                                                     <h5>Delivery charges</h5>
+                                                     {{-- <h5>Delivery charges</h5> --}}
                                                      <h5>Tax</h5>
                                                  </div>
                                                  <div class="cilop1">
                                                      <h5>AED {{ number_format($total, 2) }}</h5>
                                                      <h5>-AED {{ number_format($total_discount, 2) }}</h5>
-                                                     <h5>+AED {{ number_format($shipping, 2) }}</h5>
+                                                     {{--  <h5>+AED {{ number_format($shipping, 2) }}</h5> --}}
                                                      <h5>+AED {{ number_format($total_tax, 2) }}</h5>
                                                  </div>
                                              </div>
