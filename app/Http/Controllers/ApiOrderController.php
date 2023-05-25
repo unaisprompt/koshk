@@ -11,6 +11,17 @@ class ApiOrderController extends Controller
     public function __construct(){
         $this->url = config('global.api');
     }
+      private function emirateList()
+  {
+    $data=[];
+        $url = $this->url."/get-emirates-list"; 
+        $response = Http::get($url);
+        if($response->successful())
+        {
+        return  $data=$response->json();
+        }
+    return $data;
+  }
     public function checkout(){
 
         $user_id= session()->get('user_id');
@@ -60,7 +71,8 @@ class ApiOrderController extends Controller
             $data = $carts;
           //  return $data;
         }
-                return view('pages.order.checkout',compact('finalData','data'));
+         $emirate_list= $this->emirateList(); 
+                return view('pages.order.checkout',compact('finalData','data','emirate_list'));
             }
             else{
                 return redirect('cart');

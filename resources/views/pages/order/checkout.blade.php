@@ -95,6 +95,29 @@
                                                                     type="text" title="Street Address" name="landmark"
                                                                     id="landmark_billing" class="input-text required-entry"
                                                                     value=""></li>
+                                                            <div class="input-box">
+                                                                <label for="billing_street1">Emirates<span
+                                                                        class="required">*</span></label><br>
+                                                                <select style="width:100%" name="emirate_id" id="emirate_id"
+                                                                    onchange="setRegions($(this).find('option:selected').data('regions'))">
+                                                                    <option value="0" data-regions="">Select Emirates
+                                                                    </option>
+                                                                    @foreach ($emirate_list['data'] as $row)
+                                                                        <option value="{{ $row['id'] }}"
+                                                                            data-regions="{{ json_encode($row['regions']) }}">
+                                                                            {{ $row['name'] }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                            <div class="input-box">
+                                                                <label for="billing_street1">Regions<span
+                                                                        class="required">*</span></label><br>
+                                                                <select style="width:100%" name="region_id"
+                                                                    id="region_id">
+                                                                    <option value="0">Select Regions</option>
+                                                                </select>
+                                                            </div>
+                                                            </li>
                                                         </ul>
                                                         <p class="require"><em class="required">* </em>Required Fields</p>
                                                         <button type="button" class="button continue"
@@ -130,7 +153,8 @@
                                                                         data-landmark={{ $address_data['landmark'] }}
                                                                         data-mobile={{ $address_data['mobile'] }}
                                                                         data-city={{ $address_data['city'] }}
-                                                                        data-email={{ $address_data['email'] }}>
+                                                                        data-email={{ $address_data['email'] }}
+                                                                        @if (isset($address_data['region'])) data-shipping_cost="{{ $address_data['region']['shipping_coast'] }}" @endif>
                                                                         {{ $address_data['first_name'] }}
                                                                         {{ $address_data['last_name'] }}
                                                                         {{ $address_data['street_address'] }}
@@ -294,7 +318,7 @@
                                                                 <div class="cilop">
                                                                     <h5>Total</h5>
                                                                     <h5>Discount</h5>
-                                                                    <h5>Delivery charges</h5>
+                                                                    {{-- <h5>Delivery charges</h5> --}}
                                                                     <h5>Tax</h5>
                                                                 </div>
                                                                 <div class="cilop1">
@@ -302,25 +326,44 @@
                                                                     <h5>-AED
                                                                         {{ number_format($total_discount + $loyality_discount, 2) }}
                                                                     </h5>
-                                                                    <h5>+AED {{ number_format($shipping, 2) }}</h5>
+                                                                    {{--  <h5>+AED {{ number_format($shipping, 2) }}</h5> --}}
                                                                     <h5>+AED {{ number_format($total_tax, 2) }}</h5>
                                                                 </div>
                                                             </div>
                                                             <hr>
                                                             <div class="d-flex justify-content-between">
+                                                                @php
+                                                                    $net_amount = $total - $total_discount + $shipping - $loyality_discount + $total_tax;
+                                                                @endphp
                                                                 <div class="cilop">
                                                                     <h5>Net Amount</h5>
                                                                 </div>
                                                                 <div class="cilop1">
                                                                     <h5>AED
-                                                                        {{ number_format($total - $total_discount + $shipping - $loyality_discount + $total_tax, 2) }}
+                                                                        {{ number_format($net_amount, 2) }}
                                                                     </h5>
                                                                 </div>
-
                                                                 @php
                                                                     $token = session()->get('token');
-                                                                    $gtotal = number_format($total - $total_discount + $shipping - $loyality_discount + $total_tax, 2);
+                                                                    $gtotal = number_format($net_amount, 2);
                                                                 @endphp
+                                                            </div>
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="cilop">
+                                                                    <h5>Delivery Charge</h5>
+                                                                </div>
+                                                                <div class="cilop1">
+                                                                    <h5 id="delivery_charge"
+                                                                        data-net_amount="{{ $net_amount }}"></h5>
+                                                                </div>
+                                                            </div>
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="cilop">
+                                                                    <h5>Sub Total</h5>
+                                                                </div>
+                                                                <div class="cilop1">
+                                                                    <h5 id="sub_total">{{ $net_amount }}</h5>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -343,7 +386,8 @@
 
                                         <p class="require">
                                             <em class="required">* </em> <a href="#" data-toggle="modal"
-                                                onclick="$('#myModalTerms').modal('show');">Click to Agree terms and conditions</a>
+                                                onclick="$('#myModalTerms').modal('show');">Click to Agree terms and
+                                                conditions</a>
                                         </p>
 
                                         <form action="" id="co-payment-form">
@@ -372,7 +416,7 @@
                                         {{-- <p class="require">
                                             <em class="required">* </em>Required Fields
                                         </p> --}}
-                                       
+
                                         <div class="buttons-set1" id="payment-buttons-container">
                                             <button type="button" class="button" id="place_order"
                                                 onclick="checkoutOrder()">
@@ -403,9 +447,9 @@
                                         @if (isset(CmsPage()['termsconditions']))
                                             {{ CmsPage()['termsconditions'] }}
                                         @endif
-                                         <br>
+                                        <br>
                                         <em class="required">* </em><input type="checkbox" value="1" checked
-                                        id="consent" name="consent"> <a>I Agree terms and conditions</a>
+                                            id="consent" name="consent"> <a>I Agree terms and conditions</a>
 
                                     </div>
                                 </form>
@@ -548,10 +592,10 @@
                                 <a href="{{ $sidebanner->btn_link }}">
                                     <img src="{{ $sidebanner->image }}" alt="f-img" /></a>
                                 <!-- <div class="banner-content">
-                                                <div class="banner-text">Clearance Sale</div>
-                                                <div class="banner-text1">Hot <span>Sale</span></div>
-                                                <p>save upto 20%</p>
-                                            </div> -->
+                                                                                                                                                                                                            <div class="banner-text">Clearance Sale</div>
+                                                                                                                                                                                                            <div class="banner-text1">Hot <span>Sale</span></div>
+                                                                                                                                                                                                            <p>save upto 20%</p>
+                                                                                                                                                                                                        </div> -->
                             </div>
                         </div>
                     @endif
@@ -574,6 +618,10 @@
 
         function checkoutOrder() {
             var shipping_address = $("#shipping_address").val();
+            if (!$("#shipping_address").find('option:selected').data('shipping_cost')) {
+                Swal.fire("Error!", "In Address region is missing", "error");
+                return;
+            }
             var billing_address = $("#billing_address").val();
             var check_payment_id = $('input[name="payment"]:checked').val();
             var transaction_id = $("#transaction_id").val();
@@ -583,13 +631,16 @@
                 }
             });
             $.ajax({
-                url: "{{ route('order') }}",
+                url: "{{ config('global.api') }}/order",
                 type: 'post',
+                headers: {
+                    "Authorization": 'Bearer ' + '{{ session()->get('token') }}'
+                },
                 data: {
-                    shipping_address: shipping_address,
-                    billing_address: billing_address,
-                    check_payment_id: check_payment_id,
-                    transaction_id: transaction_id,
+                    user_id: {{ session()->get('user_id') }},
+                    payment_type: 1,
+                    shipping_address_id: shipping_address,
+                    billing_address_id: billing_address
                 },
                 dataType: 'json',
                 success: function(response) {
@@ -723,6 +774,8 @@
             let mobile = $('#mobile_billing').val();
             let email = $('#email_billing').val();
             let landmark = $('#landmark_billing').val();
+            let emirate_id = $('#emirate_id').val();
+            let region_id = $('#region_id').val();
             $.ajax({
                 url: "{{ url('address-post') }}",
                 type: 'post',
@@ -733,7 +786,9 @@
                     city: city,
                     mobile: mobile,
                     email: email,
-                    landmark: landmark
+                    landmark: landmark,
+                    emirate_id: emirate_id,
+                    region_id: region_id
                 },
                 dataType: 'json',
                 success: function(response) {
@@ -743,7 +798,10 @@
                         Swal.fire("Success!", response.message, "success").then(() => {
                             $('#myModalAddAddress').modal('hide');
                             $('#shipping_address').append(
-                                `<option value="${response.data.data.id}">${response.data.data.first_name} ${response.data.data.last_name} ${response.data.data.street_address} ${response.data.data.city}</option>`
+                                `<option 
+                                value="${response.data.data.id}"
+                                data-shipping_cost="${response.data.data.region.shipping_coast}"
+                                >${response.data.data.first_name} ${response.data.data.last_name} ${response.data.data.street_address} ${response.data.data.city}</option>`
                             );
                             $('#billing_address').append(
                                 `<option value="${response.data.data.id}">${response.data.data.first_name} ${response.data.data.last_name} ${response.data.data.street_address} ${response.data.data.city}</option>`
@@ -787,6 +845,14 @@
                 }
             });
         }
+
+        function getFloatVal(input) {
+            var output = parseFloat(input);
+            if (!isNaN(output)) {
+                return output;
+            }
+            return 0;
+        }
         $('#shipping_address').on('change', function() {
             //    $("#address_id_billing").val($(this).data('id'))
             // alert($(this).find('option:selected').data('first_name'));
@@ -797,6 +863,13 @@
             $("#email_shipping_show").html($(this).find('option:selected').data('email'))
             $("#landmark_shipping_show").html($(this).find('option:selected').data('landmark'))
             $("#city_shipping_show").html($(this).find('option:selected').data('city'))
+            console
+            var shipping_cost = $(this).find('option:selected').data('shipping_cost');
+            console.log(shipping_cost);
+            $("#delivery_charge").html(`${shipping_cost} AED`);
+            var net_amount = $("#delivery_charge").data('net_amount');
+            $("#sub_total").html(`${getFloatVal(net_amount)+getFloatVal(shipping_cost)} AED`);
+            $("#sub_total").data('value', getFloatVal(net_amount) + getFloatVal(shipping_cost));
         })
         $('#billing_address').on('change', function() {
             //    $("#address_id_billing").val($(this).data('id'))
@@ -831,15 +904,18 @@
         $("#strpe_pay").click(function() {
             $('strpe_pay').prop('disabled', true);
             var form = $("#order_form");
-
-            var amount = {{ $gtotal }};
+            if (!$("#shipping_address").find('option:selected').data('shipping_cost')) {
+                Swal.fire("Error!", "In Address region is missing", "error");
+                return;
+            }
+            var amount = $('#sub_total').data('value');
             var token = '{{ $token }}';
             var cardNumber = $("#card_number").val();
             var month = $("#exp_month").val();
             var year = $("#exp_year").val();
             var cvv = $("#cvv").val();
 
-             var shipping_address_id = $("#shipping_address").val();
+            var shipping_address_id = $("#shipping_address").val();
             var billing_address_id = $("#billing_address").val();
             var check_payment_id = $('input[name="payment"]:checked').val();
             var transaction_id = $("#transaction_id").val();
@@ -860,9 +936,9 @@
                     cvv: cvv,
 
                     shipping_address_id: shipping_address_id,
-                    billing_address_id :billing_address_id,
-                    check_payment_id :check_payment_id,
-                    transaction_id :transaction_id,
+                    billing_address_id: billing_address_id,
+                    check_payment_id: check_payment_id,
+                    transaction_id: transaction_id,
                 },
                 cache: false,
                 success: function(response) {
@@ -870,7 +946,7 @@
                     if (response.status == 1) {
 
                         Swal.fire("Success!", response.message);
-                         window.location.href = "{{ url('thankYou') }}";
+                        window.location.href = "{{ url('thankYou') }}";
                         $('#stripeModal').modal('hide');
 
                         $('#transaction_id').val(response.payment_id);
@@ -891,10 +967,20 @@
                 error: function(xhr) {
                     // $(".preloader").hide();
                     console.log(xhr
-                    .responseText); // this line will save you tons of hours while debugging
+                        .responseText); // this line will save you tons of hours while debugging
                     // do something here because of error
                 }
             });
         });
+    </script>
+    <script>
+        function setRegions(list) {
+            if (list) {
+                $('#region_id').html('<option value="0">Select Regions</option>');
+                list.forEach(item => {
+                    $('#region_id').append(`<option value="${item.id}">${item.region}</option>`);
+                })
+            }
+        }
     </script>
 @endsection
