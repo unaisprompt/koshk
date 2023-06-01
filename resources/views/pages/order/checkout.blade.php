@@ -829,6 +829,7 @@
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
+                        location.reload();
                     } else {
                         Swal.fire("Failed!", response.message, "error");
                         if (response.hasOwnProperty('error_list')) {
