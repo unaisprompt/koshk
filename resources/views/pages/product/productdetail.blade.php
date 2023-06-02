@@ -809,28 +809,28 @@
 
                     let rating = $('#ratting').val();
                     let comment = $('#comment').val();
-                    let discription = `<li class="comment">
-                                  <div>
-                                    <img alt="" src="{{ session()->get('profile_pic') }}" class="avatar avatar-60 photo">
-                                    <div class="comment-text">
-                                      <div class="star-rating">
-                                        <span style="width:${rating*2*10}%">Rated <strong class="rating">${ratting}</strong> out of 5</span>
-                                      </div>
-                                      <p class="meta">
-                                        <strong>{{ session()->get('name') }}</strong>
-                                        <span>–</span>few minutes ago
-                                      </p>
-                                      <div class="description">
-                                        <p>${comment}</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </li>`;
-                    $('.commentlist').append(discription);
+                    // let discription = `<li class="comment">
+                    //               <div>
+                    //                 <img alt="" src="{{ session()->get('profile_pic') }}" class="avatar avatar-60 photo">
+                    //                 <div class="comment-text">
+                    //                   <div class="star-rating">
+                    //                     <span style="width:${rating*2*10}%">Rated <strong class="rating">${ratting}</strong> out of 5</span>
+                    //                   </div>
+                    //                   <p class="meta">
+                    //                     <strong>{{ session()->get('name') }}</strong>
+                    //                     <span>–</span>few minutes ago
+                    //                   </p>
+                    //                   <div class="description">
+                    //                     <p>${comment}</p>
+                    //                   </div>
+                    //                 </div>
+                    //               </div>
+                    //             </li>`;
+                    // $('.commentlist').append(discription);
                     $('#reset').click();
                     let review_count = parseInt($('#review_count').html());
 
-                    $('#review_count').html(review_count + 1);
+                    // $('#review_count').html(review_count + 1);
                 } else {
                     Toastify({
                         text: response.message,
