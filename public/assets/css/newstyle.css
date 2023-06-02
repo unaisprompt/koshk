@@ -127,7 +127,7 @@ display: none;
     width: 100%;
     margin: 0;
     padding: 0;
-    /* background: #000000; */
+    background: #000000;
     opacity: 0.85;
     filter: alpha(opacity=85);
     -moz-opacity: 0.85;
