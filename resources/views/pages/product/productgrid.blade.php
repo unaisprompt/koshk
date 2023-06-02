@@ -267,7 +267,8 @@
                     <!--	///*///======    End article  ========= //*/// -->
                 </div>
                 <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
-                    <div class="widget widget-categories">
+                   
+                     <div class="widget widget-categories">
                         <div class="block-title">Browse Categories</div>
                         <div id="accordion" class="accordion">
                             @if ($data->category)
@@ -308,7 +309,7 @@
                                 @include('pages.product.sidecategory')
                             @endif
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="widget widget-filter">
                         <div class="block-title">Filter</div>

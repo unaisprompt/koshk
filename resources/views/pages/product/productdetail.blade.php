@@ -322,7 +322,7 @@
                                                             <li class="comment">
                                                                 <div>
                                                                     <img alt=""
-                                                                        src="{{ $review->users->image_url }}"
+                                                                        src="@if($review->users->image_url){{ $review->users->image_url }}@else {{asset('assets/images/rating_user.png')}} @endif"
                                                                         class="avatar avatar-60 photo">
                                                                     <div class="comment-text">
                                                                         <div class="star-rating">

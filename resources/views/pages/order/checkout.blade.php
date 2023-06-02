@@ -282,7 +282,7 @@
 
                                                                 </div>
                                                                 <div class="pous2">
-                                                                    <p>AED {{ $item['price'] * $item['qty'] }}</p>
+                                                                    <p>AED {{number_format((float)$item['price'] * $item['qty'], 2, '.', '')}}</p>
                                                                     @php
                                                                         $total += $item['price'] * $item['qty'];
                                                                         $total_discount += $item['discount_amount'] ?? 0;
