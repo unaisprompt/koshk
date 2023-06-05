@@ -322,7 +322,7 @@ body {
                       <div></div>
                     </div>
                   </div>
-                  <div class="ml-2" style="color: white;">
+                  <div class="ml-2" style="color: white; position: absolute;left: 30%; bottom: 30%;">
                     0
                   </div>
                 </div>
