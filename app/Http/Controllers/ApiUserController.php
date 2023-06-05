@@ -762,4 +762,21 @@ public function addNewsLetter(Request $request)
          $data = $response->json();
       return $data;      
 }
+
+public function getLoyality(Request $request,$orderId)
+{
+     $user_id= session()->get('user_id');
+     $token= session()->get('token');
+        if(!$user_id && !$token)
+        // return redirect('/');
+    $url = $this->url."/getloyality";
+    $tokens= 'Bearer '.session()->get('token');
+    $response = Http::withHeaders([
+        'Authorization' => $tokens
+        ])->post($url);
+        //  return $response;
+    $data = $response->json();
+
+       return $data;
+}
 }
