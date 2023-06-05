@@ -302,6 +302,7 @@ body {
 
               <div class="flex space-x-4">
               <div class="card">
+                <p style="color:gold">Loyality Point</p>
                 <div class="card-content p-0 flex">
                   <div class="spinningasset coin is-sm">
                     <div>
