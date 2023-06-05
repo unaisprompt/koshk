@@ -763,8 +763,9 @@ public function addNewsLetter(Request $request)
       return $data;      
 }
 
-public function getLoyality(Request $request,$orderId)
+public function getLoyality()
 {
+    $url='';
      $user_id= session()->get('user_id');
      $token= session()->get('token');
         if(!$user_id && !$token)
@@ -777,6 +778,8 @@ public function getLoyality(Request $request,$orderId)
         //  return $response;
     $data = $response->json();
 
-       return $data;
+    return response()->json(["status"=>1,
+    "data"=>$data->data]);
+      // return $data;
 }
 }

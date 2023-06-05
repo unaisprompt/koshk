@@ -322,7 +322,7 @@ body {
                       <div></div>
                     </div>
                   </div>
-                  <div class="ml-2" style="color: white; position: absolute;left: 30%; bottom: 30%;">
+                  <div class="ml-2" id="loyality" style="color: white; position: absolute;left: 30%; bottom: 30%;">
                     0
                   </div>
                 </div>
@@ -463,30 +463,24 @@ body {
 <script>
 $( document ).ready(function() {
 
-      var setting = {
-          url: '{{ url('/user-loyalit') }}',
-          dataType: 'json',
-          type: 'get',
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-         
-
-          success: function(response) {
-              // console.log(response);
-
-              if (response.status == 1) {
-                   alert(response.data);
-              }
-
-          },
-          error: function(xhr) {
-
-              console.log(xhr.responseText); // this line will save you tons of hours while debugging
-              // do something here because of error
-          }
-      };
-      $.ajax(setting);
+       @if (session()->get('token'))
+                 var token = "{{ session()->get('token') }}";
+                 $.ajax({
+                     url: '{{ config('global.api') }}/getloyality',
+                     type: 'POST',
+                     beforeSend: function(xhr) {
+                         xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                     },
+                    
+                     success: function(response) {
+                         if (response.status == 1) {
+                          //  console.log(response);
+                          $('#loyality').text(response.data)
+                         }
+                     },
+                     error: function() {},
+                 });
+             @endif
     });
 
 </script>
