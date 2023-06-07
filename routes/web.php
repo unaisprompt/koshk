@@ -110,7 +110,7 @@ Route::post('address-data-get',[ApiOrderController::class,'getAddressEditByOrder
 Route::post('order',[ApiOrderController::class,'order'])->name('order');
 Route::post('order-cancel',[ApiOrderController::class,'orderCancel']);
 Route::get('order-tracking/{id}',[ApiOrderController::class,'OrderTracking']);
-Route::get('thankYou',[ApiOrderController::class,'thankYou']);
+Route::get('thankYou/{orderId}',[ApiOrderController::class,'thankYou']);
 Route::post('coupon-add',[ApiOrderController::class,'couponAdd']);
 Route::get('coupon-remove',[ApiOrderController::class,'couponRemove']);
 

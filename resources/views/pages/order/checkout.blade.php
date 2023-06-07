@@ -592,10 +592,10 @@
                                 <a href="{{ $sidebanner->btn_link }}">
                                     <img src="{{ $sidebanner->image }}" alt="f-img" /></a>
                                 <!-- <div class="banner-content">
-                                                                                                                                                                                                            <div class="banner-text">Clearance Sale</div>
-                                                                                                                                                                                                            <div class="banner-text1">Hot <span>Sale</span></div>
-                                                                                                                                                                                                            <p>save upto 20%</p>
-                                                                                                                                                                                                        </div> -->
+                                                                                                                                                                                                                    <div class="banner-text">Clearance Sale</div>
+                                                                                                                                                                                                                    <div class="banner-text1">Hot <span>Sale</span></div>
+                                                                                                                                                                                                                    <p>save upto 20%</p>
+                                                                                                                                                                                                                </div> -->
                             </div>
                         </div>
                     @endif
@@ -647,7 +647,7 @@
                     $(".preloader").hide();
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
-                            window.location.href = "{{ url('thankYou') }}";
+                            window.location.href = "{{ url('thankYou') }}/" + response.order_id;
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
@@ -946,7 +946,7 @@
                     if (response.status == 1) {
 
                         Swal.fire("Success!", response.message);
-                        window.location.href = "{{ url('thankYou') }}";
+                        window.location.href = "{{ url('thankYou') }}/" + response.order_id;
                         $('#stripeModal').modal('hide');
 
                         $('#transaction_id').val(response.payment_id);
