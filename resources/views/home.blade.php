@@ -156,7 +156,10 @@
                                                  <div class="brand">
                                                      @if ($product['product_brand'])
                                                          {{ $product['product_brand']['brand_name'] }}
+                                                     @else
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
                                                      @endif
+
                                                  </div>
                                                  @php
                                                      $avg_rating = $product['avg_ratting'] ?? 0;
@@ -170,13 +173,22 @@
                                                  </div>
                                                  <div class="item-content">
                                                      <div class="item-price">
-                                                         <div class="price-box"> <span class="regular-price"> <span
-                                                                     class="price">AED
+                                                         <div class="price-box"> <span class="regular-price">
+                                                          
+                                                            @if($product['product_price']>$product['discounted_price'])
+                                                            <span class="old-price"><span class="price">AED {{ number_format($product['product_price'], 2) }}</span></span> 
+                                                            @endif
+                                                            <span class="price">AED
                                                                      {{ number_format($product['discounted_price'], 2) }}</span>
                                                              </span> </div>
                                                      </div>
-                                                     <span
-                                                         style="font-size: 12px">{{ $product['delivery_message'] }}</span>
+
+                                                     @if($product['delivery_message'])
+                                                     <span style="font-size: 12px">{{ $product['delivery_message'] }}</span>
+                                                     @else
+                                                     &nbsp;&nbsp;&nbsp;&nbsp;
+                                                     @endif
+
                                                      <div class="count-number">
                                                          <form id='myform' method='POST' class='quantity'
                                                              action='#'>
@@ -297,7 +309,12 @@
                                                              href="{{ url('product-detail') }}?id={{ $featured_products['id'] }}">{{ $featured_products['product_name'] }}</a>
                                                      </div>
                                                      <div class="brand">
-                                                         {{ $featured_products['brand'] ? $featured_products['brand']['brand_name'] : '' }}
+                                                         {{-- {{ $featured_products['brand'] ? $featured_products['brand']['brand_name'] : '' }} --}}
+                                                         @if ($featured_products['brand'])
+                                                         {{ $featured_products['brand']['brand_name'] }}
+                                                     @else
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                     @endif
                                                      </div>
                                                      <div class="item-content">
                                                          @php
@@ -315,8 +332,10 @@
                                                          <div class="item-price">
                                                              <div class="price-box">
                                                                  <span class="regular-price">
+                                                                   
                                                                      <span class="price">AED
                                                                          {{ number_format($featured_products['discounted_price']) }}</span>
+                                                                       
                                                                  </span>
                                                              </div>
                                                          </div>
@@ -531,12 +550,18 @@
                                                                  out of 5</span>
                                                          </div>
                                                          <div class="item-price">
-                                                             <div class="price-box"> <span class="regular-price"> <span
-                                                                         class="price">AED
+                                                             <div class="price-box"> <span class="regular-price">
+                                                              
+                                                                 <span  class="price">AED
                                                                          {{ number_format($sale_data['product_price'], 2) }}</span>
-                                                                 </span> <span class="old-price">
+                                                                 </span> 
+
+                                                                 @if($sale_data['product_price']>$sale_data['discounted_price'])
+                                                                 <span class="old-price">
                                                                      <span class="price">AED
-                                                                         {{ number_format($sale_data['discounted_price'], 2) }}</span></span>
+                                                                         {{ number_format($sale_data['discounted_price'], 2) }}</span>
+                                                                        </span>
+                                                                 @endif
                                                              </div>
                                                          </div>
                                                      </div>
@@ -616,8 +641,12 @@
                                                              <div class="price-box"> <span class="regular-price"> <span
                                                                          class="price">AED
                                                                          {{ number_format($top_rated['product_price'], 2) }}</span>
-                                                                 </span> <span class="old-price"><span class="price">AED
+                                                                 </span> 
+                                                                 @if($top_rated['product_price']>$top_rated['discounted_price'])
+                                                                 <span class="old-price"><span class="price">AED
                                                                          {{ number_format($top_rated['discounted_price'], 2) }}</span></span>
+                                                                 @endif
+                                                                 
                                                              </div>
                                                          </div>
                                                      </div>

@@ -39,11 +39,11 @@
 
                     <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
 
-                    <span class="delivery-content" data-container="body" data-toggle="popover" data-trigger="hover"
-                        data-placement="bottom"
-                        data-content="Vivamus
-              sagittis lacus vel augue laoreet rutrum faucibus.">
-                        {!! CommonData()->top_header_clock !!} </span>
+                    <span class="delivery-content" data-container="body" data-toggle="popover" 
+                          data-trigger="hover" data-placement="bottom"
+                           data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title title>
+                                  {!! CommonData()->top_header_clock !!} </span>
+                    
 
 
                 </div>

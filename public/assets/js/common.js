@@ -203,13 +203,13 @@ jQuery(document).ready(function () {
     /*  menu highlight  */
     jQuery(".nav>li").mouseover(function () {
         if (jQuery(this).find(".wrap-popup").length > 0) {
-            jQuery(".container-fluid, .main-container").addClass("overlay");
+            jQuery(".container-fluid, .main-container").addClass("");
         }
     }
     );
 
     jQuery(".nav>li").mouseleave(function () {
-        jQuery(".container-fluid, .main-container").removeClass("overlay");
+        jQuery(".container-fluid, .main-container").removeClass("");
     }
     );
 

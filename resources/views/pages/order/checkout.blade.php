@@ -282,7 +282,7 @@
 
                                                                 </div>
                                                                 <div class="pous2">
-                                                                    <p>AED {{ $item['price'] * $item['qty'] }}</p>
+                                                                    <p>AED {{number_format((float)$item['price'] * $item['qty'], 2, '.', '')}}</p>
                                                                     @php
                                                                         $total += $item['price'] * $item['qty'];
                                                                         $total_discount += $item['discount_amount'] ?? 0;
@@ -432,7 +432,7 @@
                         </div>
                     </article>
                     <div class="modal fade" id="myModalTerms" role="dialog">
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header v5c">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -445,7 +445,7 @@
                                         </div>
 
                                         @if (isset(CmsPage()['termsconditions']))
-                                            {{ CmsPage()['termsconditions'] }}
+                                            {!! CmsPage()['termsconditions'] !!}
                                         @endif
                                         <br>
                                         <em class="required">* </em><input type="checkbox" value="1" checked
@@ -826,9 +826,11 @@
                             $("#city_billing_show").html(response.data.data.city);
                             // $('myModalforgetotp').modal('hide');
                             // location.reload();
+                            window.location.reload();
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
+                       
                     } else {
                         Swal.fire("Failed!", response.message, "error");
                         if (response.hasOwnProperty('error_list')) {
