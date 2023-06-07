@@ -15,8 +15,6 @@
                         <div class="page-title">
                             <h2>Checkout</h2>
                         </div>
-                        <button type="button" data-toggle="modal" data-target="#myModalAddAddress"
-                            class="button continue mb-7">Add Address</button>
                         <div class="panel-group accordion-faq" id="faq-accordion">
                             <div class="panel">
                                 <div class="panel-heading">
@@ -27,111 +25,12 @@
                                     </a>
                                 </div>
 
-                                {{-- modal --}}
-                                <div class="modal fade in" id="myModalAddAddress" role="dialog" style="display: none;">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header v5c"><button type="button" class="close"
-                                                    data-dismiss="modal">×</button></div>
-                                            <div class="modal-body">
-                                                <form id="address_add_form">
-                                                    @csrf
 
-                                                    <fieldset class="group-select">
-
-                                                        <ul>
-
-                                                            <li>
-                                                                <div class="customer-name">
-                                                                    <div class="input-box name-firstname"><label
-                                                                            for="billing:firstname">
-                                                                            First Name <span class="required">*</span>
-                                                                        </label><br><input type="text"
-                                                                            id="first_name_billing" name="first_name"
-                                                                            title="First Name"
-                                                                            class="input-text required-entry"
-                                                                            value="">
-                                                                    </div>
-                                                                    <div class="input-box name-lastname"><label
-                                                                            for="billing_lastname">
-                                                                            Last
-                                                                            Name <span class="required">*</span>
-                                                                        </label><br><input type="text"
-                                                                            id="last_name_billing" name="last_name"
-                                                                            title="Last Name"
-                                                                            class="input-text required-entry"
-                                                                            value="">
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li><label for="billing_street1">Street Address <span
-                                                                        class="required">*</span></label><br><input
-                                                                    type="text" title="Street Address"
-                                                                    name="street_address" id="street_address_billing"
-                                                                    class="input-text required-entry" value=""></li>
-                                                            <li>
-                                                                <div class="input-box"><label
-                                                                        for="billing_postcode">City</label><br><input
-                                                                        type="text" title="City" name="city"
-                                                                        id="city_billing" class="input-text required-entry"
-                                                                        value=""></div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="input-box"><label
-                                                                        for="billing_telephone">Telephone
-                                                                        <span class="required">*</span></label><br>
-                                                                    <input type="text" name="mobile" title="Telephone"
-                                                                        class="input-text required-entry"
-                                                                        id="mobile_billing" value="">
-                                                                </div>
-                                                                <div class="input-box"><label for="Email">Email <span
-                                                                            class="required">*</span></label><br>
-                                                                    <input type="text" name="email" title="Email"
-                                                                        class="input-text" id="email_billing"
-                                                                        value="">
-                                                                </div>
-                                                            </li>
-                                                            <li><label for="billing_street1">Landmark</label><br><input
-                                                                    type="text" title="Street Address" name="landmark"
-                                                                    id="landmark_billing" class="input-text required-entry"
-                                                                    value=""></li>
-                                                            <div class="input-box">
-                                                                <label for="billing_street1">Emirates<span
-                                                                        class="required">*</span></label><br>
-                                                                <select style="width:100%" name="emirate_id" id="emirate_id"
-                                                                    onchange="setRegions($(this).find('option:selected').data('regions'))">
-                                                                    <option value="0" data-regions="">Select Emirates
-                                                                    </option>
-                                                                    @foreach ($emirate_list['data'] as $row)
-                                                                        <option value="{{ $row['id'] }}"
-                                                                            data-regions="{{ json_encode($row['regions']) }}">
-                                                                            {{ $row['name'] }}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-                                                            <div class="input-box">
-                                                                <label for="billing_street1">Regions<span
-                                                                        class="required">*</span></label><br>
-                                                                <select style="width:100%" name="region_id"
-                                                                    id="region_id">
-                                                                    <option value="0">Select Regions</option>
-                                                                </select>
-                                                            </div>
-                                                            </li>
-                                                        </ul>
-                                                        <p class="require"><em class="required">* </em>Required Fields</p>
-                                                        <button type="button" class="button continue"
-                                                            onclick="addAddress()"><span>Save</span></button>
-                                                    </fieldset>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {{-- modal end --}}
                                 <div id="question1" class="panel-collapse collapse in">
                                     <div class="panel-body">
+
+                                        <button type="button" data-toggle="modal" data-target="#myModalAddAddress"
+                                            class="button continue mb-7">Add Address</button>
                                         <form id="co-billing-form" action="">
                                             <fieldset class="group-select">
                                                 <ul>
@@ -186,6 +85,8 @@
                                 </div>
                                 <div id="question3" class="panel-collapse collapse">
                                     <div class="panel-body">
+                                        <button type="button" data-toggle="modal" data-target="#myModalAddAddress"
+                                            class="button continue mb-7">Add Address</button>
                                         <form action="" id="co-shipping-form">
                                             <fieldset class="group-select">
                                                 <ul>
@@ -595,10 +496,10 @@
                                 <a href="{{ $sidebanner->btn_link }}">
                                     <img src="{{ $sidebanner->image }}" alt="f-img" /></a>
                                 <!-- <div class="banner-content">
-                                                                                                                                                                                                                                                                <div class="banner-text">Clearance Sale</div>
-                                                                                                                                                                                                                                                                <div class="banner-text1">Hot <span>Sale</span></div>
-                                                                                                                                                                                                                                                                <p>save upto 20%</p>
-                                                                                                                                                                                                                                                            </div> -->
+                                                                                                                                                                                                                                                                            <div class="banner-text">Clearance Sale</div>
+                                                                                                                                                                                                                                                                            <div class="banner-text1">Hot <span>Sale</span></div>
+                                                                                                                                                                                                                                                                            <p>save upto 20%</p>
+                                                                                                                                                                                                                                                                        </div> -->
                             </div>
                         </div>
                     @endif
@@ -606,14 +507,98 @@
             </div>
         </div>
     </section>
+    {{-- modal --}}
+    <div class="modal fade in" id="myModalAddAddress" role="dialog" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header v5c"><button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <form id="address_add_form">
+                        @csrf
 
+                        <fieldset class="group-select">
+
+                            <ul>
+
+                                <li>
+                                    <div class="customer-name">
+                                        <div class="input-box name-firstname"><label for="billing:firstname">
+                                                First Name <span class="required">*</span>
+                                            </label><br><input type="text" id="first_name_billing" name="first_name"
+                                                title="First Name" class="input-text required-entry" value="">
+                                        </div>
+                                        <div class="input-box name-lastname"><label for="billing_lastname">
+                                                Last
+                                                Name <span class="required">*</span>
+                                            </label><br><input type="text" id="last_name_billing" name="last_name"
+                                                title="Last Name" class="input-text required-entry" value="">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><label for="billing_street1">Street Address <span
+                                            class="required">*</span></label><br><input type="text"
+                                        title="Street Address" name="street_address" id="street_address_billing"
+                                        class="input-text required-entry" value=""></li>
+                                <li>
+                                    <div class="input-box"><label for="billing_postcode">City</label><br><input
+                                            type="text" title="City" name="city" id="city_billing"
+                                            class="input-text required-entry" value=""></div>
+                                </li>
+                                <li>
+                                    <div class="input-box"><label for="billing_telephone">Telephone
+                                            <span class="required">*</span></label><br>
+                                        <input type="text" name="mobile" title="Telephone"
+                                            class="input-text required-entry" id="mobile_billing" value="">
+                                    </div>
+                                    <div class="input-box"><label for="Email">Email <span
+                                                class="required">*</span></label><br>
+                                        <input type="text" name="email" title="Email" class="input-text"
+                                            id="email_billing" value="">
+                                    </div>
+                                </li>
+                                <li><label for="billing_street1">Landmark</label><br><input type="text"
+                                        title="Street Address" name="landmark" id="landmark_billing"
+                                        class="input-text required-entry" value=""></li>
+                                <div class="input-box">
+                                    <label for="billing_street1">Emirates<span class="required">*</span></label><br>
+                                    <select style="width:100%" name="emirate_id" id="emirate_id"
+                                        onchange="setRegions($(this).find('option:selected').data('regions'))">
+                                        <option value="0" data-regions="">Select Emirates
+                                        </option>
+                                        @foreach ($emirate_list['data'] as $row)
+                                            <option value="{{ $row['id'] }}"
+                                                data-regions="{{ json_encode($row['regions']) }}">
+                                                {{ $row['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="input-box">
+                                    <label for="billing_street1">Regions<span class="required">*</span></label><br>
+                                    <select style="width:100%" name="region_id" id="region_id">
+                                        <option value="0">Select Regions</option>
+                                    </select>
+                                </div>
+                                </li>
+                            </ul>
+                            <p class="require"><em class="required">* </em>Required Fields</p>
+                            <button type="button" class="button continue"
+                                onclick="addAddress()"><span>Save</span></button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- modal end --}}
 
 
     <script>
         /*   $('#check_strip').click(function() {
-                                        $('#stripeModal').modal('show');
-                                        $('#place_order').prop('disabled', true);
-                                    }); */
+                                                    $('#stripeModal').modal('show');
+                                                    $('#place_order').prop('disabled', true);
+                                                }); */
 
         $('#check_cash').click(function() {
             $('#place_order').prop('disabled', false);
