@@ -234,17 +234,17 @@ jQuery(document).ready(function () {
     });
 
     //given this jquery for hiding the mobile handberger clicking outside
-    jQuery('body').click(function () {
-        // alert('1')
-        var openValue = jQuery('.mm-toggle-wrap').attr("open-val");
+    // jQuery('body').click(function () {
+    //     // alert('1')
+    //     var openValue = jQuery('.mm-toggle-wrap').attr("open-val");
 
-        if (openValue == 1) {
-            // alert('reach')
-            jQuery(".mm-toggle").click();
-            jQuery('.mm-toggle-wrap').attr("open-val", 0);
+    //     if (openValue == 1) {
+    //         // alert('reach')
+    //         jQuery(".mm-toggle").click();
+    //         jQuery('.mm-toggle-wrap').attr("open-val", 0);
 
-        }
-    });
+    //     }
+    // });
 
     // jQuery('.mm-toggle-wrap').click(function () {
     //     // alert('2')
@@ -256,7 +256,21 @@ jQuery(document).ready(function () {
     //     }
     //     return false;
     // });
-
+   jQuery('#page').click(function (e) {
+     if (e.target.closest('.mm-toggle-wrap')) {
+    // The event target is inside the specific <div> or one of its descendants
+    // console.log('Event target is inside the div.');
+  } else {
+    // The event target is outside the specific <div>
+    // console.log('Event target is outside the div.');
+    if($('#mobile-menu').css("display")=='block')
+    {
+      $("#mobile-menu").hide();
+      $('#page').css("left",'0px');
+    }
+  }
+    
+   });
 
 
 
