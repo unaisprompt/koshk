@@ -109,9 +109,12 @@
         <div class="wrapper-1">
             <div class="wrapper-2">
                 <h1>Thank you !</h1>
-                <p>Thanks for ordering,Order Id : {{ $order_info['order_number'] }} </p>
+                <p>Thanks for ordering, you have earned : <b>{{ $loyality_history['reward_points'] }}</b> points </p>
                 @if ($loyality_history)
-                    <p>you have earned : {{ $loyality_history['reward_points'] }} points</p>
+                    <p>Order Id : <b>{{ $order_info['order_number'] }}</b></p>
+                @endif
+                @if ($order_info['payment_id'])
+                    <p>Payment Id : <b>{{ $order_info['payment_id'] }}</b> </p>
                 @endif
                 <a href="{{ url('/') }}" style="text-decoration: none;"><button class="go-home">
                         go home

@@ -282,7 +282,9 @@
 
                                                                 </div>
                                                                 <div class="pous2">
-                                                                    <p>AED {{number_format((float)$item['price'] * $item['qty'], 2, '.', '')}}</p>
+                                                                    <p>AED
+                                                                        {{ number_format((float) $item['price'] * $item['qty'], 2, '.', '') }}
+                                                                    </p>
                                                                     @php
                                                                         $total += $item['price'] * $item['qty'];
                                                                         $total_discount += $item['discount_amount'] ?? 0;
@@ -448,8 +450,9 @@
                                             {!! CmsPage()['termsconditions'] !!}
                                         @endif
                                         <br>
-                                        <em class="required">* </em><input type="checkbox" value="1" checked
-                                            id="consent" name="consent"> <a>I Agree terms and conditions</a>
+                                        <em class="required">* </em><input type="checkbox" value="1" id="consent"
+                                            name="consent" onclick="$('#myModalTerms').modal('hide');"> <a>I Agree terms
+                                            and conditions</a>
 
                                     </div>
                                 </form>
@@ -592,10 +595,10 @@
                                 <a href="{{ $sidebanner->btn_link }}">
                                     <img src="{{ $sidebanner->image }}" alt="f-img" /></a>
                                 <!-- <div class="banner-content">
-                                                                                                                                                                                                                    <div class="banner-text">Clearance Sale</div>
-                                                                                                                                                                                                                    <div class="banner-text1">Hot <span>Sale</span></div>
-                                                                                                                                                                                                                    <p>save upto 20%</p>
-                                                                                                                                                                                                                </div> -->
+                                                                                                                                                                                                                                                                <div class="banner-text">Clearance Sale</div>
+                                                                                                                                                                                                                                                                <div class="banner-text1">Hot <span>Sale</span></div>
+                                                                                                                                                                                                                                                                <p>save upto 20%</p>
+                                                                                                                                                                                                                                                            </div> -->
                             </div>
                         </div>
                     @endif
@@ -607,10 +610,10 @@
 
 
     <script>
-        $('#check_strip').click(function() {
-            $('#stripeModal').modal('show');
-            $('#place_order').prop('disabled', true);
-        });
+        /*   $('#check_strip').click(function() {
+                                        $('#stripeModal').modal('show');
+                                        $('#place_order').prop('disabled', true);
+                                    }); */
 
         $('#check_cash').click(function() {
             $('#place_order').prop('disabled', false);
@@ -624,6 +627,18 @@
             }
             var billing_address = $("#billing_address").val();
             var check_payment_id = $('input[name="payment"]:checked').val();
+            if (!(check_payment_id > 0)) {
+                Swal.fire("Error!", "Please select Payment type", "error");
+                return;
+            }
+            if (!$('#consent').prop('checked')) {
+                Swal.fire("Error!", "Please check the payment terms and condition", "error");
+                return;
+            }
+            if (check_payment_id == 2) {
+                $('#stripeModal').modal('show');
+                return;
+            }
             var transaction_id = $("#transaction_id").val();
             $.ajaxSetup({
                 headers: {
@@ -830,7 +845,7 @@
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
-                       
+
                     } else {
                         Swal.fire("Failed!", response.message, "error");
                         if (response.hasOwnProperty('error_list')) {
@@ -889,18 +904,18 @@
         $(document).ready(() => {
             $('#shipping_address').change();
             $('#billing_address').change();
-            const checkbox = $("#consent");
-            const button = $("#place_order");
-            checkbox.change(function() {
-                if (checkbox.prop("checked")) {
-                    button.prop("disabled", false);
-                    $('.radio').prop("disabled", false);
-                } else {
-                    button.prop("disabled", true);
-                    $('.radio').prop("disabled", true);
+            /*     const checkbox = $("#consent");
+                 const button = $("#place_order");
+                 checkbox.change(function() {
+                     if (checkbox.prop("checked")) {
+                         button.prop("disabled", false);
+                         $('.radio').prop("disabled", false);
+                     } else {
+                         button.prop("disabled", true);
+                         $('.radio').prop("disabled", true);
 
-                }
-            });
+                     }
+                 }); */
         })
 
         $("#strpe_pay").click(function() {
