@@ -154,7 +154,7 @@
             </li>
             <li> <a href="#">{{ $category ? $category->category_name : 'Categories' }}</a>
                 <ul>
-                    <li> <a href="#" class="">Laptop</a>
+                  
                         <ul>
                             @foreach ($categoryList as $category)
                                 <li role="presentation"><a
