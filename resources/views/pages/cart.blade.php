@@ -4,6 +4,11 @@
          .hide {
              display: none !important;
          }
+         .img-cart{
+                width: 100%;
+                height: 147px;
+                object-fit: contain;
+         }
      </style>
      <!-- Main Container -->
      <section class="main-container col1-layout">
@@ -38,7 +43,7 @@
                                              <a href="{{ url('product-detail?id=' . $item['product_id']) }}"
                                                  style="text-decoration:none;color:black;">
                                                  <div class="uthssk">
-                                                     <div class="pous">
+                                                     <div class="pous img-cart">
                                                          <img src="{{ $item['image_url'] }}" alt="">
                                                      </div>
                                                      <div class="pous1">

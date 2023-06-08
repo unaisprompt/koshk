@@ -16,6 +16,9 @@
              .delayedPopupWindow {
                  min-width: unset;
              }
+             .new-con{
+                background-color: lightblue;
+             }
          }
      </style>
      <!--Start of Tawk.to Script-->
