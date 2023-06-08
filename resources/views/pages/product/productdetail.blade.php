@@ -204,7 +204,7 @@
                                                     <p class="availability in-stock"><span>Sold out</span></p>
                                                 @else
                                                     <p class="availability in-stock">
-                                                        <span @if($stock < 5)style="background:red;"@elseif($stock <10)style="background:yellow;" @elseif($stock >10)style="background:green;"@endif>{{ $stock }} in stock</span>
+                                                        <span @if($stock < 5)style="background:red;"@elseif($stock <10)style="background:yellow;" @elseif($stock >10)style="background:green;"@endif>@if($stock < 10) {{ $stock }} @endif in stock</span>
                                                     </p>
                                                 @endif
                                                 <p class="special-price"> <span class="price-label">Special Price</span>
@@ -322,7 +322,7 @@
                                                             <li class="comment">
                                                                 <div>
                                                                     <img alt=""
-                                                                        src="{{ $review->users->image_url }}"
+                                                                        src="@if($review->users->image_url){{ $review->users->image_url }}@else {{asset('assets/images/rating_user.png')}} @endif"
                                                                         class="avatar avatar-60 photo">
                                                                     <div class="comment-text">
                                                                         <div class="star-rating">
@@ -809,28 +809,28 @@
 
                     let rating = $('#ratting').val();
                     let comment = $('#comment').val();
-                    let discription = `<li class="comment">
-                                  <div>
-                                    <img alt="" src="{{ session()->get('profile_pic') }}" class="avatar avatar-60 photo">
-                                    <div class="comment-text">
-                                      <div class="star-rating">
-                                        <span style="width:${rating*2*10}%">Rated <strong class="rating">${ratting}</strong> out of 5</span>
-                                      </div>
-                                      <p class="meta">
-                                        <strong>{{ session()->get('name') }}</strong>
-                                        <span>–</span>few minutes ago
-                                      </p>
-                                      <div class="description">
-                                        <p>${comment}</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </li>`;
-                    $('.commentlist').append(discription);
+                    // let discription = `<li class="comment">
+                    //               <div>
+                    //                 <img alt="" src="{{ session()->get('profile_pic') }}" class="avatar avatar-60 photo">
+                    //                 <div class="comment-text">
+                    //                   <div class="star-rating">
+                    //                     <span style="width:${rating*2*10}%">Rated <strong class="rating">${ratting}</strong> out of 5</span>
+                    //                   </div>
+                    //                   <p class="meta">
+                    //                     <strong>{{ session()->get('name') }}</strong>
+                    //                     <span>–</span>few minutes ago
+                    //                   </p>
+                    //                   <div class="description">
+                    //                     <p>${comment}</p>
+                    //                   </div>
+                    //                 </div>
+                    //               </div>
+                    //             </li>`;
+                    // $('.commentlist').append(discription);
                     $('#reset').click();
                     let review_count = parseInt($('#review_count').html());
 
-                    $('#review_count').html(review_count + 1);
+                    // $('#review_count').html(review_count + 1);
                 } else {
                     Toastify({
                         text: response.message,

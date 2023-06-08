@@ -84,6 +84,8 @@ Route::get('order-history',[ApiUserController::class,'getOrderHistory']);
 Route::get('order-detail/{id}',[ApiUserController::class,'getOrderDetails']);
 Route::post('resent-forget-otp',[ApiUserController::class,'resentOtp']);
 Route::post('resent-email-otp',[ApiUserController::class,'emailOtpVerify']);
+Route::get('user-loyality',[ApiUserController::class,'getLoyality']);
+
 ############# Product ############################
 
 Route::get('products',[ApiProductController::class,'productList']);
@@ -110,7 +112,7 @@ Route::post('address-data-get',[ApiOrderController::class,'getAddressEditByOrder
 Route::post('order',[ApiOrderController::class,'order'])->name('order');
 Route::post('order-cancel',[ApiOrderController::class,'orderCancel']);
 Route::get('order-tracking/{id}',[ApiOrderController::class,'OrderTracking']);
-Route::get('thankYou',[ApiOrderController::class,'thankYou']);
+Route::get('thankYou/{orderId}',[ApiOrderController::class,'thankYou']);
 Route::post('coupon-add',[ApiOrderController::class,'couponAdd']);
 Route::get('coupon-remove',[ApiOrderController::class,'couponRemove']);
 

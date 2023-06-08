@@ -248,8 +248,24 @@ class ApiOrderController extends Controller
            return back()->with('error', $response['message']);
        }
     }
-    public function thankYou()
+    public function thankYou($orderId)
     {
-        return view('pages.thankyou.thankyou');
+     $user_id= session()->get('user_id');
+     $token= session()->get('token');
+        if(!$user_id && !$token)
+        return view('pages.login');
+    $url = $this->url."/orderdetails";
+    $tokens= 'Bearer '.session()->get('token');
+    $response = Http::withHeaders([
+        'Authorization' => $tokens
+        ])->post($url,  [
+       'order_number'=>$orderId 
+        ]);
+        if($response->successful())
+        {
+             
+            $data = $response->json();
+            return view('pages.thankyou.thankyou',$data);
+        }
     }
 }

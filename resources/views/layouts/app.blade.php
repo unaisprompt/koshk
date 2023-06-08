@@ -332,9 +332,9 @@
                                                                                   </li>`;
                         $('#cart-sidebar').append(html);
                     });
-                    let totalqty = response.data.map(item => item.qty).reduce((partialSum, a) => parseInt(
-                        partialSum) + parseInt(a), 0);
-
+                    // let totalqty = response.data.map(item => item.qty).reduce((partialSum, a) => parseInt(
+                    //     partialSum) + parseInt(a), 0);
+                    let totalqty = response.data.length;
                     $('#cart_count').html(totalqty);
                     localStorage.setItem("cartupdate", 0);
                 },
@@ -546,7 +546,7 @@
                 success: function(response) {
                     $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
-                        console.log(response);
+                       // console.log(response);
                         Swal.fire("Success!", response.message, "success").then(() => {
                              $('#myModalsignin').modal('hide');
                             if (response.data == 1) {
@@ -558,7 +558,7 @@
                         });
                         document.getElementById("form").reset();
                         $('#refresh').click();
-                    }else if(response.status == 2 || response.status == 0){
+                    }else if(response.status == 2){
                         Swal.fire("Failed!", response.message, "error");
                         if (response.hasOwnProperty('error_list')) {
                             location.reload();
@@ -570,6 +570,18 @@
                         $('#myModalsigninotp').modal('show');
                         $('#myModalsignin').modal('hide');
                     }
+                    else{
+                      //  response.status == 0
+
+                      Swal.fire("Failed!", response.message, "error");
+                        if (response.hasOwnProperty('error_list')) {
+                            location.reload();
+                            for (x in response.error_list) {
+                                $('#error_' + x).html(response.error_list[x])
+                            }
+                        }
+                    }
+
                 },
                 error: function(xhr) {
                     $(".pre-loader").delay(2000).addClass("hidded");

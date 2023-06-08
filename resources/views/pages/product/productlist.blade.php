@@ -481,7 +481,12 @@
                                                         <div class="item-title"> <a title="{{ $item->product_name }}"
                                                                 href="{{ url('product-detail?id=' . $item->id) }}">{{ $item->product_name }}</a>
                                                         </div>
-                                                        <div class="brand">{{ $item->brand ? $item->brand->brand_name : '' }}
+                                                        <div class="brand">
+                                                            @if($item->brand)
+                                                            {{ $item->brand->brand_name}}
+                                                            @else
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                         @endif
                                                         </div>
                                                         <div class="star-rating">
                                                             <span

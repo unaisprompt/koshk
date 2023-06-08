@@ -267,7 +267,8 @@
                     <!--	///*///======    End article  ========= //*/// -->
                 </div>
                 <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
-                    <div class="widget widget-categories">
+                   
+                     <div class="widget widget-categories">
                         <div class="block-title">Browse Categories</div>
                         <div id="accordion" class="accordion">
                             @if ($data->category)
@@ -308,7 +309,7 @@
                                 @include('pages.product.sidecategory')
                             @endif
                         </div>
-                    </div>
+                    </div> 
 
                     <div class="widget widget-filter">
                         <div class="block-title">Filter</div>
@@ -478,7 +479,12 @@
                                                         <div class="item-title"> <a title="{{ $item->product_name }}"
                                                                 href="{{ url('product-detail?id=' . $item->id) }}">{{ $item->product_name }}</a>
                                                         </div>
-                                                        <div class="brand">{{ $item->brand ? $item->brand->brand_name : '' }}
+                                                        <div class="brand">
+                                                            @if($item->brand)
+                                                            {{ $item->brand->brand_name }}
+                                                            @else
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                         @endif
                                                         </div>
                                                         <div class="star-rating">
                                                             <span
