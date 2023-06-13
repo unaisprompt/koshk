@@ -4,6 +4,12 @@
          .hide {
              display: none !important;
          }
+
+         .cstock {
+             padding: 2px;
+             margin-right: 20px;
+             border-radius: 50px;
+         }
      </style>
      <!-- Main Container -->
      <section class="main-container col1-layout">
@@ -49,7 +55,15 @@
                                                          <small>Ordered
                                                              {{ \Carbon\Carbon::parse($item['created_at'])->diffForHumans(\Carbon\Carbon::now()) }}</small>
                                                      @endif --}}
-                                                         <small>Stock:{{ $item['stock'] }}</small>
+                                                         @php
+                                                             $stock = $item['stock'];
+                                                         @endphp
+                                                         <span class="cstock"
+                                                             @if ($stock < 5) style="background:red;"@elseif($stock < 10)style="background:yellow;" @elseif($stock > 10)style="background:green;" @endif>
+                                                             @if ($stock < 10)
+                                                                 {{ $stock }}
+                                                             @endif in stock
+                                                         </span>
                                                          @if (isset($item['est_shipping_days']))
                                                              <small><b>
                                                                      @if (!($item['shipping_cost'] > 0))
@@ -91,7 +105,8 @@
                                                                  <input type='text' name='quantity'
                                                                      data-cart_id="{{ Session::has('user_id') ? $item['id'] : $item['product_id'] }}"
                                                                      data-stock="{{ $item['stock'] }}"
-                                                                     value='{{ $item['qty'] }}' class='qty' />
+                                                                     value='{{ $item['qty'] }}' class='qty'
+                                                                     onkeypress="qtyUpdate(event,$(this))" />
                                                                  <input type='button' value='+' class='qtyplus plus'
                                                                      field='quantity' />
                                                              </form>
@@ -499,6 +514,29 @@
                      }
                  });
          });
+     </script>
+     <script>
+         function qtyUpdate(e, ref) {
+             var key = e.which;
+             if (key == 13) {
+                 e.preventDefault();
+                 let qty = parseInt(ref.val());
+                 let stock = parseInt(ref.data('stock'));
+                 if (qty > stock) {
+                     Toastify({
+                         text: "Please check stock",
+                         className: "error",
+                         close: true,
+                         style: {
+                             background: "red",
+                         }
+                     }).showToast();
+                     qty = stock;
+                 }
+                 updateCart(qty, ref.data('cart_id'));
+
+             }
+         }
      </script>
      <script>
          function removeCoupon(cart_id) {
