@@ -153,7 +153,7 @@
             <li> <a href="{{ url('/') }}">Home</a>
             </li>
             <li> <a href="#">{{ $category ? $category->category_name : 'Categories' }}</a>
-                <ul>
+                {{-- <ul>
                     <li> <a href="#" class="">Laptop</a>
                         <ul>
                             @foreach ($categoryList as $category)
@@ -165,6 +165,11 @@
                         </ul>
                     </li>
 
+                </ul> --}}
+                <ul>
+                     @foreach ($categoryList as $category)
+                     <li> <a href="{{ url('products?category_id=' . $category->id) }}" class="@if ($category->id == request()->category_id) active @endif">{{ $category->category_name }}</a></li>
+                      @endforeach
                 </ul>
             </li>
 
