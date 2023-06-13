@@ -73,8 +73,17 @@
                                                                      class="btn btn-danger btn-sm btn-rounded"
                                                                      onclick="removeCoupon({{ $item['id'] }})"><i
                                                                          class="fa fa-trash"></i></button>
-                                                             @endif
-                                                         @else
+                                                                         @else
+                                                                         <input type="text" name="coupon_code"
+                                                                             class="form-control unicase-form-control input-text"
+                                                                             id="coupon_code" value=""
+                                                                             placeholder="Coupon code">
+                                                                         <button type="submit"
+                                                                             class="btn btn-upper btn-primary"
+                                                                             name="apply_coupon" value="Apply coupon"
+                                                                             onclick="applyCoupon()">Apply</button>
+                                                                         @endif
+                                                                         @else
                                                              <a href="{{ url('delete-cart') }}/{{ $item['product_id'] }}">
                                                                  <span><i class="fa fa-trash"></i> Remove</span> </a>
                                                          @endif
