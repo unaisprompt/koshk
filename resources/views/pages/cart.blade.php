@@ -87,17 +87,18 @@
                                                                      class="btn btn-danger btn-sm btn-rounded"
                                                                      onclick="removeCoupon({{ $item['id'] }})"><i
                                                                          class="fa fa-trash"></i></button>
-                                                                         @else
-                                                                         <input type="text" name="coupon_code"
-                                                                             class="form-control unicase-form-control input-text"
-                                                                             id="coupon_code" value=""
-                                                                             placeholder="Coupon code">
-                                                                         <button type="submit"
-                                                                             class="btn btn-upper btn-primary"
-                                                                             name="apply_coupon" value="Apply coupon"
-                                                                             onclick="applyCoupon()">Apply</button>
-                                                                         @endif
-                                                                         @else
+                                                             @else
+                                                                 <div>
+                                                                     <input type="text"
+                                                                         class="form-control unicase-form-control input-text coupon_code_ind"
+                                                                         value="" placeholder="Coupon code">
+                                                                     <button type="submit"
+                                                                         class="btn btn-upper btn-primary"
+                                                                         name="apply_coupon" value="Apply coupon"
+                                                                         onclick="applyCouponInd($(this).closest('div').find('.coupon_code_ind').val(),{{ $item['id'] }})">Apply</button>
+                                                                 </div>
+                                                             @endif
+                                                         @else
                                                              <a href="{{ url('delete-cart') }}/{{ $item['product_id'] }}">
                                                                  <span><i class="fa fa-trash"></i> Remove</span> </a>
                                                          @endif
@@ -454,6 +455,54 @@
                  data: {
                      user_id: {{ session()->get('user_id') ?? 0 }},
                      coupon_name: $('#coupon_code').val()
+                 },
+
+                 dataType: 'json',
+                 success: function(response) {
+                     if (response.status == 1) {
+                         Toastify({
+                             text: response.message,
+                             className: "info",
+                             close: true,
+                             style: {
+                                 background: "#1CAD6A",
+                             }
+                         }).showToast();
+                         location.reload();
+                     } else {
+                         Toastify({
+                             text: response.message,
+                             className: "info",
+                             close: true,
+                             style: {
+                                 background: "red",
+                             }
+                         }).showToast();
+                     }
+                 }
+             })
+         }
+
+         function applyCouponInd(couponCode, cart_id) {
+             if (couponCode == '') {
+                 return Toastify({
+                     text: 'coupon code field is required',
+                     className: "info",
+                     close: true,
+                     style: {
+                         background: "red",
+                     }
+                 }).showToast();
+             }
+             $.ajax({
+                 url: '{{ config('global.api') }}/apply_coupon',
+                 type: 'post',
+                 beforeSend: function(xhr) {
+                     xhr.setRequestHeader('Authorization', 'Bearer {{ session()->get('token') }}');
+                 },
+                 data: {
+                     cart_id: cart_id,
+                     coupon_name: couponCode
                  },
 
                  dataType: 'json',
