@@ -160,7 +160,7 @@
                                                      @if ($product['product_brand'])
                                                          {{ $product['product_brand']['brand_name'] }}
                                                      @else
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                                      @endif
 
                                                  </div>
@@ -177,19 +177,21 @@
                                                  <div class="item-content">
                                                      <div class="item-price">
                                                          <div class="price-box"> <span class="regular-price">
-                                                          
-                                                            @if($product['product_price']>$product['discounted_price'])
-                                                            <span class="old-price"><span class="price">AED {{ number_format($product['product_price'], 2) }}</span></span> 
-                                                            @endif
-                                                            <span class="price">AED
+
+                                                                 @if ($product['product_price'] > $product['discounted_price'])
+                                                                     <span class="old-price"><span class="price">AED
+                                                                             {{ number_format($product['product_price'], 2) }}</span></span>
+                                                                 @endif
+                                                                 <span class="price">AED
                                                                      {{ number_format($product['discounted_price'], 2) }}</span>
                                                              </span> </div>
                                                      </div>
 
-                                                     @if($product['delivery_message'])
-                                                     <span style="font-size: 12px">{{ $product['delivery_message'] }}</span>
+                                                     @if ($product['delivery_message'])
+                                                         <span
+                                                             style="font-size: 12px">{{ $product['delivery_message'] }}</span>
                                                      @else
-                                                     &nbsp;&nbsp;&nbsp;&nbsp;
+                                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                                      @endif
 
                                                      <div class="count-number">
@@ -314,10 +316,10 @@
                                                      <div class="brand">
                                                          {{-- {{ $featured_products['brand'] ? $featured_products['brand']['brand_name'] : '' }} --}}
                                                          @if ($featured_products['brand'])
-                                                         {{ $featured_products['brand']['brand_name'] }}
-                                                     @else
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                                     @endif
+                                                             {{ $featured_products['brand']['brand_name'] }}
+                                                         @else
+                                                             &nbsp;&nbsp;&nbsp;&nbsp;
+                                                         @endif
                                                      </div>
                                                      <div class="item-content">
                                                          @php
@@ -335,10 +337,10 @@
                                                          <div class="item-price">
                                                              <div class="price-box">
                                                                  <span class="regular-price">
-                                                                   
+
                                                                      <span class="price">AED
-                                                                         {{ number_format($featured_products['discounted_price']) }}</span>
-                                                                       
+                                                                         {{ number_format($featured_products['discounted_price'], 2) }}</span>
+
                                                                  </span>
                                                              </div>
                                                          </div>
@@ -554,16 +556,16 @@
                                                          </div>
                                                          <div class="item-price">
                                                              <div class="price-box"> <span class="regular-price">
-                                                              
-                                                                 <span  class="price">AED
-                                                                         {{ number_format($sale_data['product_price'], 2) }}</span>
-                                                                 </span> 
 
-                                                                 @if($sale_data['product_price']>$sale_data['discounted_price'])
-                                                                 <span class="old-price">
                                                                      <span class="price">AED
-                                                                         {{ number_format($sale_data['discounted_price'], 2) }}</span>
-                                                                        </span>
+                                                                         {{ number_format($sale_data['product_price'], 2) }}</span>
+                                                                 </span>
+
+                                                                 @if ($sale_data['product_price'] > $sale_data['discounted_price'])
+                                                                     <span class="old-price">
+                                                                         <span class="price">AED
+                                                                             {{ number_format($sale_data['discounted_price'], 2) }}</span>
+                                                                     </span>
                                                                  @endif
                                                              </div>
                                                          </div>
@@ -644,12 +646,12 @@
                                                              <div class="price-box"> <span class="regular-price"> <span
                                                                          class="price">AED
                                                                          {{ number_format($top_rated['product_price'], 2) }}</span>
-                                                                 </span> 
-                                                                 @if($top_rated['product_price']>$top_rated['discounted_price'])
-                                                                 <span class="old-price"><span class="price">AED
-                                                                         {{ number_format($top_rated['discounted_price'], 2) }}</span></span>
+                                                                 </span>
+                                                                 @if ($top_rated['product_price'] > $top_rated['discounted_price'])
+                                                                     <span class="old-price"><span class="price">AED
+                                                                             {{ number_format($top_rated['discounted_price'], 2) }}</span></span>
                                                                  @endif
-                                                                 
+
                                                              </div>
                                                          </div>
                                                      </div>
