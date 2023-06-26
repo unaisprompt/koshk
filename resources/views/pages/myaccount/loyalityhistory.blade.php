@@ -8,7 +8,7 @@
       @include('pages.myaccount.sidebar')
       <div class="col-sm-9 ">
         <div class="page-title">
-          <h2>Loyality History</h2>
+          <h2>Loyalty History</h2>
         </div>
         @if(!empty($data))
         @foreach($data['datas'] as $item)

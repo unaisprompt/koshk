@@ -324,7 +324,7 @@
 
             <div class="flex space-x-4">
                 <div class="card">
-                    <p style="color:gold">Loyality Point</p>
+                    <p style="color:gold">Loyalty Point</p>
                     <div class="card-content p-0 flex">
                         <div class="spinningasset coin is-sm">
                             <div>
@@ -362,7 +362,7 @@
             <li class=@if (last(request()->segments()) == 'order-history') 'active' @endif><a href="{{ url('order-history') }}"><i
                         class="fa fa-shopping-cart"></i> Orders </a></li>
             <li class=@if (last(request()->segments()) == 'loyality-history') 'active' @endif><a href="{{ url('loyality-history') }}"><i
-                            class="fa fa-list"></i> Loyality History </a></li>
+                            class="fa fa-list"></i> Loyalty History </a></li>
             <li class=@if (last(request()->segments()) == 'wishlist') 'active' @endif><a href="{{ url('wishlist') }}"> <i
                         class="fa fa-heart"></i> Wishlist</a></li>
             <li class=@if (last(request()->segments()) == 'address-list') 'active' @endif><a href="{{ url('address-list') }}"> <i
