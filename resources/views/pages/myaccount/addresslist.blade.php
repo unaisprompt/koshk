@@ -12,7 +12,7 @@
                 @foreach ($data['data'] as $item)
                     <div class="col-sm-8 col-lg-8">
                         <div class="uthssk">
-                            <div class="pous1">
+                            <div class="pous1" style="color: #000;">
                                 <h2>{{ $item['first_name'] }} {{ $item['last_name'] }}</h2>
                                 <h4>{{ $item['street_address'] }}</h4>
                                 <h4>City : {{ $item['city'] }}</h4>
