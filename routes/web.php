@@ -85,6 +85,7 @@ Route::get('order-detail/{id}',[ApiUserController::class,'getOrderDetails']);
 Route::post('resent-forget-otp',[ApiUserController::class,'resentOtp']);
 Route::post('resent-email-otp',[ApiUserController::class,'emailOtpVerify']);
 Route::get('user-loyality',[ApiUserController::class,'getLoyality']);
+Route::get('loyality-history',[ApiUserController::class,'loyalityHistory']);
 
 ############# Product ############################
 

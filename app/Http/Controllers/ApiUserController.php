@@ -782,4 +782,26 @@ public function getLoyality()
     "data"=>$data->data]);
       // return $data;
 }
+
+public function loyalityHistory(){
+    $user_id= session()->get('user_id');
+    $token= session()->get('token');
+       if(!$user_id && !$token)
+       return redirect('/');
+   $url = $this->url."/loyality_history";
+   $tokens= 'Bearer '.session()->get('token');
+   $response = Http::withHeaders([
+       'Authorization' => $tokens
+       ])->post($url,  [
+      'user_id'=>$user_id,
+       ]);
+   $data = $response->json();
+      if($response['status']==1){
+       return view('pages.myaccount.loyalityhistory',compact('data'));
+      }
+      else{
+          return back()->with('error', $response['message']);
+      }
+}
+
 }
