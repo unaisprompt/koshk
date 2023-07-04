@@ -190,7 +190,12 @@
                                                                  $applied_discount = $total_loyality_discount;
                                                              }
                                                              try {
-                                                                 $percentage = ($applied_discount * 100) / $net_amount;
+                                                                if($applied_discount!=0 && $net_amount!=0){
+                                                                    $percentage = ($applied_discount * 100) / $net_amount;
+                                                                }
+                                                                 else{
+                                                                    $percentage = 0;
+                                                                 }
                                                              } catch (\Exception $e) {
                                                                  $percentage = 0;
                                                              }
