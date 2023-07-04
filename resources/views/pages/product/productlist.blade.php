@@ -183,11 +183,11 @@
                                                         src="{{ $product->productimage->image_url }}"
                                                         alt="{{ $product->product_name }}"> </a>
                                                 @php
-                                                if($product->discounted_price==0){
+                                                if($product->discounted_price!=0 && $product->product_price!=0){
                                                     $percentage = (($product->product_price - $product->discounted_price) / $product->product_price) * 100;
                                                 }
                                                 else{
-                                                    $percentage = ($product->product_price / $product->product_price) * 100;
+                                                    $percentage = 0;
                                                 }
                                                 @endphp
                                                 @if ($product->is_new == 1)
