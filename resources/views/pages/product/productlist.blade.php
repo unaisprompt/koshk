@@ -183,12 +183,17 @@
                                                         src="{{ $product->productimage->image_url }}"
                                                         alt="{{ $product->product_name }}"> </a>
                                                 @php
+                                                if($product->discounted_price==0){
                                                     $percentage = (($product->product_price - $product->discounted_price) / $product->product_price) * 100;
+                                                }
+                                                else{
+                                                    $percentage = ($product->product_price / $product->product_price) * 100;
+                                                }
                                                 @endphp
                                                 @if ($product->is_new == 1)
-                                                    @if ($product->is_new == 1)
+                                                  
                                                         <div class="new-label new-top-left">New</div>
-                                                    @endif
+                                                   
                                                 @else
                                                     <div class="sale-label sale-top-left"> {{ round($percentage) }}%</div>
                                                 @endif
