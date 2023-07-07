@@ -19,6 +19,8 @@
                                 <h4>Phone number : {{ $item['mobile'] }}</h4>
                                 <h4>E-mail : {{ $item['email'] }}</h4>
                                 <h4>Land mark : {{ $item['landmark'] }}</h4>
+                                <h4>Emirate : {{ $item['emirate']['name'] }}</h4>
+                                <h4>Region : {{ $item['region']['region'] }}</h4>
                                 <!-- <small><b>Free delivery by Tomorrow, Dec 28</b></small>
                                                                                                                                                                                     <h5><b>noon Fashion</b></h5>   -->
                             </div>
@@ -80,12 +82,12 @@
 
                                 <li>
                                     <div class="customer-name">
-                                        <div class="input-box name-firstname"><label for="billing:firstname">
+                                        <div class="input-box name-firstname"><label for="billing:firstname" style="color: black;">
                                                 First Name <span class="required">*</span>
                                             </label><br><input type="text" id="first_name_billing" name="first_name"
                                                 title="First Name" class="input-text required-entry" value="">
                                         </div>
-                                        <div class="input-box name-lastname"><label for="billing_lastname">
+                                        <div class="input-box name-lastname"><label for="billing_lastname" style="color: black;">
                                                 Last
                                                 Name <span class="required">*</span> </label><br><input type="text"
                                                 id="last_name_billing" name="last_name" title="Last Name"
@@ -93,33 +95,33 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><label for="billing_street1">Street Address <span
+                                <li><label for="billing_street1" style="color: black;">Street Address <span
                                             class="required">*</span></label><br><input type="text"
                                         title="Street Address" name="street_address" id="street_address_billing"
                                         class="input-text required-entry" value=""></li>
                                 <li>
-                                    <div class="input-box"><label for="billing_postcode">City</label><br><input
+                                    <div class="input-box"><label for="billing_postcode" style="color: black;">City</label><br><input
                                             type="text" title="City" name="city" id="city_billing"
                                             class="input-text required-entry" value=""></div>
                                 </li>
                                 <li>
-                                    <div class="input-box"><label for="billing_telephone">Telephone
+                                    <div class="input-box"><label for="billing_telephone" style="color: black;">Telephone
                                             <span class="required">*</span></label><br>
                                         <input type="text" name="mobile" title="Telephone"
                                             class="input-text required-entry" id="mobile_billing" value="">
                                     </div>
-                                    <div class="input-box"><label for="Email">Email <span
+                                    <div class="input-box"><label for="Email" style="color: black;">Email <span
                                                 class="required">*</span></label><br>
                                         <input type="text" name="email" title="Email" class="input-text"
                                             id="email_billing" value="">
                                     </div>
                                 </li>
-                                <li><label for="billing_street1">Landmark</label><br><input type="text"
+                                <li><label for="billing_street1" style="color: black;">Landmark</label><br><input type="text"
                                         title="Street Address" name="landmark" id="landmark_billing"
                                         class="input-text required-entry" value=""></li>
                                 <li>
                                     <div class="input-box">
-                                        <label for="billing_street1">Emirates<span class="required">*</span></label><br>
+                                        <label for="billing_street1" style="color: black;">Emirates<span class="required">*</span></label><br>
                                         <select style="width:100%" name="emirate_id" id="emirate_id"
                                             onchange="setRegions($(this).find('option:selected').data('regions'))">
                                             <option value="0" data-regions="">Select Emirates</option>
@@ -131,7 +133,7 @@
                                         </select>
                                     </div>
                                     <div class="input-box">
-                                        <label for="billing_street1">Regions<span class="required">*</span></label><br>
+                                        <label for="billing_street1" style="color: black;">Regions<span class="required">*</span></label><br>
                                         <select style="width:100%" name="region_id" id="region_id">
                                             <option value="0">Select Regions</option>
                                         </select>

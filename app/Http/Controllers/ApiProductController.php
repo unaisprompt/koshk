@@ -88,6 +88,7 @@ class ApiProductController extends Controller
     }
     public function productDetail(Request $request){
         $url = $this->url."/productdetails";
+        
         $response = Http::post($url,  [
         'product_id'=>$request->id,
         'variation_id'=>$request->variation_id,
@@ -95,6 +96,8 @@ class ApiProductController extends Controller
         ]);
        if($response->successful())
        {
+        // echo '<pre>';
+        // print_r($response->object()->data);exit;
       return view('pages.product.productdetail',["data" =>$response->object()->data,
                                                  'variation'=>$response->object()->variation,
                                                  'related_products'=>$response->object()->related_products]);
