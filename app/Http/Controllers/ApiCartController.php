@@ -13,9 +13,9 @@ class ApiCartController extends Controller
 
     public function cart(){
 
-        $url = $this->url."/getcart";
-        $user_id= session()->get('user_id');
-        $token= 'Bearer '.session()->get('token');
+        $url = $this->url."/getcart";echo '<br>';
+        $user_id= session()->get('user_id');echo '<br>';
+        $token= 'Bearer '.session()->get('token');echo '<br>';
         $loyality_points=0;
         $loyality_discount_applicable=0;
         $aed_to_loality=0;
@@ -63,6 +63,7 @@ class ApiCartController extends Controller
             {
              $similar_products=$response->object()->data;
             }
+           
         return view('pages.cart',compact('data','similar_products','loyality_points','loyality_discount_applicable','aed_to_loality'));
     }
 

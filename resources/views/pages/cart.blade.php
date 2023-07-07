@@ -69,14 +69,8 @@
                                                                  {{ $stock }}
                                                              @endif in stock
                                                          </span>
-                                                         @if (isset($item['est_shipping_days']))
-                                                             <small><b>
-                                                                     @if (!($item['shipping_cost'] > 0))
-                                                                         Free
-                                                                     @endif delivery by
-                                                                     {{ \Carbon\Carbon::now()->addDays($item['est_shipping_days'])->format('l, F jS, Y') }}
-                                                                 </b></small>
-                                                         @endif
+                                                     <small>
+<br><br><b>Shipping cost will be calculate as per the Emirates</b><br></small>
                                                          <h5>Sold by <b>Gift City</b></h5>
                                                          @if (Session::has('user_id'))
                                                              <a href="{{ url('delete-cart') }}/{{ $item['id'] }}">
