@@ -263,7 +263,7 @@
                                                     <!-- <li>Free Shipping
                                                     </li> -->
                                                        
-<li>Shipping cost will be calculate as per the region</li>
+<li>Shipping cost will be calculate as per the Emirates</li>
 {!!$data->est_shipping_days > 0 ? '<li>Estimated shipping days ' . $data->est_shipping_days.'</li>' : ''!!}
                                                     
                                                     <li>{{ $data->return_days > 0 ? "$data->return_days Days Return Policy" : 'No return Available' }}
