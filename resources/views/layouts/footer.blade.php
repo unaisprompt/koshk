@@ -5,6 +5,9 @@
             return $value->id == request()->category_id;
         });
     @endphp
+    <div class="floating-wpp"></div>
+
+
     <footer class="footer">
         <div class="news-letter-form">
             <div class="container">

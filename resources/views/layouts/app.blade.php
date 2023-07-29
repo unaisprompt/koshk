@@ -26,6 +26,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/define.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/developer.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/newstyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/floating-wpp.min.css?v5') }}">
+    
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <!-- Google Fonts -->
@@ -282,6 +284,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('assets/js/developer.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+   
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $.ajaxSetup({
@@ -293,6 +296,9 @@
 
 
     <script>
+
+
+
         function minicart() {
             var setting = {
                 url: '{{ url('/cart_ajax') }}',
@@ -1077,6 +1083,25 @@
         // function doSomething() {
         //     alert("Hi");
         // }
+        </script>
+        <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+        
+        
+    <script type="text/javascript" src="{{ asset('assets/js/floating-wpp.min.js?v5') }}"></script>
+       <script>
+        $(function () {
+        $('.floating-wpp').floatingWhatsApp({
+            phone: '+971568887583',
+            popupMessage: 'Welcome To GiftCity',
+            showPopup: true,
+            position: 'left',
+            //autoOpen: false,
+            //autoOpenTimer: 4000,
+            message: '',
+            headerColor: '#333ca1',
+            headerTitle: 'Hi! How can i help you?',
+        });
+    });
     </script>
     @yield('script')
 </body>
