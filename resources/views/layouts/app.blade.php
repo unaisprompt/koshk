@@ -152,7 +152,7 @@
     }
     .floating-wpp{
         padding-bottom: 70px !important;
-        z-index: 0;
+        z-index: 1;
     }
 
     </style>
