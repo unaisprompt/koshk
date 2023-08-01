@@ -391,8 +391,7 @@
                              <div class="banner-text">
                                  <h6 class="text-white">{{ $deal_banner['title'] }}</h6>
                                  <!-- Heading -->
-                                 <h3 class="text-white">{{ $deal_banner['description'] }}<br>
-                                     Deals</h3>
+                                 <h3 class="text-white">{{ $deal_banner['description'] }} </h3>
                                  <!-- Link -->
                                  @if ($deal_banner['btn_name'])
                                      <a class="more-link text-dark"
