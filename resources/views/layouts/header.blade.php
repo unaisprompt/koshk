@@ -6,102 +6,15 @@
     });
 @endphp
 <header>
-    <div class="top-nav">
-        <div class="container">
-            <div class="header-strip-wrap">
-
-
-                <div class="delivery-section ">
-
-                    <span class="icons" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                            <path fill="currentColor"
-                                d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02c-.37-1.11-.56-2.3-.56-3.53c0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99C3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
-                        </svg>
-                    </Span>
-
-                    <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
-                    <span class="delivery-content">{!! CommonData()->top_header_phone !!} </span>
-
-                </div>
-
-
-
-
-                <div class="delivery-section delivery-time">
-
-                    <span class="icons" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                            <path fill="currentColor"
-                                d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8s8 3.58 8 8s-3.58 8-8 8zm.5-13H11v6l5.25 3.15l.75-1.23l-4.5-2.67z" />
-                        </svg>
-                    </Span>
-
-                    <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
-
-                    <span class="delivery-content" data-container="body" data-toggle="popover" 
-                          data-trigger="hover" data-placement="bottom"
-                           data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title title>
-                                  {!! CommonData()->top_header_clock !!} </span>
-                    
-
-
-                </div>
-
-                <div class="delivery-section">
-
-                    <span class="icons" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                            <path fill="currentColor" d="M4 16h12v2H4zm-2-5h10v2H2z" />
-                            <path fill="currentColor"
-                                d="m29.919 16.606l-3-7A.999.999 0 0 0 26 9h-3V7a1 1 0 0 0-1-1H6v2h15v12.556A3.992 3.992 0 0 0 19.142 23h-6.284a4 4 0 1 0 0 2h6.284a3.98 3.98 0 0 0 7.716 0H29a1 1 0 0 0 1-1v-7a.997.997 0 0 0-.081-.394ZM9 26a2 2 0 1 1 2-2a2.002 2.002 0 0 1-2 2Zm14-15h2.34l2.144 5H23Zm0 15a2 2 0 1 1 2-2a2.002 2.002 0 0 1-2 2Zm5-3h-1.142A3.995 3.995 0 0 0 23 20v-2h5Z" />
-                        </svg>
-                    </Span>
-
-                    <!-- <img src="https://api.iconify.design/carbon:delivery.svg" alt="Fast &amp; Free Delivery" class="delivery-icon"> -->
-                    <span class="delivery-content"> {!! CommonData()->top_header3 !!}</span>
-
-                </div>
-
-                <div class="delivery-section">
-
-                    <span class="icons" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20">
-                            <path fill="currentColor"
-                                d="M10 2.5a2.5 2.5 0 0 0-4 2V6H5a1 1 0 0 0-1 1v8a3 3 0 0 0 3 3h6.5a2.5 2.5 0 0 0 2.5-2.5V7a1 1 0 0 0-1-1h-1V4.5a2.5 2.5 0 0 0-4-2Zm-3 2a1.5 1.5 0 1 1 3 0V6H7V4.5Zm3.667-1.248A1.5 1.5 0 0 1 13 4.5V6h-2V4.5c0-.454-.121-.88-.333-1.248ZM7 17a2 2 0 0 1-2-2V7h6v8.5c0 .563.186 1.082.5 1.5H7Zm8-1.5a1.5 1.5 0 0 1-3 0V7h3v8.5Z" />
-                        </svg>
-                    </span>
-                    <span class="delivery-content">{!! CommonData()->top_header2 !!}</span>
-
-                </div>
-
-                <div class="delivery-section">
-
-                    <span class="icons" href="">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 256 256">
-                            <path fill="currentColor"
-                                d="M184 104v32a8 8 0 0 1-8 8H99.3l10.4 10.3a8.1 8.1 0 0 1 0 11.4a8.2 8.2 0 0 1-11.4 0l-24-24a8.1 8.1 0 0 1 0-11.4l24-24a8.1 8.1 0 0 1 11.4 11.4L99.3 128H168v-24a8 8 0 0 1 16 0Zm48-48v144a16 16 0 0 1-16 16H40a16 16 0 0 1-16-16V56a16 16 0 0 1 16-16h176a16 16 0 0 1 16 16Zm-16 144V56H40v144Z" />
-                        </svg>
-                    </span>
-                    <span class="delivery-content">{!! CommonData()->top_header1 !!}</span>
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
+    
 
     <div class="container">
-
-
-
 
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 logo-block">
                 <!-- Header Logo -->
-                <div class="logo"> <a title="Citroen" href="{{ url('/') }}"><img alt="Citroen"
-                            src="{{ asset('assets/images/logo.png') }}">
+                <div class="logo"> <a title="logo" href="{{ url('/') }}"><img alt="logo"
+                            src="{{env('LIVE_PATH')}}/assets/images/settings/{!!CmsPage()['settings']['logo'] !!}">
                     </a>
                 </div>
                 <!-- End Header Logo -->
@@ -237,9 +150,9 @@
                             @break
                         @endif
                     @endforeach
-                    <span> <button class="offer-btn" type="button"
+                    {{-- <span> <button class="offer-btn" type="button"
                             onclick="window.location='{{ url('products?explore_more=1') }}'">{!! CommonData()->navigation_button !!}</button>
-                    </span>
+                    </span> --}}
                 </div>
             </div>
         </div>

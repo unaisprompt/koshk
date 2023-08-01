@@ -8,9 +8,10 @@
     <meta name="author" content="">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <!-- Favicons Icon -->
-    <link rel="icon" href="#" type="image/x-icon">
-    <link rel="shortcut icon" href="#" type="image/x-icon">
-    <title>Gift City</title>
+    <link rel="icon" href="{{env('LIVE_PATH')}}/assets/images/settings/{!!CmsPage()['settings']['favicon'] !!}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{env('LIVE_PATH')}}/assets/images/settings/{!!CmsPage()['settings']['favicon'] !!}" type="image/x-icon">
+ 
+    <title>{!!CmsPage()['settings']['site_title'] !!}</title>
     <!-- Mobile Specific -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- CSS Style -->
