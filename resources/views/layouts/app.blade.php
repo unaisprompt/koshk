@@ -1092,8 +1092,8 @@
        <script>
         $(function () {
         $('.floating-wpp').floatingWhatsApp({
-            phone: '+971568887583',
-            popupMessage: 'Welcome To GiftCity',
+            phone: '+9715000000',
+            popupMessage: 'Welcome To Koshk',
             showPopup: true,
             position: 'left',
             //autoOpen: false,
