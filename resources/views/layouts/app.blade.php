@@ -151,7 +151,8 @@
       background: green !important;
     }
     .floating-wpp{
-        padding-bottom: 50px !important;
+        padding-bottom: 70px !important;
+        z-index: 0;
     }
 
     </style>
