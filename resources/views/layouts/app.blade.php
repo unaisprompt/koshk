@@ -150,6 +150,9 @@
     .green-bg {
       background: green !important;
     }
+    .floating-wpp{
+        padding-bottom: 10px !important;
+    }
 
     </style>
     <script>
