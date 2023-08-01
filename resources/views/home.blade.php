@@ -411,7 +411,7 @@
              <div class="row">
                  <div class="col-md-6 col-sm-3 col-lg-3 res-wid">
                      <div class="utgd">
-                         <h4>Hot Deal <br />Product</h4>
+                         <h4>Hot Deal Product</h4>
                          @if (!empty($finalData['main_data']['hot_products_limited']))
                              @foreach ($finalData['main_data']['hot_products_limited'] as $product_img)
                                  <a href="{{ url('product-detail') }}?id={{ $product_img['id'] }}">
@@ -423,7 +423,7 @@
                  </div>
                  <div class="col-md-6 col-sm-3 col-lg-3 res-wid">
                      <div class="utgd1">
-                         <h4>New <br> Arrivals</h4>
+                         <h4>New Arrivals</h4>
                          @if ($finalData['main_data']['new_products'] && count($finalData['main_data']['new_products']) > 4)
                              @php
                                  $arr = $finalData['main_data']['new_products'];
