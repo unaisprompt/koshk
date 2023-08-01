@@ -39,30 +39,29 @@
                                                             your address
                                                             book or enter a new address.</label>
                                                         <br />
-                                                        @if (!empty($finalData['address']['data']))
-                                                            <select name="shipping_address" id="shipping_address"
-                                                                class="form-control">
+    @if (!empty($finalData['address']['data']))
+        <select name="shipping_address" id="shipping_address" class="form-control">
                                                                 {{-- <option value="">Select Address</option> --}}
-                                                                @foreach ($finalData['address']['data'] as $address_data)
-                                                                    <option value="{{ $address_data['id'] }}"
-                                                                        @if ($address_data['primary'] == 1) selected @endif
-                                                                        data-first_name={{ $address_data['first_name'] }}
-                                                                        data-last_name={{ $address_data['last_name'] }}
-                                                                        data-street_address={{ $address_data['street_address'] }}
-                                                                        data-landmark={{ $address_data['landmark'] }}
-                                                                        data-mobile={{ $address_data['mobile'] }}
-                                                                        data-city={{ $address_data['city'] }}
-                                                                        data-email={{ $address_data['email'] }}
-                                                                        @if (isset($address_data['region'])) data-shipping_cost="{{ $address_data['region']['shipping_coast'] }}" @endif>
-                                                                        {{ $address_data['first_name'] }}
-                                                                        {{ $address_data['last_name'] }}
-                                                                        {{ $address_data['street_address'] }}
-                                                                        {{ $address_data['city'] }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        @endif
-                                                    </li>
-                                                </ul>
+        @foreach ($finalData['address']['data'] as $address_data)
+            <option value="{{ $address_data['id'] }}"
+                @if ($address_data['primary'] == 1) selected @endif
+                    data-first_name={{ $address_data['first_name'] }}
+                    data-last_name={{ $address_data['last_name'] }}
+                    data-street_address={{ $address_data['street_address'] }}
+                    data-landmark={{ $address_data['landmark'] }}
+                    data-mobile={{ $address_data['mobile'] }}
+                    data-city={{ $address_data['city'] }}
+                    data-email={{ $address_data['email'] }}
+                    @if (isset($address_data['region'])) data-shipping_cost="{{ $address_data['region']['shipping_coast'] }}" @endif>
+                    {{ $address_data['first_name'] }}
+                    {{ $address_data['last_name'] }}
+                    {{ $address_data['street_address'] }}
+                    {{ $address_data['city'] }}</option>
+                      @endforeach
+            </select>
+                @endif
+        </li>
+        </ul>
                                                 <p class="require">
                                                     <em class="required">* </em>Required Fields
                                                 </p>
@@ -456,6 +455,9 @@
                                         <span id="street_address_shipping_show"></span><br>
                                         <span id="landmark_shipping_show"></span><br>
                                         <span id="city_shipping_show"></span><br>
+                                        <span id="address_emirate"></span><br>
+                                        <span id="address_region"></span><br>
+                                      
                                     </address>
                                 </dd>
                                 <dt class="complete">
@@ -470,6 +472,8 @@
                                         <span id="street_address_billing_show"></span><br>
                                         <span id="landmark_billing_show"></span><br>
                                         <span id="city_billing_show"></span><br>
+                                        <span id="billing_address_emirate"></span><br>
+                                        <span id="billing_address_region"></span><br>
 
                                     </address>
                                 </dd>
@@ -816,6 +820,10 @@
                             $("#email_shipping_show").html(response.data.data.email);
                             $("#landmark_shipping_show").html(response.data.data.landmark);
                             $("#city_shipping_show").html(response.data.data.city);
+                            $("#address_emirate").html(response.data.data.city);
+                            $("#address_region").html(response.data.data.city);
+
+
 
                             $("#first_name_billing_show").html(response.data.data.first_name);
                             $("#last_name_billing_show").html(response.data.data.last_name);
@@ -865,7 +873,7 @@
             $("#email_shipping_show").html($(this).find('option:selected').data('email'))
             $("#landmark_shipping_show").html($(this).find('option:selected').data('landmark'))
             $("#city_shipping_show").html($(this).find('option:selected').data('city'))
-            console
+            
             var shipping_cost = $(this).find('option:selected').data('shipping_cost');
             console.log(shipping_cost);
             $("#delivery_charge").html(`${shipping_cost} AED`);

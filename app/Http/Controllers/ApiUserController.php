@@ -423,7 +423,7 @@ public function loginPop(Request $request){
         $token= session()->get('token');
         if(!$user_id && !$token)
         return redirect('/');
-    $url = $this->url."/getaddress"; 
+    $url = $this->url."/getaddress";
     $token= 'Bearer '.session()->get('token');
     $user_id= session()->get('user_id');
     $response = Http::withHeaders([

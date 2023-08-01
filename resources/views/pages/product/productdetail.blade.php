@@ -259,15 +259,14 @@
                                             <div class="points">
                                                 <h4>Shipping & Return</h4>
                                                 <ul>
-                                                    @if($data->free_shipping!=2)
-                                                    <li>Free Shipping
-                                                    </li>
-                                                        @elseif ($data->shipping_cost)
-                                                        <li>Shipping Cost {{$data->shipping_cost}}</li>
-                                                         @endif
-                                                    <li>{{ $data->est_shipping_days > 0 ? 'Estimated shipping days ' . $data->est_shipping_days : 'Shipping days may vary' }}
-                                                    </li>
-                                                    <li>{{ $data->is_return ? "$data->return_days Days Return Policy" : 'No return Available' }}
+                                                   
+                                                    <!-- <li>Free Shipping
+                                                    </li> -->
+                                                       
+<li>Shipping cost will be calculate as per the Emirates</li>
+{!!$data->est_shipping_days > 0 ? '<li>Estimated shipping days ' . $data->est_shipping_days.'</li>' : ''!!}
+                                                    
+                                                    <li>{{ $data->return_days > 0 ? "$data->return_days Days Return Policy" : 'No return Available' }}
                                                     </li>
                                                 </ul>
                                             </div>

@@ -35,6 +35,7 @@ class ApiOrderController extends Controller
                 'user_id' => $user_id
             ]);
             $data = $response['data'];
+
             // return $data;
             // dd($this->addressData()['data'][0]);
             if(count($response['data'])){
@@ -71,6 +72,8 @@ class ApiOrderController extends Controller
             $data = $carts;
           //  return $data;
         }
+         // echo '<pre>';
+         //    print_r($finalData);exit;
          $emirate_list= $this->emirateList(); 
                 return view('pages.order.checkout',compact('finalData','data','emirate_list'));
             }
