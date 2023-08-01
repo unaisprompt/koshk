@@ -116,7 +116,7 @@ version:   	1.4.5
 }
 .tp-caption.LargeTitle {
 	font-weight: 900;
-	color:rgb(255, 255, 255);
+	color:rgb(12, 12, 12);
 	text-decoration: none;
 	background-color: transparent;
 	padding: 5px 0px 10px 0px;
@@ -262,13 +262,13 @@ version:   	1.4.5
 	content: "\f104";
 	font-family: 'FontAwesome';
 	font-size: 24px;
-	color: #000;
+	color: #fff;
 }
 .home-slider5 .tp-rightarrow:before {
 	content: "\f105";
 	font-family: 'FontAwesome';
 	font-size: 24px;
-	color: #000;
+	color: #fff;
 }
 .home-slider5 .tp-rightarrow {
 	z-index: 100;
