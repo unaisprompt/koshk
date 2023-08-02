@@ -142,7 +142,7 @@
                         </form>
                     </article>
                     <!--	///*///======    End article  ========= //*/// -->
-                    <section class="banner-row irf">
+                    {{-- <section class="banner-row irf">
                         <div class="container">
                             <div class="row">
                                 <div class="col-12 col-lg-12 col-md-12">
@@ -158,7 +158,7 @@
 
                             </div>
                         </div>
-                    </section>
+                    </section> --}}
                 </div>
 
 </div>
