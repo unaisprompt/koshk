@@ -13,9 +13,9 @@ class ApiCartController extends Controller
 
     public function cart(){
 
-        $url = $this->url."/getcart";echo '<br>';
-        $user_id= session()->get('user_id');echo '<br>';
-        $token= 'Bearer '.session()->get('token');echo '<br>';
+        $url = $this->url."/getcart";
+        $user_id= session()->get('user_id');
+        $token= 'Bearer '.session()->get('token');
         $loyality_points=0;
         $loyality_discount_applicable=0;
         $aed_to_loality=0;
