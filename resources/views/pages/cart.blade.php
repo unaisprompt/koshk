@@ -60,18 +60,18 @@
                                                          <small>Ordered
                                                              {{ \Carbon\Carbon::parse($item['created_at'])->diffForHumans(\Carbon\Carbon::now()) }}</small>
                                                      @endif --}}
-                                                         @php
+                                                         {{-- @php
                                                              $stock = $item['stock'];
-                                                         @endphp
-                                                         <span class="cstock"
+                                                         @endphp --}}
+                                                         {{-- <span class="cstock"
                                                              @if ($stock < 5) style="background:red;"@elseif($stock < 10)style="background:yellow;" @elseif($stock > 10)style="background:green;" @endif>
                                                              @if ($stock < 10)
                                                                  {{ $stock }}
                                                              @endif in stock
-                                                         </span>
+                                                         </span> --}}
                                                      <small>
 <br><br><b>Shipping cost will be calculate as per the Emirates</b><br></small>
-                                                         <h5>Sold by <b>Gift City</b></h5>
+                                                         <h5>Sold by <b>Koshk</b></h5>
                                                          @if (Session::has('user_id'))
                                                              <a href="{{ url('delete-cart') }}/{{ $item['id'] }}">
                                                                  <span><i class="fa fa-trash"></i> Remove</span> </a>
@@ -113,7 +113,7 @@
                                                                      field='quantity' />
                                                                  <input type='text' name='quantity'
                                                                      data-cart_id="{{ Session::has('user_id') ? $item['id'] : $item['product_id'] }}"
-                                                                     data-stock="{{ $item['stock'] }}"
+                                                                     {{-- data-stock="{{ $item['stock'] }}" --}}
                                                                      value='{{ $item['qty'] }}' class='qty'
                                                                      onkeypress="qtyUpdate(event,$(this))" />
                                                                  <input type='button' value='+' class='qtyplus plus'
@@ -537,18 +537,18 @@
                  let $input = $(this).prev('input.qty');
                  let val = parseInt($input.val());
                  let qty = val + 1;
-                 let stock = parseInt($input.data('stock'));
-                 if (qty > stock) {
-                     Toastify({
-                         text: "Please check stock",
-                         className: "error",
-                         close: true,
-                         style: {
-                             background: "red",
-                         }
-                     }).showToast();
-                     return;
-                 }
+                // let stock = parseInt($input.data('stock'));
+                //  if (qty > stock) {
+                //      Toastify({
+                //          text: "Please check stock",
+                //          className: "error",
+                //          close: true,
+                //          style: {
+                //              background: "red",
+                //          }
+                //      }).showToast();
+                //      return;
+                //  }
                  $input.val(qty).change();
                  updateCart(qty, $input.data('cart_id'));
              });
@@ -558,18 +558,18 @@
                      let $input = $(this).next('input.qty');
                      var val = parseInt($input.val());
                      let qty = val - 1;
-                     let stock = parseInt($input.data('stock'));
-                     if (qty > stock) {
-                         Toastify({
-                             text: "Please check stock",
-                             className: "error",
-                             close: true,
-                             style: {
-                                 background: "red",
-                             }
-                         }).showToast();
-                         qty = stock;
-                     }
+                    // let stock = parseInt($input.data('stock'));
+                    //  if (qty > stock) {
+                    //      Toastify({
+                    //          text: "Please check stock",
+                    //          className: "error",
+                    //          close: true,
+                    //          style: {
+                    //              background: "red",
+                    //          }
+                    //      }).showToast();
+                    //      qty = stock;
+                    //  }
                      if (val > 1) {
                          $input.val(qty).change();
                          updateCart(qty, $input.data('cart_id'));
@@ -582,19 +582,19 @@
              var key = e.which;
              if (key == 13) {
                  e.preventDefault();
-                 let qty = parseInt(ref.val());
-                 let stock = parseInt(ref.data('stock'));
-                 if (qty > stock) {
-                     Toastify({
-                         text: "Please check stock",
-                         className: "error",
-                         close: true,
-                         style: {
-                             background: "red",
-                         }
-                     }).showToast();
-                     qty = stock;
-                 }
+              //   let qty = parseInt(ref.val());
+                //  let stock = parseInt(ref.data('stock'));
+                //  if (qty > stock) {
+                //      Toastify({
+                //          text: "Please check stock",
+                //          className: "error",
+                //          close: true,
+                //          style: {
+                //              background: "red",
+                //          }
+                //      }).showToast();
+                //      qty = stock;
+                //  }
                  updateCart(qty, ref.data('cart_id'));
 
              }
