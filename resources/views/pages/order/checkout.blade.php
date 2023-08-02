@@ -696,7 +696,7 @@
                             $("#mobile").val(response.data.mobile);
                             $("#last_name").val(response.data.last_name);
                             $("#city").val(response.data.city);
-                            console.log(response);
+                         //   console.log(response);
                             // });
                             // document.getElementById("form").reset();
                             // $('#refresh').click();
@@ -743,7 +743,7 @@
                             $("#mobile_shipping").val(response.data.mobile);
                             $("#last_name_shipping").val(response.data.last_name);
                             $("#city_shipping").val(response.data.city);
-                            console.log(response);
+                           // console.log(response);
                             // });
                             // document.getElementById("form").reset();
                             // $('#refresh').click();
@@ -796,7 +796,7 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    console.log(response);
+                  //  console.log(response);
                     $(".preloader").hide();
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
@@ -875,7 +875,7 @@
             $("#city_shipping_show").html($(this).find('option:selected').data('city'))
             
             var shipping_cost = $(this).find('option:selected').data('shipping_cost');
-            console.log(shipping_cost);
+           // console.log(shipping_cost);
             $("#delivery_charge").html(`${shipping_cost} AED`);
             var net_amount = $("#delivery_charge").data('net_amount');
             $("#sub_total").html(`${getFloatVal(net_amount)+getFloatVal(shipping_cost)} AED`);

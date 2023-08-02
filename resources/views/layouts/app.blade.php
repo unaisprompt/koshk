@@ -314,7 +314,7 @@
                 },
 
                 success: function(response) {
-                    console.log(response);
+                   // console.log(response);
                     $('#cart-sidebar').empty();
                     response.data.forEach((item) => {
                         let html = ` <li class="item first">
@@ -422,7 +422,7 @@
                 },
                 cache: false,
                 success: function(response) {
-                    console.log(response);
+                    //console.log(response);
                     $(".pre-loader").delay(2000).addClass("hidded");
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
@@ -892,7 +892,7 @@
         //     $('#modal-add-buy-now').data('details', data);
         // }
       function setProductDetails(data) {
-    console.log(data);
+    //console.log(data);
     $('#myModal').modal('show');
     $('#myModal').find('img').attr('src', data.productimage.image_url);
     $('#myModal').find('.brand').html(data.brand_name);
