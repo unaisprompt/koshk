@@ -143,16 +143,17 @@
                                                     value="{{ $data->id }}"
                                                     class="button btn-cart"title="Add to Cart">Add to Cart</button>
 
-                                                @if ($stock <= 0)
+                                                {{-- @if ($stock <= 0)
                                                     <button class="button btn-buy" title="Add to Cart" type="button">Sold
                                                         Out</button>
                                                 @else
+                                                @endif --}}
                                                     <button class="button btn-buy" title="Add to Cart"
                                                         onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val(),{{ $stock }})"
                                                         type="button" id="buynow_button" style="cursor:pointer;"
                                                         value="{{ $data->id }}">Buy
                                                         Now</button>
-                                                @endif
+                                               
                                             </div>
 
                                         </div>
@@ -200,13 +201,13 @@
                                                     field='quantity' />
                                             </div>
                                             <div class="price-box">
-                                                @if ($stock <= 0)
+                                                {{-- @if ($stock <= 0)
                                                     <p class="availability in-stock"><span>Sold out</span></p>
                                                 @else
                                                     <p class="availability in-stock">
                                                         <span @if($stock < 5)style="background:red;"@elseif($stock <10)style="background:yellow;" @elseif($stock >10)style="background:green;"@endif>@if($stock < 10) {{ $stock }} @endif in stock</span>
                                                     </p>
-                                                @endif
+                                                @endif --}}
                                                 <p class="special-price"> <span class="price-label">Special Price</span>
                                                     <span id="product-price-48" class="price"> AED {{ $price }}
                                                     </span>
@@ -621,17 +622,17 @@
 
 
     function cartadd(id, variation_id, qty, stock) {
-        if (qty > stock) {
-            Toastify({
-                text: "Please check stock",
-                className: "error",
-                close: true,
-                style: {
-                    background: "red",
-                }
-            }).showToast();
-            return;
-        }
+        // if (qty > stock) {
+        //     Toastify({
+        //         text: "Please check stock",
+        //         className: "error",
+        //         close: true,
+        //         style: {
+        //             background: "red",
+        //         }
+        //     }).showToast();
+        //     return;
+        // }
         @php
 
             $tax = $data->tax;
@@ -697,17 +698,17 @@
     }
 
     function buynow(id, variation_id, qty, stock) {
-        if (qty > stock) {
-            Toastify({
-                text: "Please check stock",
-                className: "error",
-                close: true,
-                style: {
-                    background: "red",
-                }
-            }).showToast();
-            return;
-        }
+        // if (qty > stock) {
+        //     Toastify({
+        //         text: "Please check stock",
+        //         className: "error",
+        //         close: true,
+        //         style: {
+        //             background: "red",
+        //         }
+        //     }).showToast();
+        //     return;
+        // }
         @php
 
             $tax = $data->tax;
