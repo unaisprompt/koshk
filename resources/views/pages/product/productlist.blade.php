@@ -430,7 +430,7 @@
 
 
 
-                    <div class="featured-add-box">
+                    {{-- <div class="featured-add-box">
                         <div class="featured-add-inner"> <a href="#"> <img
                                     src="{{ url('assets/images/hot-trends-banner.jpg') }}" alt="f-img"></a>
                             <div class="banner-content">
@@ -439,7 +439,7 @@
                                 <p>save upto 20%</p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     @include('pages.product.topratedproducts')
                 </aside>
