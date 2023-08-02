@@ -300,13 +300,13 @@
                                                     <label for="check_cash">cash on delivery</label>
                                                 </dt>
 
-                                                <dt>
+                                                {{-- <dt>
                                                     <input type="radio" id="check_strip" name="payment"
                                                         title="Check / Money order" class="radio" value="2" />
                                                     <label for="check_strip">online payment</label><br>
                                                     <img src="{{ asset('assets/images/stripe.png') }}" alt="stripe">
 
-                                                </dt>
+                                                </dt> --}}
                                                 <dd>
                                                     <fieldset class="form-list"></fieldset>
                                                 </dd>
