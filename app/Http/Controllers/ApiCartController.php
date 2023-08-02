@@ -96,7 +96,7 @@ class ApiCartController extends Controller
 
             ]);
            
-            // return $response->json();
+             return $response->json();
 
             if($response['status']==1){
 
