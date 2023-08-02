@@ -314,6 +314,7 @@
                 },
 
                 success: function(response) {
+                    console.log(response);
                     $('#cart-sidebar').empty();
                     response.data.forEach((item) => {
                         let html = ` <li class="item first">
