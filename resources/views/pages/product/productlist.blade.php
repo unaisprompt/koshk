@@ -714,17 +714,17 @@
             } else {
                 tax = product.discounted_price * product.tax / 100;
             }
-            var stocks = product.stocks.map(item => item.quantity).reduce((a, b) => a + b, 0);
-            if (!(stocks > 0)) {
-                Toastify({
-                    text: "Not enough stocks",
-                    className: "info",
-                    close: true,
-                    style: {
-                        background: "red",
-                    }
-                }).showToast();
-            }
+            // var stocks = product.stocks.map(item => item.quantity).reduce((a, b) => a + b, 0);
+            // if (!(stocks > 0)) {
+            //     Toastify({
+            //         text: "Not enough stocks",
+            //         className: "info",
+            //         close: true,
+            //         style: {
+            //             background: "red",
+            //         }
+            //     }).showToast();
+            // }
             var setting = {
                 url: '{{ url('/add-to-cart') }}',
                 dataType: 'json',
