@@ -467,7 +467,7 @@
                              @foreach ($limitedArray as $new_arrival)
                                  <a href="{{ url('product-detail') }}?id={{ $new_arrival['id'] }}">
                                      <img src="{{ $new_arrival['productimage']['image_url'] }}" alt="" />
-                                     <h6>{{ $new_arrival['product_name'] }}</h6>
+                                     {{-- <h6>{{ $new_arrival['product_name'] }}</h6> --}}
                                  </a>
                              @endforeach
                          @endif
@@ -495,7 +495,7 @@
                                  @endphp
                                  <a href="{{ url('product-detail') }}?id={{ $bestsellers['id'] }}">
                                      <img src="{{ $bestsellers['productimage']['image_url'] }}" alt="" />
-                                     <h6>{{ $title }}</h6>
+                                     {{-- <h6>{{ $title }}</h6> --}}
                                  </a>
                              @endforeach
                          @endif
@@ -523,7 +523,7 @@
                                  @endphp
                                  <a href="{{ url('product-detail') }}?id={{ $featured_products['id'] }}">
                                      <img src="{{ $featured_products['productimage']['image_url'] }}" alt="" />
-                                     <h6>{{ $title }}</h6>
+                                     {{-- <h6>{{ $title }}</h6> --}}
                                  </a>
                              @endforeach
                          @endif
