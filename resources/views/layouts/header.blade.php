@@ -144,8 +144,11 @@
                 <div class="features-block">
                     <div class="col-lg-9 col-md-9 col-xs-12 col-sm-9 offer-block">
                         @foreach ($categoryList as $category)
-                            <a
-                                href="{{ url('products?category_id=' . $category->id) }}">{{ $category->category_name }}</a>
+                        <div class="nav-cat-main">
+                            <a class="nav-cat "
+                            href="{{ url('products?category_id=' . $category->id) }}">{{ $category->category_name }}</a>
+                        </div>
+                           
                             @if ($loop->iteration >= 5)
                             @break
                         @endif
@@ -377,4 +380,15 @@
         }
 
     };
+</script>
+
+<script>
+    // Using JavaScript to toggle the active class
+const megaMenuTitle = document.querySelector('.mega-menu-title');
+
+megaMenuTitle.addEventListener('click', () => {
+    megaMenuTitle.classList.toggle('active');
+});
+
+
 </script>

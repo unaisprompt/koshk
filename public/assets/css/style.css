@@ -19733,3 +19733,56 @@ ul.summary-list > li:last-child  {
 .activity-desk .album a:last-child{
     margin-right: 0px;
 }
+
+.mega-menu-title.active {
+    background-color: #3D123B;
+}
+/* .nav-cat.active{
+    background-color: #3d123b;
+} */
+
+.nav-cat-main {
+    display: inline-block;
+    position: relative;
+}
+
+.nav-cat {
+    display: inline-block;
+    /* padding: 10px 20px; */
+    text-decoration: none;
+    color: #333;
+    position: relative;
+    z-index: 1;
+}
+
+.nav-cat::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #3D123B;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.nav-cat:hover::before {
+    opacity: 1;
+    width: 100%;
+
+    top: -16px;
+    padding: 27px;
+    left: -6px;
+
+}
+
+.nav-cat.active::before.active {
+    opacity: 1;
+    width: 100%;
+
+    top: -16px;
+    padding: 27px;
+    left: -6px;
+}
