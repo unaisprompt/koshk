@@ -19778,10 +19778,9 @@ ul.summary-list > li:last-child  {
 
 }
 
-.nav-cat.active::before.active {
+.nav-cat.active::before {
     opacity: 1;
     width: 100%;
-
     top: -16px;
     padding: 27px;
     left: -6px;

@@ -143,9 +143,10 @@
             <div class="our-features-box hidden-xs">
                 <div class="features-block">
                     <div class="col-lg-9 col-md-9 col-xs-12 col-sm-9 offer-block">
+                       
                         @foreach ($categoryList as $category)
                         <div class="nav-cat-main">
-                            <a class="nav-cat "
+                            <a class="nav-cat @if(url()->full()== url('products?category_id=' . $category->id)) active  @endif"
                             href="{{ url('products?category_id=' . $category->id) }}">{{ $category->category_name }}</a>
                         </div>
                            
