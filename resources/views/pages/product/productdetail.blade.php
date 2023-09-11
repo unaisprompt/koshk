@@ -2,7 +2,8 @@
 @section('content')
     @php
         $price = $data->is_variation ? $variation->discounted_variation_price : $data->discounted_price;
-        $stock = $data->is_variation ? $variation->stock->quantity : collect($data->stocks)->sum('quantity');
+        // $stock = $data->is_variation ? $variation->stock->quantity : collect($data->stocks)->sum('quantity');
+        $stock=1;
     @endphp
     <style>
         .product-view .product-essential .add-to-links .link-wishlist.active {
