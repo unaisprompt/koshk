@@ -217,9 +217,11 @@
                                                     id="pro_price">
 
                                                 <p class="old-price"> <span class="price-label">Regular Price:</span>
+                                                    @if($data->product_price>$price)
                                                     <span class="price"> AED
                                                         {{ $data->is_variation ? $variation->price : $data->product_price }}
                                                     </span>
+                                                    @endif
                                                 </p>
                                                 <p>{{ $data->delivery_message }}</p>
 

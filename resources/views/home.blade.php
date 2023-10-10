@@ -593,13 +593,14 @@
                                                              <div class="price-box"> <span class="regular-price">
 
                                                                      <span class="price">AED
-                                                                         {{ number_format($sale_data['product_price'], 2) }}</span>
+                                                                        {{ number_format($sale_data['discounted_price'], 2) }}</span>
                                                                  </span>
 
                                                                  @if ($sale_data['product_price'] > $sale_data['discounted_price'])
                                                                      <span class="old-price">
                                                                          <span class="price">AED
-                                                                             {{ number_format($sale_data['discounted_price'], 2) }}</span>
+                                                                            {{ number_format($sale_data['product_price'], 2) }}
+                                                                            </span>
                                                                      </span>
                                                                  @endif
                                                              </div>
@@ -679,12 +680,11 @@
                                                          </div>
                                                          <div class="item-price">
                                                              <div class="price-box"> <span class="regular-price"> <span
-                                                                         class="price">AED
-                                                                         {{ number_format($top_rated['product_price'], 2) }}</span>
+                                                                         class="price">AED  {{ number_format($top_rated['discounted_price'], 2) }}</span>
                                                                  </span>
                                                                  @if ($top_rated['product_price'] > $top_rated['discounted_price'])
                                                                      <span class="old-price"><span class="price">AED
-                                                                             {{ number_format($top_rated['discounted_price'], 2) }}</span></span>
+                                                                        {{ number_format($top_rated['product_price'], 2) }}</span></span>
                                                                  @endif
 
                                                              </div>
