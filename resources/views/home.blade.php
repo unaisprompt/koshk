@@ -445,7 +445,7 @@
          <div class="container">
              <div class="row">
                  <div class="col-md-6 col-sm-3 col-lg-3 res-wid">
-                     <div class="utgd">
+                     <div class="utgd1">
                          <h4>Hot Deal Product</h4>
                          @if (!empty($finalData['main_data']['hot_products_limited']))
                              @foreach ($finalData['main_data']['hot_products_limited'] as $product_img)
