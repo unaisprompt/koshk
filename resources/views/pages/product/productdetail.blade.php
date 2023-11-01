@@ -639,7 +639,7 @@
         @php
 
             $tax = $data->tax;
-            if ($data->tax_type == 'percentage') {
+            if ($data->tax_type == 'percent') {
                 $tax = round(($price * $tax) / 100, 2);
             }
         @endphp
@@ -715,7 +715,7 @@
         @php
 
             $tax = $data->tax;
-            if ($data->tax_type == 'percentage') {
+            if ($data->tax_type == 'percent') {
                 $tax = round(($price * $tax) / 100, 2);
             }
         @endphp

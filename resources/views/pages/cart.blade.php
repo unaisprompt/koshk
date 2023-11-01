@@ -194,10 +194,10 @@
                                                                  $percentage = 0;
                                                              }
                                                          @endphp
-                                                         <label><input type="checkbox" id="apply_coins"
+                                                         {{-- <label><input type="checkbox" id="apply_coins"
                                                                  @if ($total_loyality_discount > 0) checked @endif
                                                                  onchange="applyCoins({{ round($percentage, 2) }})">&ensp;Apply
-                                                             {{ $applied_discount * $aed_to_loality }} coins</label>
+                                                             {{ $applied_discount * $aed_to_loality }} coins</label> --}}
                                                      @endif
 
                                                  </div>
