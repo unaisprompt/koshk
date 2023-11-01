@@ -311,7 +311,7 @@
                         </div>
                     </div> 
 
-                    <div class="widget widget-filter">
+                    {{-- <div class="widget widget-filter">
                         <div class="block-title">Filter</div>
 
                         <div class="widget-brand">
@@ -325,7 +325,7 @@
                                         {{ $brand->brand_name }}</label>
                                 </div>
                             @endforeach
-                        </div>
+                        </div> --}}
 
                         <!-- <div class="widget-color">
                                                 <h5 class="widget-title">Colors</h5>
@@ -414,7 +414,7 @@
                                 </fieldset>
                             </div>
                         </div> --}}
-                    </div>
+                    {{-- </div> --}}
 
 
 
