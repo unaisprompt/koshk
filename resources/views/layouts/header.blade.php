@@ -150,7 +150,7 @@
                             href="{{ url('products?category_id=' . $category->id) }}">{{ $category->category_name }}</a>
                         </div>
                            
-                            @if ($loop->iteration >= 5)
+                            @if ($loop->iteration >= 6)
                             @break
                         @endif
                     @endforeach
