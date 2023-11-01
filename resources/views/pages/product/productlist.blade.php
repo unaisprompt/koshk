@@ -392,7 +392,7 @@
 
                                                                                                                                                       </div>     -->
 
-                        <div class="widget-price">
+                        {{-- <div class="widget-price">
                             <h5>Price Range</h5>
                             <div class="wrapper">
                                 <fieldset class="filter-price">
@@ -420,7 +420,7 @@
                                     </div>
                                 </fieldset>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
 
