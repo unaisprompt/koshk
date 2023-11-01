@@ -1104,7 +1104,7 @@
             //autoOpen: false,
             //autoOpenTimer: 4000,
             message: '',
-            headerColor: '#333ca1',
+            headerColor: '#642161',
             headerTitle: 'Hi! How can i help you?',
         });
     });
