@@ -1105,7 +1105,7 @@
        <script>
         $(function () {
         $('.floating-wpp').floatingWhatsApp({
-            phone: '+9715000000',
+            phone: '+97172356655',
             popupMessage: 'Welcome To Koshk',
             showPopup: true,
             position: 'left',
