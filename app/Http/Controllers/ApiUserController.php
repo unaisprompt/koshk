@@ -720,6 +720,7 @@ public function getOrderHistory()
        'user_id'=>$user_id,
         ]);
     $data = $response->json();
+   // return $data;
        if($response['status']==1){
         return view('pages.myaccount.orderhistory',compact('data'));
        }

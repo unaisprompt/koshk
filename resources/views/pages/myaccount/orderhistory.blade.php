@@ -23,6 +23,10 @@
                       <h5 class="card-title">Order Number : {{$item['order_number']}}</h5>
                       <p class="card-text">Date :{{$item['date']}}</p>
                       <p class="card-text">Amount: AED {{$item['grand_total']}}</p>
+                      {{-- {{dd($item['delivery_charge_mapping']['delivery_charge'])}} --}}
+                      @if($item['delivery_charge_mapping'])
+                      <p class="card-text">Delivery Charge: AED {{$item['delivery_charge_mapping']['delivery_charge']}}</p>
+                     @endif
                       <a href="{{url('order-detail/'.encrypt($item['order_number']))}}" class="btn btn-primary">order
                         details</a>
                     </div>
