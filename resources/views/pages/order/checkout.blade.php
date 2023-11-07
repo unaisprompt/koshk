@@ -648,7 +648,7 @@
                 },
                 dataType: 'json',
                 success: function(response) {
-                    $(".preloader").hide();
+                    // $(".preloader").hide();
                     if (response.status == 1) {
                         Swal.fire("Success!", response.message, "success").then(() => {
                             window.location.href = "{{ url('thankYou') }}/" + response.order_id;
