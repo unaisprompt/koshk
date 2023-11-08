@@ -52,6 +52,7 @@ Route::get('faq',[ApiCommonCms::class, 'faq']);
 Route::get('payment',[ApiCommonCms::class, 'payment']);
 Route::get('shippment',[ApiCommonCms::class, 'shippment']);
 Route::get('/',[ApiController::class, 'home']);
+Route::get('change/lang', [ApiController::class, 'lang_change'])->name('LangChange');
 
 ############# User ############################
 

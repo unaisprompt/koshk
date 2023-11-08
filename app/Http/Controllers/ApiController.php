@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App;
+
 
 class ApiController extends Controller
 {
@@ -76,6 +78,13 @@ class ApiController extends Controller
      // return $data;
         return view('pages.return-policy',compact('data'));
 
+    }
+
+    public function lang_change(Request $request)
+    {
+        App::setLocale($request->lang);
+        session()->put('locale', $request->lang);  
+        return redirect('/');
     }
 
 

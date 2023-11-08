@@ -1,0 +1,33 @@
+<?php
+
+
+return [
+    'categories' => 'فئات',
+    'all_categories' => 'جميع الفئات',
+    'SIGN_UP_TO_NEWSLETTER'=>'قم بالتسجيل في النشرة الإخبارية',
+    'Subscribe'=>'يشترك',
+    'SHOPPING_GUIDE'=>'دليل التسوق',
+    'MY_PROFILE'=>'ملفي',
+    'INFORMATION'=>'معلومة',
+    'CONTACT_US'=>'اتصل بنا',
+    'FAQs'=>'الأسئلة الشائعة',
+    'Payment'=>'قسط',
+    'Shipment'=>'شحنة',
+    'Return_policy'=>'سياسة العائدات',
+    'Your_Account'=>'الحساب الخاص بك',
+    'Addresses'=>'عناوين',
+    'Wishlist'=>'قائمة الرغبات',
+    'Orders_History'=>'تاريخ الطلبات',
+    'Search_Terms'=>'مصطلحات البحث',
+    'Terms_and_condition'=>'أحكام وشروط',
+    'Privacy_policy'=>'سياسة الخصوصية',
+    'About_Us'=>'معلومات عنا',
+    'Best_Sellers'=>'أفضل البائعين',
+    'Hot_Deal_Product'=>'منتج الصفقة الساخنة',
+    'New_Arrivals'=>'الوافدون الجدد',
+    'Bestseller_Product'=>'المنتج الأكثر مبيعا',
+    'Featured_Product'=>'المنتج المميز',
+    'See_all_offers'=>'الاطلاع على جميع العروض',
+    'SALES'=>'مبيعات',
+    'TOP_RATED'=>'أعلى التقييمات',
+];

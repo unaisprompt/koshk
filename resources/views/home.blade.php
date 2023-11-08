@@ -314,7 +314,7 @@
                  <div class="slider-items-products">
                      <div class="bestsell-block">
                          <div class="block-title">
-                             <h2>Best Sellers</h2>
+                             <h2>@lang('label.Best_Sellers')</h2>
                          </div>
                          <div id="bestsell-slider" class="product-flexslider hidden-buttons">
                              <div class="slider-items slider-width-col4 products-grid block-content">
@@ -446,7 +446,7 @@
              <div class="row">
                  <div class="col-md-6 col-sm-3 col-lg-3 res-wid">
                      <div class="utgd1">
-                         <h4>Hot Deal Product</h4>
+                         <h4>@lang('label.Hot_Deal_Product')</h4>
                          @if (!empty($finalData['main_data']['hot_products_limited']))
                              @foreach ($finalData['main_data']['hot_products_limited'] as $product_img)
                                  <a href="{{ url('product-detail') }}?id={{ $product_img['id'] }}">
@@ -455,13 +455,13 @@
                              @endforeach
                          @endif
                          <div class="iu5d">
-                            <a href="{{ url('products') }}">See all offers</a>
+                            <a href="{{ url('products') }}">@lang('label.See_all_offers')</a>
                         </div>
                      </div>
                  </div>
                  <div class="col-md-6 col-sm-3 col-lg-3 res-wid">
                      <div class="utgd1">
-                         <h4>New Arrivals</h4>
+                         <h4>@lang('label.New_Arrivals')</h4>
                          @if ($finalData['main_data']['new_products'] && count($finalData['main_data']['new_products']) > 4)
                              @php
                                  $arr = $finalData['main_data']['new_products'];
@@ -475,13 +475,13 @@
                              @endforeach
                          @endif
                          <div class="iu5d">
-                             <a href="{{ url('products') }}?new_arrival=1">See all offers</a>
+                             <a href="{{ url('products') }}?new_arrival=1">@lang('label.See_all_offers')</a>
                          </div>
                      </div>
                  </div>
                  <div class="col-md-6 col-sm-3 col-lg-3 res-wid">
                      <div class="utgd1">
-                         <h4>Bestseller Product</h4>
+                         <h4>@lang('label.Bestseller_Product')</h4>
                          @if ($finalData['main_data']['bestsellers'] && count($finalData['main_data']['bestsellers']) > 4)
                              @php
                                  $arr_best = $finalData['main_data']['bestsellers'];
@@ -503,13 +503,13 @@
                              @endforeach
                          @endif
                          <div class="iu5d">
-                             <a href="{{ url('products') }}?best_seller=1">See all offers</a>
+                             <a href="{{ url('products') }}?best_seller=1">@lang('label.See_all_offers')</a>
                          </div>
                      </div>
                  </div>
                  <div class="col-md-6 col-sm-3 col-lg-3 res-wid">
                      <div class="utgd1">
-                         <h4>Featured Product</h4>
+                         <h4>@lang('label.Featured_Product')</h4>
                          @if ($finalData['main_data']['featured_products'] && count($finalData['main_data']['featured_products']) > 4)
                              @php
                                  $arr_featured = $finalData['main_data']['featured_products'];
@@ -532,7 +532,7 @@
                          @endif
 
                          <div class="iu5d">
-                             <a href="{{ url('products') }}?featured_product=1">See all offers</a>
+                             <a href="{{ url('products') }}?featured_product=1">@lang('label.See_all_offers')</a>
                          </div>
                      </div>
                  </div>
@@ -556,7 +556,7 @@
              <div class="row">
                  <div class="col-md-6 col-sm-4 col-lg-4 res-wid">
                      <div class="bv5v">
-                         <h3>Sales</h3>
+                         <h3>@lang('label.SALES')</h3>
                          <div class="products-grid yh32d">
                              @if (!empty($finalData['main_data']['sale']))
                                  @foreach ($finalData['main_data']['sale'] as $sale_data)
@@ -641,7 +641,7 @@
                  </div>
                  <div class="col-md-6 col-sm-4 col-lg-4 res-wid">
                      <div class="bv5v">
-                         <h3>top rated</h3>
+                         <h3>@lang('label.TOP_RATED')</h3>
                          <div class="products-grid yh32d">
                              @if (!empty($finalData['main_data']['top_rated']))
                                  @foreach ($finalData['main_data']['top_rated'] as $top_rated)

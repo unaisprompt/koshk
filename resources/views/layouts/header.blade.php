@@ -25,7 +25,7 @@
                         <!-- Autocomplete End code -->
                         <ul class="categories-filter animate-dropdown">
                             <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown"
-                                    href="#">{{ $category ? $category->category_name : 'Categories' }} <b
+                                    href="#">@lang('label.categories') <b
                                         class="caret"></b></a>
                                 <ul class="dropdown-menu" role="menu">
                                     @foreach ($categoryList as $category)
@@ -51,9 +51,16 @@
                     </div>
                 </div>
                 <div class="yujhs">
-                    <div class="dropdown block-language-wrapper"> <a href="#"> <img
-                                src="{{ asset('assets/images/arabia.png') }}" alt="language">
-                            UAE </a>
+                    <div class="dropdown block-language-wrapper"> 
+                        @if(session()->get('locale') == 'ar')
+                        <a href="#" data-lang="en" class="languageChange">
+                             <img src="{{ asset('assets/images/arabia.png') }}" alt="language">
+                            </a>
+                            @else
+                            <a href="#" data-lang="ar" class="languageChange"> <img
+                                src="{{ asset('assets/images/english.png') }}" alt="language">
+                            </a>
+                            @endif
                     </div>
                     <div class="fl-links">
                         <div class="no-js">
@@ -94,7 +101,7 @@
                 <div class="mega-container visible-lg visible-md visible-sm">
                     <div class="navleft-container">
                         <div class="mega-menu-title">
-                            <h3><i class="fa fa-bars" aria-hidden="true"></i> All Categories</h3>
+                            <h3><i class="fa fa-bars" aria-hidden="true"></i> @lang('label.all_categories')</h3>
                         </div>
                         <div class="mega-menu-category">
                             <ul class="nav">
@@ -381,6 +388,14 @@
         }
 
     };
+</script>
+
+<script type="text/javascript">  
+    var url = "{{ route('LangChange') }}";
+    $(".languageChange").click(function(){
+        var val=$(this).data('lang')
+        window.location.href = url + "?lang="+val;
+    });  
 </script>
 
 <script>

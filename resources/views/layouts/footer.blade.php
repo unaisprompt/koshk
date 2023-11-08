@@ -17,11 +17,11 @@
                             <div class="newsletter">
                                 <form>
                                     <div>
-                                        <h4><span>Sign up to Newsletter</span></h4>
+                                        <h4><span>@lang('label.SIGN_UP_TO_NEWSLETTER')</span></h4>
                                         <input type="text" placeholder="Enter your email address" class="input-text"
                                             title="Sign up for our newsletter" id="email_news" name="email">
                                         <button type="button" onclick="newsLetter()" class="subscribe"
-                                            title="Subscribe" type="submit"><span>Subscribe</span></button>
+                                            title="Subscribe" type="submit"><span>@lang('label.Subscribe')</span></button>
                                     </div>
                                 </form>
                             </div>
@@ -37,51 +37,50 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column pull-left">
-                            <h4>Shopping Guide</h4>
+                            <h4>@lang('label.SHOPPING_GUIDE')</h4>
                             <ul class="links">
                                 {{-- <li><a href="{{url('blog')}}" title="How to buy">Blog</a></li> --}}
-                                <li><a href="{{ url('faq') }}" title="FAQs">FAQs</a></li>
-                                <li><a href="{{ url('payment') }}" title="Payment">Payment</a></li>
-                                <li><a href="{{ url('shippment') }}" title="Shipment">Shipment</a></li>
-                                <li><a href="{{ url('return_policy') }}" title="Return policy">Return policy</a></li>
+                                <li><a href="{{ url('faq') }}" title="FAQs">@lang('label.FAQs')</a></li>
+                                <li><a href="{{ url('payment') }}" title="Payment">@lang('label.Payment')</a></li>
+                                <li><a href="{{ url('shippment') }}" title="Shipment">@lang('label.Shipment')</a></li>
+                                <li><a href="{{ url('return_policy') }}" title="Return policy">@lang('label.Return_policy')</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column pull-left">
-                            <h4>My profile</h4>
+                            <h4>@lang('label.My_profile')</h4>
                             <ul class="links">
                                 @if (!empty(session()->get('token')))
-                                    <li><a href="{{ url('my-account') }}" title="Your Account">Your Account</a></li>
-                                    <li><a href="{{ url('address-list') }}" title="Addresses">Addresses</a></li>
-                                    <li><a href="{{ url('wishlist') }}" title="Wishlist">Wishlist</a></li>
-                                    <li><a href="{{ url('order-history') }}" title="Orders History">Orders History</a>
+                                    <li><a href="{{ url('my-account') }}" title="Your Account">@lang('label.Your_Account')</a></li>
+                                    <li><a href="{{ url('address-list') }}" title="Addresses">@lang('label.Addresses')</a></li>
+                                    <li><a href="{{ url('wishlist') }}" title="Wishlist">@lang('label.Wishlist')</a></li>
+                                    <li><a href="{{ url('order-history') }}" title="Orders History">@lang('label.Orders_History')</a>
                                     </li>
                                 @else
-                                    <li><a href="#" title="Your Account">Your Account</a></li>
-                                    <li><a href="#" title="Addresses">Addresses</a></li>
-                                    <li><a href="#" title="Wishlist">Wishlist</a></li>
-                                    <li><a href="#" title="Orders History">Orders History</a></li>
+                                    <li><a href="#" title="Your Account">@lang('label.Your_Account')</a></li>
+                                    <li><a href="#" title="Addresses">@lang('label.Addresses')</a></li>
+                                    <li><a href="#" title="Wishlist">@lang('label.Wishlist')</a></li>
+                                    <li><a href="#" title="Orders History">@lang('label.Orders_History')</a></li>
                                 @endif
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column pull-left">
-                            <h4>Information</h4>
+                            <h4>@lang('label.Information')</h4>
                             <ul class="links">
-                                <li><a href="{{ url('search_terms') }}" title="Search Terms">Search Terms</a>
+                                <li><a href="{{ url('search_terms') }}" title="Search Terms">@lang('label.Search_Terms')</a>
                                 </li>
-                                <li><a href="{{ url('terms_and_condition') }}" title="Terms and condition">Terms and
-                                        condition</a>
+                                <li><a href="{{ url('terms_and_condition') }}" title="Terms and condition">@lang('label.Terms_and_condition')</a>
                                 </li>
-                                <li><a href="{{ url('privacy_policy') }}">Privacy policy</a></li>
-                                <li><a href="{{ url('about_us') }}" title="About Us">About Us</a></li>
+                                <li><a href="{{ url('privacy_policy') }}">@lang('label.Privacy_policy')</a></li>
+                                <li><a href="{{ url('about_us') }}" title="About Us">@lang('label.About_Us')</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6">
-                        <h4>Contact Us</h4>
+                        <h4>@lang('label.CONTACT_US')</h4>
                         <div class="contacts-info">
                             <address>
                                 <i class="add-icon"></i>{{ CmsPage()['settings']['address'] }}
