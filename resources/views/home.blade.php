@@ -22,7 +22,8 @@
          }
      </style>
      <!--Start of Tawk.to Script-->
-     
+     @php $lang=session()->get('locale'); @endphp
+
      <!--End of Tawk.to Script-->
      <div class="container-fluid">
          <div class="row">
@@ -50,7 +51,7 @@
                                                                      data-splitout='none' data-elementdelay='0.1'
                                                                      data-endelementdelay='0.1'
                                                                      style='z-index:2; white-space:nowrap;'>
-                                                                     <span>{{ $banner['title1'] }}</span>
+                                                                     <span>@if($lang=='en'){{ $banner['title1'] }}@else {{ $banner['multi_title1']['arabic'] }} @endif</span>
                                                                  </div>
                                                                  <div class='tp-caption LargeTitle sfl  tp-resizeme '
                                                                      data-endspeed='500' data-speed='500' data-start='1300'
@@ -58,8 +59,8 @@
                                                                      data-splitout='none' data-elementdelay='0.1'
                                                                      data-endelementdelay='0.1'
                                                                      style='z-index:3; white-space:nowrap;'><span
-                                                                         style="font-weight:normal; display:block">{{ $banner['title2'] }}</span>
-                                                                     {{ $banner['title3'] }}
+                                                                         style="font-weight:normal; display:block">@if($lang=='en'){{ $banner['title2'] }}@else {{ $banner['multi_title2']['arabic'] }} @endif</span>
+                                                                         @if($lang=='en'){{ $banner['title3'] }}@else {{ $banner['multi_title3']['arabic'] }} @endif
                                                                  </div>
                                                                  @if ($banner['btn_name'])
                                                                      <div class='tp-caption sfb  tp-resizeme '
@@ -100,10 +101,10 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <img src="{{asset('assets/images/moneyback.png')}}" alt="" />
-                    <h4 class="info-box-heading green">money back</h4>
+                    <h4 class="info-box-heading green">@lang('label.money_back')</h4>
                   </div>
                 </div>
-                <h6 class="text">30 Days Money Back Guarantee</h6>
+                <h6 class="text">@lang('label.30_Days_Money_Back_Guarantee')</h6>
               </div>
             </div>
             <!-- .col -->
@@ -113,10 +114,10 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <img src="{{asset('assets/images/free-shipping.jpg')}}" alt="" />
-                    <h4 class="info-box-heading green">free shipping</h4>
+                    <h4 class="info-box-heading green">@lang('label.free_shipping')</h4>
                   </div>
                 </div>
-                <h6 class="text">Shipping on orders over AED 99</h6>
+                <h6 class="text">@lang('label.Shipping_on_orders_over_AED_99')</h6>
               </div>
             </div>
             <!-- .col -->
@@ -126,10 +127,10 @@
                 <div class="row">
                   <div class="col-xs-12">
                     <img src="{{asset('assets/images/SpecialSale.png')}}" alt="" />
-                    <h4 class="info-box-heading green">Special Sale</h4>
+                    <h4 class="info-box-heading green">@lang('label.Special_Sale')</h4>
                   </div>
                 </div>
-                <h6 class="text">Extra off on all items </h6>
+                <h6 class="text">@lang('label.Extra_off_on_all_items')</h6>
               </div>
             </div>
             <!-- .col --> 
@@ -150,7 +151,7 @@
                      <li class="{{ $loop->iteration == 1 ? 'active' : '' }}" onClick="toggleActive($(this))"> <a
                              data-transition-type="backSlide" href="#cat_{{ $category['id'] }}" data-toggle="tab">
                              <img src="{{ $category['image_url'] }}" alt="{{ $category['category_name'] }}"> <span>
-                                 {{ $category['category_name'] }}</span> </a> </li>
+                                 @if($lang=='en'){{ $category['category_name'] }}@else {{ $category['multi_name']['arabic'] }} @endif</span> </a> </li>
                  @endforeach
              </ul>
              <!-- /.nav-tabs -->
@@ -189,7 +190,7 @@
                                              <div class="info-inner">
                                                  <div class="item-title">
                                                      <a href="{{ url('product-detail') }}?id={{ $product['id'] }}">
-                                                         {{ $product['product_name'] }}
+                                                         @if($lang=='en'){{ $product['product_name'] }}@else {{ $product['multi_name']['arabic'] }} @endif
                                                      </a>
                                                  </div>
                                                  <div class="brand">
@@ -347,7 +348,8 @@
                                                  <div class="info-inner">
                                                      <div class="item-title">
                                                          <a title="{{ $featured_products['product_name'] }}"
-                                                             href="{{ url('product-detail') }}?id={{ $featured_products['id'] }}">{{ $featured_products['product_name'] }}</a>
+                                                             href="{{ url('product-detail') }}?id={{ $featured_products['id'] }}">
+                                                            @if($lang=='en'){{ $featured_products['product_name'] }}@else {{ $featured_products['multi_name']['arabic'] }} @endif</a>
                                                      </div>
                                                      <div class="brand">
                                                          {{-- {{ $featured_products['brand'] ? $featured_products['brand']['brand_name'] : '' }} --}}
@@ -425,9 +427,9 @@
                              <img class="img-fluid hover-zoom" src="{{ $deal_banner['image'] }}" alt="">
                              <!-- Body -->
                              <div class="banner-text">
-                                 <h6 class="text-white">{{ $deal_banner['title'] }}</h6>
+                                 <h6 class="text-white">@if($lang=='en'){{ $deal_banner['title'] }}@else {{ $deal_banner['multi_name']['arabic'] }} @endif</h6>
                                  <!-- Heading -->
-                                 <h3 class="text-white">{{ $deal_banner['description'] }} </h3>
+                                 <h3 class="text-white">@if($lang=='en'){{ $deal_banner['description'] }}@else {{ $deal_banner['multi_description']['arabic'] }} @endif </h3>
                                  <!-- Link -->
                                  @if ($deal_banner['btn_name'])
                                      <a class="more-link text-dark"
@@ -574,7 +576,7 @@
                                                  <div class="info-inner">
                                                      <div class="item-title"> <a
                                                              href="{{ url('product-detail') }}?id={{ $sale_data['id'] }}"
-                                                             title="{{ $sale_data['product_name'] }}">{{ $sale_data['product_name'] }}</a>
+                                                             title="{{ $sale_data['product_name'] }}">@if($lang=='en'){{ $sale_data['product_name'] }}@else {{ $sale_data['multi_name']['arabic'] }} @endif</a>
                                                      </div>
                                                      <div class="brand">
                                                          {{ $sale_data['brand'] ? $sale_data['brand']['brand_name'] : '' }}
@@ -660,7 +662,7 @@
                                                      <div class="item-title" style="max-height: 50px;  ">
                                                          <a href="{{ url('product-detail') }}?id={{ $top_rated['id'] }}"
                                                              title="{{ $top_rated['product_name'] }}">
-                                                             {{ $top_rated['product_name'] }}
+                                                             @if($lang=='en'){{ $top_rated['product_name'] }}@else {{ $top_rated['multi_name']['arabic'] }} @endif
                                                          </a>
                                                      </div>
 

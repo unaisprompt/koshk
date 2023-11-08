@@ -49,7 +49,7 @@
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column pull-left">
-                            <h4>@lang('label.My_profile')</h4>
+                            <h4>@lang('label.MY_PROFILE')</h4>
                             <ul class="links">
                                 @if (!empty(session()->get('token')))
                                     <li><a href="{{ url('my-account') }}" title="Your Account">@lang('label.Your_Account')</a></li>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="footer-column pull-left">
-                            <h4>@lang('label.Information')</h4>
+                            <h4>@lang('label.INFORMATION')</h4>
                             <ul class="links">
                                 <li><a href="{{ url('search_terms') }}" title="Search Terms">@lang('label.Search_Terms')</a>
                                 </li>

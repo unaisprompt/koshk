@@ -30,4 +30,14 @@ return [
     'See_all_offers'=>'الاطلاع على جميع العروض',
     'SALES'=>'مبيعات',
     'TOP_RATED'=>'أعلى التقييمات',
+    'Account'=>'الحساب',
+    'Logout'=>'تسجيل خروج',
+    'Welcome_back!'=>'!مرحبًا بعودتك',
+    'money_back'=>'إرجاع النقود',
+    '30_Days_Money_Back_Guarantee'=>'ضمان استرداد الأموال لمدة 30 يومًا',
+    'free_shipping'=>'ًالشحن مجانا',
+    'Shipping_on_orders_over_AED_99'=>'الشحن للطلبات التي تزيد قيمتها عن 99 درهمًا إماراتيًا',
+    'Special_Sale'=>'بيع خاص',
+    'Extra_off_on_all_items'=>'خصم إضافي على جميع العناصر',
+
 ];

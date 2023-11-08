@@ -4,9 +4,9 @@
     $category = collect($categoryList)->first(function ($value, $key) {
         return $value->id == request()->category_id;
     });
+    $lang=session()->get('locale');
 @endphp
 <header>
-    
 
     <div class="container">
 
@@ -33,7 +33,8 @@
                                                 role="menuitem @if ($category->id == request()->category_id) active @endif"
                                                 tabindex="-1"
                                                 href="{{ url('products?category_id=' . $category->id) }}">-
-                                                {{ $category->category_name }}</a></li>
+                                                @if($lang=='en'){{ $category->category_name }}@else {{ $category->multi_name->arabic }} @endif
+                                            </a></li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -71,13 +72,13 @@
 
                                         <li>
                                             <a href="{{ url('my-account') }}" title="My Account">
-                                                {{ session()->get('name') }}'s Account</i>
+                                                {{ session()->get('name') }}'s @lang('label.Account')</i>
                                             </a>
                                         </li>
-                                        <li><a href="{{ url('wishlist') }}" title="Wishlist">Wishlist</a></li>
+                                        <li><a href="{{ url('wishlist') }}" title="Wishlist">@lang('label.Wishlist')</a></li>
                                         <li class="last">
                                             <a href="{{ url('logout') }}" title="Login">
-                                                <span>Logout</span>
+                                                <span>@lang('label.Logout')</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -110,7 +111,7 @@
                                         <li class="nosub"><a
                                                 href="{{ url('products?category_id=' . $category->id) }}"><i
                                                     class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                                                {{ $category->category_name }}
+                                                    @if($lang=='en'){{ $category->category_name }}@else {{ $category->multi_name->arabic }} @endif
                                             </a>
                                         </li>
                                     @else
@@ -154,7 +155,11 @@
                         @foreach ($categoryList as $category)
                         <div class="nav-cat-main">
                             <a class="nav-cat @if(url()->full()== url('products?category_id=' . $category->id)) active  @endif"
-                            href="{{ url('products?category_id=' . $category->id) }}">{{ $category->category_name }}</a>
+                            href="{{ url('products?category_id=' . $category->id) }}">
+                            
+                            @if($lang=='en'){{ $category->category_name }}@else {{ $category->multi_name->arabic }} @endif
+
+                        </a>
                         </div>
                            
                             @if ($loop->iteration >= 6)
@@ -179,7 +184,7 @@
         </div>
         <div class="modal-body">
             <div class="yhd0d">
-                <h1>Welcome back!</h1>
+                <h1>@lang('label.Welcome_back!')</h1>
                 <h2>Sign in to your account</h2>
                 <h3>Don't have an account? <a href="#" data-toggle="modal"
                         onclick="$('#myModalsignup').modal('show');$('#myModalsignin').modal('hide');">Sign

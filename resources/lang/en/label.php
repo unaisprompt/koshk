@@ -30,5 +30,14 @@ return [
     'See_all_offers'=>'See all offers',
     'SALES'=>'SALES',
     'TOP_RATED'=>'TOP RATED',
-
+    'Account'=>'Account',
+    'Logout'=>'Logout',
+    'Welcome_back!'=>'Welcome back!',
+    'money_back'=>'money back',
+    '30_Days_Money_Back_Guarantee'=>'30 Days Money Back Guarantee',
+    'free_shipping'=>'free shipping',
+    'Shipping_on_orders_over_AED_99'=>'Shipping on orders over AED 99',
+    'Special_Sale'=>'Special Sale',
+    'Extra_off_on_all_items'=>'Extra off on all items',
+    
 ];

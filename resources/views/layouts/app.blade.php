@@ -172,6 +172,7 @@
 </head>
 
 <body class="cms-index-index cms-home-page home">
+    @php $lang=session()->get('locale'); @endphp
     <div id="page">
         <div class="pre-loader hidded" style="z-index: 3002">
 <div class="loading">
@@ -574,6 +575,7 @@
                                 window.location.href = "{{ url('user-password-new') }}";
                             } else {
                                 location.reload();
+                                $('.pre-loader').removeClass("hidded");
                             }
                         });
                         document.getElementById("form").reset();
