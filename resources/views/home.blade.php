@@ -22,7 +22,7 @@
          }
      </style>
      <!--Start of Tawk.to Script-->
-     @php $lang=session()->get('locale'); @endphp
+     @php $lang=session()->get('locale');if($lang==''){$lang='en';} @endphp
 
      <!--End of Tawk.to Script-->
      <div class="container-fluid">

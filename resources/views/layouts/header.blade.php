@@ -5,6 +5,7 @@
         return $value->id == request()->category_id;
     });
     $lang=session()->get('locale');
+    if($lang==''){$lang='en';}
 @endphp
 <header>
 
