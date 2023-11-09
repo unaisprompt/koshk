@@ -186,7 +186,7 @@
         <div class="modal-body">
             <div class="yhd0d">
                 <h1>@lang('label.Welcome_back!')</h1>
-                <h2>@lang('label.Sign in to your account')</h2>
+                <h2>@lang('label.Sign_in_to_your_account')</h2>
                 <h3>Don't have an account? <a href="#" data-toggle="modal"
                         onclick="$('#myModalsignup').modal('show');$('#myModalsignin').modal('hide');">Sign
                         Up</a></h3>
