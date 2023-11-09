@@ -43,5 +43,11 @@ return [
     'Create_an_account'=>'إنشاء حساب',
     'Verify_Your_Account'=>'تحقق من حسابك',
     'Forget_password'=>'نسيت كلمة المرور',
+    'Home'=>'بيت',
+    'Sort_by_popularity'=>'الترتيب حسب الشعبية',
+    'Sort_by_date'=>'رتب حسب التاريخ',
+    'low_to_high'=>'الترتيب حسب السعر: من الأقل إلى الأعلى',
+    'high_to_low'=>'الترتيب حسب السعر: من الأعلى إلى الأقل',
+    'BROWSE_CATEGORIES'=>'تصفح الفئات',
 
 ];

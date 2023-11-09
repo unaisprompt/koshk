@@ -18,6 +18,8 @@
             width: 200px;
         }
     </style>
+         @php $lang=session()->get('locale');if($lang==''){$lang='en';} @endphp
+
     <!-- Main Container -->
     <section class="main-container col2-left-layout">
         <div class="container">
@@ -40,7 +42,7 @@
                     @else
                         @if ($data->category)
                             <li> <a href="{{ url('products?category_id=' . $data->category->id) }}"
-                                    title="">{{ $data->category->category_name }}</a><input type="hidden"
+                                    title=""> @if($lang=='en'){{ $data->category->category_name }}@else{{$data->category->multi_name->arabic}} @endif</a><input type="hidden"
                                     id="category_id" value="{{ $data->category->id }}">
                                 @if ($data->subcategory)
                                     <span>/ </span>
@@ -107,9 +109,9 @@
                                 @elseif($data->subcategory)
                                     {{ $data->subcategory->subcategory_name }}
                                 @elseif($data->category)
-                                    {{ $data->category->category_name }}
+                                @if($lang=='en'){{ $data->category->category_name }}@else{{$data->category->multi_name->arabic}} @endif
                                 @else
-                                    All Category
+                                   @lang('label.all_categories')
                                 @endif
                             @endif
                         </h2>
@@ -162,16 +164,16 @@
                                                 <select name="orderby" aria-label="Shop order" id="sort-type"
                                                     onchange="filter()">
                                                     <option value="sort-by-popularity">
-                                                        Sort by popularity
+                                                        @lang('label.Sort_by_popularity')
                                                     </option>
                                                     <option value="sort-by-date" selected>
-                                                        Sort by date
+                                                        @lang('label.Sort_by_date')
                                                     </option>
                                                     <option value="price-low-to-high">
-                                                        Sort by price: low to high
+                                                        @lang('label.low_to_high')
                                                     </option>
                                                     <option value="price-high-to-low">
-                                                        Sort by price: high to low
+                                                        @lang('label.high_to_low')
                                                     </option>
                                                 </select>
                                             </form>
@@ -200,7 +202,8 @@
                                                 <div class="product-shop">
                                                     <h2 class="product-name" style="height:62px;overflow:hidden"><a
                                                             href="{{ url('product-detail?id=' . $product->id) }}"
-                                                            title="{{ $product->product_name }}">{{ $product->product_name }}</a>
+                                                            title="{{ $product->product_name }}"> @if($lang=='en'){{ $product->product_name }}@else {{ $product->multi_name->arabic }} @endif
+                                                        </a>
                                                     </h2>
                                                     <div class="ratings">
                                                         <div class="rating-box">
@@ -269,7 +272,7 @@
                 <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9">
                    
                      <div class="widget widget-categories">
-                        <div class="block-title">Browse Categories</div>
+                        <div class="block-title">@lang('label.BROWSE_CATEGORIES')</div>
                         <div id="accordion" class="accordion">
                             @if ($data->category)
                                 @foreach ($data->category->subcategory as $subcategory)
@@ -434,7 +437,7 @@
                         </div>
                     </div> --}}
 
-                    @include('pages.product.topratedproducts')
+                    {{-- @include('pages.product.topratedproducts') --}}
                 </aside>
             </div>
         </div>
