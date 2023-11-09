@@ -39,5 +39,8 @@ return [
     'Shipping_on_orders_over_AED_99'=>'Shipping on orders over AED 99',
     'Special_Sale'=>'Special Sale',
     'Extra_off_on_all_items'=>'Extra off on all items',
-    
+    'Sign_in_to_your_account'=>'Sign in to your account',
+    'Create_an_account'=>'Create an account',
+    'Verify_Your_Account'=>'Verify Your Account',
+    'Forget_password'=>'Forget password',
 ];

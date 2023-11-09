@@ -39,5 +39,9 @@ return [
     'Shipping_on_orders_over_AED_99'=>'الشحن للطلبات التي تزيد قيمتها عن 99 درهمًا إماراتيًا',
     'Special_Sale'=>'بيع خاص',
     'Extra_off_on_all_items'=>'خصم إضافي على جميع العناصر',
+    'Sign_in_to_your_account'=>'تسجيل الدخول إلى حسابك',
+    'Create_an_account'=>'إنشاء حساب',
+    'Verify_Your_Account'=>'تحقق من حسابك',
+    'Forget_password'=>'نسيت كلمة المرور',
 
 ];

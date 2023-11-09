@@ -186,7 +186,7 @@
         <div class="modal-body">
             <div class="yhd0d">
                 <h1>@lang('label.Welcome_back!')</h1>
-                <h2>Sign in to your account</h2>
+                <h2>@lang('label.Sign in to your account')</h2>
                 <h3>Don't have an account? <a href="#" data-toggle="modal"
                         onclick="$('#myModalsignup').modal('show');$('#myModalsignin').modal('hide');">Sign
                         Up</a></h3>
@@ -222,7 +222,7 @@
             @csrf
             <div class="modal-body">
                 <div class="yhd0d">
-                    <h2>Create an account</h2>
+                    <h2>@lang('label.Create an account')</h2>
                     <h3>Already have an account? <a href="#"
                             onclick="$('#myModalsignup').modal('hide');$('#myModalsignin').modal('show');">Sign
                             In</a></h3>
@@ -273,7 +273,7 @@
             <div class="modal-body">
                 <div class="yhd0d">
                     <div id="some_div_time"></div>
-                    <h1>Verify Your Account</h1>
+                    <h1>@lang('Verify_Your_Account')</h1>
                     {{-- <h2>Sign in to your account</h2> --}}
                     <h3>Don't have an account? <a href="#" data-toggle="modal"
                             onclick="$('#myModalsignup').modal('show');">Sign Up</a>
@@ -306,7 +306,7 @@
             @csrf
             <div class="modal-body">
                 <div class="yhd0d">
-                    <h1>Forget password</h1>
+                    <h1>@lang('Forget_password')</h1>
                     <button type="button"
                         onclick="$('#myModalsignup').modal('show');$('#myModalforgot').modal('hide');">Create
                         your account ?</button>
