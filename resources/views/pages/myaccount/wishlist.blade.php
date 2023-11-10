@@ -7,7 +7,7 @@
       <div class="col-sm-9 ">
         <article class="col-main">
           <div class="page-title">
-            <h2>Wishlist</h2>
+            <h2>@lang('label.Wishlist')</h2>
           </div>
           <div class="bestsell-block">
 

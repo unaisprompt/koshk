@@ -8,7 +8,7 @@
       @include('pages.myaccount.sidebar')
       <div class="col-sm-9 ">
         <div class="page-title">
-          <h2>Orders</h2>
+          <h2>@lang('label.Orders')</h2>
         </div>
         @php $total=1;@endphp
         @if(!empty($data))
@@ -40,7 +40,7 @@
         @endif
          <div class="col-sm-8 col-lg-8 mt-3">
         <div class="gcvYcJ">
-         <a href="{{url('products')}}" style="text-decoration:none;"> <button type="button">Continue Shopping</button></a>
+         <a href="{{url('products')}}" style="text-decoration:none;"> <button type="button">@lang('label.Continue_Shopping')</button></a>
         </div>
          </div>
         <!--	///*///======    End article  ========= //*/// -->

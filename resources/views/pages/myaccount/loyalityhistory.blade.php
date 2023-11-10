@@ -8,7 +8,7 @@
       @include('pages.myaccount.sidebar')
       <div class="col-sm-9 ">
         <div class="page-title">
-          <h2>Loyalty History</h2>
+          <h2>@lang('label.Loyalty_History')</h2>
         </div>
 
 

@@ -7,7 +7,7 @@
             @include('pages.myaccount.sidebar')
             <div class="col-sm-9">
                 <div class="page-title">
-                    <h2>Address</h2>
+                    <h2>@lang('label.address')</h2>
                 </div>
                 @foreach ($data['data'] as $item)
                     <div class="col-sm-8 col-lg-8">

@@ -324,7 +324,7 @@
 
             <div class="flex space-x-4">
                 <div class="card">
-                    <p style="color:gold">Loyalty Point</p>
+                    <p style="color:gold">@lang('label.Loyalty_Point')</p>
                     <div class="card-content p-0 flex">
                         <div class="spinningasset coin is-sm">
                             <div>
@@ -358,19 +358,19 @@
 
         <ul class="nav nav-pills nav-stacked">
             <li class=@if (last(request()->segments()) == 'my-account') 'active' @endif><a href="{{ url('my-account') }}"> <i
-                        class="fa fa-user"></i> Profile</a></li>
+                        class="fa fa-user"></i> @lang('label.Profile')</a></li>
             <li class=@if (last(request()->segments()) == 'order-history') 'active' @endif><a href="{{ url('order-history') }}"><i
-                        class="fa fa-shopping-cart"></i> Orders </a></li>
+                        class="fa fa-shopping-cart"></i> @lang('label.Orders') </a></li>
             <li class=@if (last(request()->segments()) == 'loyality-history') 'active' @endif><a href="{{ url('loyality-history') }}"><i
-                            class="fa fa-list"></i> Loyalty History </a></li>
+                            class="fa fa-list"></i> @lang('label.Loyalty_History') </a></li>
             <li class=@if (last(request()->segments()) == 'wishlist') 'active' @endif><a href="{{ url('wishlist') }}"> <i
-                        class="fa fa-heart"></i> Wishlist</a></li>
+                        class="fa fa-heart"></i> @lang('label.Wishlist')</a></li>
             <li class=@if (last(request()->segments()) == 'address-list') 'active' @endif><a href="{{ url('address-list') }}"> <i
-                        class="fa fa-map-marker"></i> Address</a></li>
+                        class="fa fa-map-marker"></i> @lang('label.address')</a></li>
             <li class=@if (last(request()->segments()) == 'edit-profile') 'active' @endif><a href="{{ url('edit-profile') }}"> <i
-                        class="fa fa-edit"></i> Edit Profile</a></li>
+                        class="fa fa-edit"></i> @lang('label.edit_profile')</a></li>
             <li><a href="#" onclick="$('#myModalChangePassword').modal('show');"> <i class="fa fa-lock"></i>
-                    Change Password</a></li>
+                @lang('label.Change_Password')</a></li>
         </ul>
     </div>
 </div>

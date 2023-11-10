@@ -117,22 +117,22 @@
      
       <div class="panel">
           <div class="panel-body bio-graph-info">
-              <h1>Profile</h1>
+              <h1>@lang('label.Profile')</h1>
               <div class="row">
                   <div class="bio-row">
-                      <p><span>First Name </span>:{{$data['data']['name']}}</p>
+                      <p><span>@lang('label.First_Name') </span>:{{$data['data']['name']}}</p>
                   </div>
               </div>
 
             
               <div class="row">     
                   <div class="bio-row">
-                      <p><span>Email </span>:  {{$data['data']['email']}}</p>
+                      <p><span>@lang('label.Email') </span>:  {{$data['data']['email']}}</p>
                   </div>
               </div>
               <div class="row">  
                   <div class="bio-row">
-                      <p><span>Mobile </span>: {{$data['data']['mobile']}}</p>
+                      <p><span>@lang('label.Mobile') </span>: {{$data['data']['mobile']}}</p>
                   </div>
               </div>  
                     

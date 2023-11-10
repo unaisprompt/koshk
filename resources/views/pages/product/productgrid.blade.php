@@ -26,7 +26,7 @@
             <!-- Breadcrumbs -->
             <div class="breadcrumbs">
                 <ul>
-                    <li class="home"> <a href="{{ url('') }}" title="Go to Home Page">Home</a> <span>/</span> </li>
+                    <li class="home"> <a href="{{ url('') }}" title="Go to Home Page">@lang('label.Home')</a> <span>/</span> </li>
                     @if (request()->explore_more)
                         <li> <strong>Explore Offers</strong><input type="hidden" id="explore_more"
                                 value="{{ request()->explore_more }}"> </li>

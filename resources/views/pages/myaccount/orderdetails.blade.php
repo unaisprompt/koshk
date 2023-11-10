@@ -14,7 +14,7 @@
             @include('pages.myaccount.sidebar')
             <div class="col-sm-9 ">
                 <div class="page-title">
-                    <h2>Orders</h2>
+                    <h2>@lang('label.Orders')</h2>
                 </div>
                 @php $total=1;@endphp
                 @if (!empty($data))

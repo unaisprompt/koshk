@@ -4,7 +4,9 @@
         $price = $data->is_variation ? $variation->discounted_variation_price : $data->discounted_price;
         // $stock = $data->is_variation ? $variation->stock->quantity : collect($data->stocks)->sum('quantity');
         $stock=1;
+        $lang=session()->get('locale');if($lang==''){$lang='en';}
     @endphp
+
     <style>
         .product-view .product-essential .add-to-links .link-wishlist.active {
             background: #6e6eff;
@@ -19,16 +21,16 @@
             color: #6e6eff;
         }
     </style>
+    {{-- {{dd($related_products)}} --}}
     <section class="main-container col1-layout">
         <div class="container">
             <div class="row">
-
                 <!-- Breadcrumbs -->
                 <div class="breadcrumbs">
                     <ul>
-                        <li class="home"> <a href="{{ url('') }}" title="Go to Home Page">Home</a> <span>/</span> </li>
+                        <li class="home"> <a href="{{ url('') }}" title="Go to Home Page">@lang('label.Home')</a> <span>/</span> </li>
 
-                        <li> <strong>{{ $data->product_name }}</strong> </li>
+                        <li> <strong>@if($lang=='en'){{ $data->product_name }}@else {{ $data->multi_name->arabic }} @endif</strong> </li>
                     </ul>
                 </div>
                 <!-- Breadcrumbs End -->
@@ -42,7 +44,7 @@
                                     <input name="form_key" value="6UbXroakyQlbfQzK" type="hidden">
                                     <div class="product-img-box col-lg-5 col-sm-5 col-xs-12">
                                         @if ($data->new_item)
-                                            <div class="new-label new-top-left"> New </div>
+                                            <div class="new-label new-top-left"> @lang('label.new') </div>
                                         @endif
                                         <div class="product-image">
                                             @if ($data->is_variation)
@@ -142,7 +144,7 @@
                                                     onclick="cartadd({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val(),{{ $stock }})"
                                                     type="button" id="cart_button" style="cursor:pointer;"
                                                     value="{{ $data->id }}"
-                                                    class="button btn-cart"title="Add to Cart">Add to Cart</button>
+                                                    class="button btn-cart"title="Add to Cart">@lang('label.Add_to_Cart')</button>
 
                                                 {{-- @if ($stock <= 0)
                                                     <button class="button btn-buy" title="Add to Cart" type="button">Sold
@@ -152,8 +154,7 @@
                                                     <button class="button btn-buy" title="Add to Cart"
                                                         onclick="buynow({{ $data->id }},{{ $variation ? $variation->id : 0 }},$('.qty').val(),{{ $stock }})"
                                                         type="button" id="buynow_button" style="cursor:pointer;"
-                                                        value="{{ $data->id }}">Buy
-                                                        Now</button>
+                                                        value="{{ $data->id }}">@lang('label.Buy_Now')</button>
                                                
                                             </div>
 
@@ -161,10 +162,8 @@
                                         <ul class="add-to-links">
                                             <li> <a class="link-wishlist  @if ($data->is_wishlist) active @endif"
                                                     id="wishlist_act" href="#"
-                                                    onclick="addWishlist({{ $data->id }},$(this))"><span>Add to
-                                                        Wishlist</span></a></li>
-                                            <li><a class="link-compare" href="{{ url('products') }}"><span>Continue
-                                                        Shopping</span></a></li>
+                                                    onclick="addWishlist({{ $data->id }},$(this))"><span>@lang('label.Add_to_Wishlist')</span></a></li>
+                                            <li><a class="link-compare" href="{{ url('products') }}"><span>@lang('label.Continue_Shopping')</span></a></li>
                                         </ul>
                                     </div>
                                     <div class="product-shop col-lg- col-sm-7 col-xs-12">
@@ -174,7 +173,7 @@
                                         </div> --}}
                                         <div class="brand">{{ $data->brand ? $data->brand->brand_name : '' }}</div>
                                         <div class="product-name">
-                                            <h1>{{ $data->product_name }}</h1>
+                                            <h1>@if($lang=='en'){{ $data->product_name }}@else {{ $data->multi_name->arabic }} @endif</h1>
                                             <input type="hidden" value="{{ $data->product_name }}" name="pro_name"
                                                 id="pro_name">
                                             <input type="hidden" value="{{ $data->productimage->image_url }}"
@@ -248,26 +247,28 @@
                                             @endforeach
                                         @endif
                                         <div class="list">
-                                            <div class="heading">Highlights</div>
+                                            <div class="heading">@lang('label.Highlights')</div>
                                             <div class="points">
                                                 {!! $data->highlights !!}</div>
                                         </div>
                                         <div class="list">
-                                            <div class="heading">Description</div>
+                                            <div class="heading">@lang('label.Description')</div>
                                             <div class="points">
-                                                {!! $data->description !!}</div>
+                                                @if($lang=='en') {!! $data->description !!} @else {!! $data->multi_description->arabic !!} @endif
+
+                                               </div>
                                         </div>
 
                                         <div class="list">
-                                            <div class="heading">Other</div>
+                                            <div class="heading">@lang('label.Other')</div>
                                             <div class="points">
-                                                <h4>Shipping & Return</h4>
+                                                <h4>@lang('label.Shipping_Return')</h4>
                                                 <ul>
                                                    
                                                     <!-- <li>Free Shipping
                                                     </li> -->
                                                        
-<li>Shipping cost will be calculate as per the Emirates</li>
+<li>@lang('label.emirate_base_ship')</li>
 {!!$data->est_shipping_days > 0 ? '<li>Estimated shipping days ' . $data->est_shipping_days.'</li>' : ''!!}
                                                     
                                                     <li>{{ $data->return_days > 0 ? "$data->return_days Days Return Policy" : 'No return Available' }}
@@ -289,17 +290,17 @@
                                 <div class="add_info">
                                     <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
                                         <li class="active"> <a href="#product_tabs_description" data-toggle="tab">
-                                                Product Description
+                                                @lang('label.Product_Description')
                                             </a> </li>
-                                        <li><a href="#product_tabs_tags" data-toggle="tab">Specifications</a></li>
-                                        <li> <a href="#reviews_tabs" data-toggle="tab">Reviews</a> </li>
+                                        <li><a href="#product_tabs_tags" data-toggle="tab">@lang('label.Specifications')</a></li>
+                                        <li> <a href="#reviews_tabs" data-toggle="tab">@lang('label.Reviews')</a> </li>
                                         <!-- <li> <a href="#product_tabs_custom" data-toggle="tab">Custom Tab</a> </li> -->
                                         <!-- <li> <a href="#product_tabs_custom1" data-toggle="tab">Questions & Answers</a> </li> -->
                                     </ul>
                                     <div id="productTabContent" class="tab-content">
                                         <div class="tab-pane fade in active" id="product_tabs_description">
                                             <div class="std">
-                                                {!! $data->detail_description !!}
+                                                @if($lang=='en') {!! $data->detail_description !!} @else {!! $data->multi_detail_description->arabic !!} @endif
                                             </div>
                                             @if ($data->youtube_link != null)
                                                 <div class="std">
@@ -450,18 +451,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
                             <!-- similar products -->
                             <div class="bestsell-pro mt-0 mb-60">
 
@@ -472,7 +461,7 @@
                                     <div class="slider-items-products">
                                         <div class="bestsell-block">
                                             <div class="block-title">
-                                                <h2>Similar Products</h2>
+                                                <h2>@lang('label.Similar_Products')</h2>
                                             </div>
                                             <div id="bestsell-slider" class="product-flexslider hidden-buttons">
                                                 <div class="slider-items slider-width-col4 products-grid block-content">
@@ -508,7 +497,9 @@
                                                                     <div class="info-inner">
                                                                         <div class="item-title"> <a
                                                                                 title="Retis lapen casen"
-                                                                                href="{{ url('product-detail') }}?id={{ $related_product->id }}">{{ $related_product->product_name }}</a>
+                                                                                href="{{ url('product-detail') }}?id={{ $related_product->id }}">
+                                                                               @if($lang=='en') {{ $related_product->product_name }}@else {{ $related_product->multi_name->arabic }} @endif
+                                                                            </a>
                                                                         </div>
                                                                         <div class="brand">
                                                                             {{ $related_product->brand ? $related_product->brand->brand_name : '' }}
