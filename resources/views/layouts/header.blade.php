@@ -57,17 +57,20 @@
                         @if(session()->get('locale') == 'ar')
                         <a href="#" data-lang="en" class="languageChange">
                              <img src="{{ asset('assets/images/arabia.png') }}" alt="language">
+                           AR
                             </a>
                             @else
                             <a href="#" data-lang="ar" class="languageChange"> <img
                                 src="{{ asset('assets/images/english.png') }}" alt="language">
+                                EN
                             </a>
                             @endif
                     </div>
                     <div class="fl-links">
                         <div class="no-js">
                             @if (session()->get('token'))
-                                <a href="{{ url('my-account') }}" title="Company" class="clicker"></a>
+                                <a href="{{ url('my-account') }}" title="Company" class="clicker"><br>
+                                <span style="font-size: 7px;font-weight: bold;">My Profile</span></a>
                                 <div class="fl-nav-links">
                                     <ul class="links">
 
