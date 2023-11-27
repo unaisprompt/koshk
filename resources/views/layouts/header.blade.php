@@ -70,7 +70,7 @@
                         <div class="no-js">
                             @if (session()->get('token'))
                                 <a href="{{ url('my-account') }}" title="Company" class="clicker"><br>
-                                <span style="font-size: 7px;font-weight: bold;">My Profile</span></a>
+                                My Profile</a>
                                 <div class="fl-nav-links">
                                     <ul class="links">
 
