@@ -322,7 +322,7 @@
             <h1>{{ session()->get('name') }}</h1>
             <p>{{ session()->get('email') }}</p>
 
-            <div class="flex space-x-4">
+            {{-- <div class="flex space-x-4">
                 <div class="card">
                     <p style="color:gold">@lang('label.Loyalty_Point')</p>
                     <div class="card-content p-0 flex">
@@ -351,7 +351,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
 
         </div>
@@ -361,8 +361,8 @@
                         class="fa fa-user"></i> @lang('label.Profile')</a></li>
             <li class=@if (last(request()->segments()) == 'order-history') 'active' @endif><a href="{{ url('order-history') }}"><i
                         class="fa fa-shopping-cart"></i> @lang('label.Orders') </a></li>
-            <li class=@if (last(request()->segments()) == 'loyality-history') 'active' @endif><a href="{{ url('loyality-history') }}"><i
-                            class="fa fa-list"></i> @lang('label.Loyalty_History') </a></li>
+            {{-- <li class=@if (last(request()->segments()) == 'loyality-history') 'active' @endif><a href="{{ url('loyality-history') }}"><i
+                            class="fa fa-list"></i> @lang('label.Loyalty_History') </a></li> --}}
             <li class=@if (last(request()->segments()) == 'wishlist') 'active' @endif><a href="{{ url('wishlist') }}"> <i
                         class="fa fa-heart"></i> @lang('label.Wishlist')</a></li>
             <li class=@if (last(request()->segments()) == 'address-list') 'active' @endif><a href="{{ url('address-list') }}"> <i
