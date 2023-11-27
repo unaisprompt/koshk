@@ -113,7 +113,7 @@
                                 @foreach ($categoryList as $category)
                                     @if (empty($category->subcategory))
                                         <li class="nosub"><a
-                                                href="{{ url('products?category_id=' . $category->id) }}"><i
+                                                href="{{ url('products-grid?category_id=' . $category->id) }}"><i
                                                     class="fa fa-long-arrow-right" aria-hidden="true"></i>
                                                     @if($lang=='en'){{ $category->category_name }}@else {{ $category->multi_name->arabic }} @endif
                                             </a>
@@ -128,14 +128,14 @@
                                                         @foreach ($category->subcategory as $subcategory)
                                                             <div class="col-md-4 col-sm-6">
                                                                 <h3><a
-                                                                        href="{{ url('products?category_id=' . $category->id . '&subcategory_id=' . $subcategory->id) }}">
+                                                                        href="{{ url('products-grid?category_id=' . $category->id . '&subcategory_id=' . $subcategory->id) }}">
                                                                         {{ $subcategory->subcategory_name }}
                                                                     </a>
                                                                 </h3>
                                                                 <ul class="nav">
                                                                     @foreach ($subcategory->inner_category as $inner_category)
                                                                         <li> <a
-                                                                                href="{{ url('products?category_id=' . $category->id . '&subcategory_id=' . $subcategory->id . '&innersubcategory_id=' . $inner_category->id) }}"><span>{{ $inner_category->innersubcategory_name }}</span></a>
+                                                                                href="{{ url('products-grid?category_id=' . $category->id . '&subcategory_id=' . $subcategory->id . '&innersubcategory_id=' . $inner_category->id) }}"><span>{{ $inner_category->innersubcategory_name }}</span></a>
                                                                         </li>
                                                                     @endforeach
                                                                 </ul>
@@ -158,8 +158,8 @@
                        
                         @foreach ($categoryList as $category)
                         <div class="nav-cat-main">
-                            <a class="nav-cat @if(url()->full()== url('products?category_id=' . $category->id)) active  @endif"
-                            href="{{ url('products?category_id=' . $category->id) }}">
+                            <a class="nav-cat @if(url()->full()== url('products-grid?category_id=' . $category->id)) active  @endif"
+                            href="{{ url('products-grid?category_id=' . $category->id) }}">
                             
                             @if($lang=='en'){{ $category->category_name }}@else {{ $category->multi_name->arabic }} @endif
 

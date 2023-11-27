@@ -7,7 +7,7 @@
                                {{$category->category_name}}
                             </a>
                             @else
-                             <a class="link-title" href="{{url('products?category_id='.$category->id)}}">
+                             <a class="link-title" href="{{url('products-grid?category_id='.$category->id)}}">
                                {{$category->category_name}}
                             </a>
                            @endif
@@ -18,7 +18,7 @@
                             <div class="card-body text-muted">
                                 <ul class="list-unstyled">
                                     @foreach ($category->subcategory as $subcategory)
-                                        <li> <a href="{{url('products?category_id='.$category->id.'&subcategory_id='.$subcategory->id)}}">{{$subcategory->subcategory_name}}</a></li>
+                                        <li> <a href="{{url('products-grid?category_id='.$category->id.'&subcategory_id='.$subcategory->id)}}">{{$subcategory->subcategory_name}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
